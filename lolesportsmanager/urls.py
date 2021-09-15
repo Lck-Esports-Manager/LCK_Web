@@ -20,11 +20,8 @@ from django.views.generic import TemplateView
 from api import views
 
 
-router = routers.DefaultRouter()
-router.register('Product', views.ProductView, 'Product')
-
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api/', include(router.urls)),
+    path("api/", include("api.urls")),
     re_path('.*', TemplateView.as_view(template_name='index.html'))
 ]
