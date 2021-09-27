@@ -1,6 +1,8 @@
 # api/urls.py
 from django.urls import path, include, re_path
 from rest_auth.registration.views import VerifyEmailView, RegisterView
+from django.conf import settings
+from django.conf.urls.static import static
 from .views import *
 
 urlpatterns = [
@@ -17,4 +19,4 @@ urlpatterns = [
     re_path(r'^account-confirm-email/(?P<key>[-:\w]+)/$',
             ConfirmEmailView.as_view(), name='account_confirm_email'),
 
-]
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

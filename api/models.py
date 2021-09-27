@@ -27,7 +27,7 @@ class Player(models.Model):
     status3 = models.IntegerField(default=0)
     rate = models.IntegerField(default=0)
     price = models.IntegerField(default=0)
-    image = models.CharField(null=True, max_length=20)
+    images = models.ImageField(blank=True, upload_to="images", null=True)
     team = models.ForeignKey(Team, default=1, on_delete=models.CASCADE)
 
 

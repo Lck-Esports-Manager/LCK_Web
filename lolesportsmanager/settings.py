@@ -93,6 +93,12 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'frontend', 'build', 'static')
 ]
 
+
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+MEDIA_URL = '/api/media/'
+
+
 WSGI_APPLICATION = 'lolesportsmanager.wsgi.application'
 
 
