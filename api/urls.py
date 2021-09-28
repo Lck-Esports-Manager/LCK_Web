@@ -7,8 +7,10 @@ from .views import *
 
 urlpatterns = [
 
+    # 선수 도감
+    path('playerlist/', PlayerListView.as_view()),
+    path('playerlist/detail/', PlayerDetailView.as_view()),
 
-    path("userlist/", UserListAPI.as_view()),
 
     # 로그인 회원가입 관련 api
     path('rest-auth/', include('rest_auth.urls')),
@@ -18,5 +20,6 @@ urlpatterns = [
             name='account_email_verification_sent'),
     re_path(r'^account-confirm-email/(?P<key>[-:\w]+)/$',
             ConfirmEmailView.as_view(), name='account_confirm_email'),
+
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

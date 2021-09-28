@@ -8,6 +8,9 @@ class Team(models.Model):
     name = models.CharField(max_length=30)
     season = models.IntegerField(default=0)
 
+    def __str__(self):
+        return self.name
+
 
 class LeagueTeam(models.Model):
     win = models.IntegerField(default=0)
@@ -27,7 +30,8 @@ class Player(models.Model):
     status3 = models.IntegerField(default=0)
     rate = models.IntegerField(default=0)
     price = models.IntegerField(default=0)
-    images = models.ImageField(blank=True, upload_to="images", null=True)
+    images = models.ImageField(
+        blank=True, upload_to="images", null=True)
     team = models.ForeignKey(Team, default=1, on_delete=models.CASCADE)
 
 
