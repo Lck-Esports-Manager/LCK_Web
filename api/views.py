@@ -44,21 +44,30 @@ class ConfirmEmailView(APIView):
 
 class PlayerListView(APIView):
     def get(self, request):
+
+        name = request.query_params.get('name', None)
         rate = request.query_params.get('rate', None)
         position = request.query_params.get('position', None)
         season = request.query_params.get('season', None)
+        result = Player.objects.all()
 
-        print(rate, position, season)
+        if name != None:
+            result = result.filter(name=name)
+        if rate != None:
+            result = result.filter(rate=rate)
+        if position != None:
+            result = result.filter(position=position)
+        if season != None:
+            result = result.filter(season=season)
 
-        serializer = PlayerSerializer(Player.objects.all(), many=True)
-        # serializer = PlayerSerializer(
-        #     Player.objects.filter(season=''), many=True)
+        serializer = PlayerSerializer(result, many=True)
         return Response(serializer.data)
 
 # 선수 상세 정보 API
 
 
 class PlayerDetailView(APIView):
+
     def get(self, request):
         id = request.query_params.get('id', None)
 
