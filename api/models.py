@@ -23,7 +23,8 @@ class LeagueTeam(models.Model):
 class Player(models.Model):
 
     name = models.CharField(max_length=20)
-    season = models.IntegerField(default=0)
+    season = models.CharField(max_length=20)
+    rate = models.IntegerField(default=0)
     position = models.CharField(max_length=20)
     status1 = models.IntegerField(default=0)
     status2 = models.IntegerField(default=0)
