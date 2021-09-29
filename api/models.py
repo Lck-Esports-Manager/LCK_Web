@@ -6,7 +6,8 @@ from django.contrib.auth.models import User
 class Team(models.Model):
 
     name = models.CharField(max_length=30)
-    season = models.IntegerField(default=0)
+    year = models.IntegerField(default=0)
+    season = models.CharField(max_length=30)
 
     def __str__(self):
         return self.name
