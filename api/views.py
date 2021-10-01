@@ -74,5 +74,9 @@ class PlayerDetailView(APIView):
     def get(self, request):
         id = request.query_params.get('id', None)
 
-        serializer = PlayerSerializer(Player.objects.get(id=id))
+        try:
+            serializer = PlayerSerializer(Player.objects.get(id=id))
+        except:
+            return Response([])
+
         return Response(serializer.data)

@@ -25,6 +25,7 @@ class Player(models.Model):
 
     name = models.CharField(max_length=20)
     season = models.CharField(max_length=20)
+    year = models.IntegerField(default=0)
     rate = models.IntegerField(default=0)
     position = models.CharField(max_length=20)
     status1 = models.IntegerField(default=0)
