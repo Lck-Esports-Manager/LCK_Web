@@ -71,29 +71,29 @@ class MyPlayer(models.Model):
 
 class MyTeam(models.Model):
     top = models.OneToOneField(
-        MyPlayer, default=1, on_delete=models.CASCADE, related_name='top')
+        MyPlayer, null=True, on_delete=models.CASCADE, related_name='top')
     junggle = models.OneToOneField(
-        MyPlayer, default=1, on_delete=models.CASCADE, related_name='junggle')
+        MyPlayer, null=True, on_delete=models.CASCADE, related_name='junggle')
     mid = models.OneToOneField(
-        MyPlayer, default=1, on_delete=models.CASCADE, related_name='mid')
+        MyPlayer, null=True, on_delete=models.CASCADE, related_name='mid')
     adc = models.OneToOneField(
-        MyPlayer, default=1, on_delete=models.CASCADE, related_name='adc')
+        MyPlayer, null=True, on_delete=models.CASCADE, related_name='adc')
     support = models.OneToOneField(
-        MyPlayer, default=1, on_delete=models.CASCADE, related_name='support')
+        MyPlayer, null=True, on_delete=models.CASCADE, related_name='support')
     sub1 = models.OneToOneField(
-        MyPlayer, default=1, on_delete=models.CASCADE, related_name='sub1')
+        MyPlayer, null=True, on_delete=models.CASCADE, related_name='sub1')
     sub2 = models.OneToOneField(
-        MyPlayer, default=1, on_delete=models.CASCADE, related_name='sub2')
+        MyPlayer, null=True, on_delete=models.CASCADE, related_name='sub2')
     sponsor1 = models.OneToOneField(
-        Sponsor, default=1, on_delete=models.CASCADE, related_name='sponsor1')
+        Sponsor, null=True, on_delete=models.CASCADE, related_name='sponsor1')
     sponsor2 = models.OneToOneField(
-        Sponsor, default=1, on_delete=models.CASCADE, related_name='sponsor2')
+        Sponsor, null=True, on_delete=models.CASCADE, related_name='sponsor2')
     sponsor3 = models.OneToOneField(
-        Sponsor, default=1, on_delete=models.CASCADE, related_name='sponsor3')
+        Sponsor, null=True, on_delete=models.CASCADE, related_name='sponsor3')
     enterprise1 = models.OneToOneField(
-        Enterprise, default=1, on_delete=models.CASCADE, related_name='enterprise1')
+        Enterprise, null=True, on_delete=models.CASCADE, related_name='enterprise1')
     enterprise2 = models.OneToOneField(
-        Enterprise, default=1, on_delete=models.CASCADE, related_name='enterprise2')
+        Enterprise, null=True, on_delete=models.CASCADE, related_name='enterprise2')
 
     money = models.IntegerField(default=0)
     popularity = models.IntegerField(default=0)
