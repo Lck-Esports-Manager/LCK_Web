@@ -11,6 +11,8 @@ urlpatterns = [
     path('playerlist/', PlayerListView.as_view()),
     path('playerlist/detail/', PlayerDetailView.as_view()),
 
+    # 팀 생성
+    path('maketeam/', test.as_view()),
 
     # 로그인 회원가입 관련 api
     path('rest-auth/', include('rest_auth.urls')),

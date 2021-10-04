@@ -6,6 +6,7 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 from django.http import HttpResponseRedirect, HttpResponse
 from .serializers import *
+from .models import *
 from django.contrib.auth.models import User
 from rest_framework.permissions import AllowAny
 from allauth.account.models import EmailConfirmation, EmailConfirmationHMAC
@@ -80,3 +81,43 @@ class PlayerDetailView(APIView):
             return Response([])
 
         return Response(serializer.data)
+
+
+# 팀 생성
+
+class test(APIView):
+    def post(self, request):
+
+        user = User.objects.get(username=request.user)
+        name = request.data['name']
+        top = Player.objects.get(pk=request.data['top'])
+        top1 = MyPlayer(player=top, user=user, status1=top.status1, status2=top.status2, status3=top.status3,
+                        level=1)
+        top1.save()
+
+        jungle = Player.objects.get(pk=request.data['jungle'])
+        jungle1 = MyPlayer(player=jungle, user=user, status1=jungle.status1, status2=jungle.status2, status3=jungle.status3,
+                           level=1)
+        jungle1.save()
+
+        mid = Player.objects.get(pk=request.data['mid'])
+        mid1 = MyPlayer(player=mid, user=user, status1=mid.status1, status2=mid.status2, status3=mid.status3,
+                        level=1)
+        mid1.save()
+
+        adc = Player.objects.get(pk=request.data['adc'])
+
+        adc1 = MyPlayer(player=adc, user=user, status1=adc.status1, status2=adc.status2, status3=adc.status3,
+                        level=1)
+        adc1.save()
+
+        sup = Player.objects.get(pk=request.data['sup'])
+        sup1 = MyPlayer(player=sup, user=user, status1=sup.status1, status2=sup.status2, status3=sup.status3,
+                        level=1)
+        sup1.save()
+        total_money = request.data['total_money']
+
+        myteam = MyTeam(user=user, name=name, top=top1, jungle=jungle1, mid=mid1,
+                        adc=adc1, support=sup1, money=total_money)
+        myteam.save()
+        return Response({})
