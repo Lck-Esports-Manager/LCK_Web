@@ -17,8 +17,8 @@ class LeagueTeam(models.Model):
     win = models.IntegerField(default=0)
     lose = models.IntegerField(default=0)
     team_num = models.IntegerField(default=0)
-    base_team = models.OneToOneField(Team, default=1, on_delete=models.CASCADE)
-    league = models.ForeignKey("League", default=1, on_delete=models.CASCADE)
+    base_team = models.ForeignKey(Team, default=1, on_delete=models.CASCADE)
+    league = models.ForeignKey("League", null=True, on_delete=models.CASCADE)
 
 
 class Player(models.Model):
@@ -103,7 +103,8 @@ class MyTeam(models.Model):
 
 class League(models.Model):
     my_team = models.ForeignKey(MyTeam, default=1, on_delete=models.CASCADE)
-    current_date = models.IntegerField(default=0)
+    season = models.CharField(null=True, max_length=20)
+    current_date = models.IntegerField(default=1)
     user = models.ForeignKey(User, default=1, on_delete=models.CASCADE)
     state_finish = models.BooleanField(default=False)
 

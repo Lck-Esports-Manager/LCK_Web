@@ -85,7 +85,7 @@ class PlayerDetailView(APIView):
 
 # 팀 생성
 
-class test(APIView):
+class MakeTeam(APIView):
     def post(self, request):
 
         user = User.objects.get(username=request.user)
@@ -120,4 +120,14 @@ class test(APIView):
         myteam = MyTeam(user=user, name=name, top=top1, jungle=jungle1, mid=mid1,
                         adc=adc1, support=sup1, money=total_money)
         myteam.save()
+
+        league = League(my_team=myteam, season='Spring', user=user)
+        league.save()
+
+        team = Team.objects.order_by('?')[0:9]
+
+        for idx, elem in enumerate(team):
+            league_team = LeagueTeam(
+                base_team=elem, team_num=idx, league=league)
+            league_team.save()
         return Response({})
