@@ -78,7 +78,7 @@ class PlayerDetailView(APIView):
         try:
             serializer = PlayerSerializer(Player.objects.get(id=id))
         except:
-            return Response([])
+            return Response({})
 
         return Response(serializer.data)
 
@@ -131,3 +131,47 @@ class MakeTeam(APIView):
                 base_team=elem, team_num=idx, league=league)
             league_team.save()
         return Response({})
+
+
+class GetSchedules(APIView):
+
+    def get(self, request):
+        user = User.objects.get(username=request.user)
+        league = League.objects.get(user=user, state_finish=False)
+        season = league.season
+
+        return_data = []
+        count = 0
+        i = league.current_date
+
+        while True:
+
+            schedules = LeagueSchedule.objects.filter(day=i)
+
+            for schedule in schedules:
+                elem = {"team1": None, "team2": None, "date": None}
+                if schedule.team1 == -1:
+                    continue
+                else:
+                    if schedule.team1 < 9:
+                        elem["team1"] = LeagueTeam.objects.get(
+                            league=league, team_num=schedule.team1).base_team.name
+                    else:
+                        elem["team1"] = MyTeam.objects.get(user=user).name
+                    if schedule.team2 < 9:
+                        elem["team2"] = LeagueTeam.objects.get(
+                            league=league, team_num=schedule.team2).base_team.name
+                    else:
+                        elem["team2"] = MyTeam.objects.get(user=user).name
+                    if season == 'spring':
+                        elem["date"] = schedule.spring
+                    else:
+                        elem["date"] = schedule.summer
+                    return_data.append(elem)
+                    count += 1
+            i += 1
+            if count == 10:
+                break
+
+        data = {"schedule": return_data}
+        return Response(data)

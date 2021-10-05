@@ -14,6 +14,10 @@ urlpatterns = [
     # 팀 생성
     path('maketeam/', MakeTeam.as_view()),
 
+    # 스케줄 5개 가져오기(main page에서 사용)
+
+    path('getschedule/', GetSchedules.as_view()),
+
     # 로그인 회원가입 관련 api
     path('rest-auth/', include('rest_auth.urls')),
     path('rest-auth/signup/', include('rest_auth.registration.urls')),

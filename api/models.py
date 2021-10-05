@@ -114,7 +114,7 @@ class Match(models.Model):
     team_num2 = models.IntegerField(default=0)
     match_num = models.IntegerField(default=0)
     result = models.CharField(null=True, max_length=20)
-    league = models.OneToOneField(League, default=0, on_delete=models.CASCADE)
+    league = models.ForeignKey(League, default=0, on_delete=models.CASCADE)
 
 
 class Set(models.Model):
@@ -123,3 +123,11 @@ class Set(models.Model):
     idx = models.IntegerField(default=1)
     result = models.IntegerField(default=1)
     match = models.ForeignKey(Match, default=0, on_delete=models.CASCADE)
+
+
+class LeagueSchedule(models.Model):
+    team1 = models.IntegerField(null=True)
+    team2 = models.IntegerField(null=True)
+    day = models.IntegerField(default=1)
+    spring = models.CharField(null=True, max_length=20)
+    summer = models.CharField(null=True, max_length=20)
