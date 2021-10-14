@@ -130,7 +130,9 @@ class MakeTeam(APIView):
             league_team = LeagueTeam(
                 base_team=elem, team_num=idx, league=league)
             league_team.save()
-        return Response({})
+        return Response({
+            'success': True
+        })
 
 
 class GetSchedules(APIView):

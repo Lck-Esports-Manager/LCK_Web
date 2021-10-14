@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 from pathlib import Path
 import mysetting
 import os
+import datetime
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -49,6 +50,7 @@ INSTALLED_APPS = [
     'rest_auth',
     'allauth',
     'allauth.account',
+    'allauth.socialaccount',
     'rest_auth.registration',
     # API
     'api',
@@ -197,3 +199,10 @@ ACCOUNT_EMAIL_CONFIRMATION_EXPIRE_DAYS = 1
 # 이메일에 자동으로 표시되는 사이트 정보
 ACCOUNT_EMAIL_SUBJECT_PREFIX = "LCK-Esports-Manager"
 REST_USE_JWT = True
+
+JWT_AUTH = {
+
+    'JWT_EXPIRATION_DELTA': datetime.timedelta(seconds=3000),
+    'JWT_ALLOW_REFRESH': True,
+    'JWT_REFRESH_EXPIRATION_DELTA': datetime.timedelta(days=7),
+}

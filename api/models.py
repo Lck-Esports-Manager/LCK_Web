@@ -10,7 +10,7 @@ class Team(models.Model):
     season = models.CharField(max_length=30)
 
     def __str__(self):
-        return self.name
+        return str(self.year)+' ' + self.season+' ' + self.name
 
 
 class LeagueTeam(models.Model):
@@ -19,6 +19,9 @@ class LeagueTeam(models.Model):
     team_num = models.IntegerField(default=0)
     base_team = models.ForeignKey(Team, default=1, on_delete=models.CASCADE)
     league = models.ForeignKey("League", null=True, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return str(self.league)+' ' + str(self.base_team)
 
 
 class Player(models.Model):
@@ -35,6 +38,9 @@ class Player(models.Model):
     images = models.ImageField(
         blank=True, upload_to="images", null=True)
     team = models.ForeignKey(Team, default=1, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return str(self.year)+' ' + self.season+' ' + self.name
 
 
 class Enterprise(models.Model):
@@ -66,6 +72,9 @@ class MyPlayer(models.Model):
     remain = models.IntegerField(default=0)
     schedule = models.ForeignKey(
         Schedule, null=True, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return str(self.player)
 
 
 class MyTeam(models.Model):
@@ -100,6 +109,9 @@ class MyTeam(models.Model):
     money = models.IntegerField(default=0)
     popularity = models.IntegerField(default=0)
 
+    def __str__(self):
+        return self.name
+
 
 class League(models.Model):
     my_team = models.ForeignKey(MyTeam, default=1, on_delete=models.CASCADE)
@@ -107,6 +119,9 @@ class League(models.Model):
     current_date = models.IntegerField(default=1)
     user = models.ForeignKey(User, default=1, on_delete=models.CASCADE)
     state_finish = models.BooleanField(default=False)
+
+    def __str__(self):
+        return str(self.my_team) + " 's league"
 
 
 class Match(models.Model):
