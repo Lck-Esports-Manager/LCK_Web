@@ -13,6 +13,12 @@ class Team(models.Model):
         return str(self.year)+' ' + self.season+' ' + self.name
 
 
+class Champion(models.Model):
+    name = models.CharField(max_length=30)
+    grade = models.IntegerField(default=0)
+    position = models.CharField(max_length=30)
+
+
 class LeagueTeam(models.Model):
     win = models.IntegerField(default=0)
     lose = models.IntegerField(default=0)
