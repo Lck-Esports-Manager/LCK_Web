@@ -22,6 +22,10 @@ urlpatterns = [
     # 리그 진행
 
     path('progressleague/', ProgressLeague.as_view()),
+
+    # 밴픽 완료
+
+    path('banpick/', BanPick.as_view()),
     # 로그인 회원가입 관련 api
     path('rest-auth/', include('rest_auth.urls')),
     path('rest-auth/signup/', include('rest_auth.registration.urls')),

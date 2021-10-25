@@ -237,7 +237,7 @@ class ProgressLeague(APIView):
                             "other_team": False,
                             "banpick": True,
                             "set_num": 1,
-                            "side": s.side,
+                            "set_id": s.id,
                             "data": champion_data
                         })
 
@@ -269,7 +269,7 @@ class ProgressLeague(APIView):
                                 "other_team": False,
                                 "banpick": True,
                                 "set_num": set_num,
-                                "side": set.side,
+                                "set_id": set.id,
                                 "data": champion_data
                             })
 
@@ -300,3 +300,55 @@ class ProgressLeague(APIView):
 
         else:
             return Response({"league": False})
+
+# 밴픽 완료
+
+
+class BanPick(APIView):
+    def post(self, request):
+        user = request.user
+        set_id = request.data['set_id']
+        try:
+            set = Set.objects.get(pk=set_id)
+        except:
+            return Response({"Success": False})
+
+        btop = request.data['btop']
+        bjng = request.data['bjng']
+        bmid = request.data['bmid']
+        badc = request.data['badc']
+        bsup = request.data['bsup']
+        rtop = request.data['rtop']
+        rjng = request.data['rjng']
+        rmid = request.data['rmid']
+        radc = request.data['radc']
+        rsup = request.data['rsup']
+
+        if set.side == 1:
+            set.my_top = Champion.objects.get(pk=btop)
+            set.my_jng = Champion.objects.get(pk=bjng)
+            set.my_mid = Champion.objects.get(pk=bmid)
+            set.my_adc = Champion.objects.get(pk=badc)
+            set.my_sup = Champion.objects.get(pk=bsup)
+            set.op_top = Champion.objects.get(pk=rtop)
+            set.op_jng = Champion.objects.get(pk=rjng)
+            set.op_mid = Champion.objects.get(pk=rmid)
+            set.op_adc = Champion.objects.get(pk=radc)
+            set.op_sup = Champion.objects.get(pk=rsup)
+            set.status = "ongoing"
+            set.save()
+
+        else:
+            set.my_top = Champion.objects.get(pk=rtop)
+            set.my_jng = Champion.objects.get(pk=rjng)
+            set.my_mid = Champion.objects.get(pk=rmid)
+            set.my_adc = Champion.objects.get(pk=radc)
+            set.my_sup = Champion.objects.get(pk=rsup)
+            set.op_top = Champion.objects.get(pk=btop)
+            set.op_jng = Champion.objects.get(pk=bjng)
+            set.op_mid = Champion.objects.get(pk=bmid)
+            set.op_adc = Champion.objects.get(pk=badc)
+            set.op_sup = Champion.objects.get(pk=bsup)
+            set.status = "ongoing"
+            set.save()
+        return Response({"Success": True})
