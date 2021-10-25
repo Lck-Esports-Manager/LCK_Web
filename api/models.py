@@ -18,6 +18,9 @@ class Champion(models.Model):
     grade = models.IntegerField(default=0)
     position = models.CharField(max_length=30)
 
+    def __str__(self):
+        return self.name+' ' + self.position
+
 
 class LeagueTeam(models.Model):
     win = models.IntegerField(default=0)
@@ -133,7 +136,7 @@ class League(models.Model):
 class Match(models.Model):
     team_num1 = models.IntegerField(default=0)
     team_num2 = models.IntegerField(default=0)
-    match_num = models.IntegerField(default=1)
+    set_num = models.IntegerField(default=1)
     result = models.CharField(null=True, max_length=20)
     league = models.ForeignKey(League, default=0, on_delete=models.CASCADE)
     status_finish = models.BooleanField(default=False)
@@ -187,7 +190,8 @@ class Set(models.Model):
     op_gold = models.IntegerField(default=2500)
     my_tower_destroy = models.IntegerField(default=0)
     op_tower_destroy = models.IntegerField(default=0)
-    match_num = models.IntegerField(default=1)
+    set_num = models.IntegerField(default=1)
+    status = models.CharField(default='bp', max_length=10)
     result = models.IntegerField(default=1)
     match = models.ForeignKey(Match, default=0, on_delete=models.CASCADE)
 

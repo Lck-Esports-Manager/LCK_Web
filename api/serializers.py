@@ -18,6 +18,23 @@ class TeamSerializer(serializers.ModelSerializer):
         model = Team
         fields = "__all__"
 
+# 챔피언
+
+
+class ChampionSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Champion
+        fields = "__all__"
+
+
+# 세트
+class SetSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Set
+        fields = "__all__"
+
+
 # 선수
 
 

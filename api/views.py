@@ -178,3 +178,125 @@ class GetSchedules(APIView):
 
         data = {"schedule": return_data}
         return Response(data)
+
+# 리그진행
+
+
+class ProgressLeague(APIView):
+
+    def post(self, request):
+        user = User.objects.get(username=request.user)
+        try:
+            league = League.objects.get(user=user, state_finish=False)
+        except:
+            league = None
+        # 리그가 있는지 확인
+        if league:
+            current_date = league.current_date
+            schedules = LeagueSchedule.objects.filter(day=current_date)
+            for elem in schedules:
+                if elem.team1 == 0 or elem.team2 == 0:
+                    # match데이터를 확인한다.
+                    try:
+                        match = Match.objects.get(
+                            status_finish=False, league=league)
+                    except:
+                        match = None
+
+                    if not match:
+                        m = Match(team_num1=elem.team1,
+                                  team_num2=elem.team2, league=league)
+                        m.save()
+                        if elem.team1 == 0:
+                            s = Set(side=1, match=m)
+
+                        else:
+                            s = Set(side=0, match=m)
+                        s.save()
+                        top = ChampionSerializer(
+                            Champion.objects.filter(position="Top"), many=True)
+                        jng = ChampionSerializer(
+                            Champion.objects.filter(position="Jungle"), many=True)
+                        mid = ChampionSerializer(
+                            Champion.objects.filter(position="Middle"), many=True)
+                        adc = ChampionSerializer(
+                            Champion.objects.filter(position="Bottom"), many=True)
+                        sup = ChampionSerializer(
+                            Champion.objects.filter(position="Support"), many=True)
+                        champion_data = {
+                            "top": top.data,
+                            "jng": jng.data,
+                            "mid": mid.data,
+                            "adc": adc.data,
+                            "sup": sup.data
+
+                        }
+                        return Response({
+                            "league": True,
+                            "my_team": True,
+                            "other_team": False,
+                            "banpick": True,
+                            "set_num": 1,
+                            "side": s.side,
+                            "data": champion_data
+                        })
+
+                    else:
+                        set_num = match.set_num
+                        set = Set.objects.get(match=match, set_num=set_num)
+                        if set.status == 'bp':
+                            top = ChampionSerializer(
+                                Champion.objects.filter(position="Top"), many=True)
+                            jng = ChampionSerializer(
+                                Champion.objects.filter(position="Jungle"), many=True)
+                            mid = ChampionSerializer(
+                                Champion.objects.filter(position="Middle"), many=True)
+                            adc = ChampionSerializer(
+                                Champion.objects.filter(position="Bottom"), many=True)
+                            sup = ChampionSerializer(
+                                Champion.objects.filter(position="Support"), many=True)
+                            champion_data = {
+                                "top": top.data,
+                                "jng": jng.data,
+                                "mid": mid.data,
+                                "adc": adc.data,
+                                "sup": sup.data
+
+                            }
+                            return Response({
+                                "league": True,
+                                "my_team": True,
+                                "other_team": False,
+                                "banpick": True,
+                                "set_num": set_num,
+                                "side": set.side,
+                                "data": champion_data
+                            })
+
+                        else:
+                            set_data = SetSerializer(set)
+                            return Response({
+                                "league": True,
+                                "my_team": True,
+                                "other_team": False,
+                                "banpick": False,
+                                "data": set_data.data
+                            })
+
+                if elem.team1 == -1:
+                    return Response({
+                        "league": True,
+                        "my_team": False,
+                        "other_team": False,
+                        "banpick": False
+                    })
+
+            return Response({
+                "league": True,
+                "my_team": False,
+                "other_team": True,
+                "banpick": False
+            })
+
+        else:
+            return Response({"league": False})
