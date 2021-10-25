@@ -44,6 +44,7 @@ class ConfirmEmailView(APIView):
 # 선수 도감 API
 
 class PlayerListView(APIView):
+
     def get(self, request):
 
         name = request.query_params.get('name', None)
