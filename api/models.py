@@ -133,15 +133,61 @@ class League(models.Model):
 class Match(models.Model):
     team_num1 = models.IntegerField(default=0)
     team_num2 = models.IntegerField(default=0)
-    match_num = models.IntegerField(default=0)
+    match_num = models.IntegerField(default=1)
     result = models.CharField(null=True, max_length=20)
     league = models.ForeignKey(League, default=0, on_delete=models.CASCADE)
+    status_finish = models.BooleanField(default=False)
 
 
 class Set(models.Model):
-    blue = models.IntegerField(default=0)
-    red = models.IntegerField(default=0)
-    idx = models.IntegerField(default=1)
+    side = models.IntegerField(default=0)
+    my_top = models.ForeignKey(
+        Champion, null=True, on_delete=models.CASCADE, related_name='my_top')
+    my_jng = models.ForeignKey(
+        Champion, null=True, on_delete=models.CASCADE, related_name='my_jng')
+    my_mid = models.ForeignKey(
+        Champion, null=True, on_delete=models.CASCADE, related_name='my_mid')
+    my_adc = models.ForeignKey(
+        Champion, null=True, on_delete=models.CASCADE, related_name='my_adc')
+    my_sup = models.ForeignKey(
+        Champion, null=True, on_delete=models.CASCADE, related_name='my_sup')
+    op_top = models.ForeignKey(
+        Champion, null=True, on_delete=models.CASCADE, related_name='op_top')
+    op_jng = models.ForeignKey(
+        Champion, null=True, on_delete=models.CASCADE, related_name='op_jng')
+    op_mid = models.ForeignKey(
+        Champion, null=True, on_delete=models.CASCADE, related_name='op_mid')
+    op_adc = models.ForeignKey(
+        Champion, null=True, on_delete=models.CASCADE, related_name='op_adc')
+    op_sup = models.ForeignKey(
+        Champion, null=True, on_delete=models.CASCADE, related_name='op_sup')
+    my_tower1 = models.IntegerField(default=5)
+    my_tower2 = models.IntegerField(default=5)
+    my_tower3 = models.IntegerField(default=5)
+    my_tower4 = models.IntegerField(default=5)
+    my_tower5 = models.IntegerField(default=5)
+    my_tower6 = models.IntegerField(default=5)
+    my_tower7 = models.IntegerField(default=5)
+    my_tower8 = models.IntegerField(default=5)
+    my_tower9 = models.IntegerField(default=5)
+    op_tower1 = models.IntegerField(default=5)
+    op_tower2 = models.IntegerField(default=5)
+    op_tower3 = models.IntegerField(default=5)
+    op_tower4 = models.IntegerField(default=5)
+    op_tower5 = models.IntegerField(default=5)
+    op_tower6 = models.IntegerField(default=5)
+    op_tower7 = models.IntegerField(default=5)
+    op_tower8 = models.IntegerField(default=5)
+    op_tower9 = models.IntegerField(default=5)
+    my_dragon = models.IntegerField(default=0)
+    op_dragon = models.IntegerField(default=0)
+    my_baron = models.IntegerField(default=0)
+    op_baron = models.IntegerField(default=0)
+    my_gold = models.IntegerField(default=2500)
+    op_gold = models.IntegerField(default=2500)
+    my_tower_destroy = models.IntegerField(default=0)
+    op_tower_destroy = models.IntegerField(default=0)
+    match_num = models.IntegerField(default=1)
     result = models.IntegerField(default=1)
     match = models.ForeignKey(Match, default=0, on_delete=models.CASCADE)
 
