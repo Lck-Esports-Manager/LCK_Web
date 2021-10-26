@@ -185,8 +185,8 @@ DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 
 URL_FRONT = 'http://****'  # 공개적인 웹페이지가 있다면 등록
 
-ACCOUNT_CONFIRM_EMAIL_ON_GET = True  # 유저가 받은 링크를 클릭하면 회원가입 완료되게끔
-ACCOUNT_EMAIL_REQUIRED = True
+# ACCOUNT_CONFIRM_EMAIL_ON_GET = True  # 유저가 받은 링크를 클릭하면 회원가입 완료되게끔
+#ACCOUNT_EMAIL_REQUIRED = True
 
 #ACCOUNT_EMAIL_VERIFICATION = "mandatory"
 ACCOUNT_EMAIL_VERIFICATION = "none"
