@@ -1,0 +1,114 @@
+.player--top{
+    background-color: #c1c1c1;
+}
+.player--top .inner{
+    display: flex;
+    width: 1200px;
+    height: 140px;
+    margin: auto;
+    position: relative;
+}
+.player--top .inner .title{
+    font-size:100px;
+    font-family: 'Staatliches', cursive, sans-serif;
+    display: block;
+    text-align: center;
+    margin: auto;
+    font-weight: 700;
+    padding: 20px;
+}
+.player--main {
+    background-color: #c1c1c1;
+    height: 700px;
+}
+.player--main .inner {
+    padding: 10px;
+    background-color: #666;
+    width: 1200px;
+    display: flex;
+    height: 610px;
+    margin: auto;
+    position: relative;
+    border-radius: 15px;
+    padding: 15px;
+}
+.player--main .inner .playerbox{
+    background-color: white;
+    /* border: 5px solid black; */
+    border-radius: 15px;
+    display: block;
+    width: 1200px;
+    height: 600px;
+    margin: auto;
+}
+.player--main .inner .playerbox .title{
+    font-weight: 700;
+    font-size: 45px;
+    text-align: center;
+    padding: 16px 16px 0px 16px;
+}
+.player--main .inner .playerbox .line{
+    background-color: #666;
+    width: 1150px;
+    height: 6px;
+    margin: 0px 0px 10px 5px;
+}
+.player--main .inner .playerbox .contents{
+    /* background-color: orange; */
+    font-family: 'Noto Sans KR', sans-serif;
+    box-sizing: border-box;
+    height: 490px;
+    padding: 10px 20px 20px 20px;
+}
+.player--main .inner .playerbox .contents .btnbar{
+    display: flex;
+    /* background-color: yellow; */
+    /* padding: 10px; */
+}
+.player--main .inner .playerbox .contents .btnbar button{
+    margin: auto;
+    padding: 5px;
+    width: 120px;
+    font-size: 13px;
+    font-weight: 700;
+    border-radius: 5px;
+    border: 2px solid #666;
+    background-color: white;
+    transition: 0.2s;
+}
+.player--main .inner .playerbox .contents .btnbar button:hover{
+    color:white;
+    background-color: #333;
+    cursor: pointer;
+}
+.player--main .inner .playerbox .contents .index{
+    background-color: #c1c1c1;
+}
+.player--main .inner .playerbox .contents .index ul{
+    display: flex;
+    margin: 10px;   
+    padding: 10px;
+}
+.player--main .inner .playerbox .contents .index ul li{
+    font-weight: 700;
+    margin: auto;
+}
+.player--main .inner .playerbox .contents .players{
+    overflow: auto;
+    /* background-color: tomato; */
+    height: 390px;
+}
+.player--main .inner .playerbox .contents .players ul{
+    display: flex;
+    background-color: rgb(255, 219, 161);
+    padding: 10px;
+    border-radius: 7px;
+    margin: 5px;
+}
+.player--main .inner .playerbox .contents .players ul li{
+    /* background-color: tomato; */
+    font-weight: 700;
+    margin: auto;
+    width: 100px;
+    text-align: center;
+}

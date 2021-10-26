@@ -1,43 +1,62 @@
 <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#000000" />
-    <meta
-      name="description"
-      content="Web site created using create-react-app"
-    />
-    <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
-    <!--
-      manifest.json provides metadata used when your web app is installed on a
-      user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
-    -->
-    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
-    <!--
-      Notice the use of %PUBLIC_URL% in the tags above.
-      It will be replaced with the URL of the `public` folder during the build.
-      Only files inside the `public` folder can be referenced from the HTML.
+<html lang="ko">
 
-      Unlike "/favicon.ico" or "favicon.ico", "%PUBLIC_URL%/favicon.ico" will
-      work correctly both with client-side routing and a non-root public URL.
-      Learn how to configure a non-root public URL by running `npm run build`.
-    -->
-    <title>React App</title>
-  </head>
-  <body>
-    <noscript>You need to enable JavaScript to run this app.</noscript>
-    <div id="root"></div>
-    <!--
-      This HTML file is a template.
-      If you open it directly in the browser, you will see an empty page.
+<head>
+  <!-- 콘솔창에 Waiting for update signal from WDS... 메세지 없애는법
+node_modules/webpack/hot/log.js 에서 21번줄 안에 if문을 주석처리 -->
+  <meta charset="utf-8" />
 
-      You can add webfonts, meta tags, or analytics to this file.
-      The build step will place the bundled scripts into the <body> tag.
+  <!-- favicon -->
+  <link rel="icon" href="./favicon.ico" />
 
-      To begin the development, run `npm start` or `yarn start`.
-      To create a production bundle, use `npm run build` or `yarn build`.
-    -->
-  </body>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Web site created using create-react-app" />
+
+  <!-- open graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="LCK Esports Manager" />
+  <meta property="og:title" content="LCK Esports Manager" />
+  <meta property="og:description" content="LCK Esports Manager는 LoL과 함께 높은 관심을 보이는 e스포츠 대회를 접목하여 만든 게임입니다." />
+  <meta property="og:image" content="../src/images/logo_rtg.png" />
+  <!-- <meta property="og:url" content="https://starbucks.co.kr" /> -->
+
+  <!-- swiper cdn -->
+  <link rel="stylesheet" href="https://unpkg.com/swiper@7/swiper-bundle.min.css" />
+  <script src="https://unpkg.com/swiper@7/swiper-bundle.min.js"></script>
+
+  <!-- css reset -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reset-css@5.0.1/reset.min.css">
+  <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+
+  <!-- icon -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+
+  <!-- font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Staatliches&display=swap" rel="stylesheet">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300&display=swap" rel="stylesheet">
+
+  <title>LCK Esports Manager</title>
+</head>
+
+<body>
+  <div id="root"></div>
+</body>
+
 </html>
+
+
+<!-- 수정할 것
+로그인 api에서 유저이름 삭제
+회원가입 성공시 api오류?? 메일이 안옴 메일전송되었다는 문구도 안뜸
+스케줄 불러오는 api가 포스트맨에서 안나오던데???
+
+선수정보 불러올때 선수가 게임뛴 시즌&년도 == 팀의 시즌&년도???
+선수정보랑 팀정보랑 따로 불러오는건 어떤지?? > 2분정도 걸림;;;
+
+패스워드 같은지 판단은 프론트에서 담당
+ -->

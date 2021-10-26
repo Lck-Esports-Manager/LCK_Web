@@ -1,0 +1,110 @@
+.login--top{
+    background-color: #c1c1c1;
+}
+.login--top .inner{
+    display: flex;
+    width: 1200px;
+    height: 140px;
+    margin: auto;
+    position: relative;
+}
+.login--top .inner .title{
+    font-size:100px;
+    font-family: 'Staatliches', cursive, sans-serif;
+    display: block;
+    text-align: center;
+    margin: auto;
+    font-weight: 700;
+    padding: 20px;
+}
+.login--main{
+    background-color: #c1c1c1;
+    height: 800px;
+    position: relative;
+}
+.login--main .inner{
+    width: 1200px;
+    margin: auto;
+}
+.login--main .inner .loginbox{
+    width: 530px;
+    height: 630px;
+    display: block;
+    margin: auto;
+    background-color: white;
+    border: 5px solid #333;
+    border-radius: 5px;
+    text-align: center;
+    font-weight: 700;
+}
+.login--main .inner .boxtitle{
+    font-size: 40px;
+    padding: 80px;
+    margin-top: 20px;
+}
+.login--main .inner .inputbox{
+    padding: 20px;
+    font-size: 25px;
+    display: block;
+}
+.login--main .inner .inputbox .email{
+    padding: 5px;
+    display: flex;
+    margin: auto;
+    width: 400px;
+    height: 45px;
+}
+.login--main .inner .inputbox .pw{
+    padding: 5px;
+    display: flex;
+    margin: auto;
+    width: 400px;
+    height: 45px;
+    /* background-color: orange; */
+}
+.login--main .inner .inputbox label{
+    padding: 10px;
+    display: block;
+    width: 80px;
+    /* background-color: violet; */
+}
+.login--main .inner .inputbox input{
+    padding: 10px;
+    width: 250px;
+    display: block;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+.login--main .inner .loginbox .btnbox {
+    /* background-color: orange; */
+    width: 400px;
+    height: 100px;
+    margin: auto;
+}
+.login--main .inner .loginbox .btnbox a {
+    /* background-color: orange; */
+    color:#333;
+    padding: 10px;
+    font-size: 20px;
+    display: block;
+    margin: auto;
+    /* text-decoration: none; */
+}
+.login--main .inner .loginbox .btnbox a:hover {
+    color:red;
+}
+.login--main .inner .loginbox .btnbox input{
+    font-size: 20px;
+    font-weight: 700;
+    padding: 5px;
+    border-radius: 5px;
+    margin: 7px;
+    width: 300px;
+    transition: 0.2s;
+}
+.login--main .inner .loginbox .btnbox input:hover{
+    color:white;
+    background-color: #333;
+    cursor: pointer;
+}
