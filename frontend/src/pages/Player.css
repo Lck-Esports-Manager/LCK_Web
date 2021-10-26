@@ -4,12 +4,11 @@
 .player--top .inner{
     display: flex;
     width: 1200px;
-    height: 140px;
     margin: auto;
     position: relative;
 }
 .player--top .inner .title{
-    font-size:100px;
+    font-size:80px;
     font-family: 'Staatliches', cursive, sans-serif;
     display: block;
     text-align: center;

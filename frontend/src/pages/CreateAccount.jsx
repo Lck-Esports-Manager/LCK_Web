@@ -17,6 +17,11 @@ function CreateAccount() {
             [name]: value
         });
     }
+    const autoNext = (e) => {
+        if (e.key = 'Enter') {
+            new_request();
+        }
+    }
     const new_request = () => {
         if (user.password1 === user.password2) {
             axios.post('http://localhost:8000/api/rest-auth/registration/', user
@@ -24,7 +29,7 @@ function CreateAccount() {
                 alert([`가입을 축하드립니다. \nname : ${user.username} \nemail : ${user.email} \n 가입확인 메일이 발송되었습니다.`]);
                 document.location.href = '/login';
             }).catch((Error) => {
-                // console.log(Error.response.data);
+                console.log(Error.response.data);
                 Error.response.data &&
                     alert(`ERROR : ${Error.response.data[`${Object.keys(Error.response.data)[0]}`][0]}`);
             }).then(() => { });
@@ -48,8 +53,8 @@ function CreateAccount() {
                     <div className="boxtitle">회원가입</div>
                     <div className="inputbox">
                         <div className="q">
-                            <label>Name</label>
-                            <input onChange={new_user} name="username" type="text" placeholder="이름을 입력하세요." />
+                            <label>ID</label>
+                            <input onChange={new_user} name="username" type="text" placeholder="아이디를 입력하세요." />
                         </div>
                         <div className="q">
                             <label>Email</label>
@@ -61,7 +66,7 @@ function CreateAccount() {
                         </div>
                         <div className="q">
                             <label>Re-enter PW</label>
-                            <input onChange={new_user} name="password2" type="password" placeholder="비밀번호를 입력하세요." />
+                            <input onChange={new_user} onKeyPress={autoNext} name="password2" type="password" placeholder="비밀번호를 입력하세요." />
                         </div>
                     </div>
                     <div className="btnbox">

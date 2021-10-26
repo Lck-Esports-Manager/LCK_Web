@@ -1,6 +1,7 @@
 // import { Swiper, SwiperSlide } from "swiper/react";
 // import 'swiper/swiper.min.css';
 import React from 'react';
+import axios from 'axios';
 // import Headline from "./Headline";
 
 import slide1 from '../images/main-1.png';

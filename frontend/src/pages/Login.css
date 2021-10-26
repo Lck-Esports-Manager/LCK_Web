@@ -4,12 +4,11 @@
 .login--top .inner{
     display: flex;
     width: 1200px;
-    height: 140px;
     margin: auto;
     position: relative;
 }
 .login--top .inner .title{
-    font-size:100px;
+    font-size:80px;
     font-family: 'Staatliches', cursive, sans-serif;
     display: block;
     text-align: center;
@@ -27,8 +26,8 @@
     margin: auto;
 }
 .login--main .inner .loginbox{
-    width: 530px;
-    height: 630px;
+    width: 500px;
+    height: 590px;
     display: block;
     margin: auto;
     background-color: white;
@@ -39,7 +38,7 @@
 }
 .login--main .inner .boxtitle{
     font-size: 40px;
-    padding: 80px;
+    padding: 70px;
     margin-top: 20px;
 }
 .login--main .inner .inputbox{

@@ -6,8 +6,7 @@ import axios from 'axios';
 
 function Login(props) {
     const [user, setInfo] = useState({
-        username: 'test',
-        email: '',
+        username: '',
         password: ''
     });
     const input_info = (e) => {
@@ -17,11 +16,17 @@ function Login(props) {
             [name]: value
         });
     }
+    const autoPress = (e) => {
+        if (e.key == 'Enter') {
+            login_request();
+        }
+    }
     const login_request = () => {
         axios.post('http://localhost:8000/api/rest-auth/login/', user
         ).then((response) => {
+            // console.log(response.data);
             alert(`${response.data.user.username}님 환영합니다.`);
-            document.location.href = `/${response.data.user.username}`;
+            // document.location.href = `/${response.data.user.username}`;
             // props.tag(response.data.token);
         }).catch((Error) => {
             Error.response.data &&
@@ -44,12 +49,12 @@ function Login(props) {
                         <div className="boxtitle">로그인</div>
                         <div className="inputbox">
                             <div className="email">
-                                <label>EMAIL</label>
-                                <input type="text" onChange={input_info} name='email' value={user.email} placeholder="이메일을 입력하세요." />
+                                <label>ID</label>
+                                <input type="text" onKeyPress={autoPress} onChange={input_info} name='username' value={user.username} placeholder="아이디를 입력하세요." />
                             </div>
                             <div className="pw">
                                 <label>PW</label>
-                                <input type="password" onChange={input_info} name='password' value={user.pw} placeholder="비밀번호를 입력하세요." />
+                                <input type="password" onKeyPress={autoPress} onChange={input_info} name='password' value={user.password} placeholder="비밀번호를 입력하세요." />
                             </div>
                         </div>
                         <div className="btnbox">

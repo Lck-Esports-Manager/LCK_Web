@@ -5,7 +5,7 @@ import './Player.css';
 
 export default function Player() {
     console.log('불러오기 시작');
-    axios.get('http://localhost:8000/api/playerlist/?'
+    axios.get('http://localhost:8000/api/playerlist/?position=top'
     ).then((response) => {
         Loading(response.data);
         // const [player, setPlayer] = useState({

@@ -10,13 +10,13 @@ img {
 header .inner{
     background-color: #666;
     width: 1200px;
-    height: 130px;
+    height: 110px;
     margin: 0 auto;
     position: relative;
 }
 header .inner ul{
     position: absolute;
-    top: 30px;
+    top: 20px;
     right: 0;
     display: flex;
     font-family: Arial, sans-serif;
@@ -42,7 +42,7 @@ header .inner ul li:first-child:before{
 header .inner ul li a{
     /* background-color: orangered; */
     padding: 21px 70px;
-    font-size: 20px;
+    font-size: 22px;
     font-weight: 900;
     color: #333;
     text-decoration: none;
@@ -55,13 +55,14 @@ header .inner ul li a:hover{
 }
 header img{
     background-color: white;
-    width: 120px;
-    height: 90px;
+    width: 100px;
+    height: 75px;
     margin: auto;
     position:absolute;
     border: 5px solid;
     top: 0;
     bottom: 0;
     left: 25px;
+    border-radius: 5px;
     /* display: none; */
 }
