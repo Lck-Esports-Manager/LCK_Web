@@ -27,6 +27,7 @@ urlpatterns = [
 
     path('banpick/', BanPick.as_view()),
     # 로그인 회원가입 관련 api
+
     path('rest-auth/', include('rest_auth.urls')),
     path('rest-auth/signup/', include('rest_auth.registration.urls')),
     path('rest-auth/registration/', RegisterView.as_view(), name='rest_register'),

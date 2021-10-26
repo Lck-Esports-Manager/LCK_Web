@@ -179,7 +179,7 @@ EMAIL_HOST_USER = 'lck.esports.manager@gmail.com'  # 발신할 이메일
 
 EMAIL_HOST_PASSWORD = 'lckesportsmanager'  # 발신할 메일의 비밀번호
 
-EMAIL_USE_TLS = True  # TLS 보안 방법
+EMAIL_USE_TLS = False  # TLS 보안 방법
 
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 
