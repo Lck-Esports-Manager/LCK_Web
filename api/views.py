@@ -40,8 +40,19 @@ class ConfirmEmailView(APIView):
         qs = qs.select_related("email_address__user")
         return qs
 
+#
 
+
+class AuthView(APIView):
+    def get(self, request):
+
+        if request.user.is_authenticated:
+            return Response({"login": True})
+
+        else:
+            return Response({"login": False})
 # 선수 도감 API
+
 
 class PlayerListView(APIView):
 

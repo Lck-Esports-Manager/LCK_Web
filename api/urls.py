@@ -7,6 +7,7 @@ from .views import *
 
 urlpatterns = [
 
+    path('auth/', AuthView.as_view()),
     # 선수 도감
     path('playerlist/', PlayerListView.as_view()),
     path('playerlist/detail/', PlayerDetailView.as_view()),
