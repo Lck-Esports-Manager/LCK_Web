@@ -144,6 +144,7 @@ class Match(models.Model):
 
 class Set(models.Model):
     side = models.IntegerField(default=0)
+    turn = models.IntegerField(default=1)
     my_top = models.ForeignKey(
         Champion, null=True, on_delete=models.CASCADE, related_name='my_top')
     my_jng = models.ForeignKey(

@@ -27,6 +27,10 @@ urlpatterns = [
     # 밴픽 완료
 
     path('banpick/', BanPick.as_view()),
+
+    # 선택지 가져오기
+
+    path('makeselection/', MakeSelection.as_view()),
     # 로그인 회원가입 관련 api
 
     path('rest-auth/', include('rest_auth.urls')),

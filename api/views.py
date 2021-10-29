@@ -363,3 +363,63 @@ class BanPick(APIView):
             set.status = "ongoing"
             set.save()
         return Response({"Success": True})
+
+
+# 선택지 만들기
+class MakeSelection(APIView):
+
+    def lane_press(self):
+        if self.turn > 5:
+            return 0
+        match = self.set.match
+        team1 = match.team_num1
+        team2 = match.team_num2
+        league = match.league
+        if team1 == 0:
+
+            self.my_team = league.my_team
+            op_team_temp = LeagueTeam.objects.get(
+                League=league, team_num=team2)
+            self.op_team = op_team_temp.base_team
+
+        else:
+            self.my_team = league.my_team
+            op_team_temp = LeagueTeam.objects.get(
+                League=league, team_num=team1)
+            self.op_team = op_team_temp.base_team
+
+        return 0
+
+    def ganking(self):
+        return
+
+    def engage(self):
+        return
+
+    def fight(self):
+        return
+
+    def tower_press(self):
+        return
+
+    def tower_destroy(self):
+        return
+
+    def nexus_destroy(self):
+        return
+
+    def get(self, request):
+
+        self.data = {"lane_press": {"top": [False, 1], "mid": [False, 1], "bot": [False, 1]},
+                     "ganking": {"top": [False, 1], "mid": [False, 1], "bot": [False, 1]},
+                     "engage": {"top": [False, 2], "mid": [False, 2], "bot": [False, 2]},
+                     "fight": {"dragon": [False, 3], "elder": [False, 3], "baron": [False, 3], "normal": [False, 3]},
+                     "tower_press": {"top": [False, 1], "mid": [False, 1], "bot": [False, 1]},
+                     "tower_destroy": {"top": [False, 2], "mid": [False, 2], "bot": [False, 2]},
+                     "nexus_destroy": [False, 3]}
+        # 쿼리에서 세트 가져오기
+        set_id = request.query_params.get('set', None)
+        print(set_id)
+        self.set = Set.objects.get(pk=set_id)
+
+        return Response(self.data)
