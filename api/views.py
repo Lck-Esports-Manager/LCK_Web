@@ -369,7 +369,8 @@ class BanPick(APIView):
 class MakeSelection(APIView):
 
     def lane_press(self):
-        if self.turn > 5:
+        turn = self.set.turn
+        if turn > 4:
             return 0
         match = self.set.match
         team1 = match.team_num1
@@ -379,33 +380,131 @@ class MakeSelection(APIView):
 
             self.my_team = league.my_team
             op_team_temp = LeagueTeam.objects.get(
-                League=league, team_num=team2)
+                league=league, team_num=team2)
             self.op_team = op_team_temp.base_team
 
         else:
             self.my_team = league.my_team
             op_team_temp = LeagueTeam.objects.get(
-                League=league, team_num=team1)
+                league=league, team_num=team1)
             self.op_team = op_team_temp.base_team
 
+        my_top = self.my_team.top
+        my_mid = self.my_team.mid
+        my_adc = self.my_team.adc
+        my_sup = self.my_team.support
+        my_top_champ = self.set.my_top
+        my_mid_champ = self.set.my_mid
+        my_adc_champ = self.set.my_adc
+        my_sup_champ = self.set.my_sup
+
+        op_top = Player.objects.filter(team=self.op_team, position='Top')[0]
+        op_mid = Player.objects.filter(team=self.op_team, position='Middle')[0]
+        op_adc = Player.objects.filter(team=self.op_team, position='ADC')[0]
+        op_sup = Player.objects.filter(
+            team=self.op_team, position='Support')[0]
+        op_top_champ = self.set.op_top
+        op_mid_champ = self.set.op_mid
+        op_adc_champ = self.set.op_adc
+        op_sup_champ = self.set.op_sup
+        my_top_grade = my_top.status1+(6-my_top_champ.grade)*20
+        op_top_grade = op_top.status1+(6-op_top_champ.grade)*20
+        my_mid_grade = my_mid.status1+(6-my_mid_champ.grade)*20
+        op_mid_grade = op_mid.status1+(6-op_mid_champ.grade)*20
+        my_bot_grade = my_adc.status1 + \
+            (6-my_adc_champ.grade)*20+my_sup.status1+(6-my_sup_champ.grade)*20
+        op_bot_grade = op_adc.status1 + \
+            (6-op_adc_champ.grade)*20+op_sup.status1+(6-op_sup_champ.grade)*20
+
+        if turn % 2 == 1:
+            self.data["lane_press"]["top"][0] = (my_top_grade > op_top_grade)
+            self.data["lane_press"]["mid"][0] = (my_mid_grade > op_mid_grade)
+            self.data["lane_press"]["bot"][0] = (my_bot_grade > op_bot_grade)
+
+        else:
+            self.data["lane_press"]["top"][0] = (my_top_grade < op_top_grade)
+            self.data["lane_press"]["mid"][0] = (my_mid_grade < op_mid_grade)
+            self.data["lane_press"]["bot"][0] = (my_bot_grade < op_bot_grade)
         return 0
 
     def ganking(self):
-        return
+        if self.set.turn > 4:
+            return 0
+        self.data["ganking"]["top"][0] = True
+        self.data["ganking"]["mid"][0] = True
+        self.data["ganking"]["bot"][0] = True
+        return 0
 
     def engage(self):
-        return
+        self.data["engage"]["top"][0] = True
+        self.data["engage"]["mid"][0] = True
+        self.data["engage"]["bot"][0] = True
+        return 0
 
     def fight(self):
-        return
+        turn = self.set.turn
+        if self.set.turn < 5:
+            return 0
+        self.data["fight"]["dragon"][0] = (turn % 2 == 1)
+        self.data["fight"]["baron"][0] = (turn % 2 == 1) and (turn > 8)
+        self.data["fight"]["elder"][0] = (turn % 2 == 1) and (
+            self.set.my_dragon >= 4 or self.set.op_dragon >= 4)
+        self.data["fight"]["normal"][0] = (turn % 2 == 0)
+
+        return 0
+
+        return 0
 
     def tower_press(self):
-        return
+        turn = self.set.turn
+        if turn < 5:
+            return 0
+        if turn % 2 == 1:
+            self.data["tower_press"]["top"][0] = (self.set.op_tower1 > 0) or (
+                self.set.op_tower4 > 0) or (self.set.op_tower7 > 0)
+            self.data["tower_press"]["mid"][0] = (self.set.op_tower2 > 0) or (
+                self.set.op_tower5 > 0) or (self.set.op_tower8 > 0)
+            self.data["tower_press"]["bot"][0] = (self.set.op_tower3 > 0) or (
+                self.set.op_tower6 > 0) or (self.set.op_tower9 > 0)
+
+        else:
+            self.data["tower_press"]["top"][0] = (self.set.my_tower1 > 0) or (
+                self.set.my_tower4 > 0) or (self.set.my_tower7 > 0)
+            self.data["tower_press"]["mid"][0] = (self.set.my_tower2 > 0) or (
+                self.set.my_tower5 > 0) or (self.set.my_tower8 > 0)
+            self.data["tower_press"]["bot"][0] = (self.set.my_tower3 > 0) or (
+                self.set.my_tower6 > 0) or (self.set.my_tower9 > 0)
+
+        return 0
 
     def tower_destroy(self):
+        turn = self.set.turn
+        if turn < 5:
+            return 0
+        if turn % 2 == 1:
+            self.data["tower_destroy"]["top"][0] = (self.set.op_tower1 > 0) or (
+                self.set.op_tower4 > 0) or (self.set.op_tower7 > 0)
+            self.data["tower_destroy"]["mid"][0] = (self.set.op_tower2 > 0) or (
+                self.set.op_tower5 > 0) or (self.set.op_tower8 > 0)
+            self.data["tower_destroy"]["bot"][0] = (self.set.op_tower3 > 0) or (
+                self.set.op_tower6 > 0) or (self.set.op_tower9 > 0)
+
+        else:
+            self.data["tower_destroy"]["top"][0] = (self.set.my_tower1 > 0) or (
+                self.set.my_tower4 > 0) or (self.set.my_tower7 > 0)
+            self.data["tower_destroy"]["mid"][0] = (self.set.my_tower2 > 0) or (
+                self.set.my_tower5 > 0) or (self.set.my_tower8 > 0)
+            self.data["tower_destroy"]["bot"][0] = (self.set.my_tower3 > 0) or (
+                self.set.my_tower6 > 0) or (self.set.my_tower9 > 0)
         return
 
     def nexus_destroy(self):
+        turn = self.set.turn
+        if turn % 2 == 1:
+            self.data["nexus_destroy"] = self.set.my_tower_destroy >= 9
+        else:
+            self.data["nexus_destroy"] = self.set.op_tower_destroy >= 9
+
         return
 
     def get(self, request):
@@ -419,7 +518,12 @@ class MakeSelection(APIView):
                      "nexus_destroy": [False, 3]}
         # 쿼리에서 세트 가져오기
         set_id = request.query_params.get('set', None)
-        print(set_id)
-        self.set = Set.objects.get(pk=set_id)
 
+        self.set = Set.objects.get(pk=set_id)
+        self.lane_press()
+        self.ganking()
+        self.engage()
+        self.fight()
+        self.tower_press()
+        self.nexus_destroy()
         return Response(self.data)
