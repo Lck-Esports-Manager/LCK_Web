@@ -2,9 +2,8 @@ import React, { useState } from 'react';
 import { Link } from "react-router-dom";
 import './Login.css';
 import axios from 'axios';
-// import Headline from "./Headline";
 
-function Login(props) {
+function Login() {
     const [user, setInfo] = useState({
         username: '',
         password: ''
@@ -17,18 +16,19 @@ function Login(props) {
         });
     }
     const autoPress = (e) => {
-        if (e.key == 'Enter') {
+        if (e.key === 'Enter') {
             login_request();
         }
     }
     const login_request = () => {
         axios.post('http://localhost:8000/api/rest-auth/login/', user
         ).then((response) => {
-            // console.log(response.data);
+            console.log(response.data);
             alert(`${response.data.user.username}님 환영합니다.`);
-            // document.location.href = `/${response.data.user.username}`;
+            // document.location.href = `/`;
             // props.tag(response.data.token);
         }).catch((Error) => {
+            console.log(Error.response);
             Error.response.data &&
                 alert(`ERROR : ${Error.response.data[`${Object.keys(Error.response.data)[0]}`][0]}`);
         }).then(() => { });
@@ -36,13 +36,6 @@ function Login(props) {
     return (
         <div>
             {/* <Headline /> */}
-            <div className="login--top">
-                <div className="inner">
-                    <div className="title">
-                        LCK Esports Manager
-                    </div>
-                </div>
-            </div>
             <div className="login--main">
                 <div className="inner">
                     <div className="loginbox">

@@ -1,0 +1,223 @@
+.MT--top{
+    background-color: #c1c1c1;
+}
+.MT--top .inner{
+    display: flex;
+    width: 1200px;
+    margin: auto;
+    position: relative;
+}
+.MT--top .inner .title{
+    font-size:80px;
+    font-family: 'Staatliches', cursive, sans-serif;
+    display: block;
+    text-align: center;
+    margin: auto;
+    font-weight: 700;
+    padding: 20px;
+}
+.MT--main {
+    background-color: #c1c1c1;
+    height: 750px;
+}
+.MT--main .inner {
+    padding: 10px;
+    background-color: #666;
+    width: 1200px;
+    display: flex;
+    height: 630px;
+    margin: auto;
+    position: relative;
+    border-radius: 15px;
+    padding: 15px;
+    background-image: url('../images/maketeam_back.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.MT--main .inner .MTbox{
+    background-color: rgba(255,255,255,0.7);
+    /* border: 5px solid black; */
+    border-radius: 15px;
+    display: block;
+    width: 1200px;
+    height: 620px;
+    margin: auto;
+}
+.MT--main .inner .MTbox .main--top{
+    display: flex;
+    margin: 5px 5px 0;
+    padding: 5px 15px 0;
+}
+.MT--main .inner .MTbox .main--top .title{
+    font-weight: 700;
+    font-size: 38px;
+    display: block;
+    text-align: center;
+    width: 130px;
+    margin: auto;
+    padding: 25px 16px 0px 16px;
+}
+.MT--main .inner .MTbox .main--top .money{
+    display: block;
+    width: 160px;
+    text-align: center;
+    font-family: 'Noto Sans KR', sans-serif;
+    font-weight: 700;
+    margin: 15px;
+    font-size: 17px;
+}
+.MT--main .inner .MTbox .main--top .myplayer{
+    width: 800px;
+    display: flex;
+    border-radius: 5px;
+    margin: auto;
+    padding: 8px;
+}
+.MT--main .inner .MTbox .main--top .send{
+    font-family: 'Noto Sans KR', sans-serif;
+    font-weight: 700;
+    font-size: 17px;
+    display: block;
+    margin: auto;
+    width: 160px;
+}
+.MT--main .inner .MTbox .main--top .send button{
+    font-family: 'Noto Sans KR', sans-serif;
+    font-size: 17px;
+    font-weight: 700;
+    border-radius: 5px;
+    border:2px solid #666;
+    width: 90px;
+    height: 40px;
+    text-align: center;
+    margin: 5px 0 5px 35px;
+}
+.MT--main .inner .MTbox .main--top .send button:hover{
+    color:tomato;
+    cursor: pointer;
+}
+.MT--main .inner .MTbox .main--top .send button:active{
+    background-color: tomato;
+    color: white;
+}
+.MT--main .inner .MTbox .line{
+    background-color: #666;
+    width: 1165px;
+    height: 6px;
+    margin: 0px 0px 10px 0px;
+}
+.MT--main .inner .MTbox .contents{
+    /* background-color: orange; */
+    font-family: 'Noto Sans KR', sans-serif;
+    box-sizing: border-box;
+    height: 490px;
+    padding: 10px 20px 20px 20px;
+}
+.MT--main .inner .MTbox .contents .btnbar{
+    display: flex;
+    /* background-color: yellow; */
+    /* padding: 10px; */
+}
+.MT--main .inner .MTbox .contents .btnbar .position{
+    margin: auto;
+    padding: 8px;
+    width: 230px;
+    font-size: 15px;
+    text-align: center;
+    font-weight: 700;
+    border-radius: 5px;
+    box-sizing: border-box;
+    border: 2px solid #666;
+    background-color: white;
+    transition: 0.2s;
+}
+.MT--main .inner .MTbox .contents .btnbar .position:hover{
+    background-color: #c1c1c1;
+    border: #c1c1c1;
+    cursor: pointer;
+}
+.MT--main .inner .MTbox .contents .index ul{
+    display: flex;
+    margin: 10px 0 10px;   
+    border: 2px solid #666;
+    background-color: #c1c1c1;
+    padding: 4px 10px 4px;
+    border-radius: 5px;
+}
+.MT--main .inner .MTbox .contents .index ul li{ /*나머지 인덱스*/
+    padding: 5px;
+    font-size: 15px;
+    text-align: center;
+    font-weight: 700;
+    border-radius: 5px;
+    box-sizing: border-box;
+    transition: 0.2s;
+}
+.MT--main .inner .MTbox .contents .index ul div{ /*선수선택*/
+    padding: 5px;
+    font-size: 15px;
+    text-align: center;
+    font-weight: 700;
+    border-radius: 5px;
+    box-sizing: border-box;
+    transition: 0.2s;
+}
+.MT--main .inner .MTbox .contents .index ul li:hover{
+    color:white;
+    cursor: pointer;
+}
+.MT--main .inner .MTbox .contents .MT--players{
+    overflow: auto;
+    /* background-color: tomato; */
+    height: 380px;
+}
+.MT--main .inner .MTbox .contents .MT--players ul{
+    display: flex;
+    flex-wrap: wrap;
+    background-color: rgb(255, 219, 161);
+    padding: 5px;
+    height: 25px;
+    border-radius: 7px;
+    margin: 5px;
+    transition: 0.5s;
+}
+.MT--main .inner .MTbox .contents .MT--players ul div{
+    padding: 0 10px 0;
+}
+.MT--main .inner .MTbox .contents .MT--players ul div button{
+    width: 50px;
+    height: 25px;
+    border-radius: 5px;
+    border:2px solid #666;
+    font-family: 'Noto Sans KR', sans-serif;
+    font-weight: 700;
+}
+.MT--main .inner .MTbox .contents .MT--players ul div button:active{
+    background-color: #666;
+    color: white;
+}
+.MT--main .inner .MTbox .contents .MT--players ul div button:hover{
+    cursor: pointer;
+}
+.MT--main .inner .MTbox .contents .MT--players ul li{
+    font-weight: 700;
+    margin: auto;
+    width: 100px;
+    height: 10px;
+    padding: 5px 0px 15px;
+    text-align: center;
+    display: block;
+}
+.MT--main .inner .MTbox .contents .MT--players ul .long{
+    font-weight: 700;
+    margin: auto;
+    width: 150px;
+    height: 10px;
+    padding: 5px 0px 15px;
+    text-align: center;
+    display: block;
+}
+.MT--main .inner .MTbox .contents .MT--players ul li.status{
+    background-color:rgb(255, 192, 90) ;
+    border-radius: 5px;
+}

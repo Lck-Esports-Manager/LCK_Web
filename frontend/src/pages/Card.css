@@ -1,0 +1,27 @@
+#Card{
+    background-color: white;
+    border-radius: 10px;
+    border:2px dashed black;
+    margin: auto;
+    width: 130px;
+    height: 70px;
+    padding: 5px;
+    line-height: 1.1;
+    font-weight: 700;
+}
+#Card .card--title{
+    font-size: 16px;
+    text-align: center;
+}
+#Card .card--name{
+    font-size: 16px;
+    text-align: center;
+}
+#Card .card--rate{
+    font-size: 14px;
+    text-align: center;
+}
+#Card .card--price{
+    font-size: 16px;
+    text-align: center;
+}

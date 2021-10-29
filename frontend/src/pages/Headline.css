@@ -19,7 +19,9 @@ header .inner ul{
     top: 20px;
     right: 0;
     display: flex;
-    font-family: Arial, sans-serif;
+    font-family: 'Bitter', serif;
+    font-style: italic;
+    font-weight: 700;
 }
 header .inner ul li{
     /* background-color: orangered; */
@@ -65,4 +67,27 @@ header img{
     left: 25px;
     border-radius: 5px;
     /* display: none; */
+}
+
+.top{
+    /* margin: 10px auto; */
+    background-color: #c1c1c1;
+}
+.top .maintitle{
+    font-size:80px;
+    /* font-family: 'Staatliches', cursive, sans-serif; */
+    font-family: 'Signika Negative', sans-serif;
+    display: block;
+    text-align: center;
+    font-weight: 700;
+    padding: 20px;
+}
+.top .top-inner .title{
+    font-size:80px;
+    font-family: 'Staatliches', cursive, sans-serif;
+    display: block;
+    text-align: center;
+    margin: auto;
+    font-weight: 700;
+    padding: 20px;
 }

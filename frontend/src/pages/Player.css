@@ -18,39 +18,42 @@
 }
 .player--main {
     background-color: #c1c1c1;
-    height: 700px;
+    height: 750px;
 }
 .player--main .inner {
     padding: 10px;
     background-color: #666;
     width: 1200px;
     display: flex;
-    height: 610px;
+    height: 630px;
     margin: auto;
     position: relative;
     border-radius: 15px;
     padding: 15px;
+    background-image: url('../images/players_back.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 .player--main .inner .playerbox{
-    background-color: white;
+    background-color: rgba(255,255,255,0.7);
     /* border: 5px solid black; */
     border-radius: 15px;
     display: block;
     width: 1200px;
-    height: 600px;
+    height: 620px;
     margin: auto;
 }
 .player--main .inner .playerbox .title{
     font-weight: 700;
-    font-size: 45px;
+    font-size: 40px;
     text-align: center;
     padding: 16px 16px 0px 16px;
 }
 .player--main .inner .playerbox .line{
     background-color: #666;
-    width: 1150px;
+    width: 1165px;
     height: 6px;
-    margin: 0px 0px 10px 5px;
+    margin: 0px 0px 10px 0px;
 }
 .player--main .inner .playerbox .contents{
     /* background-color: orange; */
@@ -64,50 +67,77 @@
     /* background-color: yellow; */
     /* padding: 10px; */
 }
-.player--main .inner .playerbox .contents .btnbar button{
+.player--main .inner .playerbox .contents .btnbar .position{
     margin: auto;
-    padding: 5px;
-    width: 120px;
-    font-size: 13px;
+    padding: 8px;
+    width: 230px;
+    font-size: 15px;
+    text-align: center;
     font-weight: 700;
     border-radius: 5px;
+    box-sizing: border-box;
     border: 2px solid #666;
     background-color: white;
     transition: 0.2s;
 }
-.player--main .inner .playerbox .contents .btnbar button:hover{
-    color:white;
-    background-color: #333;
-    cursor: pointer;
-}
-.player--main .inner .playerbox .contents .index{
+.player--main .inner .playerbox .contents .btnbar .position:hover{
     background-color: #c1c1c1;
+    border: #c1c1c1;
+    cursor: pointer;
 }
 .player--main .inner .playerbox .contents .index ul{
     display: flex;
-    margin: 10px;   
-    padding: 10px;
+    margin: 10px 0 10px;   
+    border: 2px solid #666;
+    background-color: #c1c1c1;
+    padding: 4px 10px 4px;
+    border-radius: 5px;
 }
 .player--main .inner .playerbox .contents .index ul li{
-    font-weight: 700;
     margin: auto;
+    padding: 5px;
+    width: 150px;
+    font-size: 15px;
+    text-align: center;
+    font-weight: 700;
+    border-radius: 5px;
+    box-sizing: border-box;
+    transition: 0.2s;
+}
+.player--main .inner .playerbox .contents .index ul li:hover{
+    color:white;
+    cursor: pointer;
 }
 .player--main .inner .playerbox .contents .players{
     overflow: auto;
     /* background-color: tomato; */
-    height: 390px;
+    height: 420px;
 }
 .player--main .inner .playerbox .contents .players ul{
     display: flex;
+    flex-wrap: wrap;
     background-color: rgb(255, 219, 161);
-    padding: 10px;
+    padding: 5px;
+    height: 25px;
     border-radius: 7px;
     margin: 5px;
+    transition: 0.5s;
+    overflow: hidden;
+}
+.player--main .inner .playerbox .contents .players ul:hover{
+    height: 70px;
 }
 .player--main .inner .playerbox .contents .players ul li{
     /* background-color: tomato; */
     font-weight: 700;
     margin: auto;
-    width: 100px;
+    width: 180px;
+    height: 10px;
+    padding: 5px 0px 15px;
     text-align: center;
+    display: block;
+}
+.player--main .inner .playerbox .contents .players ul li.status{
+    background-color:rgb(255, 192, 90) ;
+    border-radius: 5px;
 }

@@ -18,7 +18,7 @@ function CreateAccount() {
         });
     }
     const autoNext = (e) => {
-        if (e.key = 'Enter') {
+        if (e.key === 'Enter') {
             new_request();
         }
     }
@@ -29,7 +29,7 @@ function CreateAccount() {
                 alert([`가입을 축하드립니다. \nname : ${user.username} \nemail : ${user.email} \n 가입확인 메일이 발송되었습니다.`]);
                 document.location.href = '/login';
             }).catch((Error) => {
-                console.log(Error.response.data);
+                //console.log(Error.response.data);
                 Error.response.data &&
                     alert(`ERROR : ${Error.response.data[`${Object.keys(Error.response.data)[0]}`][0]}`);
             }).then(() => { });
@@ -40,13 +40,6 @@ function CreateAccount() {
     }
     return (<div>
         {/* <Headline /> */}
-        <div className="CA--top">
-            <div className="inner">
-                <div className="title">
-                    LCK Esports Manager
-                </div>
-            </div>
-        </div>
         <div className="CA--main">
             <div className="inner">
                 <div className="CAbox">

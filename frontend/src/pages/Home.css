@@ -1,11 +1,12 @@
 .home--top{
     /* margin: 10px auto; */
-    height: 590px;
+    height: 470px;
     background-color: #c1c1c1;
 }
 .home--top .maintitle{
     font-size:80px;
-    font-family: 'Staatliches', cursive, sans-serif;
+    /* font-family: 'Staatliches', cursive, sans-serif; */
+    font-family: 'Signika Negative', sans-serif;
     display: block;
     text-align: center;
     font-weight: 700;
@@ -56,7 +57,7 @@
 }
 .home--bottom {
     background-color: #c1c1c1;
-    height: 400px;
+    height: 350px;
 }
 .home--bottom .inner {
     padding: 10px;
@@ -75,15 +76,14 @@
     margin: auto;
 }
 .home--bottom .inner h2 {
-    padding: 10px;
-    /* background-color:#666; */
+    padding: 15px 15px 0 15px;
     border-radius: 20px;
-    font-size: 43px;
-    font-family: 'Staatliches', cursive, sans-serif;
+    font-size: 38px;
+    /* font-family: 'Staatliches', cursive, sans-serif; */
+    font-family: 'Signika Negative', sans-serif;
 }
 .home--bottom .inner p {
     padding: 10px;
-    /* background-color:#666; */
     font-weight: 700;
     border-radius: 20px;
     font-size: 20px;

@@ -9,6 +9,7 @@ import Player from "./pages/Player";
 import NotFound from "./pages/NotFound";
 import Headline from "./pages/Headline";
 import CreateAccount from './pages/CreateAccount';
+import MakeTeam from './pages/MakeTeam';
 
 // let isLogin = false;
 
@@ -17,7 +18,8 @@ function App() {
     <BrowserRouter>
       <Headline />
       <Switch>
-        <Route path="/CreateAccount" component={CreateAccount} />
+        <Route path="/maketeam" component={MakeTeam} />
+        <Route path="/createaccount" component={CreateAccount} />
         {/* <Route
           path="/login"
           render={() => isLogin ? <Redirect to="/" /> : <Login />} /> */}

@@ -23,6 +23,13 @@ export default function Headline() {
                     <li><NavLink activeStyle={actStyle} to="/login">Login</NavLink></li>
                 </ul>
             </div>
+            <div className="top">
+                <div className="top-inner">
+                    <div className="title">
+                        LCK Esports Manager
+                    </div>
+                </div>
+            </div>
         </header>
     );
 }
