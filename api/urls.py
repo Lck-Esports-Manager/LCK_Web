@@ -12,6 +12,9 @@ urlpatterns = [
     path('playerlist/', PlayerListView.as_view()),
     path('playerlist/detail/', PlayerDetailView.as_view()),
 
+    # 챔피언 가져오기
+
+    path('champion/', ChampionListView.as_view()),
     # 팀 생성
     path('maketeam/', MakeTeam.as_view()),
 

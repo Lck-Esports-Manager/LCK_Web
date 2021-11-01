@@ -95,7 +95,25 @@ class PlayerDetailView(APIView):
         return Response(serializer.data)
 
 
+# 챔피언 list
+class ChampionListView(APIView):
+
+    def get(self, request):
+
+        tier = request.query_params.get('tier', None)
+        position = request.query_params.get('position', None)
+
+        result = Champion.objects.all()
+
+        if position != None:
+            result = result.filter(position=position)
+        if tier != None:
+            result = result.filter(grade=tier)
+
+        serializer = ChampionSerializer(result, many=True)
+        return Response(serializer.data)
 # 팀 생성
+
 
 class MakeTeam(APIView):
     def post(self, request):
