@@ -225,6 +225,20 @@ class ProgressLeague(APIView):
             schedules = LeagueSchedule.objects.filter(day=current_date)
             for elem in schedules:
                 if elem.team1 == 0 or elem.team2 == 0:
+                    my_team_data = dict()
+                    op_team_data = dict()
+                    my_team = MyTeam.objects.get(user=user)
+                    my_top_p = SimplePlayerSerializer(my_team.top.player)
+                    my_jng_p = SimplePlayerSerializer(my_team.jungle.player)
+                    my_mid_p = SimplePlayerSerializer(my_team.mid.player)
+                    my_adc_p = SimplePlayerSerializer(my_team.adc.player)
+                    my_sup_p = SimplePlayerSerializer(my_team.support.player)
+                    my_team_data['name'] = my_team.name
+                    my_team_data['top'] = my_top_p.data
+                    my_team_data['jng'] = my_jng_p.data
+                    my_team_data['mid'] = my_mid_p.data
+                    my_team_data['adc'] = my_adc_p.data
+                    my_team_data['sup'] = my_sup_p.data
                     # match데이터를 확인한다.
                     try:
                         match = Match.objects.get(
@@ -236,11 +250,54 @@ class ProgressLeague(APIView):
                         m = Match(team_num1=elem.team1,
                                   team_num2=elem.team2, league=league)
                         m.save()
+
                         if elem.team1 == 0:
+                            op_team__ = LeagueTeam.objects.get(
+                                league=league, team_num=elem.team2)
+                            op_team = op_team__.base_team
+                            op_team_data['name'] = op_team.name
+
+                            top_p = SimplePlayerSerializer(Player.objects.filter(
+                                team=op_team, position="Top")[0])
+                            op_team_data['top'] = top_p.data
+                            jng_p = SimplePlayerSerializer(Player.objects.filter(
+                                team=op_team, position="Jungle")[0])
+                            op_team_data['jng'] = jng_p.data
+                            mid_p = SimplePlayerSerializer(Player.objects.filter(
+                                team=op_team, position="Middle")[0])
+                            op_team_data['mid'] = mid_p.data
+                            adc_p = SimplePlayerSerializer(Player.objects.filter(
+                                team=op_team, position="ADC")[0])
+                            op_team_data['adc'] = adc_p.data
+                            sup_p = SimplePlayerSerializer(Player.objects.filter(
+                                team=op_team, position="Support")[0])
+                            op_team_data['sup'] = sup_p.data
                             s = Set(side=1, match=m)
 
                         else:
+                            op_team__ = LeagueTeam.objects.get(
+                                league=league, team_num=elem.team1)
+                            op_team = op_team__.base_team
+                            op_team_data['name'] = op_team.name
+
+                            top_p = SimplePlayerSerializer(Player.objects.filter(
+                                team=op_team, position="Top")[0])
+                            op_team_data['top'] = top_p.data
+                            jng_p = SimplePlayerSerializer(Player.objects.filter(
+                                team=op_team, position="Jungle")[0])
+                            op_team_data['jng'] = jng_p.data
+                            mid_p = SimplePlayerSerializer(Player.objects.filter(
+                                team=op_team, position="Middle")[0])
+                            op_team_data['mid'] = mid_p.data
+                            adc_p = SimplePlayerSerializer(Player.objects.filter(
+                                team=op_team, position="ADC")[0])
+                            op_team_data['adc'] = adc_p.data
+                            sup_p = SimplePlayerSerializer(Player.objects.filter(
+                                team=op_team, position="Support")[0])
+                            op_team_data['sup'] = sup_p.data
+
                             s = Set(side=0, match=m)
+
                         s.save()
                         top = ChampionSerializer(
                             Champion.objects.filter(position="Top"), many=True)
@@ -265,13 +322,43 @@ class ProgressLeague(APIView):
                             "my_team": True,
                             "other_team": False,
                             "banpick": True,
+                            "my_team_data": my_team_data,
+                            "op_team_data": op_team_data,
                             "set_num": 1,
                             "set_id": s.id,
+                            "side": s.side,
                             "data": champion_data
                         })
 
                     else:
                         set_num = match.set_num
+                        op_team_data = {}
+                        if match.team_num1 != 0:
+                            op_team__ = LeagueTeam.objects.get(
+                                league=league, team_num=match.team_num1)
+                        else:
+                            op_team__ = LeagueTeam.objects.get(
+                                league=league, team_num=match.team_num2)
+
+                        op_team = op_team__.base_team
+                        op_team_data['name'] = op_team.name
+
+                        top_p = SimplePlayerSerializer(Player.objects.filter(
+                            team=op_team, position="Top")[0])
+                        op_team_data['top'] = top_p.data
+                        jng_p = SimplePlayerSerializer(Player.objects.filter(
+                            team=op_team, position="Jungle")[0])
+                        op_team_data['jng'] = jng_p.data
+                        mid_p = SimplePlayerSerializer(Player.objects.filter(
+                            team=op_team, position="Middle")[0])
+                        op_team_data['mid'] = mid_p.data
+                        adc_p = SimplePlayerSerializer(Player.objects.filter(
+                            team=op_team, position="ADC")[0])
+                        op_team_data['adc'] = adc_p.data
+                        sup_p = SimplePlayerSerializer(Player.objects.filter(
+                            team=op_team, position="Support")[0])
+                        op_team_data['sup'] = sup_p.data
+
                         set = Set.objects.get(match=match, set_num=set_num)
                         if set.status == 'bp':
                             top = ChampionSerializer(
@@ -297,6 +384,9 @@ class ProgressLeague(APIView):
                                 "my_team": True,
                                 "other_team": False,
                                 "banpick": True,
+                                "my_team_data": my_team_data,
+                                "op_team_data": op_team_data,
+                                "side": set.side,
                                 "set_num": set_num,
                                 "set_id": set.id,
                                 "data": champion_data
@@ -309,6 +399,8 @@ class ProgressLeague(APIView):
                                 "my_team": True,
                                 "other_team": False,
                                 "banpick": False,
+                                "my_team_data": my_team_data,
+                                "op_team_data": op_team_data,
                                 "data": set_data.data
                             })
 

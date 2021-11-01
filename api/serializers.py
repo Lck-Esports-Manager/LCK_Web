@@ -44,3 +44,13 @@ class PlayerSerializer(serializers.ModelSerializer):
     class Meta:
         model = Player
         fields = "__all__"
+
+
+class SimplePlayerSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Player
+        fields = ['name', 'season', 'year']
+
+
+# class SimpleMyPlayerSerializer(serializers.ModelSerializer):
