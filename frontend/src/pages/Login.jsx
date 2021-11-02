@@ -3,6 +3,8 @@ import { Link } from "react-router-dom";
 import './Login.css';
 import axios from 'axios';
 
+axios.defaults.withCredentials = true;
+
 function Login() {
     const [user, setInfo] = useState({
         username: '',
@@ -24,14 +26,17 @@ function Login() {
         axios.post('http://localhost:8000/api/rest-auth/login/', user
         ).then((response) => {
             console.log(response.data);
+            axios.defaults.headers.common['Authorization'] = `jwt ${response.data.token}`;
+            console.log(axios.defaults.headers.common['Authorization']);
             alert(`${response.data.user.username}님 환영합니다.`);
-            // document.location.href = `/`;
-            // props.tag(response.data.token);
+            window.localStorage.setItem('user', JSON.stringify(user));
+            window.localStorage.setItem('isLogin', 'true');
+            document.location.href = '/';
         }).catch((Error) => {
             console.log(Error.response);
             Error.response.data &&
                 alert(`ERROR : ${Error.response.data[`${Object.keys(Error.response.data)[0]}`][0]}`);
-        }).then(() => { });
+        });
     }
     return (
         <div>

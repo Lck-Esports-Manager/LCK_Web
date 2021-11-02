@@ -1,11 +1,13 @@
-import React, { Component, useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './MakeTeam.css';
 import Card from './Card'
 
 export default function MakeTeam() {
+    let temp = 'asdf';
     const [players, setPlayer] = useState(null);
     const [myteam, setTeam] = useState({
+        name: '',
         total: 200000,
         Top: {
             id: 0,
@@ -43,9 +45,21 @@ export default function MakeTeam() {
             choice: false
         }
     });
+    if (myteam.name === '') {
+        temp = prompt('생성할 팀 이름을 입력해주세요.');
+        while (temp.length <= 4) {
+            alert('팀 이름이 너무 짧습니다. 다시 입력해주세요');
+            temp = prompt('생성할 팀 이름을 입력해주세요.');
+        }
+        setTeam({
+            ...myteam,
+            name: temp
+        });
+        alert(`팀이름 : ${temp} 이 되었습니다.`);
+    }
     const getList = (props) => {
         axios.get('http://localhost:8000/api/playerlist/?position=' + props).then((response) => { setPlayer(response.data); })
-    }
+    };
     useEffect(() => {
         const fetchUsers = async () => {
             try {
@@ -57,30 +71,22 @@ export default function MakeTeam() {
         };
         fetchUsers();
     }, []);
-    const sortName = () => {
-        const newlist = [...players].sort((a, b) => a.name.localeCompare(b.name));
-        setPlayer(newlist);
-    }
-    const sortSeason = () => {
-        const newlist = [...players].sort((a, b) => a.year < b.year ? -1 : a.year > b.year ? 1 : 0);
-        setPlayer(newlist);
-    }
-    const sortTeam = () => {
-        const newlist = [...players].sort((a, b) => a.team.name < b.team.name ? -1 : a.team.name > b.team.name ? 1 : 0);
-        setPlayer(newlist);
-    }
-    const sortPosition = () => {
-        const newlist = [...players].sort((a, b) => a.position < b.position ? -1 : a.position > b.position ? 1 : 0);
-        setPlayer(newlist);
-    }
-    const sortRate = () => {
-        const newlist = [...players].sort((a, b) => a.price < b.price ? -1 : a.price > b.price ? 1 : 0);
-        setPlayer(newlist);
-    }
-    const sortPrice = () => {
-        const newlist = [...players].sort((a, b) => a.rate < b.rate ? -1 : a.rate > b.rate ? 1 : 0);
-        setPlayer(newlist);
-    }
+    const sortList = (props) => {
+        let newList;
+        if (props === 'name')
+            newList = [...players].sort((a, b) => a.name.localeCompare(b.name));
+        else if (props === 'season')
+            newList = [...players].sort((a, b) => a.year < b.year ? -1 : a.year > b.year ? 1 : 0);
+        else if (props === 'team')
+            newList = [...players].sort((a, b) => a.team.name < b.team.name ? -1 : a.team.name > b.team.name ? 1 : 0);
+        else if (props === 'position')
+            newList = [...players].sort((a, b) => a.position < b.position ? -1 : a.position > b.position ? 1 : 0);
+        else if (props === 'rate')
+            newList = [...players].sort((a, b) => a.price < b.price ? -1 : a.price > b.price ? 1 : 0);
+        else if (props === 'price')
+            newList = [...players].sort((a, b) => a.rate < b.rate ? -1 : a.rate > b.rate ? 1 : 0);
+        setPlayer(newList);
+    };
     const selectPlayer = (props) => {
         setTeam({
             ...myteam,
@@ -92,7 +98,7 @@ export default function MakeTeam() {
                 choice: true
             },
         });
-    }
+    };
     const resetTeam = () => {
         setTeam({
             ...myteam,
@@ -133,7 +139,7 @@ export default function MakeTeam() {
                 choice: false
             }
         })
-    }
+    };
     const sendTeam = () => { // 모두 골랐는지 체크, 돈이 안넘었는지 체크
         if (myteam.Top.price * myteam.Jungle.price * myteam.Middle.price
             * myteam.ADC.price * myteam.Support.price === 0) {
@@ -144,8 +150,10 @@ export default function MakeTeam() {
             alert("주어진 금액을 초과했습니다. 다시 선택해주세요.");
         }
         else {
+            console.log(myteam);
+            alert(`${myteam.name} 팀이 생성되었습니다.`);
             axios.post('http://localhost:8000/api/maketeam/', {
-                name: 'test',
+                name: myteam.name,
                 top: myteam.Top.id,
                 jungle: myteam.Jungle.id,
                 mid: myteam.Middle.id,
@@ -159,9 +167,9 @@ export default function MakeTeam() {
             }).catch((e) => {
                 console.log(e.response);
             })
-            console.log(myteam);
+            document.location.href = `/banpick`;
         }
-    }
+    };
     return (<>
         <div>
             <div className="MT--main">
@@ -200,12 +208,12 @@ export default function MakeTeam() {
                             <div className="index">
                                 <ul>
                                     <div>선수 선택</div>
-                                    <li onClick={sortName} >ㅤ선수 이름ㅤΞ</li>
-                                    <li onClick={sortSeason}>ㅤㅤㅤ시즌ㅤΞ</li>
-                                    <li onClick={sortTeam}>ㅤㅤㅤㅤㅤ팀 이름ㅤΞ</li>
-                                    <li onClick={sortPosition}>ㅤㅤㅤㅤ포지션ㅤΞ</li>
-                                    <li onClick={sortRate}>ㅤㅤㅤ티어ㅤΞ</li>
-                                    <li onClick={sortPrice}>ㅤㅤㅤ영입비용ㅤΞ</li>
+                                    <li onClick={() => { sortList('name') }} >ㅤ선수 이름ㅤΞ</li>
+                                    <li onClick={() => { sortList('season') }}>ㅤㅤㅤ시즌ㅤΞ</li>
+                                    <li onClick={() => { sortList('team') }}>ㅤㅤㅤㅤㅤ팀 이름ㅤΞ</li>
+                                    <li onClick={() => { sortList('position') }}>ㅤㅤㅤㅤ포지션ㅤΞ</li>
+                                    <li onClick={() => { sortList('rate') }}>ㅤㅤㅤ티어ㅤΞ</li>
+                                    <li onClick={() => { sortList('price') }}>ㅤㅤㅤ영입비용ㅤΞ</li>
                                     <div >ㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤ 능력치</div>
                                 </ul>
                             </div>

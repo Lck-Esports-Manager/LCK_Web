@@ -3,7 +3,6 @@ import './League.css';
 import axios from 'axios';
 
 export default function League() {
-    // const [leagueState, setLeague] = useState(null);
     const [leagueState, setLeague] = useState({
         league: false,
         my_team: true,

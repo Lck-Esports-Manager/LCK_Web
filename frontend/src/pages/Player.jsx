@@ -1,4 +1,4 @@
-import React, { Component, useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './Player.css';
 /*import styled from 'styled-components';*/
@@ -6,20 +6,8 @@ import './Player.css';
 
 export default function Player() {
     const [players, setPlayer] = useState(null);
-    const top = () => {
-        axios.get('http://localhost:8000/api/playerlist/?position=top').then((response) => { setPlayer(response.data); })
-    }
-    const jungle = () => {
-        axios.get('http://localhost:8000/api/playerlist/?position=jungle').then((response) => { setPlayer(response.data); })
-    }
-    const middle = () => {
-        axios.get('http://localhost:8000/api/playerlist/?position=middle').then((response) => { setPlayer(response.data); })
-    }
-    const adc = () => {
-        axios.get('http://localhost:8000/api/playerlist/?position=adc').then((response) => { setPlayer(response.data); })
-    }
-    const support = () => {
-        axios.get('http://localhost:8000/api/playerlist/?position=support').then((response) => { setPlayer(response.data); })
+    const getList = (props) => {
+        axios.get('http://localhost:8000/api/playerlist/?position=' + props).then((response) => { setPlayer(response.data); })
     }
     useEffect(() => {
         const fetchUsers = async () => {
@@ -32,29 +20,21 @@ export default function Player() {
         };
         fetchUsers();
     }, []);
-    const sortName = () => {
-        const newlist = [...players].sort((a, b) => a.name.localeCompare(b.name));
-        setPlayer(newlist);
-    }
-    const sortSeason = () => {
-        const newlist = [...players].sort((a, b) => a.year < b.year ? -1 : a.year > b.year ? 1 : 0);
-        setPlayer(newlist);
-    }
-    const sortTeam = () => {
-        const newlist = [...players].sort((a, b) => a.team.name < b.team.name ? -1 : a.team.name > b.team.name ? 1 : 0);
-        setPlayer(newlist);
-    }
-    const sortPosition = () => {
-        const newlist = [...players].sort((a, b) => a.position < b.position ? -1 : a.position > b.position ? 1 : 0);
-        setPlayer(newlist);
-    }
-    const sortRate = () => {
-        const newlist = [...players].sort((a, b) => a.price < b.price ? -1 : a.price > b.price ? 1 : 0);
-        setPlayer(newlist);
-    }
-    const sortPrice = () => {
-        const newlist = [...players].sort((a, b) => a.rate < b.rate ? -1 : a.rate > b.rate ? 1 : 0);
-        setPlayer(newlist);
+    const sortList = (props) => {
+        let newList;
+        if (props === 'name')
+            newList = [...players].sort((a, b) => a.name.localeCompare(b.name));
+        else if (props === 'season')
+            newList = [...players].sort((a, b) => a.year < b.year ? -1 : a.year > b.year ? 1 : 0);
+        else if (props === 'team')
+            newList = [...players].sort((a, b) => a.team.name < b.team.name ? -1 : a.team.name > b.team.name ? 1 : 0);
+        else if (props === 'position')
+            newList = [...players].sort((a, b) => a.position < b.position ? -1 : a.position > b.position ? 1 : 0);
+        else if (props === 'rate')
+            newList = [...players].sort((a, b) => a.price < b.price ? -1 : a.price > b.price ? 1 : 0);
+        else if (props === 'price')
+            newList = [...players].sort((a, b) => a.rate < b.rate ? -1 : a.rate > b.rate ? 1 : 0);
+        setPlayer(newList);
     }
     return (<>
         <div>
@@ -67,20 +47,20 @@ export default function Player() {
                         <div className="contents">
                             <div className="line">ㅤ</div>
                             <div className="btnbar">
-                                <div className="position" onClick={top}>Top</div>
-                                <div className="position" onClick={jungle}>Jungle</div>
-                                <div className="position" onClick={middle}>Middle</div>
-                                <div className="position" onClick={adc}>ADC</div>
-                                <div className="position" onClick={support}>Support</div>
+                                <div className="position" onClick={() => { getList('top') }}>Top</div>
+                                <div className="position" onClick={() => { getList('jungle') }}>Jungle</div>
+                                <div className="position" onClick={() => { getList('middle') }}>Middle</div>
+                                <div className="position" onClick={() => { getList('adc') }}>ADC</div>
+                                <div className="position" onClick={() => { getList('support') }}>Support</div>
                             </div>
                             <div className="index">
                                 <ul>
-                                    <li onClick={sortName} >선수 이름ㅤΞ</li>
-                                    <li onClick={sortSeason}>시즌ㅤΞ</li>
-                                    <li onClick={sortTeam}>팀 이름ㅤΞ</li>
-                                    <li onClick={sortPosition}>포지션ㅤΞ</li>
-                                    <li onClick={sortRate}>티어ㅤΞ</li>
-                                    <li onClick={sortPrice}>영입비용ㅤΞ</li>
+                                    <li onClick={() => { sortList('name') }} >선수 이름ㅤΞ</li>
+                                    <li onClick={() => { sortList('season') }}>시즌ㅤΞ</li>
+                                    <li onClick={() => { sortList('team') }}>팀 이름ㅤΞ</li>
+                                    <li onClick={() => { sortList('position') }}>포지션ㅤΞ</li>
+                                    <li onClick={() => { sortList('rate') }}>티어ㅤΞ</li>
+                                    <li onClick={() => { sortList('price') }}>영입비용ㅤΞ</li>
                                 </ul>
                             </div>
                             <div className="players">

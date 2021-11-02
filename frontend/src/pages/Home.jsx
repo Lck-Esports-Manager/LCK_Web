@@ -1,9 +1,7 @@
 // import { Swiper, SwiperSlide } from "swiper/react";
 // import 'swiper/swiper.min.css';
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import axios from 'axios';
-// import Headline from "./Headline";
-
 import slide1 from '../images/main-1.png';
 import slide2 from '../images/main-2.png';
 import slide3 from '../images/main-3.png';
@@ -15,16 +13,17 @@ let imgs = [slide1, slide2, slide3, slide4, slide5];
 
 function Home() {
     const [state, setState] = useState({
-        num: 0,
-        match: {
-        }
+        num: 0
     });
+    const [match, setMatch] = useState({
+        list: null
+    })
     axios.get('http://localhost:8000/api/getschedule/'
     ).then((response) => {
-        console.log(response.data[0]);
+        console.log(response.data);
+
     }).catch((Error) => {
         console.log(Error.response);
-    }).then(() => {
     });
     const Lclick = () => {
         if (state.num > 0)
@@ -59,7 +58,10 @@ function Home() {
                     <div className="match">
                         <h2>MATCH SCHEDULE</h2>
                         <div className="schedule">
-                            스케줄 들어갈 자리
+                            {
+                                JSON.parse(window.localStorage.getItem('isLogin')) ?
+                                    <div className="match--list">{JSON.parse(window.localStorage.getItem('user')).username}님의 스케줄을 준비중에 있습니다.</div>
+                                    : <div className="match--contents">로그인후 이용 가능합니다.</div>}
                         </div>
                     </div>
                 </div>
