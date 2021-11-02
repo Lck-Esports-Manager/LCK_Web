@@ -137,7 +137,7 @@ class Match(models.Model):
     team_num1 = models.IntegerField(default=0)
     team_num2 = models.IntegerField(default=0)
     set_num = models.IntegerField(default=1)
-    result = models.CharField(null=True, max_length=20)
+    result = models.IntegerField(default=0)
     league = models.ForeignKey(League, default=0, on_delete=models.CASCADE)
     status_finish = models.BooleanField(default=False)
 
