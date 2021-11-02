@@ -119,6 +119,17 @@ class MakeTeam(APIView):
     def post(self, request):
 
         user = User.objects.get(username=request.user)
+        try:
+            my_team = MyTeam.objects.get(user=user)
+        except:
+            my_team = None
+
+        if my_team:
+            return Response({
+                "success": False,
+                "message": "There is your team already"
+            })
+
         name = request.data['name']
         top = Player.objects.get(pk=request.data['top'])
         top1 = MyPlayer(player=top, user=user, status1=top.status1, status2=top.status2, status3=top.status3,
