@@ -630,13 +630,13 @@ class MakeSelection(APIView):
 
     def get(self, request):
 
-        self.data = {"lane_press": {"top": [False, 1], "mid": [False, 1], "bot": [False, 1]},
-                     "ganking": {"top": [False, 1], "mid": [False, 1], "bot": [False, 1]},
-                     "engage": {"top": [False, 2], "mid": [False, 2], "bot": [False, 2]},
-                     "fight": {"dragon": [False, 3], "elder": [False, 3], "baron": [False, 3], "normal": [False, 3]},
-                     "tower_press": {"top": [False, 1], "mid": [False, 1], "bot": [False, 1]},
-                     "tower_destroy": {"top": [False, 2], "mid": [False, 2], "bot": [False, 2]},
-                     "nexus_destroy": [False, 3]}
+        self.data = {"lane_press": {"top": [False, 1, 1], "mid": [False, 1, 2], "bot": [False, 1, 3]},
+                     "ganking": {"top": [False, 1, 4], "mid": [False, 1, 5], "bot": [False, 1, 6]},
+                     "engage": {"top": [False, 2, 7], "mid": [False, 2, 8], "bot": [False, 2, 9]},
+                     "fight": {"dragon": [False, 3, 10], "elder": [False, 3, 11], "baron": [False, 3, 12], "normal": [False, 3, 13]},
+                     "tower_press": {"top": [False, 1, 14], "mid": [False, 1, 15], "bot": [False, 1, 16]},
+                     "tower_destroy": {"top": [False, 2, 17], "mid": [False, 2, 18], "bot": [False, 2, 19]},
+                     "nexus_destroy": [False, 3, 20]}
         # 쿼리에서 세트 가져오기
         set_id = request.query_params.get('set', None)
 
