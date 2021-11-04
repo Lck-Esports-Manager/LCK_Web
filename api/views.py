@@ -574,8 +574,6 @@ class MakeSelection(APIView):
 
         return 0
 
-        return 0
-
     def tower_press(self):
         turn = self.set.turn
         if turn < 5:
@@ -648,3 +646,208 @@ class MakeSelection(APIView):
         self.tower_press()
         self.nexus_destroy()
         return Response(self.data)
+
+
+class ProcessSelection(APIView):
+
+    def initiate(self):
+        self.match = self.set.match
+        self.league = self.match.league
+
+        if self.match.team_num1 == 0:
+            self.my_team['team'] = self.league.my_team
+
+            op_team_temp = LeagueTeam.objects.get(
+                league=self.league, team_num=self.match.team_num2)
+            self.op_team['team'] = op_team_temp.base_team
+
+        else:
+            self.my_team['team'] = self.league.my_team
+            op_team_temp = LeagueTeam.objects.get(
+                league=self.league, team_num=self.match.team_num1)
+            self.op_team['team'] = op_team_temp.base_team
+
+        self.my_team['top'] = self.my_team['team'].top
+        self.my_team['jng'] = self.my_team['team'].jungle
+        self.my_team['mid'] = self.my_team['team'].mid
+        self.my_team['adc'] = self.my_team['team'].adc
+        self.my_team['sup'] = self.my_team['team'].support
+
+        self.op_team['top'] = Player.objects.filter(
+            team=self.op_team['team'], position='Top')[0]
+        self.op_team['jng'] = Player.objects.filter(
+            team=self.op_team['team'], position='Jungle')[0]
+        self.op_team['mid'] = Player.objects.filter(
+            team=self.op_team['team'], position='Middle')[0]
+        self.op_team['adc'] = Player.objects.filter(
+            team=self.op_team['team'], position='ADC')[0]
+        self.op_team['sup'] = Player.objects.filter(
+            team=self.op_team['team'], position='Support')[0]
+        if self.set.side == 1:
+            self.my_team['side'] = 'Blue'
+            self.op_team['side'] = 'Red'
+
+        else:
+            self.my_team['side'] = 'Red'
+            self.op_team['side'] = 'Blue'
+        return
+
+    def progress(self):
+
+        for elem in self.selection:
+            if elem == 1:
+                if self.set.turn % 2 == 1:
+                    self.response.append(
+                        "{0} : {1}팀 탑의 라인전이 우세하여 300골드를 추가로 얻습니다.".format(self.set.turn, self.my_team['side']))
+                else:
+                    self.response.append(
+                        "{0} : {1}팀 탑의 라인전이 우세하여 300골드를 추가로 얻습니다.".format(self.set.turn, self.op_team['side']))
+            elif elem == 2:
+                if self.set.turn % 2 == 1:
+                    self.response.append(
+                        "{0} : {1}팀 미드의 라인전이 우세하여 300골드를 추가로 얻습니다.".format(self.set.turn, self.my_team['side']))
+                else:
+                    self.response.append(
+                        "{0} : {1}팀 미드의 라인전이 우세하여 300골드를 추가로 얻습니다.".format(self.set.turn, self.op_team['side']))
+            elif elem == 3:
+                if self.set.turn % 2 == 1:
+                    self.response.append(
+                        "{0} : {1}팀 바텀의 라인전이 우세하여 300골드를 추가로 얻습니다.".format(self.set.turn, self.my_team['side']))
+                else:
+                    self.response.append(
+                        "{0} : {1}팀 바텀의 라인전이 우세하여 300골드를 추가로 얻습니다.".format(self.set.turn, self.op_team['side']))
+            elif elem == 4:
+                if self.set.turn % 2 == 1:
+                    self.response.append(
+                        "{0} : {1}팀 탑의 갱킹이 성공하여 500골드를 추가로 얻습니다.".format(self.set.turn, self.my_team['side']))
+                else:
+                    self.response.append(
+                        "{0} : {1}팀 탑의 갱킹이 성공하여 500골드를 추가로 얻습니다.".format(self.set.turn, self.op_team['side']))
+            elif elem == 5:
+                if self.set.turn % 2 == 1:
+                    self.response.append(
+                        "{0} : {1}팀 미드의 갱킹이 성공하여 500골드를 추가로 얻습니다.".format(self.set.turn, self.my_team['side']))
+                else:
+                    self.response.append(
+                        "{0} : {1}팀 미드의 갱킹이 성공하여 500골드를 추가로 얻습니다.".format(self.set.turn, self.op_team['side']))
+            elif elem == 6:
+                if self.set.turn % 2 == 1:
+                    self.response.append(
+                        "{0} : {1}팀 바텀의 갱킹이 성공하여 500골드를 추가로 얻습니다.".format(self.set.turn, self.my_team['side']))
+                else:
+                    self.response.append(
+                        "{0} : {1}팀 바텀의 갱킹이 성공하여 500골드를 추가로 얻습니다.".format(self.set.turn, self.op_team['side']))
+            elif elem == 7:
+                if self.set.turn % 2 == 1:
+                    self.response.append(
+                        "{0} : {1}팀 탑에서의 교전이 성공하여를 800골드를 추가로 얻습니다.".format(self.set.turn, self.my_team['side']))
+                else:
+                    self.response.append(
+                        "{0} : {1}팀 탑에서의 교전이 성공하여를 800골드를 추가로 얻습니다.".format(self.set.turn, self.op_team['side']))
+            elif elem == 8:
+                if self.set.turn % 2 == 1:
+                    self.response.append(
+                        "{0} : {1}팀 미드에서의 교전이 성공하여를 800골드를 추가로 얻습니다.".format(self.set.turn, self.my_team['side']))
+                else:
+                    self.response.append(
+                        "{0} : {1}팀 미드에서의 교전이 성공하여를 800골드를 추가로 얻습니다.".format(self.set.turn, self.op_team['side']))
+            elif elem == 9:
+                if self.set.turn % 2 == 1:
+                    self.response.append(
+                        "{0} : {1}팀 바텀에서의 교전이 성공하여를 800골드를 추가로 얻습니다.".format(self.set.turn, self.my_team['side']))
+                else:
+                    self.response.append(
+                        "{0} : {1}팀 바텀에서의 교전이 성공하여를 800골드를 추가로 얻습니다.".format(self.set.turn, self.op_team['side']))
+            elif elem == 10:
+                if self.set.turn % 2 == 1:
+                    self.response.append(
+                        "{0} : {1}팀이 한타를 승리하여 드래곤을 획득하고 1000골드를 추가로 얻습니다.".format(self.set.turn, self.my_team['side']))
+                else:
+                    self.response.append(
+                        "{0} : {1}팀이 한타를 승리하여 드래곤을 획득하고 1000골드를 추가로 얻습니다.".format(self.set.turn, self.op_team['side']))
+            elif elem == 11:
+                if self.set.turn % 2 == 1:
+                    self.response.append(
+                        "{0} : {1}팀이 한타를 승리하여 장로 드래곤을 획득하고 1000골드를 추가로 얻습니다.".format(self.set.turn, self.my_team['side']))
+                else:
+                    self.response.append(
+                        "{0} : {1}팀이 한타를 승리하여 장로 드래곤을 획득하고 1000골드를 추가로 얻습니다.".format(self.set.turn, self.op_team['side']))
+            elif elem == 12:
+                if self.set.turn % 2 == 1:
+                    self.response.append(
+                        "{0} : {1}팀이 한타를 승리하여 바론을 획득하고 2000골드를 추가로 얻습니다.".format(self.set.turn, self.my_team['side']))
+                else:
+                    self.response.append(
+                        "{0} : {1}팀이 한타를 승리하여 바론을 획득하고 2000골드를 추가로 얻습니다.".format(self.set.turn, self.op_team['side']))
+            elif elem == 13:
+                if self.set.turn % 2 == 1:
+                    self.response.append(
+                        "{0} : {1}팀이 한타를 승리하여 1000골드를 추가로 얻습니다.".format(self.set.turn, self.my_team['side']))
+                else:
+                    self.response.append(
+                        "{0} : {1}팀이 한타를 승리하여 1000골드를 추가로 얻습니다.".format(self.set.turn, self.op_team['side']))
+            elif elem == 14:
+                if self.set.turn % 2 == 1:
+                    self.response.append(
+                        "{0} : {1}팀이 {2}팀 탑의 타워를 압박합니다.".format(self.set.turn, self.my_team['side'], self.op_team['side']))
+                else:
+                    self.response.append(
+                        "{0} : {1}팀이 {2}팀 탑의 타워를 압박합니다.".format(self.set.turn, self.op_team['side'], self.my_team['side']))
+            elif elem == 15:
+                if self.set.turn % 2 == 1:
+                    self.response.append(
+                        "{0} : {1}팀이 {2}팀 미드의 타워를 압박합니다.".format(self.set.turn, self.my_team['side'], self.op_team['side']))
+                else:
+                    self.response.append(
+                        "{0} : {1}팀이 {2}팀 미드의 타워를 압박합니다.".format(self.set.turn, self.op_team['side'], self.my_team['side']))
+            elif elem == 16:
+                if self.set.turn % 2 == 1:
+                    self.response.append(
+                        "{0} : {1}팀이 {2}팀 바텀의 타워를 압박합니다.".format(self.set.turn, self.my_team['side'], self.op_team['side']))
+                else:
+                    self.response.append(
+                        "{0} : {1}팀이 {2}팀 바텀의 타워를 압박합니다.".format(self.set.turn, self.op_team['side'], self.my_team['side']))
+            elif elem == 17:
+                if self.set.turn % 2 == 1:
+                    self.response.append(
+                        "{0} : {1}팀이 {2}팀 탑의 타워를 파괴합니다.".format(self.set.turn, self.my_team['side'], self.op_team['side']))
+                else:
+                    self.response.append(
+                        "{0} : {1}팀이 {2}팀 탑의 타워를 파괴합니다.".format(self.set.turn, self.op_team['side'], self.my_team['side']))
+            elif elem == 18:
+                if self.set.turn % 2 == 1:
+                    self.response.append(
+                        "{0} : {1}팀이 {2}팀 미드의 타워를 파괴합니다.".format(self.set.turn, self.my_team['side'], self.op_team['side']))
+                else:
+                    self.response.append(
+                        "{0} : {1}팀이 {2}팀 미드의 타워를 파괴합니다.".format(self.set.turn, self.op_team['side'], self.my_team['side']))
+            elif elem == 19:
+                if self.set.turn % 2 == 1:
+                    self.response.append(
+                        "{0} : {1}팀이 {2}팀 바텀의 타워를 파괴합니다.".format(self.set.turn, self.my_team['side'], self.op_team['side']))
+                else:
+                    self.response.append(
+                        "{0} : {1}팀이 {2}팀 바텀의 타워를 파괴합니다.".format(self.set.turn, self.op_team['side'], self.my_team['side']))
+            else:
+                if self.set.turn % 2 == 1:
+                    self.response.append(
+                        "{0} : {1}팀이 {2}팀에게 승리했습니다!".format(self.set.turn, self.my_team['side'], self.op_team['side']))
+                else:
+                    self.response.append(
+                        "{0} : {1}팀이 {2}팀에게 승리했습니다!".format(self.set.turn, self.op_team['side'], self.my_team['side']))
+
+        return
+
+    def post(self, request):
+        self.my_team = dict()
+        self.op_team = dict()
+        self.set = Set.objects.get(pk=request.data['set_id'])
+        self.selection = request.data['selection']
+        self.response = []
+        self.initiate()
+        self.progress()
+
+        return Response({
+            "message": self.response
+
+        })
