@@ -196,6 +196,9 @@ class Set(models.Model):
     result = models.IntegerField(default=1)
     match = models.ForeignKey(Match, default=0, on_delete=models.CASCADE)
 
+    is_baron = models.IntegerField(default=0)
+    is_elder = models.IntegerField(default=0)
+
 
 class LeagueSchedule(models.Model):
     team1 = models.IntegerField(null=True)
