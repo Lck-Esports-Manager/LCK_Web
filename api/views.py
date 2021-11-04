@@ -795,72 +795,72 @@ class ProcessSelection(APIView):
                 if self.set.turn % 2 == 1:
 
                     self.set.my_gold = self.set.my_gold+300
-                    self.set.my_tower1 = self.set.my_tower1-1
+                    self.set.op_tower1 = self.set.op_tower1-1
                     self.response.append(
                         "{0} : {1}팀 탑의 라인전이 우세하여 300골드를 추가로 얻습니다.".format(self.set.turn, self.my_team['side']))
                 else:
                     self.set.op_gold = self.set.op_gold+300
-                    self.set.op_tower1 = self.set.op_tower1-1
+                    self.set.my_tower1 = self.set.my_tower1-1
                     self.response.append(
                         "{0} : {1}팀 탑의 라인전이 우세하여 300골드를 추가로 얻습니다.".format(self.set.turn, self.op_team['side']))
 
             elif elem == 2:
                 if self.set.turn % 2 == 1:
                     self.set.my_gold = self.set.my_gold+300
-                    self.set.my_tower2 = self.set.my_tower2-1
+                    self.set.op_tower2 = self.set.op_tower2-1
                     self.response.append(
                         "{0} : {1}팀 미드의 라인전이 우세하여 300골드를 추가로 얻습니다.".format(self.set.turn, self.my_team['side']))
                 else:
                     self.set.op_gold = self.set.op_gold+300
-                    self.set.op_tower2 = self.set.op_tower2-1
+                    self.set.my_tower2 = self.set.my_tower2-1
                     self.response.append(
                         "{0} : {1}팀 미드의 라인전이 우세하여 300골드를 추가로 얻습니다.".format(self.set.turn, self.op_team['side']))
 
             elif elem == 3:
                 if self.set.turn % 2 == 1:
                     self.set.my_gold = self.set.my_gold+300
-                    self.set.my_tower3 = self.set.my_tower3-1
+                    self.set.op_tower3 = self.set.op_tower3-1
                     self.response.append(
                         "{0} : {1}팀 바텀의 라인전이 우세하여 300골드를 추가로 얻습니다.".format(self.set.turn, self.my_team['side']))
                 else:
                     self.set.op_gold = self.set.op_gold+300
-                    self.set.op_tower3 = self.set.op_tower3-1
+                    self.set.my_tower3 = self.set.my_tower3-1
                     self.response.append(
                         "{0} : {1}팀 바텀의 라인전이 우세하여 300골드를 추가로 얻습니다.".format(self.set.turn, self.op_team['side']))
 
             elif elem == 4:
                 if self.set.turn % 2 == 1:
                     self.set.my_gold = self.set.my_gold+500
-                    self.set.my_tower1 = self.set.my_tower1-1
+                    self.set.op_tower1 = self.set.op_tower1-1
                     self.response.append(
                         "{0} : {1}팀 탑의 갱킹이 성공하여 500골드를 추가로 얻습니다.".format(self.set.turn, self.my_team['side']))
                 else:
                     self.set.op_gold = self.set.op_gold+500
-                    self.set.op_tower1 = self.set.op_tower1-1
+                    self.set.my_tower1 = self.set.my_tower1-1
                     self.response.append(
                         "{0} : {1}팀 탑의 갱킹이 성공하여 500골드를 추가로 얻습니다.".format(self.set.turn, self.op_team['side']))
 
             elif elem == 5:
                 if self.set.turn % 2 == 1:
                     self.set.my_gold = self.set.my_gold+500
-                    self.set.my_tower2 = self.set.my_tower2-1
+                    self.set.op_tower2 = self.set.op_tower2-1
                     self.response.append(
                         "{0} : {1}팀 미드의 갱킹이 성공하여 500골드를 추가로 얻습니다.".format(self.set.turn, self.my_team['side']))
                 else:
                     self.set.op_gold = self.set.op_gold+500
-                    self.set.op_tower2 = self.set.op_tower2-1
+                    self.set.my_tower2 = self.set.my_tower2-1
                     self.response.append(
                         "{0} : {1}팀 미드의 갱킹이 성공하여 500골드를 추가로 얻습니다.".format(self.set.turn, self.op_team['side']))
 
             elif elem == 6:
                 if self.set.turn % 2 == 1:
                     self.set.my_gold = self.set.my_gold+500
-                    self.set.my_tower3 = self.set.my_tower3-1
+                    self.set.op_tower3 = self.set.op_tower3-1
                     self.response.append(
                         "{0} : {1}팀 바텀의 갱킹이 성공하여 500골드를 추가로 얻습니다.".format(self.set.turn, self.my_team['side']))
                 else:
                     self.set.op_gold = self.set.op_gold+500
-                    self.set.op_tower3 = self.set.op_tower3-1
+                    self.set.my_tower3 = self.set.my_tower3-1
                     self.response.append(
                         "{0} : {1}팀 바텀의 갱킹이 성공하여 500골드를 추가로 얻습니다.".format(self.set.turn, self.op_team['side']))
 
@@ -1303,6 +1303,9 @@ class ProcessSelection(APIView):
 
         return
 
+    def save(self):
+        self.set.save()
+
     def post(self, request):
         self.my_team = dict()
         self.op_team = dict()
@@ -1311,7 +1314,7 @@ class ProcessSelection(APIView):
         self.response = []
         self.initiate()
         self.progress()
-        print(self.my_team)
+        self.save()
         return Response({
             "message": self.response
 
