@@ -128,6 +128,8 @@ class League(models.Model):
     current_date = models.IntegerField(default=1)
     user = models.ForeignKey(User, default=1, on_delete=models.CASCADE)
     state_finish = models.BooleanField(default=False)
+    win = models.IntegerField(default=0)
+    lose = models.IntegerField(default=0)
 
     def __str__(self):
         return str(self.my_team) + " 's league"

@@ -683,11 +683,76 @@ class ProcessSelection(APIView):
                     self.response.append(
                         "{0} : {1}팀이 {2}팀에게 승리했습니다!".format(self.set.turn, self.op_team['side'], self.my_team['side']))
 
+                self.post_process()
         return
 
     def save(self):
         self.set.turn = self.set.turn+1
         self.set.save()
+        self.match.save()
+        self.league.save()
+
+    def post_process(self):
+        # *세트의 status를 변화시킨다.
+        self.set.status = 'finish'
+        # *세트의 승패를 저장한다.
+        self.set.result = self.set.turn % 2
+        # *Match에 결과를 저장한다.
+        if self.set.result == 1:
+            if self.match.team_num1 == 0:
+                self.match.result = self.match.result+1
+            else:
+                self.match.result = self.match.result-1
+        else:
+            if self.match.team_num1 == 0:
+                self.match.result = self.match.result-1
+            else:
+                self.match.result = self.match.result+1
+
+        # *Match가 끝난다.
+
+        if (self.match.set_num == 2 and (self.match.result == 2 or self.match.result == -2))\
+                and (self.match.set_num == 3 and (self.match.result == 1 or self.match.result == -1)):
+            self.match.status_finish = True
+
+        if self.match.status_finish == True:
+            if self.match.result > 0:
+                if self.match.team_num1 == 0:
+                    self.league.win = self.league.win+1
+                    # 돈하고 인기도,선수들 경험치 상승
+                    op_team = LeagueTeam.objects.get(
+                        league=self.league, team_num=self.match.team_num2)
+                    op_team.lose = op_team.lose+1
+                    op_team.save()
+                else:
+                    self.league.lose = self.league.lose+1
+                    # 돈하고 인기도,선수들 경험치 상승
+                    op_team = LeagueTeam.objects.get(
+                        league=self.league, team_num=self.match.team_num2)
+                    op_team.win = op_team.win+1
+                    op_team.save()
+            else:
+                if self.match.team_num1 == 0:
+                    self.league.lose = self.league.lose+1
+                    # 돈하고 인기도,선수들 경험치 상승
+                    op_team = LeagueTeam.objects.get(
+                        league=self.league, team_num=self.match.team_num2)
+                    op_team.win = op_team.win+1
+                    op_team.save()
+                else:
+                    self.league.win = self.league.win+1
+                    # 돈하고 인기도,선수들 경험치 상승
+                    op_team = LeagueTeam.objects.get(
+                        league=self.league, team_num=self.match.team_num2)
+                    op_team.lose = op_team.lose+1
+                    op_team.save()
+
+        else:
+            self.match.set_num = self.match.set_num+1
+            new_set = Set(match=self.match,
+                          set_num=self.set.set_num+1, side=self.set.side)
+            new_set.save()
+            # **새로운 set를 만든다.
 
     def post(self, request):
         self.my_team = dict()
