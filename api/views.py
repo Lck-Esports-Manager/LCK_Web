@@ -114,6 +114,19 @@ class ChampionListView(APIView):
 
         serializer = ChampionSerializer(result, many=True)
         return Response(serializer.data)
+
+
+class ChampionDetailView(APIView):
+
+    def get(self, request):
+        id = request.query_params.get('id', None)
+
+        try:
+            serializer = ChampionSerializer(Champion.objects.get(id=id))
+        except:
+            return Response({})
+
+        return Response(serializer.data)
 # 팀 생성
 
 
