@@ -4,6 +4,7 @@ from rest_auth.registration.views import VerifyEmailView, RegisterView
 from django.conf import settings
 from django.conf.urls.static import static
 from .views import *
+from .league_process_view import *
 
 urlpatterns = [
 
