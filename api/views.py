@@ -545,18 +545,15 @@ class MakeSelection(APIView):
         op_sup_champ = self.set.op_sup
         my_top_grade = my_top.status1 * \
             (1+0.1*my_top.feeling)+(6-my_top_champ.grade)*10
-        op_top_grade = op_top.status1 * \
-            (1+0.1*op_top.feeling)+(6-op_top_champ.grade)*10
+        op_top_grade = op_top.status1 + (6-op_top_champ.grade)*10
         my_mid_grade = my_mid.status1 * \
             (1+0.1*my_mid.feeling)+(6-my_mid_champ.grade)*10
-        op_mid_grade = op_mid.status1 * \
-            (1+0.1*op_mid.feeling)+(6-op_mid_champ.grade)*10
+        op_mid_grade = op_mid.status1+(6-op_mid_champ.grade)*10
         my_bot_grade = my_adc.status1*(1+0.1*my_adc.feeling) + \
             (6-my_adc_champ.grade)*10+my_sup.status1 * \
             (1+0.1*my_sup.feeling)+(6-my_sup_champ.grade)*10
-        op_bot_grade = op_adc.status1*(1+0.1*op_adc.feeling) + \
-            (6-op_adc_champ.grade)*10+op_sup.status1 * \
-            (1+0.1*my_sup.feeling)+(6-op_sup_champ.grade)*10
+        op_bot_grade = op_adc.status1 + \
+            (6-op_adc_champ.grade)*10+op_sup.status1+(6-op_sup_champ.grade)*10
 
         if turn % 2 == 1:
             self.data["lane_press"]["top"][0] = (my_top_grade > op_top_grade)
