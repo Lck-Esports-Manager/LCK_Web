@@ -14,14 +14,12 @@ export default function Banpick() {
             "set_id": 9,
         }
     );
-    let randT = 0;
-    let randC = 0;
     let bpTitle = "챔피언 선택";
-    let bpSubTitle = ['Top Ban', 'Top Ban', 'Jungle Ban',
-        'Jungle Ban', 'Middle Ban', 'Middle Ban', 'Top Pick'
-        , 'Top Pick', 'Jungle Pick', 'Jungle Pick', 'Middle Pick',
-        'Middle Pick', 'Bottom Ban', 'Bottom Ban', 'Support Ban',
-        'Support Ban', 'Bottom Pick', 'Bottom Pick', 'Support Pick', 'Support Pick', 'Selection complete !!'];
+    let bpSubTitle = ['RED Team Ban 1', 'BLUE Team Ban 1', 'RED Team Ban 1',
+        'BLUE Team Ban 1', 'RED Team Ban 1', 'BLUE Team Ban 1', 'BLUE Team pick 1'
+        , 'RED Team pick 1/2', 'RED Team pick 2/2', 'BLUE Team pick 1/2', 'BLUE Team pick 2/2',
+        'RED Team pick 1', 'RED Team Ban 1', 'BLUE Team Ban 1', 'RED Team Ban 1',
+        'BLUE Team Ban 1', 'RED Team pick 1', 'BLUE Team pick 1/2', 'BLUE Team pick 2/2', 'RED Team pick 1', 'Selection complete'];
     let [iTurn, setTurn] = useState(-1);
 
     /* 선택된 챔피언 리스트 밴픽, 픽 모두 포함 */
@@ -71,6 +69,14 @@ export default function Banpick() {
     }
     /* 선택완료 버튼 눌렀을때의 동작 */
     const nextTurn = () => {
+        console.log('버튼실행');
+        axios.get('http://localhost:8000/api/champion/?position=' + isPos(iTurn))
+            .then((response) => {
+                setRanList(
+                    ...ranList,
+                    response.data
+                );
+            })
         if (iTurn >= 19) {
             alert('챔피언 선택이 완료되었습니다.');
             axios.post('http://localhost:8000/api/banpick/', {
@@ -94,18 +100,10 @@ export default function Banpick() {
         }
         else {
             setTurn(iTurn + 1);
-            axios.get('http://localhost:8000/api/champion/?position=' + isPos(iTurn + 1) + '&tier=1')
-                .then((response1) => {
-                    axios.get('http://localhost:8000/api/champion/?position=' + isPos(iTurn + 1) + '&tier=2')
-                        .then((response2) => {
-                            setRanList({
-                                1: response1.data,
-                                2: response2.data
-                            });
-                        })
-                })
+            console.log(`현재 ${iTurn} 단계`);
         }
     }
+    let rand = 0;
     const isBan = (i) => {
         if (i === 0 || i === 1 || i === 2 || i === 3 || i === 4 || i === 5
             || i === 12 || i === 13 || i === 14 || i === 15)
@@ -115,23 +113,21 @@ export default function Banpick() {
     }
     const isPos = (i) => {
         if (i === 0 || i === 1 || i === 6 || i === 7)
-            return 'Top'
+            return 'top'
         else if (i === 2 || i === 3 || i === 8 || i === 9)
-            return 'Jungle'
+            return 'jungle'
         else if (i === 4 || i === 5 || i === 10 || i === 11)
-            return 'Middle'
+            return 'middle'
         else if (i === 12 || i === 13 || i === 16 || i === 17)
-            return 'Bottom'
-        else if (i === 14 || i === 15 || i === 18 || i === 19)
-            return 'Support'
-        else
-            return
+            return 'adc'
+        else if (i === 10 || i === 11 || i === 18 || i === 19)
+            return 'support'
     }
     /* 챔피언을 하나 눌렀을때 동작 */
     const Pick = (cham) => {
         if (iTurn === -1)
             alert('시작하기를 눌러주세요.');
-        if (iTurn != -1 && isMyturn()) {
+        if (isMyturn()) {
             for (let i = 0; i < iTurn; i++) {
                 if (cham.id === chamList[i].id) {
                     alert('다른 챔피언으로 다시 선택해주십시오.');
@@ -139,19 +135,23 @@ export default function Banpick() {
                 }
             }
             console.log(cham);
-            if (cham.position != isPos(iTurn))
-                alert(`${isPos(iTurn)} 포지션의 챔피언을 선택해주세요.`);
-            else {
-                setChamList({
-                    ...chamList,
-                    [iTurn]: cham,
-                })
-            }
-            //console.log(cham);
-            //console.log(chamList);
+            /*if (cham.position === 'Top' && isBan(iTurn) === 1) {
+                if(cham[1].check===false)
+                {
+                    setChamList({
+                        ...chamList,
+                        [iTurn]: cham,
+                    })
+                }
+            }*/
+            setChamList({
+                ...chamList,
+                [iTurn]: cham,
+            })
+            console.log(chamList);
         }
         else {
-            alert('상대방 차례입니다. NEXT를 눌러 진행해주세요.');
+            alert('상대방 차례입니다.. NEXT를 눌러 진행해주세요.');
         }
     }
     /* 선택된 챔피언들을 출력하는 함수 */
@@ -175,72 +175,31 @@ export default function Banpick() {
                     .then((response) => { setPntList(response.data); })
                 axios.get('http://localhost:8000/api/progressleague/')
                     .then((response) => { setApi(response.data); })
-
-                axios.get('http://localhost:8000/api/champion/?position=' + 'top' + '&tier=1')
-                    .then((response1) => {
-                        axios.get('http://localhost:8000/api/champion/?position=' + 'top' + '&tier=2')
-                            .then((response2) => {
-                                setRanList({
-                                    1: response1.data,
-                                    2: response2.data
-                                });
-                            })
-                    })
             } catch (e) { console.log(e); }
         };
         fetch();
     }, []);
-    /* 1티어, 2티어 스테이트 생성 *//*
-    useEffect(() => {
-        console.log(`==== i: ${iTurn}+1 ran 새로받아오기 ====`);
-        const fetchcham = async () => {
-            try {
-                axios.get('http://localhost:8000/api/champion/?position=' + isPos(iTurn + 1) + '&tier=1')
-                    .then((response1) => {
-                        axios.get('http://localhost:8000/api/champion/?position=' + isPos(iTurn + 1) + '&tier=2')
-                            .then((response2) => {
-                                setRanList({
-                                    1: response1.data,
-                                    2: response2.data
-                                });
-                            })
-                    })
-                //console.log(ranList);
-            } catch (e) { console.log(e); }
-        };
-        fetchcham();
-    }, [iTurn]);*/
     /* 렌더될때마다 내 턴이 아니면 자동으로 픽하는 동작 */
     if (!isMyturn(iTurn)) {
-        randT = Math.floor(Math.random() * 2) + 1;
-        randC = Math.floor(Math.random() * ranList[randT].length);
+        console.log('if문실행');
+        rand = Math.floor(Math.random() * pntList.length);
         let temp = 1;
-        axios.get('http://localhost:8000/api/champion/?position=' + isPos(iTurn + 1) + '&tier=1')
-            .then((response1) => {
-                axios.get('http://localhost:8000/api/champion/?position=' + isPos(iTurn + 1) + '&tier=2')
-                    .then((response2) => {
-                        setRanList({
-                            1: response1.data,
-                            2: response2.data
-                        });
-                    })
-            })
         while (temp) {
             temp = 0;
             for (let i = 0; i < iTurn; i++) {
-                if (ranList[randT][randC].id === chamList[i].id) {
-                    randT = Math.floor(Math.random() * 2) + 1;
-                    randC = Math.floor(Math.random() * ranList[randT].length);
+                if (pntList[rand].id === chamList[i].id) {
+                    rand = Math.floor(Math.random() * pntList.length);
                     temp = 1;
                 }
             }
         }
         setChamList({
             ...chamList,
-            [iTurn]: ranList[randT][randC],
+            [iTurn]: pntList[rand],
         })
         setTurn(iTurn + 1);
-
+        console.log(iTurn);
+        setRanList(null);
     }
     return (<>
         <div className="BP--main">
@@ -255,7 +214,7 @@ export default function Banpick() {
                                 {bpSubTitle[iTurn]}
                             </div>
                             <div className="nextBtn" onClick={nextTurn}>
-                                {iTurn === -1 ? '시작하기' : iTurn != 20 ? '선택완료' : '완 료'}
+                                {iTurn === -1 ? '시작하기' : '선택완료'}
                             </div>
                         </div>
                         <ul>
@@ -309,16 +268,11 @@ export default function Banpick() {
                             </li>
                             <li className="chams">
                                 <div className="btnbar">
-                                    {isPos(iTurn) != 'Top' ? <div className="position" onClick={() => { getList('top') }}>Top</div>
-                                        : <div className="special" onClick={() => { getList('top') }}>Top</div>}
-                                    {isPos(iTurn) != 'Jungle' ? <div className="position" onClick={() => { getList('jungle') }}>Jungle</div>
-                                        : <div className="special" onClick={() => { getList('jungle') }}>Jungle</div>}
-                                    {isPos(iTurn) != 'Middle' ? <div className="position" onClick={() => { getList('middle') }}>Middle</div>
-                                        : <div className="special" onClick={() => { getList('middle') }}>Middle</div>}
-                                    {isPos(iTurn) != 'Bottom' ? <div className="position" onClick={() => { getList('bottom') }}>ADC</div>
-                                        : <div className="special" onClick={() => { getList('bottom') }}>ADC</div>}
-                                    {isPos(iTurn) != 'Support' ? <div className="position" onClick={() => { getList('support') }}>Support</div>
-                                        : <div className="special" onClick={() => { getList('support') }}>Support</div>}
+                                    <div className="position" onClick={() => { getList('top') }}>Top</div>
+                                    <div className="position" onClick={() => { getList('jungle') }}>Jungle</div>
+                                    <div className="position" onClick={() => { getList('middle') }}>Middle</div>
+                                    <div className="position" onClick={() => { getList('bottom') }}>ADC</div>
+                                    <div className="position" onClick={() => { getList('support') }}>Support</div>
                                 </div>
                                 <div className="list">
                                     {pntList && pntList.map((cham) => (

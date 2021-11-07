@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './League.css';
 import axios from 'axios';
 
@@ -6,16 +6,24 @@ export default function League() {
     const [leagueState, setLeague] = useState({
         league: false,
         my_team: true,
-        banpick: false
+        banpick: false,
     });
+    useEffect(() => {
+        const getLeague = async () => {
+            try {
+                axios.post('http://localhost:8000/api/progressleague/'
+                ).then((response) => {
+                    console.log(response);
+                    setLeague(response.data);
+                }).catch((e) => {
+                    console.log(e.response);
+                })
+            } catch (e) { console.log(e); }
+        };
+        getLeague();
+    }, []);
     const movePage = () => {
-        axios.post('http://localhost:8000/api/progressleague/'
-        ).then((response) => {
-            console.log(response);
-            setLeague(response.data);
-        }).catch((e) => {
-            console.log(e.response);
-        })
+        console.log(leagueState);
         if (leagueState.league === false)       // 리그가 없는 경우 -> 팀생성
             document.location.href = `/maketeam`;
         else if (leagueState.my_team === false) // 경기가 없는 경우 -> 선수 개인스케줄
@@ -23,7 +31,7 @@ export default function League() {
         else if (leagueState.banpick === false) // 밴픽이 없는 경우 -> 밴픽
             document.location.href = `/banpick`;
         else                                    // 다 준비 되어 있는 경우 -> 게임시작
-            document.location.href = `/playgame`;
+            document.location.href = `/game`;
     }
     return (<>
         <div className="league--main">

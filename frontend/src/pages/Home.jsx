@@ -1,6 +1,4 @@
-// import { Swiper, SwiperSlide } from "swiper/react";
-// import 'swiper/swiper.min.css';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import slide1 from '../images/main-1.png';
 import slide2 from '../images/main-2.png';
@@ -12,19 +10,22 @@ import './Home.css';
 let imgs = [slide1, slide2, slide3, slide4, slide5];
 
 function Home() {
+    const [refresh, setRefresh] = useState(0);
     const [state, setState] = useState({
         num: 0
     });
-    const [match, setMatch] = useState({
-        list: null
-    })
-    axios.get('http://localhost:8000/api/getschedule/'
-    ).then((response) => {
-        console.log(response.data);
-
-    }).catch((Error) => {
-        console.log(Error.response);
-    });
+    const [match, setMatch] = useState(null);
+    useEffect(() => {
+        axios.get('http://localhost:8000/api/getschedule/'
+        ).then((response) => {
+            console.log(response.data.schedule);
+            setMatch(response.data);
+            console.log(match);
+        }).catch((Error) => {
+            console.log(Error);
+            console.log(Error.response);
+        });
+    }, [refresh]);
     const Lclick = () => {
         if (state.num > 0)
             setState({ num: state.num - 1 })
@@ -33,6 +34,10 @@ function Home() {
     }
     const Rclick = () => {
         setState({ num: (state.num + 1) % 5 })
+    }
+    const pageRefresh = () => {
+        setRefresh(refresh + 1);
+        console.log(refresh);
     }
     return (
         <div>
@@ -57,11 +62,27 @@ function Home() {
                     </div>
                     <div className="match">
                         <h2>MATCH SCHEDULE</h2>
+                        <div class="refresh" onClick={pageRefresh}>ㅤ</div>
+                        {JSON.parse(window.localStorage.getItem('user')).username ?
+                            <div className="username">{JSON.parse(window.localStorage.getItem('user')).username}님의 스케줄</div>
+                            : <div></div>}
                         <div className="schedule">
-                            {
-                                JSON.parse(window.localStorage.getItem('isLogin')) ?
-                                    <div className="match--list">{JSON.parse(window.localStorage.getItem('user')).username}님의 스케줄을 준비중에 있습니다.</div>
-                                    : <div className="match--contents">로그인후 이용 가능합니다.</div>}
+                            {JSON.parse(window.localStorage.getItem('isLogin')) ?
+                                <div className="match--list">
+                                    <ul className="index">
+                                        <li className="date">DATE</li>
+                                        <li>BLUE TEAM</li>
+                                        <li>RED TEAM</li>
+                                    </ul>
+                                    {match && match.schedule.map((data) => (
+                                        <ul className="data">
+                                            <li className="date">{data.date}</li>
+                                            <li>{data.team1}</li>
+                                            <li>{data.team2}</li>
+                                        </ul>
+                                    ))}
+                                </div>
+                                : <div className="match--contents">로그인후 이용 가능합니다.</div>}
                         </div>
                     </div>
                 </div>

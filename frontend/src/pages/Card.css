@@ -1,8 +1,8 @@
 #Card{
     background-color: white;
     border-radius: 10px;
-    border:2px dashed black;
-    margin: auto;
+    border:3px solid black;
+    margin: 0 7px 0;
     width: 130px;
     height: 70px;
     padding: 5px;

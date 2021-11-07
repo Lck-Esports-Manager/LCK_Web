@@ -1,0 +1,99 @@
+.game{
+    background-color: #c1c1c1;
+    height: 850px;
+}
+.game .inner{
+    width: 1200px;
+    display: block;
+    margin: auto;
+}
+.game .inner .gamebox{
+    height: 780px;
+    padding: 10px;
+    border-radius: 15px;
+    background-image: url('../images/game_back.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
+}
+.game .inner .gamebox .contents{
+    font-family: 'Noto Sans KR', sans-serif;
+    background-color: rgba(255, 255, 255, 0.8);
+    font-weight: 700;
+    text-align: center;
+    border-radius: 15px;
+    height: 780px;
+}
+.game .inner .gamebox .contents .main{
+    padding: 50px;
+    height: 680px;
+    position: relative;
+}
+.game .inner .gamebox .contents .main .head{
+    z-index: 2;
+}
+.game .inner .gamebox .contents .main .head .notice{
+    display: flex;
+    background-color: papayawhip;
+    width: 400px;
+    height: 45px;
+    position: absolute;
+    z-index: 2;
+    top: 15px;
+    left: 390px;
+    border:4px solid;
+    border-radius: 15px;
+    padding: 10px;
+}
+.game .inner .gamebox .contents .main .head .notice li{
+    margin: auto;
+}
+.game .inner .gamebox .contents .main .head .notice .time{
+    font-size: 50px;
+    margin: 0;
+}
+.game .inner .gamebox .contents .main .map{
+    background-image: url('../images/map.jpg');
+    width: 900px;
+    height: 705px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    position: absolute;
+    top: 30px;
+    left: 140px;
+    border-radius: 15px;
+    z-index: 1;
+    border: 5px solid;
+}
+.game .inner .gamebox .contents .main .choice{
+    z-index: 2;
+    position: absolute;
+    background-color: #666;
+    bottom: 10px;
+    width: 1000px;
+    height: 75px;
+    left: 90px;
+    border-radius: 10px;
+    border:4px solid;
+}
+.game .inner .gamebox .contents .main .choice ul{
+    display: flex;
+}
+.game .inner .gamebox .contents .main .choice ul li{
+    background-color: #c1c1c1;
+    margin: 10px 20px 5px;
+    padding: 10px;
+    border-radius: 15px;
+    width: 300px;
+    height: 30px;
+    font-size: 25px;
+    cursor: pointer;
+    border:4px solid;
+}
+.game .inner .gamebox .contents .main .choice ul li:hover{
+    background-color: #666;
+    border:4px solid #c1c1c1;
+}
+.game .inner .gamebox .contents .main .choice ul li:active{
+    color:aliceblue;
+}

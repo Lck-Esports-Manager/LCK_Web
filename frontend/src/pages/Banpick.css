@@ -1,6 +1,6 @@
 .BP--main{
     background-color: #c1c1c1;
-    height: 750px;
+    height: 810px;
 }
 .BP--main .BP--inner{
     display: flex;
@@ -13,7 +13,7 @@
     background-color: #666;
     width: 1200px;
     display: flex;
-    height: 650px;
+    height: 750px;
     margin: auto;
     position: relative;
     border-radius: 15px;
@@ -27,7 +27,7 @@
     border-radius: 15px;
     display: block;
     width: 1200px;
-    height: 650px;
+    height: 750px;
     margin: auto;
     font-family: 'Noto Sans KR', sans-serif;
     font-weight: 700;
@@ -40,12 +40,16 @@
     text-align: center;
     width: 300px;
     padding: 15px;
+    margin: 10px 0 0 0;
 }
 .BP--main .BP--inner .BPbox .contents .titles .BP--Subtitle{
     background-color: white;
+    border:10px solid green;
+    color: green;
     border-radius: 15px;
     margin: 10px 15px 0;
     width: 500px;
+    height: 30px;
     font-size: 30px;
     text-align: center;
     padding: 15px;
@@ -59,7 +63,7 @@
     border:2px solid #666;
     width: 150px;
     height: 30px;
-    margin: 12px auto 0px;
+    margin: 22px auto 0px;
     text-align: center;
     padding: 13px 10px 10px;
 }
@@ -85,28 +89,29 @@
     margin: 0px 10px 10px 10px;
     height: 100px;
     border-radius: 10px;
+    display: flex;
 }
-.BP--main .BP--inner .BPbox .contents ul .ban .pick{
+.BP--main .BP--inner .BPbox .contents ul .ban .blue--pick{
     background-color: white;
     margin: 10px;
     height: 80px;
     border-radius: 10px;
     opacity: 0.7;
     display: flex;
+    width: 525px;
+    padding: 0 15px 0 15px;
 }
-.BP--main .BP--inner .BPbox .contents ul .ban .pick .title{
-    padding: 15px;
-    margin: 9px 0 0;
-}
-.BP--main .BP--inner .BPbox .contents ul .ban .pick .cardbar{
+.BP--main .BP--inner .BPbox .contents ul .ban .blue--pick .cardbar{
     display: flex;
     padding: 0px;
+    position: relative;
 }
-.BP--main .BP--inner .BPbox .contents ul .ban .pick .cardbar .card{
+.BP--main .BP--inner .BPbox .contents ul .ban .blue--pick .cardbar .card{
     background-color:orange;
     height: 70px;
     width: 94px;
     display: flex;
+    flex-wrap: wrap;
     margin: 5px;
     font-size: 18px;
     background-color: #c1c1c1;
@@ -114,19 +119,78 @@
     box-sizing: border-box;
     border-radius: 10px;
 }
-.BP--main .BP--inner .BPbox .contents ul .ban .pick .cardbar .card ul{
-    display: flex;
-}
-.BP--main .BP--inner .BPbox .contents ul .ban .pick .cardbar .card .grade{
-     border:2px solid #666;
-     border-radius: 30px;
+.BP--main .BP--inner .BPbox .contents ul .ban .blue--pick .cardbar .top{
+    width: 90px;
     display: block;
-    font-size:17px;
-    width: 20px;
-    height: 20px;
+    height: 15px;
+    text-align: center;
+    position: absolute;
+    font-size: 20px;
+    font-style: italic;
+    color:rgb(197, 20, 0);
+    background-color: rgba(255,255,255,0);
+}
+.BP--main .BP--inner .BPbox .contents ul .ban .blue--pick .cardbar .jng{
+    width: 90px;
+    display: block;
+    height: 15px;
+    text-align: center;
+    position: absolute;
+    font-size: 20px;
+    left: 110px;
+    font-style: italic;
+    color:rgb(197, 20, 0);
+}
+.BP--main .BP--inner .BPbox .contents ul .ban .blue--pick .cardbar .mid{
+    width: 90px;
+    display: block;
+    height: 15px;
+    text-align: center;
+    position: absolute;
+    font-style: italic;
+    color:rgb(197, 20, 0);
+    font-size: 20px;
+    left: 215px;
+}
+.BP--main .BP--inner .BPbox .contents ul .ban .blue--pick .cardbar .adc{
+    width: 90px;
+    display: block;
+    height: 15px;
+    text-align: center;
+    position: absolute;
+    font-style: italic;
+    color:rgb(197, 20, 0);
+    font-size: 20px;
+    left: 315px;
+}
+.BP--main .BP--inner .BPbox .contents ul .ban .blue--pick .cardbar .spt{
+    width: 90px;
+    display: block;
+    height: 15px;
+    text-align: center;
+    position: absolute;
+    font-style: italic;
+    color:rgb(197, 20, 0);
+    font-size: 20px;
+    left: 420px;
+}
+.BP--main .BP--inner .BPbox .contents ul .ban .blue--pick .cardbar .card .cham{
+
+}
+.BP--main .BP--inner .BPbox .contents ul .ban .blue--pick .cardbar .card ul{
+    display: flex;
+    padding: 7px;
+}
+.BP--main .BP--inner .BPbox .contents ul .ban .blue--pick .cardbar .card .grade{
+    border:2px solid #666;
+    border-radius: 30px;
+    display: block;
+    font-size:15px;
+    width: 15px;
+    height: 15px;
     margin: 0px 5px 0 0;
 }
-.BP--main .BP--inner .BPbox .contents ul .ban .pick .cardbar .card .pos{
+.BP--main .BP--inner .BPbox .contents ul .ban .blue--pick .cardbar .card .pos{
     padding: 2px;
     display: block;
     font-size:17px;
@@ -134,7 +198,7 @@
     height: 20px;
     margin: 0 5px 5px 0;
 }
-.BP--main .BP--inner .BPbox .contents ul .ban .pick .cardbar .card .name{
+.BP--main .BP--inner .BPbox .contents ul .ban .blue--pick .cardbar .card .name{
     padding: 2px;
     display: block;
     font-size:20px;
@@ -147,13 +211,13 @@
     background-color: rgb(255, 90, 90);
     width: 130px;
     margin: 0 10px 0 10px;
-    height: 440px;
+    height: 530px;
     border-radius: 10px;
 }
 .BP--main .BP--inner .BPbox .contents ul .red .pick{
     background-color: white;
     margin: 10px;
-    height: 420px;
+    height: 510px;
     border-radius: 10px;
     opacity: 0.7;
 }
@@ -179,6 +243,7 @@
 }
 .BP--main .BP--inner .BPbox .contents ul .red .pick .cardbar .card ul{
     display: flex;
+    padding: 7px;
 }
 .BP--main .BP--inner .BPbox .contents ul .red .pick .cardbar .card .grade{
      border:2px solid #666;
@@ -189,13 +254,13 @@
     height: 20px;
     margin: 0px 5px 0 0;
 }
-.BP--main .BP--inner .BPbox .contents ul .red .pick .cardbar .card .pos{
+.BP--main .BP--inner .BPbox .contents ul .red .pick .cardbar .pos{
     padding: 2px;
     display: block;
-    font-size:17px;
-    width: 35px;
-    height: 20px;
-    margin: 0 5px 5px 0;
+    font-size:18px;
+    width: 100px;
+    text-align: center;
+    margin: 3px 0 0 0;
 }
 .BP--main .BP--inner .BPbox .contents ul .red .pick .cardbar .card .name{
     padding: 2px;
@@ -210,13 +275,13 @@
     background-color: rgb(90, 90, 255);
     width: 130px;
     margin: 0 10px 0 10px;
-    height: 440px;
+    height: 530px;
     border-radius: 10px;
 }
 .BP--main .BP--inner .BPbox .contents ul .blue .pick{
     background-color: white;
     margin: 10px;
-    height: 420px;
+    height: 510px;
     border-radius: 10px;
     opacity: 0.7;
 }
@@ -242,6 +307,7 @@
 }
 .BP--main .BP--inner .BPbox .contents ul .blue .pick .cardbar .card ul{
     display: flex;
+    padding: 7px;
 }
 .BP--main .BP--inner .BPbox .contents ul .blue .pick .cardbar .card .grade{
      border:2px solid #666;
@@ -252,13 +318,13 @@
     height: 20px;
     margin: 0px 5px 0 0;
 }
-.BP--main .BP--inner .BPbox .contents ul .blue .pick .cardbar .card .pos{
+.BP--main .BP--inner .BPbox .contents ul .blue .pick .cardbar .pos{
     padding: 2px;
     display: block;
-    font-size:17px;
-    width: 35px;
-    height: 20px;
-    margin: 0 5px 5px 0;
+    font-size:18px;
+    width: 100px;
+    text-align: center;
+    margin: 3px 0 0 0;
 }
 .BP--main .BP--inner .BPbox .contents ul .blue .pick .cardbar .card .name{
     padding: 2px;
@@ -270,15 +336,52 @@
     margin: 0 5px 5px 0;
 }
 .BP--main .BP--inner .BPbox .contents ul .chams{
-    background-color: rgb(255, 192, 90);
+    background-color: green;
     width: 880px;
-    height: 440px;
+    height: 530px;
     border-radius: 10px;
+}
+.BP--main .BP--inner .BPbox .contents ul .chams .btnbar{
+    display: flex;
+    padding: 0 20px 0 20px;
+    margin: 10px;
+}
+.BP--main .BP--inner .BPbox .contents ul .chams .btnbar .position{
+    background-color: rgba(255,255,255,0.7);
+    padding: 8px;
+    width: 140px;
+    font-size: 20px;
+    border-radius: 10px;
+    margin: 0 15px 0 15px;
+    cursor: pointer;
+    transition: 0.2s;
+    border: 1px solid green;
+}
+.BP--main .BP--inner .BPbox .contents ul .chams .btnbar .position:hover{
+    background-color: green;
+    color:white;
+    border: 1px solid rgba(255,255,255,0.7);
+}
+.BP--main .BP--inner .BPbox .contents ul .chams .btnbar .special{
+    background-color: orange;
+    padding: 8px;
+    width: 140px;
+    font-size: 20px;
+    border-radius: 10px;
+    margin: 0 15px 0 15px;
+    cursor: pointer;
+    transition: 0.2s;
+    border: 1px solid green;
+}
+.BP--main .BP--inner .BPbox .contents ul .chams .btnbar .special:hover{
+    background-color: green;
+    color:white;
+    border: 1px solid rgba(255,255,255,0.7);
 }
 .BP--main .BP--inner .BPbox .contents ul .chams .list{
     background-color: white;
     margin: 10px;
-    height: 420px;
+    height: 465px;
     border-radius: 10px;
     opacity: 0.7;
     overflow: auto;
@@ -327,7 +430,4 @@
     height: 25px;
     overflow: hidden;
     margin: 0 5px 5px 0;
-}
-.speical{
-    background-color: orangered;
 }

@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import './App.css';
 import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
 import Home from "./pages/Home";
@@ -44,7 +44,10 @@ function App() {
         <Route path="/league" component={League} />
         <Route path="/player" component={Player} />
         <Route path="/lck/:username" exact component={Home} />
-        <Route path="/" exact component={Home} />
+        <Route
+          exact
+          path="/"
+          render={() => <Home />} />
         <Route component={NotFound} />
       </Switch>
     </BrowserRouter>

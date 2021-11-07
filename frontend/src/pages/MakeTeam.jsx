@@ -167,7 +167,7 @@ export default function MakeTeam() {
             }).catch((e) => {
                 console.log(e.response);
             })
-            document.location.href = `/banpick`;
+            document.location.href = `/league`;
         }
     };
     return (<>

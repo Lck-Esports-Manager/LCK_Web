@@ -57,7 +57,7 @@
 }
 .home--bottom {
     background-color: #c1c1c1;
-    height: 350px;
+    height: 400px;
 }
 .home--bottom .inner {
     padding: 10px;
@@ -72,7 +72,7 @@
     background-color: rgb(160, 160, 160);
     border-radius: 15px;
     width: 500px;
-    /* height: 300px; */
+    height: 360px;
     margin: auto;
 }
 .home--bottom .inner h2 {
@@ -93,13 +93,40 @@
 .home--bottom .inner .match {
     background-color: rgb(160, 160, 160);
     border-radius: 15px;
-    width: 600px;
-    height: 300px;
-    display: block;
+    width: 620px;
+    height: 360px;
+    display: flex;
+    flex-wrap: wrap;
     margin: auto;
 }
+.home--bottom .inner .match .refresh{
+    background-image: url('../images/refresh.png');
+    background-repeat: no-repeat;
+    display: block;
+    width: 25px;
+    height: 25px;
+    margin: 20px 0 0 10px;
+    padding: 0;
+    cursor: pointer;
+    transition: 0.2s;
+    background-color: antiquewhite;
+    border-radius: 15px;
+}
+.home--bottom .inner .match .refresh:hover{
+    transform: rotate(60deg);
+}
+.home--bottom .inner .match .username{
+    text-align: right;
+    font-size: 20px;
+    width: 200px;
+    height: 20px;
+    padding: 20px 0 0;
+    font-family: 'Noto Sans KR', sans-serif;
+    font-weight: 700;
+}
 .home--bottom .inner .match .match--contents{
-    padding: 10px;
+    margin: 0 100px 0;
+    padding: 100px;
     font-weight: 700;
     border-radius: 20px;
     font-size: 20px;
@@ -113,6 +140,30 @@
     font-size: 20px;
     line-height: 1.3;
     font-family: 'Noto Sans KR', sans-serif;
+    height: 290px;
+}
+.home--bottom .inner .match .match--list .index{
+    display: flex;
+    background-color: antiquewhite;
+    border-radius: 10px;
+}
+.home--bottom .inner .match .match--list .index .date{
+    text-align: center;
+    
+}
+.home--bottom .inner .match .match--list .index li{
+    width: 200px;
+}
+.home--bottom .inner .match .match--list .data{
+    display: flex;
+}
+.home--bottom .inner .match .match--list .data .date{
+    padding: 0 0 0 40px;
+    width: 160px;
+}
+.home--bottom .inner .match .match--list .data li{
+    width: 200px;
+    height: 25px;
 }
 .underline {
     /* height: 50px; */
