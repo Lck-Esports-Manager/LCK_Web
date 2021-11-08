@@ -223,8 +223,12 @@ class ProcessSelection(APIView):
                         "{0} : {1}팀 바텀의 갱킹이 성공하여 500골드를 추가로 얻습니다.".format(self.set.turn, self.op_team['side']))
 
             elif elem == 7:
+
+                mine = self.my_team['top'][1]+self.my_team['jng'][1]
+                op = self.op_team['top'][1]+self.op_team['jng'][1]
                 if self.set.turn % 2 == 1:
-                    rate = (self.my_team['top'][1]/(self.my_team['top'][1]+self.op_team['top'][1]))*0.4+(
+
+                    rate = (mine/(mine+op))*0.4+(
                         self.set.my_gold/(self.set.my_gold+self.set.op_gold))*0.6
                     rand_n = random.random()
                     if rand_n < rate:
@@ -237,7 +241,7 @@ class ProcessSelection(APIView):
                             "{0} : {1}팀 탑에서의 교전이 패배하여를 상대팀이 800골드를 추가로 얻습니다.".format(self.set.turn, self.my_team['side']))
 
                 else:
-                    rate = (self.op_team['top'][1]/(self.op_team['top'][1]+self.my_team['top'][1]))*0.4+(
+                    rate = (op/(mine+op))*0.4+(
                         self.set.op_gold/(self.set.my_gold+self.set.op_gold))*0.6
                     rand_n = random.random()
                     if rand_n < rate:
@@ -250,8 +254,10 @@ class ProcessSelection(APIView):
                             "{0} : {1}팀 탑에서의 교전이 패배하여를 상대팀이 800골드를 추가로 얻습니다.".format(self.set.turn, self.op_team['side']))
 
             elif elem == 8:
+                mine = self.my_team['mid'][1]+self.my_team['jng'][1]
+                op = self.op_team['mid'][1]+self.op_team['jng'][1]
                 if self.set.turn % 2 == 1:
-                    rate = (self.my_team['mid'][1]/(self.my_team['mid'][1]+self.op_team['mid'][1]))*0.4+(
+                    rate = (mine/(mine+op))*0.4*0.4+(
                         self.set.my_gold/(self.set.my_gold+self.set.op_gold))*0.6
                     rand_n = random.random()
                     if rand_n < rate:
@@ -264,7 +270,7 @@ class ProcessSelection(APIView):
                             "{0} : {1}팀 미드에서의 교전이 패배하여를 상대팀이 800골드를 추가로 얻습니다.".format(self.set.turn, self.my_team['side']))
 
                 else:
-                    rate = (self.op_team['mid'][1]/(self.op_team['mid'][1]+self.my_team['mid'][1]))*0.4+(
+                    rate = (op/(mine+op))*0.4+(
                         self.set.op_gold/(self.set.my_gold+self.set.op_gold))*0.6
                     rand_n = random.random()
                     if rand_n < rate:
@@ -277,8 +283,12 @@ class ProcessSelection(APIView):
                             "{0} : {1}팀 미드에서의 교전이 패배하여를 상대팀이 800골드를 추가로 얻습니다.".format(self.set.turn, self.op_team['side']))
 
             elif elem == 9:
+                mine = self.my_team['adc'][1] + \
+                    self.my_team['sup'][1]+self.my_team['jng'][1]
+                op = self.op_team['adc'][1] + \
+                    self.op_team['sup'][1]+self.op_team['jng'][1]
                 if self.set.turn % 2 == 1:
-                    rate = ((self.my_team['adc'][1]+self.my_team['sup'][1])/(self.my_team['adc'][1]+self.op_team['adc'][1]+self.my_team['sup'][1]+self.op_team['sup'][1]))*0.4+(
+                    rate = (mine/(mine+op))*0.4+(
                         self.set.my_gold/(self.set.my_gold+self.set.op_gold))*0.6
                     rand_n = random.random()
                     if rand_n < rate:
@@ -291,7 +301,7 @@ class ProcessSelection(APIView):
                             "{0} : {1}팀 바텀에서의 교전이 패배하여를 상대팀이 800골드를 추가로 얻습니다.".format(self.set.turn, self.my_team['side']))
 
                 else:
-                    rate = ((self.op_team['adc'][1]+self.op_team['sup'][1])/(self.my_team['adc'][1]+self.op_team['adc'][1]+self.my_team['sup'][1]+self.op_team['sup'][1]))*0.4+(
+                    rate = (op/(mine+op))*0.4+(
                         self.set.op_gold/(self.set.my_gold+self.set.op_gold))*0.6
                     rand_n = random.random()
                     if rand_n < rate:
@@ -691,6 +701,8 @@ class ProcessSelection(APIView):
         self.set.save()
         self.match.save()
         self.league.save()
+
+    # def acquire_ext(self, win):
 
     def post_process(self):
         # *세트의 status를 변화시킨다.
