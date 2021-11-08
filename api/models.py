@@ -79,6 +79,7 @@ class MyPlayer(models.Model):
     status2 = models.IntegerField(default=0)
     status3 = models.IntegerField(default=0)
     remain = models.IntegerField(default=0)
+    exp = models.IntegerField(default=0)
     schedule = models.ForeignKey(
         Schedule, null=True, on_delete=models.CASCADE)
 

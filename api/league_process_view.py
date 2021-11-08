@@ -702,7 +702,49 @@ class ProcessSelection(APIView):
         self.match.save()
         self.league.save()
 
-    # def acquire_ext(self, win):
+    def acquire_exp(self, win):
+        exp = 10 if win else 5
+        lst = []
+        top = self.my_team['team'].top
+        lst.append(top)
+        jng = self.my_team['team'].jng
+        lst.append(jng)
+        mid = self.my_team['team'].mid
+        lst.append(mid)
+        adc = self.my_team['team'].adc
+        lst.append(adc)
+        sup = self.my_team['team'].sup
+        lst.append(sup)
+        for elem in lst:
+            player = elem.player
+            max_level = 10+5*(5-player.rate)
+            if elem.level == max_level:
+                continue
+            elem.exp = elem.exp+exp
+            if elem.exp > 9:
+                elem.exp = elem.exp-10
+                elem.level = elem.level+1
+                if elem.level == max:
+                    continue
+
+                elem.remain = elem.remain+3
+            elem.save()
+        return
+
+    def acquire_money(self, win):
+        my_team = self.league.my_team
+        money = 20000 if win else 8000
+        my_team.money = my_team.money+money
+        my_team.save()
+        return
+
+    def acquire_popularity(self, win):
+        popularity = 10 if win else 3
+        my_team = self.league.my_team
+        my_team.popularity = my_team.popularity+popularity
+        my_team.save()
+
+        return
 
     def post_process(self):
         # *세트의 status를 변화시킨다.
@@ -731,14 +773,18 @@ class ProcessSelection(APIView):
             if self.match.result > 0:
                 if self.match.team_num1 == 0:
                     self.league.win = self.league.win+1
-                    # 돈하고 인기도,선수들 경험치 상승
+                    self.acquire_exp(True)
+                    self.acquire_money(True)
+                    self.acquire_popularity(True)
                     op_team = LeagueTeam.objects.get(
                         league=self.league, team_num=self.match.team_num2)
                     op_team.lose = op_team.lose+1
                     op_team.save()
                 else:
                     self.league.lose = self.league.lose+1
-                    # 돈하고 인기도,선수들 경험치 상승
+                    self.acquire_exp(False)
+                    self.acquire_money(False)
+                    self.acquire_popularity(False)
                     op_team = LeagueTeam.objects.get(
                         league=self.league, team_num=self.match.team_num2)
                     op_team.win = op_team.win+1
@@ -746,14 +792,18 @@ class ProcessSelection(APIView):
             else:
                 if self.match.team_num1 == 0:
                     self.league.lose = self.league.lose+1
-                    # 돈하고 인기도,선수들 경험치 상승
+                    self.acquire_exp(False)
+                    self.acquire_money(False)
+                    self.acquire_popularity(False)
                     op_team = LeagueTeam.objects.get(
                         league=self.league, team_num=self.match.team_num2)
                     op_team.win = op_team.win+1
                     op_team.save()
                 else:
                     self.league.win = self.league.win+1
-                    # 돈하고 인기도,선수들 경험치 상승
+                    self.acquire_exp(True)
+                    self.acquire_money(True)
+                    self.acquire_popularity(True)
                     op_team = LeagueTeam.objects.get(
                         league=self.league, team_num=self.match.team_num2)
                     op_team.lose = op_team.lose+1
