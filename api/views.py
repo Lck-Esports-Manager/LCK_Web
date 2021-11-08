@@ -684,3 +684,85 @@ class MakeSelection(APIView):
         self.tower_press()
         self.nexus_destroy()
         return Response(self.data)
+
+
+# 다른 팀들 경기 진행
+
+class OtherTeamProcess(APIView):
+
+    def get_team_power(self, num):
+        pos = ['Top', 'Jungle', 'Middle', 'ADC', 'Support']
+        team_power = 0
+        team = self.team1 if num == 1 else self.team2
+
+        base_team = team.base_team
+
+        for elem in pos:
+            player = Player.objects.filter(team=base_team, position=elem)[0]
+            score = 6-player.rate
+            team_power = team_power+score
+
+        return team_power
+
+    def post(self, request):
+        # 유저가져옴
+        self.user = request.user
+        # 리그 가져옴
+        self.league = League.objects.get(user=self.user, state_finish=False)
+
+        # 리그에서 현재 day가져와서
+        date = self.league.current_date
+
+        schedules = LeagueSchedule.objects.filter(day=date)
+
+        for elem in schedules:
+            if elem.team1 == -1:
+                self.league.current_date = self.league.current_date+1
+                self.league.save()
+                # 날짜만 증가 시킴
+                return Response({
+                    "success": True
+                })
+
+            if elem.team1 == 0 or elem.team2 == 0:
+                continue
+
+            self.team1 = LeagueTeam(league=self.league, team_num=elem.team1)
+            self.team2 = LeagueTeam(league=self.league, team_num=elem.team2)
+            team_power1 = self.get_team_power(1)
+            team_power2 = self.get_team_power(2)
+            rate = team_power1/(team_power1+team_power2)
+            rand = random.random()
+            if rand < rate:  # team1 win
+                self.team1.win = self.team1.win+1
+                self.team2.lose = self.team2.lose+1
+
+            else:
+                self.team2.win = self.team2.win+1
+                self.team1.lose = self.team1.lose+1
+
+            self.team1.save()
+            self.team2.save()
+
+        self.league.current_date = self.league.current_date+1
+        self.league.save()
+
+        # 아군팀 있으면 무시
+        # 다른팀들 게임 진행
+        # 경기 없으면 그냥 패스
+        # day하나 증가
+        return Response({
+            "success": True
+        })
+
+
+class ConditionSelection(APIView):
+
+    def get(self, request):
+        # 알아서 팀 정보 전달!!
+        return
+
+    def post(self, request):
+        # 유저 팀 가져와서
+        # 알아서 할당
+        return

@@ -24,7 +24,8 @@ urlpatterns = [
 
     path('getschedule/', GetSchedules.as_view()),
 
-
+    # 다른 팀 경기 진행
+    path('otherteamprocess/', OtherTeamProcess.as_view()),
     # 리그 진행
 
     path('progressleague/', ProgressLeague.as_view()),

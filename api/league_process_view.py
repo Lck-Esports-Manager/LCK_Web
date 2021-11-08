@@ -707,13 +707,13 @@ class ProcessSelection(APIView):
         lst = []
         top = self.my_team['team'].top
         lst.append(top)
-        jng = self.my_team['team'].jng
+        jng = self.my_team['team'].jungle
         lst.append(jng)
         mid = self.my_team['team'].mid
         lst.append(mid)
         adc = self.my_team['team'].adc
         lst.append(adc)
-        sup = self.my_team['team'].sup
+        sup = self.my_team['team'].support
         lst.append(sup)
         for elem in lst:
             player = elem.player
@@ -766,7 +766,7 @@ class ProcessSelection(APIView):
         # *Match가 끝난다.
 
         if (self.match.set_num == 2 and (self.match.result == 2 or self.match.result == -2))\
-                and (self.match.set_num == 3 and (self.match.result == 1 or self.match.result == -1)):
+                or (self.match.set_num == 3 and (self.match.result == 1 or self.match.result == -1)):
             self.match.status_finish = True
 
         if self.match.status_finish == True:
