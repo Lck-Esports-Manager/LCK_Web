@@ -56,6 +56,7 @@ class Enterprise(models.Model):
     name = models.CharField(null=True, max_length=20)
     description = models.CharField(null=True, max_length=150)
     earning = models.IntegerField(default=0)
+    cost = models.IntegerField(default=0)
 
 
 class Sponsor(models.Model):

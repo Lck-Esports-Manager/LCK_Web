@@ -759,9 +759,9 @@ class OtherTeamProcess(APIView):
 class TeamInfo(APIView):
 
     def get(self, request):
-        user = request.user
-        my_team = MyTeam.objects.get(user=user)
-        serializer = MyTeamSerializer(my_team)
+        self.user = request.user
+        self.my_team = MyTeam.objects.get(user=self.user)
+        serializer = MyTeamSerializer(self.my_team)
 
         # 알아서 팀 정보 전달!!
         return Response(serializer.data)
