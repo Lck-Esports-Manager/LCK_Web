@@ -34,6 +34,9 @@ urlpatterns = [
 
     path('banpick/', BanPick.as_view()),
 
+    # 팀정보
+    path('teaminfo/', TeamInfo.as_view()),
+
     # 선택지 가져오기
 
     path('makeselection/', MakeSelection.as_view()),

@@ -756,11 +756,15 @@ class OtherTeamProcess(APIView):
         })
 
 
-class ConditionSelection(APIView):
+class TeamInfo(APIView):
 
     def get(self, request):
+        user = request.user
+        my_team = MyTeam.objects.get(user=user)
+        serializer = MyTeamSerializer(my_team)
+
         # 알아서 팀 정보 전달!!
-        return
+        return Response(serializer.data)
 
     def post(self, request):
         # 유저 팀 가져와서

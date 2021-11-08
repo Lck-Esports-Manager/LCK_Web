@@ -53,4 +53,34 @@ class SimplePlayerSerializer(serializers.ModelSerializer):
         fields = ['name', 'season', 'year']
 
 
+class SimplePlayerSerializer2(serializers.ModelSerializer):
+
+    class Meta:
+        model = Player
+        fields = ['name', 'season', 'year', 'rate']
+
+# 나의 팀
+
+
+class MyPlayerSerializer(serializers.ModelSerializer):
+    player = SimplePlayerSerializer2()
+
+    class Meta:
+        model = MyPlayer
+        fields = '__all__'
+
+
+class MyTeamSerializer(serializers.ModelSerializer):
+    top = MyPlayerSerializer()
+    jungle = MyPlayerSerializer()
+    mid = MyPlayerSerializer()
+    adc = MyPlayerSerializer()
+    support = MyPlayerSerializer()
+    sub1 = MyPlayerSerializer()
+    sub2 = MyPlayerSerializer()
+
+    class Meta:
+        model = MyTeam
+        fields = '__all__'
+
 # class SimpleMyPlayerSerializer(serializers.ModelSerializer):
