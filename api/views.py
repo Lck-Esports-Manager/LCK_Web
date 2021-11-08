@@ -757,14 +757,80 @@ class OtherTeamProcess(APIView):
 
 
 class TeamInfo(APIView):
+    def get_available_sponsor(self):
+        rt = []
+        temp = Sponsor.objects.all()
+        for elem in temp:
+            rt.append(elem.name)
+
+        if self.league.win < 3:
+            rt.remove('블루불')
+        if self.league.win < 7:
+            rt.remove('오디도스')
+        if self.league.win < 3:
+            rt.remove('DWM')
+
+        for elem in rt:
+            if self.my_team.sponsor1:
+                if self.my_team.sponsor1.name in rt:
+                    rt.remove(elem)
+                    continue
+            if self.my_team.sponsor2:
+                if self.my_team.sponsor2.name in rt:
+                    rt.remove(elem)
+                    continue
+            if self.my_team.sponsor3:
+                if self.my_team.sponsor3.name in rt:
+                    rt.remove(elem)
+                    continue
+
+        result = []
+        for elem in rt:
+            result.append(Sponsor.objects.get(name=elem))
+        return result
+
+    def get_available_enterprise(self):
+        rt = []
+        temp = Enterprise.objects.all()
+        for elem in temp:
+            rt.append(elem.name)
+
+        for elem in rt:
+
+            if self.my_team.enterprise1:
+                if self.my_team.enterprise1.name in rt:
+                    rt.remove(elem)
+                    continue
+            if self.my_team.enterprise2:
+                if self.my_team.enterprise2.name in rt:
+                    rt.remove(elem)
+                    continue
+
+        result = []
+        for elem in rt:
+            result.append(Enterprise.objects.get(name=elem))
+        return result
 
     def get(self, request):
         self.user = request.user
+        self.league = League(user=self.user, state_finish=False)
         self.my_team = MyTeam.objects.get(user=self.user)
-        serializer = MyTeamSerializer(self.my_team)
+        my_team_serializer = MyTeamSerializer(self.my_team)
 
+        available_sponsor = self.get_available_sponsor()
+        sponsor_serializer = SponsorSerializer(available_sponsor, many=True)
+
+        available_enterprise = self.get_available_enterprise()
+        enterprise_serializer = EnterpriseSerializer(
+            available_enterprise, many=True)
+
+        response_data = {
+            "my_team": my_team_serializer.data,
+            "available_sponsor": sponsor_serializer.data,
+            "available_enterprise": enterprise_serializer.data
+        }
         # 알아서 팀 정보 전달!!
-        return Response(serializer.data)
+        return Response(response_data)
 
     def post(self, request):
         # 유저 팀 가져와서

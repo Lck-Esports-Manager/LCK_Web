@@ -70,6 +70,20 @@ class MyPlayerSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
+class SponsorSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Sponsor
+        fields = '__all__'
+
+
+class EnterpriseSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Enterprise
+        fields = '__all__'
+
+
 class MyTeamSerializer(serializers.ModelSerializer):
     top = MyPlayerSerializer()
     jungle = MyPlayerSerializer()
@@ -78,9 +92,13 @@ class MyTeamSerializer(serializers.ModelSerializer):
     support = MyPlayerSerializer()
     sub1 = MyPlayerSerializer()
     sub2 = MyPlayerSerializer()
+    sponsor1 = SponsorSerializer()
+    sponsor2 = SponsorSerializer()
+    sponsor3 = SponsorSerializer()
+    enterprise1 = EnterpriseSerializer()
+    enterprise1 = EnterpriseSerializer()
 
     class Meta:
         model = MyTeam
         fields = '__all__'
-
 # class SimpleMyPlayerSerializer(serializers.ModelSerializer):
