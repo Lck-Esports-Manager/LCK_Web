@@ -186,7 +186,7 @@ class MakeTeam(APIView):
 
         for idx, elem in enumerate(team):
             league_team = LeagueTeam(
-                base_team=elem, team_num=idx, league=league)
+                base_team=elem, team_num=idx+1, league=league)
             league_team.save()
         return Response({
             'success': True
@@ -464,7 +464,17 @@ class ProgressLeague(APIView):
             })
 
         else:
-            return Response({"league": False})
+            try:
+                past_league = League.objects.filter(
+                    user=user, state_finish=False)
+            except:
+                past_league = None
+            if past_league:
+                return Response({"league": False,
+                                "past_league": True})
+            else:
+                return Response({"league": False,
+                                "past_league": False})
 
 # 밴픽 완료
 
@@ -742,6 +752,8 @@ class OtherTeamProcess(APIView):
         for elem in schedules:
             if elem.team1 == -1:
                 self.league.current_date = self.league.current_date+1
+                if self.league.current_date > 68:
+                    self.league.state_finish = True
                 self.league.save()
                 # 날짜만 증가 시킴
                 return Response({
@@ -771,6 +783,8 @@ class OtherTeamProcess(APIView):
             self.team2.save()
 
         self.league.current_date = self.league.current_date+1
+        if self.league.current_date > 68:
+            self.league.state_finish = True
         self.league.save()
 
         # 아군팀 있으면 무시
@@ -1096,3 +1110,23 @@ class LeagueRank(APIView):
         # 역대 리그 성적 가져오기
 
         # 새로운 리그 생성
+
+
+class MakeNewLeague(APIView):
+    def post(self, request):
+        if not request.user.is_authenticated:
+            return HttpResponseRedirect('/login')
+
+        my_team = MyTeam.objects.get(user=request.user)
+
+        league = League(my_team=my_team, season='Summer', user=request.user)
+        league.save()
+
+        team = Team.objects.order_by('?')[0:9]
+
+        for idx, elem in enumerate(team):
+            league_team = LeagueTeam(
+                base_team=elem, team_num=idx+1, league=league)
+            league_team.save()
+
+        return Response({"success": True})

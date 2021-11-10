@@ -174,7 +174,10 @@ class ProcessSelection(APIView):
         for elem in schedules:
             if elem.team1 == -1:
                 self.league.current_date = self.league.current_date+1
+                if self.league.current_date > 68:
+                    self.league.state_finish = True
                 self.league.save()
+                return
                 # 날짜만 증가 시킴
 
             if elem.team1 == 0 or elem.team2 == 0:
@@ -200,15 +203,15 @@ class ProcessSelection(APIView):
             self.team2.save()
 
         self.league.current_date = self.league.current_date+1
+        if self.league.current_date > 68:
+            self.league.state_finish = True
         self.league.save()
 
         # 아군팀 있으면 무시
         # 다른팀들 게임 진행
         # 경기 없으면 그냥 패스
         # day하나 증가
-        return Response({
-            "success": True
-        })
+        return
 
     def progress(self):
 
