@@ -36,6 +36,9 @@ urlpatterns = [
 
     # 팀정보
     path('teaminfo/', TeamInfo.as_view()),
+    path('updatestatus/', IncreaseStatus.as_view()),
+    path('enterprisestart/', EnterpriseStart.as_view()),
+    path('sponsorstart/', SponsorStart.as_view()),
 
     # 선택지 가져오기
 
@@ -44,6 +47,17 @@ urlpatterns = [
     # 선택지 적용
 
     path('selectionprocess/', ProcessSelection.as_view()),
+
+    # 스케줄가져오기
+
+    path('personalschedule/', GetPersonalSchedule.as_view()),
+
+    # 개인스케줄 진행하기
+
+    path('progresspersonalschedule/', ProgressSchedule.as_view()),
+
+    # 리그 랭킹
+    path('leaguerank/', LeagueRank.as_view()),
     # 로그인 회원가입 관련 api
 
     path('rest-auth/', include('rest_auth.urls')),

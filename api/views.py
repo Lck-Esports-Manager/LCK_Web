@@ -132,6 +132,8 @@ class ChampionDetailView(APIView):
 
 class MakeTeam(APIView):
     def post(self, request):
+        if not request.user.is_authenticated:
+            return HttpResponseRedirect('/login')
 
         user = User.objects.get(username=request.user)
         try:
@@ -240,6 +242,8 @@ class GetSchedules(APIView):
 class ProgressLeague(APIView):
 
     def post(self, request):
+        if not request.user.is_authenticated:
+            return HttpResponseRedirect('/login')
         user = User.objects.get(username=request.user)
         try:
             league = League.objects.get(user=user, state_finish=False)
@@ -453,6 +457,8 @@ class ProgressLeague(APIView):
 
 class BanPick(APIView):
     def post(self, request):
+        if not request.user.is_authenticated:
+            return HttpResponseRedirect('/login')
         user = request.user
         set_id = request.data['set_id']
         try:
@@ -665,6 +671,8 @@ class MakeSelection(APIView):
         return
 
     def get(self, request):
+        if not request.user.is_authenticated:
+            return HttpResponseRedirect('/login')
 
         self.data = {"lane_press": {"top": [False, 1, 1], "mid": [False, 1, 2], "bot": [False, 1, 3]},
                      "ganking": {"top": [False, 1, 4], "mid": [False, 1, 5], "bot": [False, 1, 6]},
@@ -705,6 +713,8 @@ class OtherTeamProcess(APIView):
         return team_power
 
     def post(self, request):
+        if not request.user.is_authenticated:
+            return HttpResponseRedirect('/login')
         # 유저가져옴
         self.user = request.user
         # 리그 가져옴
@@ -727,8 +737,10 @@ class OtherTeamProcess(APIView):
             if elem.team1 == 0 or elem.team2 == 0:
                 continue
 
-            self.team1 = LeagueTeam(league=self.league, team_num=elem.team1)
-            self.team2 = LeagueTeam(league=self.league, team_num=elem.team2)
+            self.team1 = LeagueTeam.objects.get(
+                league=self.league, team_num=elem.team1)
+            self.team2 = LeagueTeam.objects.get(
+                league=self.league, team_num=elem.team2)
             team_power1 = self.get_team_power(1)
             team_power2 = self.get_team_power(2)
             rate = team_power1/(team_power1+team_power2)
@@ -757,6 +769,13 @@ class OtherTeamProcess(APIView):
 
 
 class TeamInfo(APIView):
+
+    def initiate(self):
+
+        self.league = League(user=self.user, state_finish=False)
+        self.my_team = MyTeam.objects.get(user=self.user)
+        return
+
     def get_available_sponsor(self):
         rt = []
         temp = Sponsor.objects.all()
@@ -812,9 +831,11 @@ class TeamInfo(APIView):
         return result
 
     def get(self, request):
+        if not request.user.is_authenticated:
+            return HttpResponseRedirect('/login')
+
         self.user = request.user
-        self.league = League(user=self.user, state_finish=False)
-        self.my_team = MyTeam.objects.get(user=self.user)
+        self.initiate()
         my_team_serializer = MyTeamSerializer(self.my_team)
 
         available_sponsor = self.get_available_sponsor()
@@ -833,6 +854,231 @@ class TeamInfo(APIView):
         return Response(response_data)
 
     def post(self, request):
-        # 유저 팀 가져와서
-        # 알아서 할당
-        return
+        if not request.user.is_authenticated:
+            return HttpResponseRedirect('/login')
+        self.user = request.user
+        self.initiate()
+        try:
+
+            self.my_team.top = MyPlayer.objects.get(pk=request.data['top'])
+            self.my_team.jungle = MyPlayer.objects.get(pk=request.data['jng'])
+            self.my_team.mid = MyPlayer.objects.get(pk=request.data['mid'])
+            self.my_team.adc = MyPlayer.objects.get(pk=request.data['adc'])
+            self.my_team.support = MyPlayer.objects.get(pk=request.data['sup'])
+            self.my_team.sub1 = MyPlayer.objects.get(
+                pk=request.data['sub1']) if request.data['sub1'] else None
+            self.my_team.sub2 = MyPlayer.objects.get(
+                pk=request.data['sub2']) if request.data['sub2'] else None
+        except:
+            return Response({
+                "success": False
+            })
+            # 유저 팀 가져와서
+            # 알아서 할당
+        return Response({
+            "success": True
+        })
+
+
+class GetPersonalSchedule(APIView):
+
+    def get(self, request):
+        schedules = Schedule.objects.all()
+        schedule_serializer = ScheduleSerializer(schedules, many=True)
+
+        return Response(schedule_serializer.data)
+
+
+class ProgressSchedule(APIView):
+    def progress_schedule(self, my_player, id):
+
+        if id == None:
+            return
+
+        if id == 1:
+            temp_cond = my_player.feeling+2
+            new_condtion = 2 if temp_cond > 2 else temp_cond
+            temp_exp = my_player.exp-3
+            new_exp = 0 if temp_exp < 0 else temp_exp
+            my_player.feeling = new_condtion
+            my_player.exp = new_exp
+            my_player.save()
+
+            # 휴식:컨디션 +2 경험치 -3
+            return
+
+        elif id == 2:  # 헬스 : 컨디션+1
+            temp_cond = my_player.feeling+1
+            new_condtion = 2 if temp_cond > 2 else temp_cond
+            my_player.feeling = new_condtion
+            my_player.save()
+            return
+
+        elif id == 3:  # 스트리밍 :개인방송 선수단 예산 +500 인기도 +1
+            self.my_team.popularity = self.my_team.popularity+1
+            self.my_team.money = self.my_team.money+500
+            self.my_team.save()
+            return
+        else:  # 추가 연습 : 경험치 +3 컨디션 -1
+            temp_cond = my_player.feeling-1
+            new_condtion = -2 if temp_cond < -2 else temp_cond
+            temp_exp = my_player.exp+3
+            if temp_exp > 9:
+                new_exp = temp_exp-10
+                max_level = 10+5*(5-my_player.rate)
+                if my_player.level != max_level:
+                    my_player.level = my_player.level+1
+                    if my_player.level == max_level:
+                        my_player.exp = 0
+                    else:
+                        my_player.exp = new_exp
+            else:
+                new_exp = temp_exp
+                my_player.exp = new_exp
+
+            my_player.feeling = new_condtion
+
+            my_player.save()
+            return
+
+    def post(self, request):
+        if not request.user.is_authenticated:
+            return HttpResponseRedirect('/login')
+        self.my_team = MyTeam.objects.get(pk=request.data['my_team'])
+        schedule = dict()
+        try:
+            schedule['top'] = request.data['top']
+            self.progress_schedule(self.my_team.top, schedule['top'])
+            schedule['jng'] = request.data['jng']
+            self.progress_schedule(self.my_team.jungle, schedule['jng'])
+            schedule['mid'] = request.data['mid']
+            self.progress_schedule(self.my_team.mid, schedule['mid'])
+            schedule['adc'] = request.data['adc']
+            self.progress_schedule(self.my_team.adc, schedule['adc'])
+            schedule['sup'] = request.data['sup']
+            self.progress_schedule(self.my_team.support, schedule['sup'])
+            schedule['sub1'] = request.data['sub1']
+            self.progress_schedule(self.my_team.sub1, schedule['sub1'])
+            schedule['sub2'] = request.data['sub2']
+            self.progress_schedule(self.my_team.sub2, schedule['sub2'])
+        except:
+            return Response({
+                'success': False
+            })
+        return Response({
+            'success': True
+        })
+
+# 선수 능력치 증가
+
+
+class IncreaseStatus(APIView):
+
+    def post(self, request):
+        if not request.user.is_authenticated:
+            return HttpResponseRedirect('/login')
+
+        my_player = MyPlayer.objects.get(pk=request.data['my_player'])
+
+        my_player.status1 = my_player.status1+request.data['status1']
+        my_player.status2 = my_player.status1+request.data['status2']
+        my_player.status3 = my_player.status1+request.data['status3']
+
+        my_player.remain = request.data['remain']
+
+        my_player.save()
+        serializers = MyPlayerSerializer(my_player)
+
+        return Response(serializers.data)
+
+# 선수단 사업 시작
+
+
+class EnterpriseStart(APIView):
+
+    def post(self, request):
+        if not request.user.is_authenticated:
+            return HttpResponseRedirect('/login')
+        enterprise_num = request.data['enterprise']
+        new_enter = Enterprise.objects.get(
+            pk=enterprise_num)
+        self.my_team = MyTeam.objects.get(user=request.user)
+        if self.my_team.money < new_enter.cost:
+            return Response({
+                "success": False,
+                "message": "자금이 부족합니다"
+            })
+
+        self.my_team.money = self.my_team.money-new_enter.cost
+        if self.my_team.enterprise1:
+            if not self.my_team.enterprise2:
+                self.my_team.enterprise2 = new_enter
+        else:
+            self.my_team.enterprise1 = new_enter
+
+        self.my_team.save()
+
+        return Response({
+            "success": True
+        })
+
+# 선수단 스폰서 계약
+
+
+class SponsorStart(APIView):
+
+    def post(self, request):
+        if not request.user.is_authenticated:
+            return HttpResponseRedirect('/login')
+        enterprise_num = request.data['sponsor']
+        new_sponsor = Enterprise.objects.get(
+            pk=enterprise_num)
+        self.my_team = MyTeam.objects.get(user=request.user)
+
+        if not self.my_team.enterprise1:
+
+            self.my_team.sponsor1 = new_sponsor
+        elif not self.my_team.enterprise2:
+            self.my_team.sponsor2 = new_sponsor
+
+        elif not self.my_team.enterprise3:
+            self.my_team.sponsor3 = new_sponsor
+
+        self.my_team.save()
+
+        return Response({
+            "success": True
+        })
+
+
+# 리그 순위 가져오기
+
+class LeagueRank(APIView):
+
+    def get(self, request):
+        if not request.user.is_authenticated:
+            return HttpResponseRedirect('/login')
+        lst = []
+
+        self.league = League.objects.get(user=request.user, state_finish=False)
+        self.my_team = MyTeam.objects.get(league=self.league)
+        my_team_data = dict()
+        my_team_data['name'] = self.my_team.name
+        my_team_data['win'] = self.league.win
+        my_team_data['lose'] = self.league.lose
+        lst.append(my_team_data)
+
+        league_teams = LeagueTeam.objects.filter(league=self.league)
+        for elem in league_teams:
+            temp = dict()
+            base_team = elem.base_team
+            temp['name'] = str(base_team)
+            temp['win'] = elem.win
+            temp['lose'] = elem.lose
+            lst.append(temp)
+
+        lst.sort(key=lambda x: (-x['win'], x['lose']))
+        return Response({"Data": lst})
+        # 역대 리그 성적 가져오기
+
+        # 새로운 리그 생성

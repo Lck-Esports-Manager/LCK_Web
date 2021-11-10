@@ -101,4 +101,12 @@ class MyTeamSerializer(serializers.ModelSerializer):
     class Meta:
         model = MyTeam
         fields = '__all__'
+
+
+class ScheduleSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Schedule
+        fields = '__all__'
+
+
 # class SimpleMyPlayerSerializer(serializers.ModelSerializer):
