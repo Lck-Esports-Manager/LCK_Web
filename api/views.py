@@ -240,6 +240,14 @@ class GetSchedules(APIView):
 
 
 class ProgressLeague(APIView):
+    def get_score(self, match):
+        if match.set_num == 1:
+            return [0, 0]
+        else:
+            if match.result == 1:
+                return [1, 0]
+            else:
+                return [0, 1]
 
     def post(self, request):
         if not request.user.is_authenticated:
@@ -279,7 +287,9 @@ class ProgressLeague(APIView):
                     if not match:
                         m = Match(team_num1=elem.team1,
                                   team_num2=elem.team2, league=league)
+
                         m.save()
+                        score = self.get_score(m)
 
                         if elem.team1 == 0:
                             op_team__ = LeagueTeam.objects.get(
@@ -352,6 +362,7 @@ class ProgressLeague(APIView):
                             "my_team": True,
                             "other_team": False,
                             "banpick": True,
+                            "score": score,
                             "my_team_data": my_team_data,
                             "op_team_data": op_team_data,
                             "set_num": 1,
@@ -362,6 +373,7 @@ class ProgressLeague(APIView):
 
                     else:
                         set_num = match.set_num
+                        score = self.get_score(match)
                         op_team_data = {}
                         if match.team_num1 != 0:
                             op_team__ = LeagueTeam.objects.get(
@@ -414,6 +426,7 @@ class ProgressLeague(APIView):
                                 "my_team": True,
                                 "other_team": False,
                                 "banpick": True,
+                                "score": score,
                                 "my_team_data": my_team_data,
                                 "op_team_data": op_team_data,
                                 "side": set.side,
@@ -429,6 +442,7 @@ class ProgressLeague(APIView):
                                 "my_team": True,
                                 "other_team": False,
                                 "banpick": False,
+                                "score": score,
                                 "my_team_data": my_team_data,
                                 "op_team_data": op_team_data,
                                 "data": set_data.data

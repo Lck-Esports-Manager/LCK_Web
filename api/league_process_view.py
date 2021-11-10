@@ -165,7 +165,6 @@ class ProcessSelection(APIView):
         # 유저가져옴
 
         # 리그 가져옴
-        self.league = League.objects.get(user=self.user, state_finish=False)
 
         # 리그에서 현재 day가져와서
         date = self.league.current_date
