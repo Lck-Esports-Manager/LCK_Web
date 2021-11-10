@@ -196,7 +196,7 @@ class MakeTeam(APIView):
 class GetSchedules(APIView):
 
     def get(self, request):
-        user = User.objects.get(username=request.user)
+        user = request.user
         league = League.objects.get(user=user, state_finish=False)
         season = league.season
 
