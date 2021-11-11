@@ -206,3 +206,17 @@ JWT_AUTH = {
     'JWT_ALLOW_REFRESH': False,
     'JWT_REFRESH_EXPIRATION_DELTA': datetime.timedelta(days=7),
 }
+
+
+
+def load_model_from_path(path):
+    model = load_model(path)
+    return model
+
+def load_all_models():
+    global gModelObjs # each object is a tuple of graph, model
+    gModelObjs = dict()
+
+    gModelObjs = {
+        'model_1': load_model_from_path('../machine/LCK.h5')
+    }

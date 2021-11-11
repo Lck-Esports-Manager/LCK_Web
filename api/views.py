@@ -1164,6 +1164,3 @@ class MachineLearningModel(APIView):
 
 
         return Response({"Data": lst}) #이 부분은 어떻게 해야 할 지 몰라서 안 건드렸음
-        # 역대 리그 성적 가져오기
-
-        # 새로운 리그 생성
