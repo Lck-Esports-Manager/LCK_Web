@@ -524,6 +524,7 @@ class ProcessSelection(APIView):
                     if self.set.op_tower1 != 0:
                         if self.set.op_tower1 <= 3:
                             self.set.op_tower1 = 0
+                            self.set.my_tower_destroy = self.set.my_tower_destroy+1
                             self.set.my_gold = self.set.my_gold+500
                             self.response.append(
                                 "{0} : {1}팀이 {2}팀 탑의 타워를 파괴하였습니다.".format(self.set.turn, self.my_team['side'], self.op_team['side']))
@@ -532,6 +533,7 @@ class ProcessSelection(APIView):
                     elif self.set.op_tower4 != 0:
                         if self.set.op_tower4 <= 3:
                             self.set.op_tower4 = 0
+                            self.set.my_tower_destroy = self.set.my_tower_destroy+1
                             self.set.my_gold = self.set.my_gold+500
                             self.response.append(
                                 "{0} : {1}팀이 {2}팀 탑의 타워를 파괴하였습니다.".format(self.set.turn, self.my_team['side'], self.op_team['side']))
@@ -540,6 +542,7 @@ class ProcessSelection(APIView):
                     else:
                         if self.set.op_tower7 <= 3:
                             self.set.op_tower7 = 0
+                            self.set.my_tower_destroy = self.set.my_tower_destroy+1
                             self.set.my_gold = self.set.my_gold+500
                             self.response.append(
                                 "{0} : {1}팀이 {2}팀 탑의 타워를 파괴하였습니다.".format(self.set.turn, self.my_team['side'], self.op_team['side']))
@@ -552,6 +555,7 @@ class ProcessSelection(APIView):
                     if self.set.my_tower1 != 0:
                         if self.set.my_tower1 <= 3:
                             self.set.my_tower1 = 0
+                            self.set.op_tower_destroy = self.set.op_tower_destroy+1
                             self.set.op_gold = self.set.op_gold+500
                             self.response.append(
                                 "{0} : {1}팀이 {2}팀 탑의 타워를 파괴하였습니다.".format(self.set.turn, self.my_team['side'], self.op_team['side']))
@@ -560,6 +564,7 @@ class ProcessSelection(APIView):
                     elif self.set.my_tower4 != 0:
                         if self.set.my_tower4 <= 3:
                             self.set.my_tower4 = 0
+                            self.set.op_tower_destroy = self.set.op_tower_destroy+1
                             self.set.op_gold = self.set.op_gold+500
                             self.response.append(
                                 "{0} : {1}팀이 {2}팀 탑의 타워를 파괴하였습니다.".format(self.set.turn, self.my_team['side'], self.op_team['side']))
@@ -568,6 +573,7 @@ class ProcessSelection(APIView):
                     else:
                         if self.set.my_tower7 <= 3:
                             self.set.my_tower7 = 0
+                            self.set.op_tower_destroy = self.set.op_tower_destroy+1
                             self.set.op_gold = self.set.op_gold+500
                             self.response.append(
                                 "{0} : {1}팀이 {2}팀 탑의 타워를 파괴하였습니다.".format(self.set.turn, self.my_team['side'], self.op_team['side']))
@@ -580,6 +586,7 @@ class ProcessSelection(APIView):
                     if self.set.op_tower2 != 0:
                         if self.set.op_tower2 <= 3:
                             self.set.op_tower2 = 0
+                            self.set.my_tower_destroy = self.set.my_tower_destroy+1
                             self.set.my_gold = self.set.my_gold+500
                             self.response.append(
                                 "{0} : {1}팀이 {2}팀 미드의 타워를 파괴하였습니다.".format(self.set.turn, self.my_team['side'], self.op_team['side']))
@@ -588,6 +595,7 @@ class ProcessSelection(APIView):
                     elif self.set.op_tower5 != 0:
                         if self.set.op_tower5 <= 3:
                             self.set.op_tower5 = 0
+                            self.set.my_tower_destroy = self.set.my_tower_destroy+1
                             self.set.my_gold = self.set.my_gold+500
                             self.response.append(
                                 "{0} : {1}팀이 {2}팀 미드의 타워를 파괴하였습니다.".format(self.set.turn, self.my_team['side'], self.op_team['side']))
@@ -596,6 +604,7 @@ class ProcessSelection(APIView):
                     else:
                         if self.set.op_tower8 <= 3:
                             self.set.op_tower8 = 0
+                            self.set.my_tower_destroy = self.set.my_tower_destroy+1
                             self.set.my_gold = self.set.my_gold+500
                             self.response.append(
                                 "{0} : {1}팀이 {2}팀 미드의 타워를 파괴하였습니다.".format(self.set.turn, self.my_team['side'], self.op_team['side']))
@@ -608,6 +617,7 @@ class ProcessSelection(APIView):
                     if self.set.my_tower2 != 0:
                         if self.set.my_tower2 <= 3:
                             self.set.my_tower2 = 0
+                            self.set.op_tower_destroy = self.set.op_tower_destroy+1
                             self.set.op_gold = self.set.op_gold+500
                             self.response.append(
                                 "{0} : {1}팀이 {2}팀 미드의 타워를 파괴하였습니다.".format(self.set.turn, self.my_team['side'], self.op_team['side']))
@@ -616,6 +626,7 @@ class ProcessSelection(APIView):
                     elif self.set.my_tower5 != 0:
                         if self.set.my_tower5 <= 3:
                             self.set.my_tower5 = 0
+                            self.set.op_tower_destroy = self.set.op_tower_destroy+1
                             self.set.op_gold = self.set.op_gold+500
                             self.response.append(
                                 "{0} : {1}팀이 {2}팀 미드의 타워를 파괴하였습니다.".format(self.set.turn, self.my_team['side'], self.op_team['side']))
@@ -624,6 +635,7 @@ class ProcessSelection(APIView):
                     else:
                         if self.set.my_tower8 <= 3:
                             self.set.my_tower8 = 0
+                            self.set.op_tower_destroy = self.set.op_tower_destroy+1
                             self.set.op_gold = self.set.op_gold+500
                             self.response.append(
                                 "{0} : {1}팀이 {2}팀 미드의 타워를 파괴하였습니다.".format(self.set.turn, self.my_team['side'], self.op_team['side']))
@@ -637,6 +649,7 @@ class ProcessSelection(APIView):
                     if self.set.op_tower3 != 0:
                         if self.set.op_tower3 <= 3:
                             self.set.op_tower3 = 0
+                            self.set.my_tower_destroy = self.set.my_tower_destroy+1
                             self.set.my_gold = self.set.my_gold+500
                             self.response.append(
                                 "{0} : {1}팀이 {2}팀 바텀의 타워를 파괴하였습니다.".format(self.set.turn, self.my_team['side'], self.op_team['side']))
@@ -645,6 +658,7 @@ class ProcessSelection(APIView):
                     elif self.set.op_tower6 != 0:
                         if self.set.op_tower6 <= 3:
                             self.set.op_tower6 = 0
+                            self.set.my_tower_destroy = self.set.my_tower_destroy+1
                             self.set.my_gold = self.set.my_gold+500
                             self.response.append(
                                 "{0} : {1}팀이 {2}팀 바텀의 타워를 파괴하였습니다.".format(self.set.turn, self.my_team['side'], self.op_team['side']))
@@ -653,6 +667,7 @@ class ProcessSelection(APIView):
                     else:
                         if self.set.op_tower9 <= 3:
                             self.set.op_tower9 = 0
+                            self.set.my_tower_destroy = self.set.my_tower_destroy+1
                             self.set.my_gold = self.set.my_gold+500
                             self.response.append(
                                 "{0} : {1}팀이 {2}팀 바텀의 타워를 파괴하였습니다.".format(self.set.turn, self.my_team['side'], self.op_team['side']))
@@ -665,6 +680,7 @@ class ProcessSelection(APIView):
                     if self.set.my_tower3 != 0:
                         if self.set.my_tower3 <= 3:
                             self.set.my_tower3 = 0
+                            self.set.op_tower_destroy = self.set.op_tower_destroy+1
                             self.set.op_gold = self.set.op_gold+500
                             self.response.append(
                                 "{0} : {1}팀이 {2}팀 바텀의 타워를 파괴하였습니다.".format(self.set.turn, self.my_team['side'], self.op_team['side']))
@@ -673,6 +689,7 @@ class ProcessSelection(APIView):
                     elif self.set.my_tower6 != 0:
                         if self.set.my_tower6 <= 3:
                             self.set.my_tower6 = 0
+                            self.set.op_tower_destroy = self.set.op_tower_destroy+1
                             self.set.op_gold = self.set.op_gold+500
                             self.response.append(
                                 "{0} : {1}팀이 {2}팀 바텀의 타워를 파괴하였습니다.".format(self.set.turn, self.my_team['side'], self.op_team['side']))
@@ -681,7 +698,9 @@ class ProcessSelection(APIView):
                     else:
                         if self.set.my_tower9 <= 3:
                             self.set.my_tower9 = 0
+                            self.set.op_tower_destroy = self.set.op_tower_destroy+1
                             self.set.op_gold = self.set.op_gold+500
+
                             self.response.append(
                                 "{0} : {1}팀이 {2}팀 바텀의 타워를 파괴하였습니다.".format(self.set.turn, self.my_team['side'], self.op_team['side']))
                         else:
@@ -696,6 +715,7 @@ class ProcessSelection(APIView):
                     else:
                         self.set.op_tower7 = 0
                     self.set.my_gold = self.set.my_gold+500
+                    self.set.my_tower_destroy = self.set.my_tower_destroy+1
                     self.response.append(
                         "{0} : {1}팀이 {2}팀 탑의 타워를 파괴합니다.".format(self.set.turn, self.my_team['side'], self.op_team['side']))
                 else:
@@ -706,6 +726,7 @@ class ProcessSelection(APIView):
                     else:
                         self.set.my_tower7 = 0
                     self.set.op_gold = self.set.op_gold+500
+                    self.set.op_tower_destroy = self.set.op_tower_destroy+1
                     self.response.append(
                         "{0} : {1}팀이 {2}팀 탑의 타워를 파괴합니다.".format(self.set.turn, self.op_team['side'], self.my_team['side']))
 
@@ -718,6 +739,7 @@ class ProcessSelection(APIView):
                     else:
                         self.set.op_tower8 = 0
                     self.set.my_gold = self.set.my_gold+500
+                    self.set.my_tower_destroy = self.set.my_tower_destroy+1
                     self.response.append(
                         "{0} : {1}팀이 {2}팀 탑의 타워를 파괴합니다.".format(self.set.turn, self.my_team['side'], self.op_team['side']))
                 else:
@@ -727,7 +749,9 @@ class ProcessSelection(APIView):
                         self.set.my_tower5 = 0
                     else:
                         self.set.my_tower8 = 0
+
                     self.set.op_gold = self.set.op_gold+500
+                    self.set.op_tower_destroy = self.set.op_tower_destroy+1
                     self.response.append(
                         "{0} : {1}팀이 {2}팀 탑의 타워를 파괴합니다.".format(self.set.turn, self.op_team['side'], self.my_team['side']))
 
@@ -740,6 +764,7 @@ class ProcessSelection(APIView):
                     else:
                         self.set.op_tower9 = 0
                     self.set.my_gold = self.set.my_gold+500
+                    self.set.my_tower_destroy = self.set.my_tower_destroy+1
                     self.response.append(
                         "{0} : {1}팀이 {2}팀 탑의 타워를 파괴합니다.".format(self.set.turn, self.my_team['side'], self.op_team['side']))
                 else:
@@ -750,6 +775,7 @@ class ProcessSelection(APIView):
                     else:
                         self.set.my_tower9 = 0
                     self.set.op_gold = self.set.op_gold+500
+                    self.set.op_tower_destroy = self.set.op_tower_destroy+1
                     self.response.append(
                         "{0} : {1}팀이 {2}팀 탑의 타워를 파괴합니다.".format(self.set.turn, self.op_team['side'], self.my_team['side']))
 
