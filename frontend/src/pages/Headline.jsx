@@ -18,8 +18,7 @@ export default function Headline() {
             console.log(response.data);
             alert(response.data.detail);
             window.localStorage.setItem('isLogin', 'false');
-            window.localStorage.removeItem('username');
-            window.localStorage.removeItem('password');
+            window.localStorage.removeItem('user');
             setRender(render + 1);
         }).catch((Error) => {
             console.log(Error.response);
@@ -53,13 +52,6 @@ export default function Headline() {
                         }
                     </li>
                 </ul>
-            </div>
-            <div className="top">
-                <div className="top-inner">
-                    <div className="title">
-                        LCK Esports Manager
-                    </div>
-                </div>
             </div>
         </header>
     );

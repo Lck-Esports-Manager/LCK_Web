@@ -1,9 +1,9 @@
 import React from 'react';
-// import Headline from "./Headline";
+import Maintitle from './Maintitle';
 
 export default function Team() {
     return (<>
-        {/* <Headline /> */}
+        <Maintitle />
         <div>팀관리 페이지</div>
     </>);
 }

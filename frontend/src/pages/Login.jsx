@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Link } from "react-router-dom";
 import './Login.css';
 import axios from 'axios';
+import Maintitle from './Maintitle';
 
 axios.defaults.withCredentials = true;
 
@@ -40,7 +41,7 @@ function Login() {
     }
     return (
         <div>
-            {/* <Headline /> */}
+            <Maintitle />
             <div className="login--main">
                 <div className="inner">
                     <div className="loginbox">

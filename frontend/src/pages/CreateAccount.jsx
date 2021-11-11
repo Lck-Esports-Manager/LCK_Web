@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import './CreateAccount.css';
-// import Headline from "./Headline";
+import Maintitle from './Maintitle';
 import axios from 'axios';
 
 function CreateAccount() {
@@ -39,7 +39,7 @@ function CreateAccount() {
         }
     }
     return (<div>
-        {/* <Headline /> */}
+        <Maintitle />
         <div className="CA--main">
             <div className="inner">
                 <div className="CAbox">

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import "./Banpick.css";
+import Maintitle from './Maintitle';
 
 export default function Banpick() {
     /* 해당 계정에 대한 정보 */
@@ -131,7 +132,7 @@ export default function Banpick() {
     const Pick = (cham) => {
         if (iTurn === -1)
             alert('시작하기를 눌러주세요.');
-        if (iTurn != -1 && isMyturn()) {
+        if (iTurn !== -1 && isMyturn()) {
             for (let i = 0; i < iTurn; i++) {
                 if (cham.id === chamList[i].id) {
                     alert('다른 챔피언으로 다시 선택해주십시오.');
@@ -139,7 +140,7 @@ export default function Banpick() {
                 }
             }
             console.log(cham);
-            if (cham.position != isPos(iTurn))
+            if (cham.position !== isPos(iTurn))
                 alert(`${isPos(iTurn)} 포지션의 챔피언을 선택해주세요.`);
             else {
                 setChamList({
@@ -243,6 +244,7 @@ export default function Banpick() {
 
     }
     return (<>
+        <Maintitle />
         <div className="BP--main">
             <div className="BP--inner">
                 <div className="BPbox">
@@ -255,7 +257,7 @@ export default function Banpick() {
                                 {bpSubTitle[iTurn]}
                             </div>
                             <div className="nextBtn" onClick={nextTurn}>
-                                {iTurn === -1 ? '시작하기' : iTurn != 20 ? '선택완료' : '완 료'}
+                                {iTurn === -1 ? '시작하기' : iTurn !== 20 ? '선택완료' : '완 료'}
                             </div>
                         </div>
                         <ul>
@@ -309,15 +311,15 @@ export default function Banpick() {
                             </li>
                             <li className="chams">
                                 <div className="btnbar">
-                                    {isPos(iTurn) != 'Top' ? <div className="position" onClick={() => { getList('top') }}>Top</div>
+                                    {isPos(iTurn) !== 'Top' ? <div className="position" onClick={() => { getList('top') }}>Top</div>
                                         : <div className="special" onClick={() => { getList('top') }}>Top</div>}
-                                    {isPos(iTurn) != 'Jungle' ? <div className="position" onClick={() => { getList('jungle') }}>Jungle</div>
+                                    {isPos(iTurn) !== 'Jungle' ? <div className="position" onClick={() => { getList('jungle') }}>Jungle</div>
                                         : <div className="special" onClick={() => { getList('jungle') }}>Jungle</div>}
-                                    {isPos(iTurn) != 'Middle' ? <div className="position" onClick={() => { getList('middle') }}>Middle</div>
+                                    {isPos(iTurn) !== 'Middle' ? <div className="position" onClick={() => { getList('middle') }}>Middle</div>
                                         : <div className="special" onClick={() => { getList('middle') }}>Middle</div>}
-                                    {isPos(iTurn) != 'Bottom' ? <div className="position" onClick={() => { getList('bottom') }}>ADC</div>
+                                    {isPos(iTurn) !== 'Bottom' ? <div className="position" onClick={() => { getList('bottom') }}>ADC</div>
                                         : <div className="special" onClick={() => { getList('bottom') }}>ADC</div>}
-                                    {isPos(iTurn) != 'Support' ? <div className="position" onClick={() => { getList('support') }}>Support</div>
+                                    {isPos(iTurn) !== 'Support' ? <div className="position" onClick={() => { getList('support') }}>Support</div>
                                         : <div className="special" onClick={() => { getList('support') }}>Support</div>}
                                 </div>
                                 <div className="list">

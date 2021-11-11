@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './League.css';
 import axios from 'axios';
+import Maintitle from './Maintitle';
 
 export default function League() {
     const [leagueState, setLeague] = useState({
@@ -28,12 +29,13 @@ export default function League() {
             document.location.href = `/maketeam`;
         else if (leagueState.my_team === false) // 경기가 없는 경우 -> 선수 개인스케줄
             document.location.href = `/personalschedule`;
-        else if (leagueState.banpick === false) // 밴픽이 없는 경우 -> 밴픽
+        else if (leagueState.banpick === true) // 밴픽이 없는 경우 -> 밴픽
             document.location.href = `/banpick`;
         else                                    // 다 준비 되어 있는 경우 -> 게임시작
             document.location.href = `/game`;
     }
     return (<>
+        <Maintitle />
         <div className="league--main">
             <div className="inner">
                 <div className="league--box">

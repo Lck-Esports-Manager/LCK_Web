@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './Player.css';
+import Maintitle from './Maintitle';
 /*import styled from 'styled-components';*/
 // import Headline from "./Headline";
 
@@ -37,6 +38,7 @@ export default function Player() {
         setPlayer(newList);
     }
     return (<>
+        <Maintitle />
         <div>
             <div className="player--main">
                 <div className="inner">

@@ -6,6 +6,7 @@ import slide3 from '../images/main-3.png';
 import slide4 from '../images/main-4.png';
 import slide5 from '../images/main-5.png';
 import './Home.css';
+import Maintitle from './Maintitle';
 
 let imgs = [slide1, slide2, slide3, slide4, slide5];
 
@@ -14,6 +15,18 @@ function Home() {
     const [state, setState] = useState({
         num: 0
     });
+    useEffect(() => {
+        const fetch = async () => {
+            try {
+                axios.get('http://localhost:8000/api/teaminfo/')
+                    .then((response) => {
+                        console.log(response);
+                        console.log(response.data);
+                    });
+            } catch (e) { console.log(e); }
+        };
+        fetch();
+    }, []);
     const [match, setMatch] = useState(null);
     useEffect(() => {
         axios.get('http://localhost:8000/api/getschedule/'
@@ -41,6 +54,7 @@ function Home() {
     }
     return (
         <div>
+            <Maintitle />
             <div className="home--top">
                 <div className="inner">
                     <div className="material-icons L" onClick={Lclick}>chevron_left</div>
@@ -63,7 +77,7 @@ function Home() {
                     <div className="match">
                         <h2>MATCH SCHEDULE</h2>
                         <div class="refresh" onClick={pageRefresh}>ㅤ</div>
-                        {JSON.parse(window.localStorage.getItem('user')).username ?
+                        {JSON.parse(window.localStorage.getItem('user')) ?
                             <div className="username">{JSON.parse(window.localStorage.getItem('user')).username}님의 스케줄</div>
                             : <div></div>}
                         <div className="schedule">

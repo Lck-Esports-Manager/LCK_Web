@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './MakeTeam.css';
-import Card from './Card'
+import Card from './Card';
+import Maintitle from './Maintitle';
 
 export default function MakeTeam() {
     let temp = 'asdf';
@@ -171,6 +172,7 @@ export default function MakeTeam() {
         }
     };
     return (<>
+        <Maintitle />
         <div>
             <div className="MT--main">
                 <div className="inner">

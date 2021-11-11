@@ -1,0 +1,31 @@
+.tower--main{
+    position:absolute;
+    width: 60px;
+    height: 90px;
+    display: flex;
+    flex-wrap: wrap;
+}
+.tower--main .hpbar{
+    background-color: rgb(170, 144, 77);
+    border-radius: 3px;
+    padding: 1px 1px 2px 1px;
+    width: 100px;
+    height: 20px;
+    display: flex;
+}
+.tower--main .hpbar .hp{
+    background-color: rgb(156, 35, 35);
+    width: 10px;
+    height: 20px;
+    border-radius: 3px;
+    margin: 1px;
+}
+.tower--main .tower{
+    background-image: url('../images/turret.png');
+    background-repeat: no-repeat;
+    background-size: contain;
+    margin: auto;
+    width: 45px;
+    height: 65px;
+}
+
