@@ -688,9 +688,13 @@ class MakeSelection(APIView):
     def nexus_destroy(self):
         turn = self.set.turn
         if turn % 2 == 1:
-            self.data["nexus_destroy"] = self.set.my_tower_destroy >= 9
+            logic = (self.set.my_tower7 == 0 and self.set.my_tower_destroy >= 6) or (self.set.my_tower8 ==
+                                                                                     0 and self.set.my_tower_destroy >= 6) or (self.set.my_tower9 == 0 and self.set.my_tower_destroy >= 6)
+            self.data["nexus_destroy"] = logic
         else:
-            self.data["nexus_destroy"] = self.set.op_tower_destroy >= 9
+            logic = (self.set.op_tower7 == 0 and self.set.op_tower_destroy >= 6) or (self.set.op_tower8 ==
+                                                                                     0 and self.set.op_tower_destroy >= 6) or (self.set.op_tower9 == 0 and self.set.op_tower_destroy >= 6)
+            self.data["nexus_destroy"] = logic
 
         return
 
@@ -1132,21 +1136,20 @@ class MakeNewLeague(APIView):
         return Response({"success": True})
 
 
-
 class MachineLearningModel(APIView):
-    def showMatchResult(self, dragons,barons,towers,model):
-        num=1
+    def showMatchResult(self, dragons, barons, towers, model):
+        num = 1
         x = np.array(dragons)
         y = np.array(barons)
         z = np.array(towers)
-        
-        if x.shape[0]!=1:
+
+        if x.shape[0] != 1:
             num = x.shape[0]
-        x = np.asarray(x).astype('int32').reshape((-1,1))
-        y = np.asarray(y).astype('int32').reshape((-1,1))
-        z = np.asarray(z).astype('int32').reshape((-1,1))
-    
-        preds = model.predict([x,y,z])
+        x = np.asarray(x).astype('int32').reshape((-1, 1))
+        y = np.asarray(y).astype('int32').reshape((-1, 1))
+        z = np.asarray(z).astype('int32').reshape((-1, 1))
+
+        preds = model.predict([x, y, z])
         preds = preds.reshape(num,)
         return preds
 
@@ -1154,13 +1157,11 @@ class MachineLearningModel(APIView):
         if not request.user.is_authenticated:
             return HttpResponseRedirect('/login')
 
-
-        dragons = request.data['dragons'] #or request.query_params.get('dragons', None)
+        # or request.query_params.get('dragons', None)
+        dragons = request.data['dragons']
         barons = request.data['barons']
         towers = request.data['towers']
 
-        preds = showMatchResult(dragons,barons,towers)
+        preds = showMatchResult(dragons, barons, towers)
 
-
-
-        return Response({"Data": lst}) #이 부분은 어떻게 해야 할 지 몰라서 안 건드렸음
+        return Response({"Data": lst})  # 이 부분은 어떻게 해야 할 지 몰라서 안 건드렸음
