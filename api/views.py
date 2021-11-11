@@ -1130,3 +1130,40 @@ class MakeNewLeague(APIView):
             league_team.save()
 
         return Response({"success": True})
+
+
+
+class MachineLearningModel(APIView):
+    def showMatchResult(self, dragons,barons,towers,model):
+        num=1
+        x = np.array(dragons)
+        y = np.array(barons)
+        z = np.array(towers)
+        
+        if x.shape[0]!=1:
+            num = x.shape[0]
+        x = np.asarray(x).astype('int32').reshape((-1,1))
+        y = np.asarray(y).astype('int32').reshape((-1,1))
+        z = np.asarray(z).astype('int32').reshape((-1,1))
+    
+        preds = model.predict([x,y,z])
+        preds = preds.reshape(num,)
+        return preds
+
+    def get(self, request):
+        if not request.user.is_authenticated:
+            return HttpResponseRedirect('/login')
+
+
+        dragons = request.data['dragons'] #or request.query_params.get('dragons', None)
+        barons = request.data['barons']
+        towers = request.data['towers']
+
+        preds = showMatchResult(dragons,barons,towers)
+
+
+
+        return Response({"Data": lst}) #이 부분은 어떻게 해야 할 지 몰라서 안 건드렸음
+        # 역대 리그 성적 가져오기
+
+        # 새로운 리그 생성
