@@ -213,12 +213,12 @@ class GetSchedules(APIView):
                 if schedule.team1 == -1:
                     continue
                 else:
-                    if schedule.team1 < 9:
+                    if schedule.team1 > 0:
                         elem["team1"] = LeagueTeam.objects.get(
                             league=league, team_num=schedule.team1).base_team.name
                     else:
                         elem["team1"] = MyTeam.objects.get(user=user).name
-                    if schedule.team2 < 9:
+                    if schedule.team2 > 0:
                         elem["team2"] = LeagueTeam.objects.get(
                             league=league, team_num=schedule.team2).base_team.name
                     else:
