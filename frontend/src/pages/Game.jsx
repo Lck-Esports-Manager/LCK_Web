@@ -215,6 +215,10 @@ export default function Game() {
             });
         return temp;
     }
+    const randomPick = () => {
+        let rannum = Math.floor(Math.random() * 20) + 1;
+
+    }
     useEffect(() => {
         const fetch = async () => {
             try {
@@ -537,7 +541,10 @@ export default function Game() {
                                         <SelectBtn text="탑 (1)" bool={select.ganking?.top[0]} argu={clicked[4]} func={() => { click(4) }} />
                                     </li>
                                     <li className='turn--info'>
-                                        <div className='turn'>TURN {info.data?.turn}</div>
+                                        {info.data?.turn % 2 === 1 ?
+                                            <div className='blue--turn'>TURN {info.data?.turn}</div>
+                                            : <div className='red--turn'>TURN {info.data?.turn}</div>
+                                        }
                                         <div className='action'>남은 행동력 {action}</div>
                                         <div className='complete' onClick={sendSelect}>진행</div>
                                     </li>
