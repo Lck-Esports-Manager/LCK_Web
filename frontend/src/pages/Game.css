@@ -185,6 +185,28 @@
     height: 730px;
     z-index: 2;
 }
+.game .inner .gamebox .contents .main .something .baron{
+    z-index: 3;
+    width: 75px;
+    height: 100px;
+    position: absolute;
+    top: 150px;
+    left: 470px;
+    background-image: url('../images/baron.png');
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+.game .inner .gamebox .contents .main .something .dragon{
+    z-index: 3;
+    width: 110px;
+    height: 110px;
+    position: absolute;
+    top: 440px;
+    left: 700px;
+    background-image: url('../images/dragon.png');
+    background-repeat: no-repeat;
+    background-size: contain;
+}
 .game .inner .gamebox .contents .main .head{
     z-index: 2;
     display: flex;
@@ -207,23 +229,27 @@
     padding: 5px;
     border:4px solid;
     margin-right: 0;
+    margin: 0 0 0 500px;
 }
 .game .inner .gamebox .contents .main .head .time{
-    font-size: 30px;
+    font-size: 50px;
     z-index: 3;
     color: rgb(202, 122, 51);
-    overflow: hidden;
     margin: 0 150px 0 160px;
     text-shadow: 2px 2px 2px black;
-}
-.game .inner .gamebox .contents .main .head .time .back{
+    position: absolute;
+    top: -35px;
+    left: 365px;
     background-image: url('../images/time.png');
     background-repeat: no-repeat;
     background-size: contain;
-    width: 180px;
-    height: 60px;
+}
+.game .inner .gamebox .contents .main .head .time .back{
+    width: 230px;
+    height: 80px;
     transform: translate(100,100);
     padding: 15px 0 0;
+    overflow: hidden;
 }
 
 .game .inner .gamebox .contents .main .map{

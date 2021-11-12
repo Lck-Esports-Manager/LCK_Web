@@ -147,10 +147,10 @@ export default function Game() {
         sec: 0
     });
     const [info, setInfo] = useState({
-        score: {
-            0: 0,
-            1: 0
-        },
+        score: [
+            0,
+            1
+        ],
         data: {
             id: 54,
             side: 0,
@@ -216,8 +216,9 @@ export default function Game() {
         return temp;
     }
     const randomPick = () => {
+        let sumAct = 0;
         let rannum = Math.floor(Math.random() * 20) + 1;
-
+        sumAct = calcAct(rannum);
     }
     useEffect(() => {
         const fetch = async () => {
@@ -328,11 +329,10 @@ export default function Game() {
                 console.log(response.data);
                 setPop(true);
                 setPopup(response.data.message);
+                if (buffer[0] === 20) {
+                    document.location.href = '/';
+                }
             });
-            if (buffer[0] === 20) {
-                alert('게임이 종료되었습니다.');
-                document.location.href = '/';
-            }
             // 선택 초기화
             setClick({
                 1: false,
@@ -435,9 +435,9 @@ export default function Game() {
                                             <li>처치한 타워수 : {info.data?.my_tower_destroy}</li>
                                         </ul>
                                     </div>
-                                    <div className="time">
-                                        <div className="back">{0} : {0}</div>
-                                    </div>
+                                    {/* <div className="time">
+                                        <div className="back">{() => { return info?.score[0] }} : {() => { return info?.score[1] }}</div>
+                                    </div> */}
                                     <div className="redstatus">
                                         <ul>
                                             <li>글로벌 골드량 : {info.data?.op_gold}</li>
@@ -447,6 +447,8 @@ export default function Game() {
                                         </ul>
                                     </div>
                                 </div>
+                                {select.fight?.baron[0] ? <div className='baron'>ㅤ</div> : <></>}
+                                {select.fight?.dragon[0] || select.fight?.elder[0] ? <div className='dragon'>ㅤ</div> : <></>}
                                 <div className="my1"><Tower color={0} num={info.data?.my_tower1} /></div>
                                 <div className="my2"><Tower color={0} num={info.data?.my_tower2} /></div>
                                 <div className="my3"><Tower color={0} num={info.data?.my_tower3} /></div>
