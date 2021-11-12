@@ -18,7 +18,7 @@
 }
 .login--main{
     background-color: #c1c1c1;
-    height: 750px;
+    height: 820px;
     position: relative;
 }
 .login--main .inner{
@@ -99,7 +99,7 @@
     padding: 5px;
     border-radius: 5px;
     margin: 7px;
-    width: 300px;
+    width: 350px;
     transition: 0.2s;
 }
 .login--main .inner .loginbox .btnbox input:hover{

@@ -11,6 +11,7 @@ import Maintitle from './Maintitle';
 let imgs = [slide1, slide2, slide3, slide4, slide5];
 
 function Home() {
+    const [have, setHave] = useState(true);
     const [refresh, setRefresh] = useState(0);
     const [state, setState] = useState({
         num: 0
@@ -32,11 +33,13 @@ function Home() {
         axios.get('http://localhost:8000/api/getschedule/'
         ).then((response) => {
             console.log(response.data.schedule);
+            setHave(true);
             setMatch(response.data);
             console.log(match);
         }).catch((Error) => {
             console.log(Error);
             console.log(Error.response);
+            setHave(false);
         });
     }, [refresh]);
     const Lclick = () => {
@@ -88,13 +91,14 @@ function Home() {
                                         <li>BLUE TEAM</li>
                                         <li>RED TEAM</li>
                                     </ul>
-                                    {match && match.schedule.map((data) => (
+                                    {have ? match && match.schedule.map((data) => (
                                         <ul className="data">
                                             <li className="date">{data.date}</li>
                                             <li>{data.team1}</li>
                                             <li>{data.team2}</li>
                                         </ul>
-                                    ))}
+                                    )) : <div className="no--team">새로고침으로 불러올수 있습니다.</div>
+                                    }
                                 </div>
                                 : <div className="match--contents">로그인후 이용 가능합니다.</div>}
                         </div>

@@ -151,9 +151,6 @@ export default function Banpick() {
             //console.log(cham);
             //console.log(chamList);
         }
-        else {
-            alert('상대방 차례입니다. NEXT를 눌러 진행해주세요.');
-        }
     }
     /* 선택된 챔피언들을 출력하는 함수 */
     const printList = (i) => {
@@ -226,6 +223,8 @@ export default function Banpick() {
                         });
                     })
             })
+        axios.post('http://localhost:8000/api/progressleague/')
+            .then((response) => { setApi(response.data); })
         while (temp) {
             temp = 0;
             for (let i = 0; i < iTurn; i++) {
@@ -241,7 +240,6 @@ export default function Banpick() {
             [iTurn]: ranList[randT][randC],
         })
         setTurn(iTurn + 1);
-
     }
     return (<>
         <Maintitle />
@@ -264,30 +262,30 @@ export default function Banpick() {
                             <li className="ban">
                                 <div className="blue--pick">
                                     <ul className="cardbar">
-                                        <div className="top">Top</div>
+                                        {/* <div className="top">Top</div> */}
                                         <li className="card"><div className="cham">{printList(1)}</div> </li>
-                                        <div className="jng">Jungle</div>
+                                        {/* <div className="jng">Jungle</div> */}
                                         <li className="card"><div className="cham">{printList(3)}</div> </li>
-                                        <div className="mid">Middle</div>
+                                        {/* <div className="mid">Middle</div> */}
                                         <li className="card"><div className="cham">{printList(5)}</div> </li>
-                                        <div className="adc">ADC</div>
+                                        {/* <div className="adc">ADC</div> */}
                                         <li className="card"><div className="cham">{printList(13)}</div> </li>
-                                        <div className="spt">Support</div>
+                                        {/* <div className="spt">Support</div> */}
                                         <li className="card"><div className="cham">{printList(15)}</div> </li>
                                     </ul>
                                 </div>
                                 <div className="blue--pick">
                                     {/* <div className="title">BAN</div> */}
                                     <ul className="cardbar">
-                                        <div className="top">Top</div>
+                                        {/* <div className="top">Top</div> */}
                                         <li className="card"><div className="cham">{printList(0)}</div> </li>
-                                        <div className="jng">Jungle</div>
+                                        {/* <div className="jng">Jungle</div> */}
                                         <li className="card"><div className="cham">{printList(2)}</div> </li>
-                                        <div className="mid">Middle</div>
+                                        {/* <div className="mid">Middle</div> */}
                                         <li className="card"><div className="cham">{printList(4)}</div> </li>
-                                        <div className="adc">ADC</div>
+                                        {/* <div className="adc">ADC</div> */}
                                         <li className="card"><div className="cham">{printList(12)}</div> </li>
-                                        <div className="spt">Support</div>
+                                        {/* <div className="spt">Support</div> */}
                                         <li className="card"><div className="cham">{printList(14)}</div> </li>
                                     </ul>
                                 </div>
