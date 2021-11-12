@@ -666,6 +666,8 @@ class MakeSelection(APIView):
             self.data["tower_destroy"]["bot"][0] = (self.set.op_tower3 > 0) or (
                 self.set.op_tower6 > 0) or (self.set.op_tower9 > 0)
 
+            print(self.data["tower_destroy"]["bot"][0])
+
             if self.set.is_baron == 1:
                 self.data["tower_destroy"]["top"][1] = 1
                 self.data["tower_destroy"]["mid"][1] = 1
@@ -718,6 +720,7 @@ class MakeSelection(APIView):
         self.engage()
         self.fight()
         self.tower_press()
+        self.tower_destroy()
         self.nexus_destroy()
         return Response(self.data)
 
