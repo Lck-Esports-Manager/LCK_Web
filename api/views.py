@@ -690,12 +690,12 @@ class MakeSelection(APIView):
     def nexus_destroy(self):
         turn = self.set.turn
         if turn % 2 == 1:
-            logic = (self.set.my_tower7 == 0 and self.set.my_tower_destroy >= 6) or (self.set.my_tower8 ==
-                                                                                     0 and self.set.my_tower_destroy >= 6) or (self.set.my_tower9 == 0 and self.set.my_tower_destroy >= 6)
+            logic = (self.set.op_tower7 == 0 and self.set.my_tower_destroy >= 6) or (self.set.op_tower8 ==
+                                                                                     0 and self.set.my_tower_destroy >= 6) or (self.set.op_tower9 == 0 and self.set.my_tower_destroy >= 6)
             self.data["nexus_destroy"] = logic
         else:
-            logic = (self.set.op_tower7 == 0 and self.set.op_tower_destroy >= 6) or (self.set.op_tower8 ==
-                                                                                     0 and self.set.op_tower_destroy >= 6) or (self.set.op_tower9 == 0 and self.set.op_tower_destroy >= 6)
+            logic = (self.set.my_tower7 == 0 and self.set.op_tower_destroy >= 6) or (self.set.my_tower8 ==
+                                                                                     0 and self.set.op_tower_destroy >= 6) or (self.set.my_tower9 == 0 and self.set.op_tower_destroy >= 6)
             self.data["nexus_destroy"] = logic
 
         return
