@@ -262,8 +262,18 @@
     margin: 10px;
     border-radius: 8px;
 }
-.game .inner .gamebox .contents .main .choice .turn--info .turn{
-    background-color: saddlebrown;
+.game .inner .gamebox .contents .main .choice .turn--info .blue--turn{
+    background-color: rgb(100, 100, 255);
+    width: 150px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 700;
+    padding: 8px;
+    margin: auto;
+    font-size: 30px;
+    border-radius: 10px;
+}
+.game .inner .gamebox .contents .main .choice .turn--info .red--turn{
+    background-color: rgb(253, 120, 120);
     width: 150px;
     font-family: Arial, Helvetica, sans-serif;
     font-weight: 700;
