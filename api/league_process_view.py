@@ -777,7 +777,7 @@ class ProcessSelection(APIView):
                     self.set.op_gold = self.set.op_gold+500
                     self.set.op_tower_destroy = self.set.op_tower_destroy+1
                     self.response.append(
-                        "{0} : {1}팀이 {2}팀 바텀의 타워를 파괴합니다.".format(self.set.turn, self.op_team['side'], self.my_team['side']))
+                        "{0} : {1}팀이 {2}팀 바텀c의 타워를 파괴합니다.".format(self.set.turn, self.op_team['side'], self.my_team['side']))
 
             else:
                 if self.set.turn % 2 == 1:

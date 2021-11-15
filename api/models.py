@@ -17,6 +17,7 @@ class Champion(models.Model):
     name = models.CharField(max_length=30)
     grade = models.IntegerField(default=0)
     position = models.CharField(max_length=30)
+    image_url = models.CharField(max_length=100, null=True)
 
     def __str__(self):
         return self.name+' ' + self.position
