@@ -83,50 +83,50 @@ class ProcessSelection(APIView):
             team=self.op_team['team'], position='Top')[0]
         self.op_team['top'].append(
             op_top.status1+(6-self.set.op_top.grade)*10)
-        self.op_team['top'].append(
-            op_top.status2+(6-self.set.op_top.grade)*10)
-        self.op_team['top'].append(
-            op_top.status3+(6-self.set.op_top.grade)*10)
+        self.op_team['top'].append((
+            op_top.status2+(6-self.set.op_top.grade)*10)*1.05)
+        self.op_team['top'].append((
+            op_top.status3+(6-self.set.op_top.grade)*10)*1.05)
 
         self.op_team['jng'] = []
         op_jng = Player.objects.filter(
             team=self.op_team['team'], position='Jungle')[0]
         self.op_team['jng'].append(
             op_jng.status1+(6-self.set.op_jng.grade)*10)
-        self.op_team['jng'].append(
-            op_jng.status2+(6-self.set.op_jng.grade)*10)
-        self.op_team['jng'].append(
-            op_jng.status3+(6-self.set.op_jng.grade)*10)
+        self.op_team['jng'].append((
+            op_jng.status2+(6-self.set.op_jng.grade)*10)*1.05)
+        self.op_team['jng'].append((
+            op_jng.status3+(6-self.set.op_jng.grade)*10)*1.05)
 
         self.op_team['mid'] = []
         op_mid = Player.objects.filter(
             team=self.op_team['team'], position='Middle')[0]
         self.op_team['mid'].append(
             op_mid.status1+(6-self.set.op_mid.grade)*10)
-        self.op_team['mid'].append(
-            op_mid.status2+(6-self.set.op_mid.grade)*10)
-        self.op_team['mid'].append(
-            op_mid.status3+(6-self.set.op_mid.grade)*10)
+        self.op_team['mid'].append((
+            op_mid.status2+(6-self.set.op_mid.grade)*10)*1.05)
+        self.op_team['mid'].append((
+            op_mid.status3+(6-self.set.op_mid.grade)*10)*1.05)
 
         self.op_team['adc'] = []
         op_adc = Player.objects.filter(
             team=self.op_team['team'], position='ADC')[0]
         self.op_team['adc'].append(
             op_adc.status1+(6-self.set.op_adc.grade)*10)
-        self.op_team['adc'].append(
-            op_adc.status2+(6-self.set.op_adc.grade)*10)
-        self.op_team['adc'].append(
-            op_adc.status3+(6-self.set.op_adc.grade)*10)
+        self.op_team['adc'].append((
+            op_adc.status2+(6-self.set.op_adc.grade)*10)*1.05)
+        self.op_team['adc'].append((
+            op_adc.status3+(6-self.set.op_adc.grade)*10)*1.05)
 
         self.op_team['sup'] = []
         op_sup = Player.objects.filter(
             team=self.op_team['team'], position='Support')[0]
         self.op_team['sup'].append(
             op_sup.status1+(6-self.set.op_sup.grade)*10)
-        self.op_team['sup'].append(
-            op_sup.status2+(6-self.set.op_sup.grade)*10)
-        self.op_team['sup'].append(
-            op_sup.status3+(6-self.set.op_sup.grade)*10)
+        self.op_team['sup'].append((
+            op_sup.status2+(6-self.set.op_sup.grade)*10)*1.05)
+        self.op_team['sup'].append((
+            op_sup.status3+(6-self.set.op_sup.grade)*10)*1.05)
 
         self.my_fight_score = self.my_team['top'][2]+self.my_team['jng'][2] + \
             self.my_team['mid'][2]+self.my_team['adc'][2] + \
@@ -296,8 +296,8 @@ class ProcessSelection(APIView):
                 op = self.op_team['top'][1]+self.op_team['jng'][1]
                 if self.set.turn % 2 == 1:
 
-                    rate = (mine/(mine+op))*0.4+(
-                        self.set.my_gold/(self.set.my_gold+self.set.op_gold))*0.6
+                    rate = (mine/(mine+op))*0.7+(
+                        self.set.my_gold/(self.set.my_gold+self.set.op_gold))*0.3
                     rand_n = random.random()
                     if rand_n < rate:
                         self.set.my_gold = self.set.my_gold+800
@@ -309,8 +309,8 @@ class ProcessSelection(APIView):
                             "{0} : {1}팀 탑에서의 교전이 패배하여를 상대팀이 800골드를 추가로 얻습니다.".format(self.set.turn, self.my_team['side']))
 
                 else:
-                    rate = (op/(mine+op))*0.4+(
-                        self.set.op_gold/(self.set.my_gold+self.set.op_gold))*0.6
+                    rate = (op/(mine+op))*0.8+(
+                        self.set.op_gold/(self.set.my_gold+self.set.op_gold))*0.2
                     rand_n = random.random()
                     if rand_n < rate:
                         self.set.op_gold = self.set.op_gold+800
@@ -325,8 +325,8 @@ class ProcessSelection(APIView):
                 mine = self.my_team['mid'][1]+self.my_team['jng'][1]
                 op = self.op_team['mid'][1]+self.op_team['jng'][1]
                 if self.set.turn % 2 == 1:
-                    rate = (mine/(mine+op))*0.4*0.4+(
-                        self.set.my_gold/(self.set.my_gold+self.set.op_gold))*0.6
+                    rate = (mine/(mine+op))*0.7+(
+                        self.set.my_gold/(self.set.my_gold+self.set.op_gold))*0.3
                     rand_n = random.random()
                     if rand_n < rate:
                         self.set.my_gold = self.set.my_gold+800
@@ -338,8 +338,8 @@ class ProcessSelection(APIView):
                             "{0} : {1}팀 미드에서의 교전이 패배하여를 상대팀이 800골드를 추가로 얻습니다.".format(self.set.turn, self.my_team['side']))
 
                 else:
-                    rate = (op/(mine+op))*0.4+(
-                        self.set.op_gold/(self.set.my_gold+self.set.op_gold))*0.6
+                    rate = (op/(mine+op))*0.8+(
+                        self.set.op_gold/(self.set.my_gold+self.set.op_gold))*0.2
                     rand_n = random.random()
                     if rand_n < rate:
                         self.set.op_gold = self.set.op_gold+800
@@ -356,8 +356,8 @@ class ProcessSelection(APIView):
                 op = self.op_team['adc'][1] + \
                     self.op_team['sup'][1]+self.op_team['jng'][1]
                 if self.set.turn % 2 == 1:
-                    rate = (mine/(mine+op))*0.4+(
-                        self.set.my_gold/(self.set.my_gold+self.set.op_gold))*0.6
+                    rate = (mine/(mine+op))*0.7+(
+                        self.set.my_gold/(self.set.my_gold+self.set.op_gold))*0.3
                     rand_n = random.random()
                     if rand_n < rate:
                         self.set.my_gold = self.set.my_gold+800
@@ -369,8 +369,8 @@ class ProcessSelection(APIView):
                             "{0} : {1}팀 바텀에서의 교전이 패배하여를 상대팀이 800골드를 추가로 얻습니다.".format(self.set.turn, self.my_team['side']))
 
                 else:
-                    rate = (op/(mine+op))*0.4+(
-                        self.set.op_gold/(self.set.my_gold+self.set.op_gold))*0.6
+                    rate = (op/(mine+op))*0.8+(
+                        self.set.op_gold/(self.set.my_gold+self.set.op_gold))*0.2
                     rand_n = random.random()
                     if rand_n < rate:
                         self.set.op_gold = self.set.op_gold+800
@@ -383,9 +383,9 @@ class ProcessSelection(APIView):
 
             elif elem == 10:
                 if self.set.turn % 2 == 1:
-                    rate = self.my_fight_score/(self.my_fight_score+self.op_fight_score)*0.4 + \
+                    rate = self.my_fight_score/(self.my_fight_score+self.op_fight_score)*0.6 + \
                         self.set.my_gold/(self.set.my_gold +
-                                          self.set.op_gold)*0.6
+                                          self.set.op_gold)*0.4
                     rand_n = random.random()
                     if rand_n < rate:
                         self.set.my_gold = self.set.my_gold+1000
@@ -398,9 +398,9 @@ class ProcessSelection(APIView):
                         self.response.append(
                             "{0} : {1}팀이 한타를 패배하여 상대팀이 드래곤을 획득하고 1000골드를 추가로 얻습니다.".format(self.set.turn, self.my_team['side']))
                 else:
-                    rate = self.op_fight_score/(self.my_fight_score+self.op_fight_score)*0.4 + \
+                    rate = self.op_fight_score/(self.my_fight_score+self.op_fight_score)*0.6 + \
                         self.set.op_gold/(self.set.my_gold +
-                                          self.set.op_gold)*0.6
+                                          self.set.op_gold)*0.4
                     rand_n = random.random()
                     if rand_n < rate:
                         self.set.op_gold = self.set.op_gold+1000
@@ -415,9 +415,9 @@ class ProcessSelection(APIView):
 
             elif elem == 11:
                 if self.set.turn % 2 == 1:
-                    rate = self.my_fight_score/(self.my_fight_score+self.op_fight_score)*0.4 + \
+                    rate = self.my_fight_score/(self.my_fight_score+self.op_fight_score)*0.6 + \
                         self.set.my_gold/(self.set.my_gold +
-                                          self.set.op_gold)*0.6
+                                          self.set.op_gold)*0.4
                     rand_n = random.random()
                     if rand_n < rate:
                         self.set.my_gold = self.set.my_gold+1000
@@ -432,9 +432,9 @@ class ProcessSelection(APIView):
                         self.response.append(
                             "{0} : {1}팀이 한타를 패배하여 상대팀이 장로드래곤을 획득하고 1000골드를 추가로 얻습니다.".format(self.set.turn, self.my_team['side']))
                 else:
-                    rate = self.op_fight_score/(self.my_fight_score+self.op_fight_score)*0.4 + \
+                    rate = self.op_fight_score/(self.my_fight_score+self.op_fight_score)*0.6 + \
                         self.set.op_gold/(self.set.my_gold +
-                                          self.set.op_gold)*0.6
+                                          self.set.op_gold)*0.4
                     rand_n = random.random()
                     if rand_n < rate:
                         self.set.op_gold = self.set.op_gold+1000
@@ -451,9 +451,9 @@ class ProcessSelection(APIView):
 
             elif elem == 12:
                 if self.set.turn % 2 == 1:
-                    rate = self.my_fight_score/(self.my_fight_score+self.op_fight_score)*0.4 + \
+                    rate = self.my_fight_score/(self.my_fight_score+self.op_fight_score)*0.6 + \
                         self.set.my_gold/(self.set.my_gold +
-                                          self.set.op_gold)*0.6
+                                          self.set.op_gold)*0.4
                     rand_n = random.random()
                     if rand_n < rate:
                         self.set.my_gold = self.set.my_gold+2000
@@ -468,9 +468,9 @@ class ProcessSelection(APIView):
                         self.response.append(
                             "{0} : {1}팀이 한타를 패배하여 상대팀이 바론을 획득하고 2000골드를 추가로 얻습니다.".format(self.set.turn, self.my_team['side']))
                 else:
-                    rate = self.op_fight_score/(self.my_fight_score+self.op_fight_score)*0.4 + \
+                    rate = self.op_fight_score/(self.my_fight_score+self.op_fight_score)*0.6 + \
                         self.set.op_gold/(self.set.my_gold +
-                                          self.set.op_gold)*0.6
+                                          self.set.op_gold)*0.4
                     rand_n = random.random()
                     if rand_n < rate:
                         self.set.op_gold = self.set.op_gold+2000
@@ -487,9 +487,9 @@ class ProcessSelection(APIView):
 
             elif elem == 13:
                 if self.set.turn % 2 == 1:
-                    rate = self.my_fight_score/(self.my_fight_score+self.op_fight_score)*0.4 + \
+                    rate = self.my_fight_score/(self.my_fight_score+self.op_fight_score)*0.6 + \
                         self.set.my_gold/(self.set.my_gold +
-                                          self.set.op_gold)*0.6
+                                          self.set.op_gold)*0.4
                     rand_n = random.random()
                     if rand_n < rate:
                         self.set.my_gold = self.set.my_gold+1000
@@ -502,9 +502,9 @@ class ProcessSelection(APIView):
                         self.response.append(
                             "{0} : {1}팀이 한타를 패배하여 상대팀이 1000골드를 추가로 얻습니다.".format(self.set.turn, self.my_team['side']))
                 else:
-                    rate = self.op_fight_score/(self.my_fight_score+self.op_fight_score)*0.4 + \
+                    rate = self.op_fight_score/(self.my_fight_score+self.op_fight_score)*0.6 + \
                         self.set.op_gold/(self.set.my_gold +
-                                          self.set.op_gold)*0.6
+                                          self.set.op_gold)*0.4
                     rand_n = random.random()
                     if rand_n < rate:
                         self.set.op_gold = self.set.op_gold+1000

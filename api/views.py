@@ -223,10 +223,9 @@ class GetSchedules(APIView):
                             league=league, team_num=schedule.team2).base_team.name
                     else:
                         elem["team2"] = MyTeam.objects.get(user=user).name
-                    if season == 'spring':
-                        elem["date"] = schedule.spring
-                    else:
-                        elem["date"] = schedule.summer
+
+                    elem["date"] = "Day "+str(schedule.day)
+
                     return_data.append(elem)
                     count += 1
             i += 1
@@ -575,15 +574,15 @@ class MakeSelection(APIView):
         op_sup_champ = self.set.op_sup
         my_top_grade = my_top.status1 * \
             (1+0.1*my_top.feeling)+(6-my_top_champ.grade)*10
-        op_top_grade = op_top.status1 + (6-op_top_champ.grade)*10
+        op_top_grade = (op_top.status1 + (6-op_top_champ.grade)*10)*1.05
         my_mid_grade = my_mid.status1 * \
             (1+0.1*my_mid.feeling)+(6-my_mid_champ.grade)*10
-        op_mid_grade = op_mid.status1+(6-op_mid_champ.grade)*10
+        op_mid_grade = (op_mid.status1+(6-op_mid_champ.grade)*10)*1.05
         my_bot_grade = my_adc.status1*(1+0.1*my_adc.feeling) + \
             (6-my_adc_champ.grade)*10+my_sup.status1 * \
             (1+0.1*my_sup.feeling)+(6-my_sup_champ.grade)*10
-        op_bot_grade = op_adc.status1 + \
-            (6-op_adc_champ.grade)*10+op_sup.status1+(6-op_sup_champ.grade)*10
+        op_bot_grade = (op_adc.status1 +
+                        (6-op_adc_champ.grade)*10+op_sup.status1+(6-op_sup_champ.grade)*10)*1.05
 
         if turn % 2 == 1:
             self.data["lane_press"]["top"][0] = (my_top_grade > op_top_grade)
@@ -614,11 +613,14 @@ class MakeSelection(APIView):
         turn = self.set.turn
         if self.set.turn < 5:
             return 0
-        self.data["fight"]["dragon"][0] = (turn % 2 == 1)
+        if (turn % 2 == 1) and not (self.set.my_dragon >= 4 or self.set.op_dragon >= 4):
+            self.data["fight"]["dragon"][0] = True
+        else:
+            self.data["fight"]["dragon"][0] = False
         self.data["fight"]["baron"][0] = (turn % 2 == 1) and (turn > 8)
         self.data["fight"]["elder"][0] = (turn % 2 == 1) and (
             self.set.my_dragon >= 4 or self.set.op_dragon >= 4)
-        self.data["fight"]["normal"][0] = (turn % 2 == 0)
+        self.data["fight"]["normal"][0] = False
 
         return 0
 
@@ -690,13 +692,15 @@ class MakeSelection(APIView):
     def nexus_destroy(self):
         turn = self.set.turn
         if turn % 2 == 1:
-            logic = (self.set.op_tower7 == 0 and self.set.my_tower_destroy >= 6) or (self.set.op_tower8 ==
-                                                                                     0 and self.set.my_tower_destroy >= 6) or (self.set.op_tower9 == 0 and self.set.my_tower_destroy >= 6)
-            self.data["nexus_destroy"] = logic
+            logic1 = (self.set.op_tower7 == 0 and self.set.my_tower_destroy >= 6) or (self.set.op_tower8 ==
+                                                                                      0 and self.set.my_tower_destroy >= 6) or (self.set.op_tower9 == 0 and self.set.my_tower_destroy >= 6)
+            logic2 = self.set.my_gold-self.set.op_gold > 3000
+            self.data["nexus_destroy"] = logic1 and logic2
         else:
-            logic = (self.set.my_tower7 == 0 and self.set.op_tower_destroy >= 6) or (self.set.my_tower8 ==
-                                                                                     0 and self.set.op_tower_destroy >= 6) or (self.set.my_tower9 == 0 and self.set.op_tower_destroy >= 6)
-            self.data["nexus_destroy"] = logic
+            logic1 = (self.set.my_tower7 == 0 and self.set.op_tower_destroy >= 6) or (self.set.my_tower8 ==
+                                                                                      0 and self.set.op_tower_destroy >= 6) or (self.set.my_tower9 == 0 and self.set.op_tower_destroy >= 6)
+            logic2 = self.set.op_gold-self.set.my_gold > 3000
+            self.data["nexus_destroy"] = logic1 and logic2
 
         return
 
@@ -707,7 +711,7 @@ class MakeSelection(APIView):
         self.data = {"lane_press": {"top": [False, 1, 1], "mid": [False, 1, 2], "bot": [False, 1, 3]},
                      "ganking": {"top": [False, 1, 4], "mid": [False, 1, 5], "bot": [False, 1, 6]},
                      "engage": {"top": [False, 2, 7], "mid": [False, 2, 8], "bot": [False, 2, 9]},
-                     "fight": {"dragon": [False, 3, 10], "elder": [False, 3, 11], "baron": [False, 3, 12], "normal": [False, 3, 13]},
+                     "fight": {"dragon": [False, 0, 10], "elder": [False, 0, 11], "baron": [False, 0, 12], "normal": [False, 0, 13]},
                      "tower_press": {"top": [False, 1, 14], "mid": [False, 1, 15], "bot": [False, 1, 16]},
                      "tower_destroy": {"top": [False, 2, 17], "mid": [False, 2, 18], "bot": [False, 2, 19]},
                      "nexus_destroy": [False, 3, 20]}
@@ -1137,34 +1141,3 @@ class MakeNewLeague(APIView):
             league_team.save()
 
         return Response({"success": True})
-
-
-class MachineLearningModel(APIView):
-    def showMatchResult(self, dragons, barons, towers, model):
-        num = 1
-        x = np.array(dragons)
-        y = np.array(barons)
-        z = np.array(towers)
-
-        if x.shape[0] != 1:
-            num = x.shape[0]
-        x = np.asarray(x).astype('int32').reshape((-1, 1))
-        y = np.asarray(y).astype('int32').reshape((-1, 1))
-        z = np.asarray(z).astype('int32').reshape((-1, 1))
-
-        preds = model.predict([x, y, z])
-        preds = preds.reshape(num,)
-        return preds
-
-    def get(self, request):
-        if not request.user.is_authenticated:
-            return HttpResponseRedirect('/login')
-
-        # or request.query_params.get('dragons', None)
-        dragons = request.data['dragons']
-        barons = request.data['barons']
-        towers = request.data['towers']
-
-        preds = showMatchResult(dragons, barons, towers)
-
-        return Response({"Data": lst})  # 이 부분은 어떻게 해야 할 지 몰라서 안 건드렸음
