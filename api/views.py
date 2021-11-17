@@ -193,12 +193,36 @@ class MakeTeam(APIView):
         })
 
 
+class GetDaySchedules(APIView):
+
+    def get(self, request):
+        # if not request.user.is_authenticated:
+        #     return HttpResponseRedirect('/login')
+        user = request.user
+        print(user)
+        league = League.objects.get(user=user, state_finish=False)
+        i = league.current_date
+        schedules = LeagueSchedule.objects.filter(day=i)
+        data = {"Success": False, "Message": "오늘은 경기가 없습니다.", "data": []}
+        for schedule in schedules:
+            if schedule.team1 == -1:
+                return Response(data)
+            data["Success"] = True
+            temp = {"team1": None, "team2": None}
+            temp["team1"] = LeagueTeam.objects.get(
+                league=league, team_num=schedule.team1).base_team.name
+            temp["team2"] = LeagueTeam.objects.get(
+                league=league, team_num=schedule.team2).base_team.name
+            data['data'].append(temp)
+
+        return Response(data)
+
+
 class GetSchedules(APIView):
 
     def get(self, request):
         user = request.user
         league = League.objects.get(user=user, state_finish=False)
-        season = league.season
 
         return_data = []
         count = 0

@@ -23,6 +23,7 @@ urlpatterns = [
     # 스케줄 5개 가져오기(main page에서 사용)
 
     path('getschedule/', GetSchedules.as_view()),
+    path('getdayschedule/', GetDaySchedules.as_view()),
 
     # 다른 팀 경기 진행
     path('otherteamprocess/', OtherTeamProcess.as_view()),
