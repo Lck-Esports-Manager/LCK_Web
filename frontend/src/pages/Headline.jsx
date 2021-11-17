@@ -18,6 +18,7 @@ export default function Headline() {
             console.log(response.data);
             alert(response.data.detail);
             window.localStorage.setItem('isLogin', 'false');
+            window.localStorage.removeItem('token');
             window.localStorage.removeItem('user');
             setRender(render + 1);
         }).catch((Error) => {

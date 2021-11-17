@@ -26,7 +26,7 @@ function CreateAccount() {
         if (user.password1 === user.password2) {
             axios.post('http://localhost:8000/api/rest-auth/registration/', user
             ).then(() => {
-                alert([`가입을 축하드립니다. \nname : ${user.username} \nemail : ${user.email} \n 가입확인 메일이 발송되었습니다.`]);
+                alert([`가입을 축하드립니다. \nname : ${user.username} \nemail : ${user.email}`]);
                 document.location.href = '/login';
             }).catch((Error) => {
                 //console.log(Error.response.data);

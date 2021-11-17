@@ -81,7 +81,7 @@ function Home() {
                         <h2>MATCH SCHEDULE</h2>
                         <div class="refresh" onClick={pageRefresh}>ㅤ</div>
                         {JSON.parse(window.localStorage.getItem('user')) ?
-                            <div className="username">{JSON.parse(window.localStorage.getItem('user')).username}님의 스케줄</div>
+                            <div className="username">{JSON.parse(window.localStorage.getItem('user'))}님의 스케줄</div>
                             : <div></div>}
                         <div className="schedule">
                             {JSON.parse(window.localStorage.getItem('isLogin')) ?

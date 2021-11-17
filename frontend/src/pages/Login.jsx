@@ -30,8 +30,9 @@ function Login() {
             axios.defaults.headers.common['Authorization'] = `jwt ${response.data.token}`;
             console.log(axios.defaults.headers.common['Authorization']);
             alert(`${response.data.user.username}님 환영합니다.`);
-            window.localStorage.setItem('user', JSON.stringify(user));
+            window.localStorage.setItem('user', JSON.stringify(user.username));
             window.localStorage.setItem('isLogin', 'true');
+            window.localStorage.setItem('token', `jwt ${response.data.token}`);
             document.location.href = '/';
         }).catch((Error) => {
             console.log(Error.response);

@@ -388,45 +388,55 @@ export default function Game() {
                                         <div>Top</div>
                                         <span class="material-icons">account_circle</span>
                                         <div>{info.my_team_data?.top.name}</div>
-                                        <span class="material-icons">pets</span>
-                                        <div>{team && team.top.id}</div>
+                                        {/* <span class="material-icons">pets</span>
+                                        <div>{team && team.top.id}</div> */}
                                     </li>
                                     <li>
                                         <span class="jungle--image">ㅤ</span>
                                         <div>Jungle</div>
                                         <span class="material-icons">account_circle</span>
                                         <div>{info.my_team_data?.jng.name}</div>
-                                        <span class="material-icons">pets</span>
-                                        <div>{team && team.jungle.id}</div>
+                                        {/* <span class="material-icons">pets</span>
+                                        <div>{team && team.jungle.id}</div> */}
                                     </li>
                                     <li>
                                         <span class="middle--image">ㅤ</span>
                                         <div>Middle</div>
                                         <span class="material-icons">account_circle</span>
                                         <div>{info.my_team_data?.mid.name}</div>
-                                        <span class="material-icons">pets</span>
-                                        <div>{team && team.mid.id}</div>
+                                        {/* <span class="material-icons">pets</span>
+                                        <div>{team && team.mid.id}</div> */}
                                     </li>
                                     <li>
                                         <span class="adc--image">ㅤ</span>
                                         <div>ADC</div>
                                         <span class="material-icons">account_circle</span>
                                         <div>{info.my_team_data?.adc.name}</div>
-                                        <span class="material-icons">pets</span>
-                                        <div>{team && team.adc.id}</div>
+                                        {/* <span class="material-icons">pets</span>
+                                        <div>{team && team.adc.id}</div> */}
                                     </li>
                                     <li>
                                         <span class="support--image">ㅤ</span>
                                         <div>Support</div>
                                         <span class="material-icons">account_circle</span>
                                         <div>{info.my_team_data?.sup.name}</div>
-                                        <span class="material-icons">pets</span>
-                                        <div>{team && team.support.id}</div>
+                                        {/* <span class="material-icons">pets</span>
+                                        <div>{team && team.support.id}</div> */}
                                     </li>
                                 </ul>
                             </div>
                             <div className="something">
                                 <div className="head">
+                                    {/* <div className="bluestatus2">
+                                        <div className="info--gold"></div>
+                                        <div className='goldnum'>ㅤ{info.data?.my_gold}</div>
+                                        <div className="info--dragon"></div>
+                                        <div>ㅤ{info.data?.my_dragon}</div>
+                                        <div className="info--baron"></div>
+                                        <div>ㅤ{info.data?.my_baron}</div>
+                                        <div className="info--tower"></div>
+                                        <div>ㅤ{info.data?.my_tower_destroy}</div>
+                                    </div> */}
                                     <div className="bluestatus">
                                         <ul>
                                             <li>글로벌 골드량 : {info.data?.my_gold}</li>
@@ -480,40 +490,40 @@ export default function Game() {
                                         <div>Top</div>
                                         <span class="material-icons">account_circle</span>
                                         <div>{info.op_team_data?.top.name}</div>
-                                        <span class="material-icons">pets</span>
-                                        <div>{team && team.top.id}</div>
+                                        {/* <span class="material-icons">pets</span>
+                                        <div>{team && team.top.id}</div> */}
                                     </li>
                                     <li>
                                         <span class="jungle--image">ㅤ</span>
                                         <div>Jungle</div>
                                         <span class="material-icons">account_circle</span>
                                         <div>{info.op_team_data?.jng.name}</div>
-                                        <span class="material-icons">pets</span>
-                                        <div>{team && team.jungle.id}</div>
+                                        {/* <span class="material-icons">pets</span>
+                                        <div>{team && team.jungle.id}</div> */}
                                     </li>
                                     <li>
                                         <span class="middle--image">ㅤ</span>
                                         <div>Middle</div>
                                         <span class="material-icons">account_circle</span>
                                         <div>{info.op_team_data?.mid.name}</div>
-                                        <span class="material-icons">pets</span>
-                                        <div>{team && team.mid.id}</div>
+                                        {/* <span class="material-icons">pets</span>
+                                        <div>{team && team.mid.id}</div> */}
                                     </li>
                                     <li>
                                         <span class="adc--image">ㅤ</span>
                                         <div>ADC</div>
                                         <span class="material-icons">account_circle</span>
                                         <div>{info.op_team_data?.adc.name}</div>
-                                        <span class="material-icons">pets</span>
-                                        <div>{team && team.adc.id}</div>
+                                        {/* <span class="material-icons">pets</span>
+                                        <div>{team && team.adc.id}</div> */}
                                     </li>
                                     <li>
                                         <span class="support--image">ㅤ</span>
                                         <div>Support</div>
                                         <span class="material-icons">account_circle</span>
                                         <div>{info.op_team_data?.sup.name}</div>
-                                        <span class="material-icons">pets</span>
-                                        <div>{team && team.support.id}</div>
+                                        {/* <span class="material-icons">pets</span>
+                                        <div>{team && team.support.id}</div> */}
                                     </li>
                                 </ul>
                             </div>
