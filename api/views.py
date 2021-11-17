@@ -182,7 +182,19 @@ class MakeTeam(APIView):
         league = League(my_team=myteam, season='Spring', user=user)
         league.save()
 
-        team = Team.objects.order_by('?')[0:9]
+        team = []
+        team_name = []
+        idx = 1
+        while True:
+            if idx == 10:
+                break
+            temp = Team.objects.order_by('?').first()
+            if temp.name not in team_name:
+                team_name.append(temp.name)
+                team.append(temp)
+                idx = idx+1
+            else:
+                continue
 
         for idx, elem in enumerate(team):
             league_team = LeagueTeam(
