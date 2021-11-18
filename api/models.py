@@ -45,8 +45,8 @@ class Player(models.Model):
     status3 = models.IntegerField(default=0)
     rate = models.IntegerField(default=0)
     price = models.IntegerField(default=0)
-    images = models.ImageField(
-        blank=True, upload_to="images", null=True)
+    images = models.CharField(
+        default='/api/media/images/player.png', max_length=100)
     team = models.ForeignKey(Team, default=1, on_delete=models.CASCADE)
 
     def __str__(self):

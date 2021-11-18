@@ -57,7 +57,7 @@ class SimplePlayerSerializer2(serializers.ModelSerializer):
 
     class Meta:
         model = Player
-        fields = ['name', 'season', 'year', 'rate']
+        fields = ['name', 'season', 'year', 'rate', 'images']
 
 # 나의 팀
 
