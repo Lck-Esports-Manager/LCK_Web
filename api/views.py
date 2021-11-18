@@ -217,6 +217,8 @@ class GetDaySchedules(APIView):
         schedules = LeagueSchedule.objects.filter(day=i)
         data = {"Success": False, "Message": "오늘은 경기가 없습니다.", "data": []}
         for schedule in schedules:
+            if schedule.team1 == 0 or schedule.team2 == 0:
+                continue
             if schedule.team1 == -1:
                 return Response(data)
             data["Success"] = True
