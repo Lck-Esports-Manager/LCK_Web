@@ -12,6 +12,7 @@ import numpy as np
 
 class MachineLearningModel(APIView):
     def normalize(np_input):
+        #평균과 표준편차 값은 기존 match2.csv에서 계산된 값을 이용
         mean= 0 #전체 match에서 블루 팀과 레드 팀의 글로벌 골드 차이의 평균
         std = 12143 #전체 match에서 블루 팀과 레드 팀의 글로벌 골드 차이의 표준편차
         return (np_input - mean) / std
