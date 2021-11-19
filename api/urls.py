@@ -5,7 +5,7 @@ from django.conf import settings
 from django.conf.urls.static import static
 from .views import *
 from .league_process_view import *
-#from .prediction_model_views import *
+from .prediction_model_views import *
 
 urlpatterns = [
 
@@ -60,7 +60,7 @@ urlpatterns = [
 
     # 리그 랭킹
     path('leaguerank/', LeagueRank.as_view()),
-    #path('modeltest', MachineLearningModel.as_view()),
+    path('modeltest/', MachineLearningModel.as_view()),
     # 로그인 회원가입 관련 api
 
     path('rest-auth/', include('rest_auth.urls')),

@@ -14,7 +14,7 @@ from pathlib import Path
 import mysetting
 import os
 import datetime
-#from keras.models import load_model
+from keras.models import load_model
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -210,14 +210,16 @@ JWT_AUTH = {
 }
 
 
-# def load_model_from_path(path):
-#     model = load_model(path)
-#     return model
+def load_model_from_path(path):
+    model = load_model(path)
+    return model
 
 
-# gModelObjs = {
-#     'model_1': load_model_from_path('../machine/LCK.h5')
-# }
+machine = os.path.join(BASE_DIR, 'machine')
+TEST = '123'
+MODEL = {
+    'model_1': load_model_from_path(machine+'/LCK.h5')
+}
 
 # def load_all_models():
 #     global gModelObjs  # each object is a tuple of graph, model
