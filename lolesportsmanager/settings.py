@@ -200,9 +200,10 @@ ACCOUNT_EMAIL_CONFIRMATION_EXPIRE_DAYS = 1
 ACCOUNT_EMAIL_SUBJECT_PREFIX = "LCK-Esports-Manager"
 REST_USE_JWT = True
 
+
 JWT_AUTH = {
 
-    'JWT_EXPIRATION_DELTA': datetime.timedelta(seconds=30000),
+    'JWT_EXPIRATION_DELTA': datetime.timedelta(days=30),
     'JWT_ALLOW_REFRESH': False,
     'JWT_REFRESH_EXPIRATION_DELTA': datetime.timedelta(days=7),
 }
