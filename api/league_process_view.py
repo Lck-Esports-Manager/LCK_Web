@@ -15,7 +15,11 @@ class ProcessSelection(APIView):
     def initiate(self):
         self.match = self.set.match
         self.league = self.match.league
-        self.is_elder = self.set.is_elder
+        if self.set.turn % 2 == 1:
+            self.is_elder = self.set.is_elder
+            self.set.is_elder = 0
+            self.set.is_baron = 0
+
         self.elder_power = [[1, 1], [1.2, 1], [1, 1.2]]
 
         if self.match.team_num1 == 0:
