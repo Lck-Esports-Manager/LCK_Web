@@ -645,6 +645,11 @@ class MakeSelection(APIView):
         self.data["engage"]["top"][0] = True
         self.data["engage"]["mid"][0] = True
         self.data["engage"]["bot"][0] = True
+        if self.set.turn > 4:
+            self.data["engage"]["top"][1] = 1
+            self.data["engage"]["mid"][1] = 1
+            self.data["engage"]["bot"][1] = 1
+
         return 0
 
     def fight(self):
@@ -750,8 +755,8 @@ class MakeSelection(APIView):
                      "ganking": {"top": [False, 1, 4], "mid": [False, 1, 5], "bot": [False, 1, 6]},
                      "engage": {"top": [False, 2, 7], "mid": [False, 2, 8], "bot": [False, 2, 9]},
                      "fight": {"dragon": [False, 0, 10], "elder": [False, 0, 11], "baron": [False, 0, 12], "normal": [False, 0, 13]},
-                     "tower_press": {"top": [False, 1, 14], "mid": [False, 1, 15], "bot": [False, 1, 16]},
-                     "tower_destroy": {"top": [False, 2, 17], "mid": [False, 2, 18], "bot": [False, 2, 19]},
+                     "tower_press": {"top": [False, 2, 14], "mid": [False, 2, 15], "bot": [False, 2, 16]},
+                     "tower_destroy": {"top": [False, 3, 17], "mid": [False, 3, 18], "bot": [False, 3, 19]},
                      "nexus_destroy": [False, 3, 20]}
         # 쿼리에서 세트 가져오기
         set_id = request.query_params.get('set', None)
