@@ -546,7 +546,7 @@ class ProcessSelection(APIView):
                                 "{0} : {1}팀이 {2}팀 탑의 타워를 파괴하였습니다.".format(self.set.turn, self.my_team['side'], self.op_team['side']))
                         else:
                             self.set.op_tower4 = self.set.op_tower4-3
-                    else:
+                    elif self.set.op_tower7 != 0:
                         if self.set.op_tower7 <= 3:
                             self.set.op_tower7 = 0
                             self.set.my_tower_destroy = self.set.my_tower_destroy+1
@@ -577,7 +577,7 @@ class ProcessSelection(APIView):
                                 "{0} : {1}팀이 {2}팀 탑의 타워를 파괴하였습니다.".format(self.set.turn, self.my_team['side'], self.op_team['side']))
                         else:
                             self.set.my_tower4 = self.set.my_tower4-3
-                    else:
+                    elif self.set.op_tower7 != 0:
                         if self.set.my_tower7 <= 3:
                             self.set.my_tower7 = 0
                             self.set.op_tower_destroy = self.set.op_tower_destroy+1
@@ -608,7 +608,7 @@ class ProcessSelection(APIView):
                                 "{0} : {1}팀이 {2}팀 미드의 타워를 파괴하였습니다.".format(self.set.turn, self.my_team['side'], self.op_team['side']))
                         else:
                             self.set.op_tower5 = self.set.op_tower5-3
-                    else:
+                    elif self.set.op_tower8 != 0:
                         if self.set.op_tower8 <= 3:
                             self.set.op_tower8 = 0
                             self.set.my_tower_destroy = self.set.my_tower_destroy+1
@@ -639,7 +639,7 @@ class ProcessSelection(APIView):
                                 "{0} : {1}팀이 {2}팀 미드의 타워를 파괴하였습니다.".format(self.set.turn, self.my_team['side'], self.op_team['side']))
                         else:
                             self.set.my_tower5 = self.set.my_tower5-3
-                    else:
+                    elif self.set.my_tower8 != 0:
                         if self.set.my_tower8 <= 3:
                             self.set.my_tower8 = 0
                             self.set.op_tower_destroy = self.set.op_tower_destroy+1
@@ -671,7 +671,7 @@ class ProcessSelection(APIView):
                                 "{0} : {1}팀이 {2}팀 바텀의 타워를 파괴하였습니다.".format(self.set.turn, self.my_team['side'], self.op_team['side']))
                         else:
                             self.set.op_tower6 = self.set.op_tower6-3
-                    else:
+                    elif self.set.op_tower9 != 0:
                         if self.set.op_tower9 <= 3:
                             self.set.op_tower9 = 0
                             self.set.my_tower_destroy = self.set.my_tower_destroy+1
@@ -702,7 +702,7 @@ class ProcessSelection(APIView):
                                 "{0} : {1}팀이 {2}팀 바텀의 타워를 파괴하였습니다.".format(self.set.turn, self.my_team['side'], self.op_team['side']))
                         else:
                             self.set.my_tower6 = self.set.my_tower6-3
-                    else:
+                    elif self.set.my_tower9 != 0:
                         if self.set.my_tower9 <= 3:
                             self.set.my_tower9 = 0
                             self.set.op_tower_destroy = self.set.op_tower_destroy+1
@@ -719,7 +719,7 @@ class ProcessSelection(APIView):
                         self.set.op_tower1 = 0
                     elif self.set.op_tower4 > 0:
                         self.set.op_tower4 = 0
-                    else:
+                    elif self.set.op_tower7 > 0:
                         self.set.op_tower7 = 0
                     self.set.my_gold = self.set.my_gold+500
                     self.set.my_tower_destroy = self.set.my_tower_destroy+1
@@ -730,7 +730,7 @@ class ProcessSelection(APIView):
                         self.set.my_tower1 = 0
                     elif self.set.my_tower4 > 0:
                         self.set.my_tower4 = 0
-                    else:
+                    elif self.set.my_tower7 > 0:
                         self.set.my_tower7 = 0
                     self.set.op_gold = self.set.op_gold+500
                     self.set.op_tower_destroy = self.set.op_tower_destroy+1
@@ -743,7 +743,7 @@ class ProcessSelection(APIView):
                         self.set.op_tower2 = 0
                     elif self.set.op_tower5 > 0:
                         self.set.op_tower5 = 0
-                    else:
+                    elif self.set.op_tower0 > 0:
                         self.set.op_tower8 = 0
                     self.set.my_gold = self.set.my_gold+500
                     self.set.my_tower_destroy = self.set.my_tower_destroy+1
@@ -754,7 +754,7 @@ class ProcessSelection(APIView):
                         self.set.my_tower2 = 0
                     elif self.set.my_tower5 > 0:
                         self.set.my_tower5 = 0
-                    else:
+                    elif self.set.my_tower8 > 0:
                         self.set.my_tower8 = 0
 
                     self.set.op_gold = self.set.op_gold+500
@@ -768,7 +768,7 @@ class ProcessSelection(APIView):
                         self.set.op_tower3 = 0
                     elif self.set.op_tower6 > 0:
                         self.set.op_tower6 = 0
-                    else:
+                    elif self.set.op_tower9 > 0:
                         self.set.op_tower9 = 0
                     self.set.my_gold = self.set.my_gold+500
                     self.set.my_tower_destroy = self.set.my_tower_destroy+1
@@ -779,7 +779,7 @@ class ProcessSelection(APIView):
                         self.set.my_tower3 = 0
                     elif self.set.my_tower6 > 0:
                         self.set.my_tower6 = 0
-                    else:
+                    elif self.set.my_tower9 > 0:
                         self.set.my_tower9 = 0
                     self.set.op_gold = self.set.op_gold+500
                     self.set.op_tower_destroy = self.set.op_tower_destroy+1
