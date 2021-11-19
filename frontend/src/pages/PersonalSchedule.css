@@ -1,0 +1,219 @@
+.PS--main{
+    background-color: #c1c1c1;
+    height: 720px;
+    padding: 0 20px 0;
+    font-family: 'Noto Sans KR', sans-serif;
+    font-weight: 700;
+}
+.PS--main .inner{
+    width: 1300px;
+    display: block;
+    margin: auto;
+}
+.PS--main .inner .contents{
+    height: 650px;
+    padding: 10px;
+    border-radius: 10px;
+    /* background-image: url('../images/game_back.jpg'); */
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
+    border: 10px solid;
+    display: flex;
+    flex-wrap: wrap;
+}
+.PS--main .inner .contents .match--info{
+    background-color: rgba(204, 121, 44, 0.698);
+    padding: 20px;
+    border-radius: 8px;
+    margin: 5px;
+    display: flex;
+    width: 640px;
+    margin: auto;
+    overflow: hidden;
+    height: 20px;
+}
+.PS--main .inner .contents .match--info .title{
+    font-size: 20px;
+    width: 150px;
+}
+.PS--main .inner .contents .match--info .VS{
+    font-size: 20px;
+    display: flex;
+}
+.PS--main .inner .contents .match--info .VS .text{
+    width: 20px;
+    height: 20px;
+    margin: 0 15px 0;
+}
+.PS--main .inner .contents .match--info .VS div{
+    width: 220px;
+}
+.PS--main .inner .contents .team--info{
+    background-color: rgba(61, 153, 118, 0.63);
+    padding: 20px;
+    border-radius: 8px;
+    margin: auto;
+    display: flex;
+    width: 520px;
+    font-size: 20px;
+}
+.PS--main .inner .contents .team--info .teamname{
+    width: 150px;
+}
+.PS--main .inner .contents .team--info .money{
+    width: 150px;
+    text-align: right;
+}
+.PS--main .inner .contents .team--info .popularity{
+    width: 200px;
+    text-align: center;
+}
+.PS--main .inner .contents .schedule--info{
+    background-color: rgba(68, 134, 68, 0.52);
+    padding: 20px 20px 15px;
+    border-radius: 8px;
+    margin: 10px 5px 10px;
+    width: 1300px;
+    height: 530px;
+    display: flex;
+    flex-wrap: wrap;
+    position: relative;
+}
+.PS--main .inner .contents .schedule--info .title{
+    width: 200px;
+    height: 20px;
+    font-size: 25px;
+    padding: 5px;
+    margin:0 0 10px 10px;
+}
+.PS--main .inner .contents .schedule--info .blank{
+    width: 580px;
+    height: 20px;
+    font-size: 25px;
+    padding: 0px;
+    margin:0 ;
+}
+.PS--main .inner .contents .schedule--info .blank .help{
+    width: 20px;
+    height: 20px;
+    margin: 3px 0;
+    font-size: 20px;
+    border-radius: 50px;
+    border:2px solid;
+    padding: 0px 5px 8px;
+    text-align: center;
+    position: absolute;
+    top: 19px;
+    left: 230px;
+    overflow: hidden;
+    line-height: 1.4;
+}
+.PS--main .inner .contents .schedule--info .blank .help:hover{
+    width: 600px;
+    height: 140px;
+    margin: 3px 0;
+    font-size: 20px;
+    border-radius: 10px;
+    border:3px solid;
+    padding: 15px;
+    text-align: left;
+    background-color: rgb(185, 185, 185);
+}
+.PS--main .inner .contents .schedule--info .send{
+    width: 150px;
+    height: 20px;
+    background-color: white;
+    border-radius: 5px;
+    padding: 5px;
+    box-shadow: inset 0 0 5px rgb(87, 87, 87);
+    text-align: center;
+    transition: 0.3s;
+    margin: auto;
+}
+.PS--main .inner .contents .schedule--info .send:hover{
+    cursor: pointer;
+    background-color: rgb(180, 180, 180);
+}
+.PS--main .inner .contents .schedule--info .card{
+    background-color: rgb(192, 192, 192);
+    padding: 20px;
+    border-radius: 8px;
+    margin: 10px 5px 10px;
+    width: 190px;
+    height: 440px;
+    font-size: 18px;
+    box-shadow: inset 0 0 10px rgb(87, 87, 87);
+}
+.PS--main .inner .contents .schedule--info .card .pos{
+    font-size: 25px;
+}
+.PS--main .inner .contents .schedule--info .card .image{
+    background-image: url('../images/player.PNG');
+    background-repeat: no-repeat;
+    background-size: contain;
+    width: 183px;
+    height: 150px;
+    margin: 15px 5px 15px;
+    border:3px solid rgb(39, 39, 39);
+    box-sizing: border-box;
+    border-radius: 5px;
+}
+.PS--main .inner .contents .schedule--info .card .info{
+    background-color: white;
+    border-radius: 5px;
+    padding: 10px;
+    box-shadow: inset 0 0 10px rgb(87, 87, 87);
+    display: flex;
+    flex-wrap: wrap;
+    margin: auto auto 7px;
+}
+.PS--main .inner .contents .schedule--info .card .info li{
+    margin: 8px 5px 8px;
+    width: 100px;
+    text-align: center;
+}
+.PS--main .inner .contents .schedule--info .card .info div{
+    margin: 8px 5px 8px;
+    width: 50px;
+}
+.PS--main .inner .contents .schedule--info .card .select{
+    width: 190px;
+    border-radius: 5px;
+}
+.PS--main .inner .contents .schedule--info .card .select ul{
+    display: flex;
+    flex-wrap: wrap;
+}
+.PS--main .inner .contents .schedule--info .card .select div{
+    background-color: rgb(255, 255, 255);
+    box-shadow: inset 0 0 5px rgb(87, 87, 87);
+    border-radius: 5px;
+    margin: 5px;
+    width: 75px;
+    height: 20px;
+    padding: 5px;
+    font-size: 15px;
+    text-align: center;
+    transition: 0.2s;
+}
+.PS--main .inner .contents .schedule--info .card .select div:hover{
+    cursor: pointer;
+    background-color: rgb(179, 179, 179);
+}
+.PS--main .inner .contents .schedule--info .card .select li{
+    background-color: rgba(114, 212, 114, 0.815);
+    box-shadow: inset 0 0 5px rgb(87, 87, 87);
+    border-radius: 5px;
+    margin: 5px;
+    width: 75px;
+    height: 20px;
+    padding: 5px;
+    font-size: 15px;
+    text-align: center;
+    transition: 0.2s;
+}
+.PS--main .inner .contents .schedule--info .card .select li:hover{
+    cursor: pointer;
+    background-color: rgb(179, 179, 179);
+}

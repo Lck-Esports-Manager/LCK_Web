@@ -6,7 +6,7 @@ import slide3 from '../images/main-3.png';
 import slide4 from '../images/main-4.png';
 import slide5 from '../images/main-5.png';
 import './Home.css';
-import Maintitle from './Maintitle';
+import Maintitle from './components/Maintitle';
 
 let imgs = [slide1, slide2, slide3, slide4, slide5];
 

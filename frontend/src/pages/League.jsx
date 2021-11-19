@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './League.css';
 import axios from 'axios';
-import Maintitle from './Maintitle';
+import Maintitle from './components/Maintitle';
 
 export default function League() {
     const [leagueState, setLeague] = useState({

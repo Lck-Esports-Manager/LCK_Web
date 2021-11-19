@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Link } from "react-router-dom";
 import './Login.css';
 import axios from 'axios';
-import Maintitle from './Maintitle';
+import Maintitle from './components/Maintitle';
 
 axios.defaults.withCredentials = true;
 

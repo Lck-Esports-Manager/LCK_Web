@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import './CreateAccount.css';
-import Maintitle from './Maintitle';
+import Maintitle from './components/Maintitle';
 import axios from 'axios';
 
 function CreateAccount() {

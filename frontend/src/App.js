@@ -7,7 +7,7 @@ import Team from "./pages/Team";
 import League from "./pages/League";
 import Player from "./pages/Player";
 import NotFound from "./pages/NotFound";
-import Headline from "./pages/Headline";
+import Headline from "./pages/components/Headline";
 import CreateAccount from './pages/CreateAccount';
 import MakeTeam from './pages/MakeTeam';
 import Banpick from './pages/Banpick';

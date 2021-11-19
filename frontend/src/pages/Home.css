@@ -168,8 +168,8 @@
     display: flex;
 }
 .home--bottom .inner .match .match--list .data .date{
-    padding: 0 0 0 40px;
-    width: 160px;
+    padding: 0 0 0 75px;
+    width: 125px;
 }
 .home--bottom .inner .match .match--list .data li{
     width: 200px;

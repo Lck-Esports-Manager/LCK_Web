@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './Player.css';
-import Maintitle from './Maintitle';
+import Maintitle from './components/Maintitle';
 /*import styled from 'styled-components';*/
 // import Headline from "./Headline";
 

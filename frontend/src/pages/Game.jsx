@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './Game.css';
-import Tower from './Tower';
-import SelectBtn from './SelectBtn';
+import Tower from './components/Tower';
+import SelectBtn from './components/SelectBtn';
 
 export default function Game() {
     const [clicked, setClick] = useState({
@@ -361,6 +361,16 @@ export default function Game() {
             buffer = [];
         }
         pageRefresh();
+    }
+    const autoSelect = () => {
+        const rand1 = Math.floor(Math.random() * 2) + 1; //1~2
+        if (rand1 === 1) { // 1만 3개 선택지
+
+        }
+        else { // 2하나 1하나 선택지
+
+        }
+        /* 해당 행동력중 true인거 리스트에 담고 하나 뽑기 */
     }
     return (<>
         <div className="game">

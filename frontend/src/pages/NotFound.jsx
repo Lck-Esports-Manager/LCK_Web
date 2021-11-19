@@ -1,5 +1,5 @@
 import React from 'react';
-import Maintitle from './Maintitle';
+import Maintitle from './components/Maintitle';
 
 /* 올바르지 못한 접근 */
 export default function NotFound() {

@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './MakeTeam.css';
-import Card from './Card';
-import Maintitle from './Maintitle';
+import Card from './components/Card';
+import Maintitle from './components/Maintitle';
 
 export default function MakeTeam() {
     let temp = 'asdf';

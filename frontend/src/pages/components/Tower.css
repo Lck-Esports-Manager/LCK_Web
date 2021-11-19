@@ -28,7 +28,7 @@
     margin: 1px;
 }
 .tower--main .blue--tower{
-    background-image: url('../images/turret_blue.png');
+    background-image: url('../../images/turret_blue.png');
     background-repeat: no-repeat;
     background-size: contain;
     margin: auto;
@@ -36,7 +36,7 @@
     height: 65px;
 }
 .tower--main .red--tower{
-    background-image: url('../images/turret_red.png');
+    background-image: url('../../images/turret_red.png');
     background-repeat: no-repeat;
     background-size: contain;
     margin: auto;
