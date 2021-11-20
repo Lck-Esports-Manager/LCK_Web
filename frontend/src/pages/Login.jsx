@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import './Login.css';
 import axios from 'axios';
 import Maintitle from './components/Maintitle';
+import Cookies from "universal-cookie";
 
 axios.defaults.withCredentials = true;
 
@@ -27,6 +28,8 @@ function Login() {
         axios.post('http://localhost:8000/api/rest-auth/login/', user
         ).then((response) => {
             console.log(response.data);
+            var cookies = new Cookies();
+            cookies.set("auth",response.data.token);
             axios.defaults.headers.common['Authorization'] = `jwt ${response.data.token}`;
             console.log(axios.defaults.headers.common['Authorization']);
             alert(`${response.data.user.username}님 환영합니다.`);

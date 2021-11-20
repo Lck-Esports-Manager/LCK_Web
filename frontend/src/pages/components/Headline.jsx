@@ -3,6 +3,7 @@ import { NavLink } from "react-router-dom";
 import "./Headline.css";
 import logo from '../../images/logo.png';
 import axios from 'axios';
+import { removeToken } from '../../cookies';
 
 const actStyle = {
     color: "rgb(255, 219, 161)",
@@ -20,6 +21,7 @@ export default function Headline() {
             window.localStorage.setItem('isLogin', 'false');
             window.localStorage.removeItem('token');
             window.localStorage.removeItem('user');
+            removeToken()
             setRender(render + 1);
         }).catch((Error) => {
             console.log(Error.response);

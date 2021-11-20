@@ -800,6 +800,9 @@ class ProcessSelection(APIView):
                     self.post_process(0)
 
             else:
+                self.response.append(
+                    "현재 결과를 기반으로 승부예측을 합니다")
+
                 self.model_progress()
         return
 
@@ -955,13 +958,19 @@ class ProcessSelection(APIView):
     def model_progress(self):
         preds = self.showMatchResult()
         p = preds*100
-        r = random.range(50, 100)
+        r = random.randrange(50, 100)
         if p < 50:
+            self.response.append(
+                "{0} : {1}팀이 {2}팀에게 승리했습니다!".format(self.set.turn, self.op_team['side'], self.my_team['side']))
             self.post_process(0)
         else:
             if r < p:
+                self.response.append(
+                    "{0} : {1}팀이 {2}팀에게 승리했습니다!".format(self.set.turn, self.my_team['side'], self.op_team['side']))
                 self.post_process(1)
             else:
+                self.response.append(
+                    "{0} : {1}팀이 {2}팀에게 승리했습니다!".format(self.set.turn, self.op_team['side'], self.my_team['side']))
                 self.post_process(0)
 
     def post(self, request):
