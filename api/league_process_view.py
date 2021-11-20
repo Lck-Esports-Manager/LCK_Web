@@ -6,6 +6,8 @@ from .serializers import *
 from .models import *
 from django.contrib.auth.models import User
 from rest_framework.permissions import AllowAny
+from django.conf import settings
+import numpy as np
 
 import random
 
@@ -786,15 +788,19 @@ class ProcessSelection(APIView):
                     self.response.append(
                         "{0} : {1}팀이 {2}팀 바텀c의 타워를 파괴합니다.".format(self.set.turn, self.op_team['side'], self.my_team['side']))
 
-            else:
+            elif elem == 20:
                 if self.set.turn % 2 == 1:
                     self.response.append(
                         "{0} : {1}팀이 {2}팀에게 승리했습니다!".format(self.set.turn, self.my_team['side'], self.op_team['side']))
+                    self.post_process(1)
                 else:
                     self.response.append(
                         "{0} : {1}팀이 {2}팀에게 승리했습니다!".format(self.set.turn, self.op_team['side'], self.my_team['side']))
 
-                self.post_process()
+                    self.post_process(0)
+
+            else:
+                self.model_progress()
         return
 
     def save(self):
@@ -847,11 +853,11 @@ class ProcessSelection(APIView):
 
         return
 
-    def post_process(self):
+    def post_process(self, win):
         # *세트의 status를 변화시킨다.
         self.set.status = 'finish'
         # *세트의 승패를 저장한다.
-        self.set.result = self.set.turn % 2
+        self.set.result = win
         # *Match에 결과를 저장한다.
         if self.set.result == 1:
             if self.match.team_num1 == 0:
@@ -916,6 +922,47 @@ class ProcessSelection(APIView):
                           set_num=self.set.set_num+1, side=self.set.side)
             new_set.save()
             # **새로운 set를 만든다.
+
+    def normalize(self, np_input):
+        # 평균과 표준편차 값은 기존 match2.csv에서 계산된 값을 이용
+        mean = 0  # 전체 match에서 블루 팀과 레드 팀의 글로벌 골드 차이의 평균
+        std = 12143  # 전체 match에서 블루 팀과 레드 팀의 글로벌 골드 차이의 표준편차
+        return (np_input - mean) / std
+
+    def showMatchResult(self):
+
+        num = 1
+        MODEL = getattr(settings, 'MODEL', None)
+        MODEL = MODEL['model_1']
+       # dragons,barons,towers,totalgold 각각은 블루팀의 드래곤 처치수 - 레드팀의 드래곤 처치수, 블루팀의 바론 처치수 - 레드팀의 바론 처치수 등등을 의미함
+        dragons = self.set.my_dragon - self.set.op_dragon
+        barons = self.set.my_baron - self.set.my_baron
+        towers = self.set.my_tower_destroy - self.set.op_tower_destroy
+        totalgold = self.set.my_gold - self.set.op_gold
+        x = dragons
+        y = barons
+        z = towers
+        a = totalgold
+        x = np.asarray(x).astype('int32').reshape((-1, 1))
+        y = np.asarray(y).astype('int32').reshape((-1, 1))
+        z = np.asarray(z).astype('int32').reshape((-1, 1))
+        a = np.asarray(a).astype('int32').reshape((-1, 1))
+        a = self.normalize(a) * 10
+        preds = MODEL.predict([x, y, z, a])
+        preds = preds.reshape(num,)
+        return preds
+
+    def model_progress(self):
+        preds = self.showMatchResult()
+        p = preds*100
+        r = random.range(50, 100)
+        if p < 50:
+            self.post_process(0)
+        else:
+            if r < p:
+                self.post_process(1)
+            else:
+                self.post_process(0)
 
     def post(self, request):
         self.user = request.user

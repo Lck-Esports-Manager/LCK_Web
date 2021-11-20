@@ -10,11 +10,13 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
+from keras.models import load_model
+import datetime
 from pathlib import Path
 import mysetting
 import os
-import datetime
-from keras.models import load_model
+os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 

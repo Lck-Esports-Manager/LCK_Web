@@ -68,4 +68,4 @@ class MachineLearningModel(APIView):
         preds = self.showMatchResult(dragons_blue, barons_blue, towers_blue,
                                      totalgold_blue, dragons_red, barons_red, towers_red, totalgold_red, MODEL)
         print(preds)
-        return Response({"Data": True})  # 이 부분은 어떻게 해야 할 지 몰라서 안 건드렸음
+        return Response({"Data": preds})  # 이 부분은 어떻게 해야 할 지 몰라서 안 건드렸음

@@ -747,6 +747,11 @@ class MakeSelection(APIView):
 
         return
 
+    def model_use(self):
+        turn = self.set.turn
+        if turn % 2 == 1 and turn > 10:
+            self.data["nexus_destroy"][0] = True
+
     def get(self, request):
         if not request.user.is_authenticated:
             return HttpResponseRedirect('/login')
@@ -757,7 +762,8 @@ class MakeSelection(APIView):
                      "fight": {"dragon": [False, 0, 10], "elder": [False, 0, 11], "baron": [False, 0, 12], "normal": [False, 0, 13]},
                      "tower_press": {"top": [False, 2, 14], "mid": [False, 2, 15], "bot": [False, 2, 16]},
                      "tower_destroy": {"top": [False, 3, 17], "mid": [False, 3, 18], "bot": [False, 3, 19]},
-                     "nexus_destroy": [False, 3, 20]}
+                     "nexus_destroy": [False, 3, 20],
+                     "model_use": [False, 3, 21]}
         # 쿼리에서 세트 가져오기
         set_id = request.query_params.get('set', None)
 
@@ -769,6 +775,7 @@ class MakeSelection(APIView):
         self.tower_press()
         self.tower_destroy()
         self.nexus_destroy()
+        self.model_use()
         return Response(self.data)
 
 
