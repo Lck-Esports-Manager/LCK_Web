@@ -21,6 +21,7 @@ urlpatterns = [
     path('champion/detail/', ChampionDetailView.as_view()),
     # 팀 생성
     path('maketeam/', MakeTeam.as_view()),
+    path('makenewleague/', MakeNewLeague.as_view()),
 
     # 스케줄 5개 가져오기(main page에서 사용)
 
