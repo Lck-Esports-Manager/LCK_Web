@@ -1,8 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { Row, Card, Col, Button, Tabs,Tab,Container } from 'react-bootstrap'
+import { useHistory } from "react-router-dom";
+import { Row, Card, Col, Button, Tabs,Tab,Container,Table } from 'react-bootstrap'
 import { header } from "../config.js";
 function Player({ player, pos }) {
+    const history = useHistory();
+    const routeChange = () =>{ 
+    let path = `/playerdetail/${player.id}`; 
+    history.push(path);
+    }
     if (player == null) {
         return (
             <div></div>
@@ -18,14 +24,11 @@ function Player({ player, pos }) {
                 <Card.Body>
                     <Card.Title>{player.player.name}</Card.Title>
                     <Card.Subtitle className="mb-2 text-muted">{player.player.year} {player.player.season}</Card.Subtitle>
-                    <Button variant="secondary">상세보기</Button>
                 </Card.Body>
             </Card>
+            <Button variant="secondary" onClick={routeChange}>상세보기</Button>
         </>
     );
-
-
-
 }
 
 function TeamInfo({myTeam}){
@@ -64,8 +67,6 @@ function Sponsor({sponsor}){
 }
 function SponsorInfo({sponsor1,sponsor2,sponsor3,_available_sponsor}){
 
-
-
     return(
         <>
 
@@ -93,9 +94,7 @@ function SponsorInfo({sponsor1,sponsor2,sponsor3,_available_sponsor}){
 
 }
 
-function Enterprise({enterprise,money}){
-
-
+function Enterprise2({enterprise,money}){
     const StartEnterprise=()=>{
         if(money<enterprise.cost){
             alert("자금이 부족합니다");
@@ -106,7 +105,7 @@ function Enterprise({enterprise,money}){
             }
             try {
                 axios.post('http://localhost:8000/api/enterprisestart/',data,header).then((response) => {
-                    alert("사업이 등로되었습니다");
+                    alert("사업이 등록되었습니다");
                     document.location.href = '/team';
                 })
             } catch (e) { console.log(e); }
@@ -128,11 +127,24 @@ function Enterprise({enterprise,money}){
             </Card>)
     }
 }
+function Enterprise1({enterprise,money}){
+   
+
+    if (enterprise==null){
+        return (<div></div>)
+    }
+    else{
+        return (
+            <Card style={{ width: '12rem' }}>
+                <Card.Body>
+                    <Card.Title>{enterprise.name}</Card.Title>
+                    <Card.Text className="mb-2 text-muted">{enterprise.description}</Card.Text>
+
+                </Card.Body>
+            </Card>)
+    }
+}
 function EnterpriseInfo({enterprise1,enterprise2,_available_enterprise,money}){
-
-    
-
-
 
     return(
         <>
@@ -140,15 +152,15 @@ function EnterpriseInfo({enterprise1,enterprise2,_available_enterprise,money}){
         <h3 class='my-2'>진행 중인 사업</h3>
         <Container>
         <Row className="justify-content-md-center">
-            <Col><Enterprise enterprise={enterprise1}></Enterprise></Col>
-            <Col><Enterprise enterprise={enterprise2}></Enterprise></Col>
+            <Col><Enterprise1 enterprise={enterprise1}></Enterprise1></Col>
+            <Col><Enterprise1 enterprise={enterprise2}></Enterprise1></Col>
         </Row>
         </Container>
         <h3 class='my-2'>시작 가능한 사업</h3>
         <Container>
         <Row className="justify-content-md-center">
         {_available_enterprise && _available_enterprise.map((enterprise) => (
-                                    <Col><Enterprise enterprise={enterprise} money={money}></Enterprise></Col>
+                                    <Col><Enterprise2 enterprise={enterprise} money={money}></Enterprise2></Col>
             ))}
         </Row>
         </Container>
@@ -156,6 +168,100 @@ function EnterpriseInfo({enterprise1,enterprise2,_available_enterprise,money}){
         )
 
 }
+
+function LeagueScheduleTable(){
+    const [schedule, setSchedule] = useState(null)
+    useEffect(() => {
+        const fetchSchdule = async () => {
+            try {
+                axios.get('http://localhost:8000/api/getschedule/',header).then((response) => {
+                    setSchedule(response.data.schedule);
+
+                })
+            } catch (e) { console.log(e); }
+        };
+        fetchSchdule();
+    }, []);
+    if (schedule===null){
+        return(<></>)
+    }
+    else{
+        return(
+        <>
+        <h2>리그 스케줄</h2>
+        <Table responsive>
+            <thead>
+              <tr>
+                <th>Date</th>
+                <th>Blue Team</th>
+                <th>Red Team</th>
+              </tr>
+            </thead>
+            <tbody>
+
+                
+                {schedule.map((elem) => (
+                <tr>
+                  <td>{elem.date}</td>
+                  <td>{elem.team1}</td>
+                  <td>{elem.team2}</td>
+                </tr>
+                ))}
+
+             
+            </tbody>
+          </Table>
+          </>
+          )
+    }
+}
+function LeagueRank(){
+    const [data, setData] = useState(null)
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                axios.get('http://localhost:8000/api/leaguerank/',header).then((response) => {
+                    setData(response.data.Data);
+
+                })
+            } catch (e) { console.log(e); }
+        };
+        fetchData();
+    }, []);
+    if (data===null){
+        return(<></>)
+    }
+    else{
+        return(
+        <>
+        <h2>리그 랭킹</h2>
+        <Table responsive>
+            <thead>
+              <tr>
+                <th>순위</th>
+                <th>팀 이름</th>
+                <th>승</th>
+                <th>패</th>
+              </tr>
+            </thead>
+            <tbody>
+                {data.map((elem,index) => (
+                <tr>
+                  <td>{index+1}</td>
+                  <td>{elem.name}</td>
+                  <td>{elem.win}</td>
+                  <td>{elem.lose}</td>
+                </tr>
+                ))}
+
+             
+            </tbody>
+          </Table>
+          </>
+          )
+    }
+}
+
 export default function Team() {
 
 
@@ -207,7 +313,10 @@ export default function Team() {
                     <EnterpriseInfo enterprise1={data.my_team.enterprise1} enterprise2={data.my_team.enterprise2} _available_enterprise={data.available_enterprise} money={data.my_team.money}></EnterpriseInfo>
                 </Tab>
                 <Tab eventKey="leagueinfo" title="리그 상황">
-                    <div>4</div>
+                    <Row>
+                        <Col><LeagueScheduleTable></LeagueScheduleTable></Col>
+                        <Col><LeagueRank></LeagueRank></Col>
+                    </Row>
                 </Tab>
             </Tabs>
         <Button onClick={test}>Redirection Test</Button>

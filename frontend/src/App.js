@@ -13,6 +13,7 @@ import MakeTeam from './pages/MakeTeam';
 import Banpick from './pages/Banpick';
 import Game from './pages/Game';
 import PersonalSchedule from './pages/PersonalSchedule';
+import PlayerDetail from './pages/PlayerDetail'
 import axios from 'axios';
 
 axios.defaults.withCredentials = true;
@@ -53,6 +54,7 @@ function App() {
           render={() => <League />} />
         <Route path="/player" component={Player} />
         <Route path="/lck/:username" exact component={Home} />
+        <Route path="/playerdetail/:id" exact component={PlayerDetail} />
         <Route
           exact
           path="/"

@@ -6,6 +6,7 @@ from django.conf.urls.static import static
 from .views import *
 from .league_process_view import *
 from .prediction_model_views import *
+from .test_view import *
 
 urlpatterns = [
 
@@ -61,6 +62,12 @@ urlpatterns = [
     # 리그 랭킹
     path('leaguerank/', LeagueRank.as_view()),
     path('modeltest/', MachineLearningModel.as_view()),
+
+    # 내 선수 상세보기
+    path('myplayerdetail/', MyPlayerInfo.as_view()),
+
+    # 테스트
+    path('addsub/', AddSub.as_view()),
     # 로그인 회원가입 관련 api
 
     path('rest-auth/', include('rest_auth.urls')),

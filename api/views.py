@@ -1069,9 +1069,9 @@ class IncreaseStatus(APIView):
 
         my_player = MyPlayer.objects.get(pk=request.data['my_player'])
 
-        my_player.status1 = my_player.status1+request.data['status1']
-        my_player.status2 = my_player.status1+request.data['status2']
-        my_player.status3 = my_player.status1+request.data['status3']
+        my_player.status1 = request.data['status1']
+        my_player.status2 = request.data['status2']
+        my_player.status3 = request.data['status3']
 
         my_player.remain = request.data['remain']
 
@@ -1191,3 +1191,15 @@ class MakeNewLeague(APIView):
             league_team.save()
 
         return Response({"success": True})
+
+
+class MyPlayerInfo(APIView):
+    def get(self, request):
+        if not request.user.is_authenticated:
+            return HttpResponseRedirect('/login')
+
+        id = request.query_params.get('id', 1)
+        my_player = MyPlayer.objects.get(pk=id)
+        serializer = MyPlayerSerializer(my_player)
+
+        return Response(serializer.data)
