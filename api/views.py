@@ -1203,3 +1203,52 @@ class MyPlayerInfo(APIView):
         serializer = MyPlayerSerializer(my_player)
 
         return Response(serializer.data)
+
+class ChangeRoaster(APIView):
+    def getMyPlayer(self,id):
+        if id==None:
+            return None
+        return MyPlayer.objects.get(pk=id)
+    def post(self,request):
+        if not request.user.is_authenticated:
+            return HttpResponseRedirect('/login')
+        user=request.user
+        
+        try:
+            my_team=MyTeam.objects.get(user=user)
+            my_team.top=self.getMyPlayer(request.data['top'])
+            my_team.jungle=self.getMyPlayer(request.data['jng'])
+            my_team.mid=self.getMyPlayer(request.data['mid'])
+            my_team.adc=self.getMyPlayer(request.data['adc'])
+            my_team.support=self.getMyPlayer(request.data['sup'])
+            my_team.sub1=self.getMyPlayer(request.data['sub1'])
+            my_team.sub2=self.getMyPlayer(request.data['sub2'])
+            my_team.save()
+            
+        except:
+            return Response({"success":False})
+
+        return Response({"success":True})
+
+
+class RemovePlayer(APIView):
+    def post(self,request):
+        if not request.user.is_authenticated:
+            return HttpResponseRedirect('/login')
+        user=request.user
+      
+        try:
+            my_team=MyTeam.objects.get(user=user)
+            delete_player=MyPlayer.objects.get(pk=request.data['id'])
+            pos=request.data['pos']
+            if pos=='Sub1':
+                my_team.sub1=None
+            else:
+                my_team.sub2=None
+            my_team.save()
+            delete_player.delete()
+            
+        except:
+            return Response({"success":False})
+
+        return Response({"success":True})

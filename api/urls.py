@@ -43,7 +43,8 @@ urlpatterns = [
     path('updatestatus/', IncreaseStatus.as_view()),
     path('enterprisestart/', EnterpriseStart.as_view()),
     path('sponsorstart/', SponsorStart.as_view()),
-
+    path('changeroaster/', ChangeRoaster.as_view()),
+    path('removeplayer/',RemovePlayer.as_view()),
     # 선택지 가져오기
 
     path('makeselection/', MakeSelection.as_view()),

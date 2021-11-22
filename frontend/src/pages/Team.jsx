@@ -32,6 +32,11 @@ function Player({ player, pos }) {
 }
 
 function TeamInfo({myTeam}){
+    const history = useHistory();
+    const routeChange = () =>{ 
+    let path = '/changeteam/'; 
+    history.push(path);
+    }
     return(
     <>
     <h2 text={myTeam.name}>{myTeam.name}</h2>
@@ -52,19 +57,61 @@ function TeamInfo({myTeam}){
         <Col><Player player={myTeam.sub2} pos="Sub2"></Player></Col>
     </Row>
     </Container>
+    <Button onClick={routeChange}>팀 수정</Button>
     </>
     )
 }
 
-function Sponsor({sponsor}){
+function Sponsor1({sponsor}){
 
     if (sponsor==null){
         return (<div></div>)
     }
     else{
-        return (<div>스폰서가 있습니다</div>)
+        return (
+            <Card style={{ width: '12rem' }}>
+                <Card.Body>
+                    <Card.Title>{sponsor.name}</Card.Title>
+                    <Card.Text className="mb-2 text-muted">{sponsor.description}</Card.Text>
+                    <Card.Text className="mb-2 text-muted">승리 시 {sponsor.earning}원 만큼 획득합니다</Card.Text>
+                </Card.Body>
+            </Card>)
     }
 }
+
+function Sponsor2({sponsor}){
+    const StartSponsor=()=>{
+      
+       
+        const data={
+            "sponsor":sponsor.id
+        }
+        try {
+            axios.post('http://localhost:8000/api/sponsorstart/',data,header).then((response) => {
+                alert("사업이 등록되었습니다");
+                document.location.href = '/team';
+            })
+        } catch (e) { console.log(e); }
+        
+    }
+
+    if (sponsor==null){
+        return (<div></div>)
+    }
+    else{
+        return (
+            <Card style={{ width: '12rem' }}>
+                <Card.Body>
+                    <Card.Title>{sponsor.name}</Card.Title>
+                    <Card.Text className="mb-2 text-muted">{sponsor.description}</Card.Text>
+                    <Card.Text className="mb-2 text-muted">승리 시 {sponsor.earning}원 만큼 획득합니다</Card.Text>
+                    <Button variant="secondary" onClick={StartSponsor}>계약 하기</Button>
+                </Card.Body>
+            </Card>)
+    }
+}
+
+
 function SponsorInfo({sponsor1,sponsor2,sponsor3,_available_sponsor}){
 
     return(
@@ -74,10 +121,9 @@ function SponsorInfo({sponsor1,sponsor2,sponsor3,_available_sponsor}){
         <Container>
         <Row className="justify-content-md-center">
 
-            <Col><Sponsor sponsor={sponsor1}></Sponsor></Col>
-            <Col><Sponsor sponsor={sponsor2}></Sponsor></Col>
-            <Col><Sponsor sponsor={sponsor3}></Sponsor></Col>
-
+            <Col><Sponsor1 sponsor={sponsor1}></Sponsor1></Col>
+            <Col><Sponsor1 sponsor={sponsor2}></Sponsor1></Col>
+            <Col><Sponsor1 sponsor={sponsor3}></Sponsor1></Col>
 
         </Row>
         </Container>
@@ -85,7 +131,7 @@ function SponsorInfo({sponsor1,sponsor2,sponsor3,_available_sponsor}){
         <Container>
         <Row className="justify-content-md-center">
         {_available_sponsor && _available_sponsor.map((sponsor) => (
-                                    <Col><Sponsor sponsor={sponsor}></Sponsor></Col>
+                                    <Col><Sponsor2 sponsor={sponsor}></Sponsor2></Col>
             ))}
         </Row>
         </Container>
