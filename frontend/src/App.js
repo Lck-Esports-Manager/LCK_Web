@@ -15,6 +15,7 @@ import Game from './pages/Game';
 import PersonalSchedule from './pages/PersonalSchedule';
 import PlayerDetail from './pages/PlayerDetail'
 import TeamChange from './pages/TeamChange'
+import AddPlayer from './pages/AddPlayer';
 import axios from 'axios';
 
 axios.defaults.withCredentials = true;
@@ -57,6 +58,7 @@ function App() {
         <Route path="/lck/:username" exact component={Home} />
         <Route path="/playerdetail/:id" exact component={PlayerDetail} />
         <Route path="/changeteam" exact component={TeamChange} />
+        <Route path="/addplayer" exact component={AddPlayer} />
         <Route
           exact
           path="/"

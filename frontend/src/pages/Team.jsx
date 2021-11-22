@@ -311,8 +311,8 @@ function LeagueRank(){
 export default function Team() {
 
 
-    const test =()=>{
-        document.location.href = '/team';
+    const moveAddPlayer =()=>{
+        document.location.href = '/addplayer';
 
     }
     const [data, setData] = useState({
@@ -323,6 +323,8 @@ export default function Team() {
             mid: null,
             adc: null,
             support: null,
+            sub1:null,
+            sub2:null,
             sponsor1:null,
             sponsor2:null,
             sponsor3:null,
@@ -365,7 +367,8 @@ export default function Team() {
                     </Row>
                 </Tab>
             </Tabs>
-        <Button onClick={test}>Redirection Test</Button>
+        {data.my_team.sub1===null || data.my_team.sub2===null?<Button onClick={moveAddPlayer}>선수 영입하기</Button>:<div></div>}
+      
 
         </>);
 }

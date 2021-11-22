@@ -67,15 +67,15 @@ class PlayerListView(APIView):
         year = request.query_params.get('year', None)
         result = Player.objects.all()
 
-        if name != None:
+        if name != None and name != '':
             result = result.filter(name=name)
-        if rate != None:
+        if rate != None and rate != '':
             result = result.filter(rate=rate)
-        if position != None:
+        if position != None and position != '':
             result = result.filter(position=position)
-        if season != None:
+        if season != None and season != '':
             result = result.filter(season=season)
-        if year != None:
+        if year != None and year != '':
             result = result.filter(year=year)
 
         serializer = PlayerSerializer(result, many=True)
