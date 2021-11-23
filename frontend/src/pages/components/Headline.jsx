@@ -21,6 +21,7 @@ export default function Headline() {
             window.localStorage.setItem('isLogin', 'false');
             window.localStorage.removeItem('token');
             window.localStorage.removeItem('user');
+            removeToken()
             setRender(render + 1);
             removeToken();
         }).catch((Error) => {

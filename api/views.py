@@ -67,15 +67,15 @@ class PlayerListView(APIView):
         year = request.query_params.get('year', None)
         result = Player.objects.all()
 
-        if name != None:
+        if name != None and name != '':
             result = result.filter(name=name)
-        if rate != None:
+        if rate != None and rate != '':
             result = result.filter(rate=rate)
-        if position != None:
+        if position != None and position != '':
             result = result.filter(position=position)
-        if season != None:
+        if season != None and season != '':
             result = result.filter(season=season)
-        if year != None:
+        if year != None and year != '':
             result = result.filter(year=year)
 
         serializer = PlayerSerializer(result, many=True)
@@ -1069,9 +1069,9 @@ class IncreaseStatus(APIView):
 
         my_player = MyPlayer.objects.get(pk=request.data['my_player'])
 
-        my_player.status1 = my_player.status1+request.data['status1']
-        my_player.status2 = my_player.status1+request.data['status2']
-        my_player.status3 = my_player.status1+request.data['status3']
+        my_player.status1 = request.data['status1']
+        my_player.status2 = request.data['status2']
+        my_player.status3 = request.data['status3']
 
         my_player.remain = request.data['remain']
 
@@ -1191,3 +1191,90 @@ class MakeNewLeague(APIView):
             league_team.save()
 
         return Response({"success": True})
+
+
+class MyPlayerInfo(APIView):
+    def get(self, request):
+        if not request.user.is_authenticated:
+            return HttpResponseRedirect('/login')
+
+        id = request.query_params.get('id', 1)
+        my_player = MyPlayer.objects.get(pk=id)
+        serializer = MyPlayerSerializer(my_player)
+
+        return Response(serializer.data)
+
+class ChangeRoaster(APIView):
+    def getMyPlayer(self,id):
+        if id==None:
+            return None
+        return MyPlayer.objects.get(pk=id)
+    def post(self,request):
+        if not request.user.is_authenticated:
+            return HttpResponseRedirect('/login')
+        user=request.user
+        
+        try:
+            my_team=MyTeam.objects.get(user=user)
+            my_team.top=self.getMyPlayer(request.data['top'])
+            my_team.jungle=self.getMyPlayer(request.data['jng'])
+            my_team.mid=self.getMyPlayer(request.data['mid'])
+            my_team.adc=self.getMyPlayer(request.data['adc'])
+            my_team.support=self.getMyPlayer(request.data['sup'])
+            my_team.sub1=self.getMyPlayer(request.data['sub1'])
+            my_team.sub2=self.getMyPlayer(request.data['sub2'])
+            my_team.save()
+            
+        except:
+            return Response({"success":False})
+
+        return Response({"success":True})
+
+
+class RemovePlayer(APIView):
+    def post(self,request):
+        if not request.user.is_authenticated:
+            return HttpResponseRedirect('/login')
+        user=request.user
+      
+        try:
+            my_team=MyTeam.objects.get(user=user)
+            delete_player=MyPlayer.objects.get(pk=request.data['id'])
+            pos=request.data['pos']
+            if pos=='Sub1':
+                my_team.sub1=None
+            else:
+                my_team.sub2=None
+            my_team.save()
+            delete_player.delete()
+            
+        except:
+            return Response({"success":False})
+
+        return Response({"success":True})
+
+#선수 영입
+class AddPlayer(APIView):
+    def post(self,request):
+        if not request.user.is_authenticated:
+            return HttpResponseRedirect('/login')
+        user=request.user
+      
+        try:
+            my_team=MyTeam.objects.get(user=user)
+            print(request.data['id'])
+            add_player=Player.objects.get(pk=request.data['id'])
+            my_player=MyPlayer(user=user,player=add_player,status1=add_player.status1,status2=add_player.status2,status3=add_player.status3)
+
+            if my_team.sub1!=None:
+                my_team.sub2=my_player
+            else:
+                my_team.sub1=my_player
+            my_player.save()
+            my_team.save()
+            
+            
+        except:
+            return Response({"success":False})
+        
+        return Response({"success":True})

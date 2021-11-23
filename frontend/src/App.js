@@ -13,6 +13,9 @@ import MakeTeam from './pages/MakeTeam';
 import Banpick from './pages/Banpick';
 import Game from './pages/Game';
 import PersonalSchedule from './pages/PersonalSchedule';
+import PlayerDetail from './pages/PlayerDetail'
+import TeamChange from './pages/TeamChange'
+import AddPlayer from './pages/AddPlayer';
 import axios from 'axios';
 // import header from './config';
 
@@ -54,6 +57,9 @@ function App() {
           render={() => <League />} />
         <Route path="/player" component={Player} />
         <Route path="/lck/:username" exact component={Home} />
+        <Route path="/playerdetail/:id" exact component={PlayerDetail} />
+        <Route path="/changeteam" exact component={TeamChange} />
+        <Route path="/addplayer" exact component={AddPlayer} />
         <Route
           exact
           path="/"

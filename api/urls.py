@@ -6,6 +6,7 @@ from django.conf.urls.static import static
 from .views import *
 from .league_process_view import *
 from .prediction_model_views import *
+from .test_view import *
 
 urlpatterns = [
 
@@ -20,6 +21,7 @@ urlpatterns = [
     path('champion/detail/', ChampionDetailView.as_view()),
     # 팀 생성
     path('maketeam/', MakeTeam.as_view()),
+    path('makenewleague/', MakeNewLeague.as_view()),
 
     # 스케줄 5개 가져오기(main page에서 사용)
 
@@ -41,7 +43,9 @@ urlpatterns = [
     path('updatestatus/', IncreaseStatus.as_view()),
     path('enterprisestart/', EnterpriseStart.as_view()),
     path('sponsorstart/', SponsorStart.as_view()),
-
+    path('changeroaster/', ChangeRoaster.as_view()),
+    path('removeplayer/',RemovePlayer.as_view()),
+    path('addplayer/',AddPlayer.as_view()),
     # 선택지 가져오기
 
     path('makeselection/', MakeSelection.as_view()),
@@ -61,6 +65,12 @@ urlpatterns = [
     # 리그 랭킹
     path('leaguerank/', LeagueRank.as_view()),
     path('modeltest/', MachineLearningModel.as_view()),
+
+    # 내 선수 상세보기
+    path('myplayerdetail/', MyPlayerInfo.as_view()),
+
+    # 테스트
+    path('addsub/', AddSub.as_view()),
     # 로그인 회원가입 관련 api
 
     path('rest-auth/', include('rest_auth.urls')),
