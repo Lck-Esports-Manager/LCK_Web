@@ -1,9 +1,78 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useHistory } from "react-router-dom";
-import { Row, DropdownButton, Col, Button, Dropdown,Table,Spinner } from 'react-bootstrap'
+import { Row, DropdownButton, Col, Button, Dropdown,Table,Spinner, Container,Image,CloseButton } from 'react-bootstrap'
 import { header } from "../config.js";
 
+
+function PlayerDetailInfo({id,unable,money,func}){
+    const [player, setPlayer] = useState(null);
+    useEffect(() => {
+        const fetchPlayer = async () => {
+            let config = {
+                
+                params: {
+                    id:id
+                }
+              }
+            try {
+                axios.get('http://localhost:8000/api/playerlist/detail/',config).then((response) => {
+                    
+                    setPlayer(response.data);
+                })
+            } catch (e) { console.log(e); }
+        };
+        
+        fetchPlayer();
+        
+        
+    }, []);
+    const exitClick=()=>{
+        func()
+    }
+    const purchase =()=>{
+        if (!unable.indexOf(player.id)){
+            alert("이미 보유하고 있는 선수입니다")
+        }
+        else if(money<player.price){
+            alert("보유하고 있는 금액이 부족합니다")
+        }
+        else{
+            alert("test")
+        }
+    }
+    if (player===null){
+        return(<></>)
+    }
+    return(
+        <>
+        <Container  style={
+            { width: '1500px',
+            height:'500px',
+            borderWidth:'thin',
+            borderStyle:"solid",}}>
+                <CloseButton onClick={exitClick}/>
+                <Row>
+                    <Col sm={4}>
+                    <Image src={`http://localhost:8000${player.images}`} rounded />
+                    <div>이름 : {player.name}</div>
+                    <div>포지션 : {player.position}</div>
+                    <div>연도 및 시즌 : {player.year} {player.season}</div>
+                    <div>소속 팀 : {player.team.name}</div>
+                    <div>등급 : {player.rate}</div>
+                    </Col>
+                    <Col sm={8}>
+                    <div>라인전 능력 : {player.status1}</div>
+                    <div>교전 능력 : {player.status2}</div>
+                    <div>한타 능력 : {player.status3}</div>
+                    <div>가격 : {player.price}</div>
+                    <Button variant ="secondary" onClick={purchase}>구입하기</Button>
+                    </Col>
+                </Row>
+            </Container>
+            </>
+    )
+} 
 
 export default function AddPlayer(){
     const [myTeam, setMyTeam] = useState({
@@ -11,6 +80,15 @@ export default function AddPlayer(){
 
     });
     const [unable, setUnable] = useState([]);
+    const [player, setPlayer] = useState([])
+    const [year, setYear] = useState(15)
+    const [position, setPosition] = useState("Top")
+    const [season, setSeason] = useState("spring")
+    const [tier, setTier] = useState(1)
+    const [click, setClick] = useState(false)
+    const [clickPlayer, setClickPlayer] = useState(null)
+    const [clickEvent, setClickEvent] = useState(false)
+    
     useEffect(() => {
         const fetchTeam = async () => {
             try {
@@ -30,18 +108,20 @@ export default function AddPlayer(){
                     }
                     setMyTeam(response.data.my_team);
                     setUnable(lst)
-                    console.log(lst)
+                    
                 })
             } catch (e) { console.log(e); }
         };
         fetchTeam();
     }, []);
-    const [player, setPlayer] = useState([])
-    const [year, setYear] = useState(15)
-    const [position, setPosition] = useState("Top")
-    const [season, setSeason] = useState("spring")
-    const [tier, setTier] = useState(1)
-    const [click, setClick] = useState(false)
+    
+    const selectPlayer=(e)=>{
+        
+        setClickEvent(true)
+
+        setClickPlayer(e.target.value)
+        
+    }
     const changePosition =(e)=>{
         setPosition(e.target.value)
     }
@@ -54,7 +134,9 @@ export default function AddPlayer(){
     const changeSeason =(e)=>{
         setSeason(e.target.value)
     }
-
+    const exit=()=>{
+        setClickEvent(false)
+    }
     const fetchPlayer=()=>{
         setClick(true)
         let config = {
@@ -81,6 +163,13 @@ export default function AddPlayer(){
     const tierArr=["1","2","3","4","5"]
     const tableHead=["이름","연도","시즌","포지션","등급"]
     return (<><div>여유 금액 :{myTeam.money}</div>
+    {clickEvent?<PlayerDetailInfo id={clickPlayer} unable={unable} money={myTeam.money} func={exit}/>:<></>}
+    
+    <Container  style={
+                        { width: '1500px',
+                        borderWidth:'thin',
+                        borderStyle:"solid",
+                        }}>                  
         <Row>
             <Col>포지션</Col>
             <Col>연도</Col>
@@ -125,36 +214,46 @@ export default function AddPlayer(){
             <Dropdown.Item as="button" onClick={changeTier} value={null}>전체</Dropdown.Item>
         </DropdownButton>
         </Col>
-        <Col>
+        <Col style={
+                        { alignContent:"center"
+                        }}>
         <Button variant="secondary" onClick={fetchPlayer}>
                 검색
         </Button>
         </Col>
         </Row>
+    </Container>  
         {click? <div class="d-flex justify-content-center"><Spinner animation="border" /></div> :
-        <Table responsive>
+        <Container  style={
+                        { width: '1500px'}}>
+        <Table size="sm" style={{alignContent:"center"}}>
         <thead>
-            <tr>
-            {tableHead&&tableHead.map((elem) => (
-                <th>{elem}</th>
-            ))}
+            <tr>          
+                    <th></th>
+                    {tableHead&&tableHead.map((elem) => (
+                                 <th>{elem}</th>
+                    ))}
+                           
             </tr>
         </thead>
         <tbody>
-            
-            {player && player.map((_player) => (
-                <tr>
-                <td>{_player.name}</td>
-                <td>{_player.position}</td>
-                <td>{_player.year}</td>
-                <td>{_player.season}</td>
-                <td>{_player.rate}</td>
-                </tr>
-            ))}
-            
+
+        {player && player.map((_player) => (
+                            <>
+                            <tr>
+                                <td><Button variant='outline-secondary' size="sm" value={_player.id} onClick={selectPlayer} disabled={clickEvent}>선택</Button></td>
+                                <td>{_player.name}</td>
+                                <td>{_player.season}</td>
+                                <td>{_player.year}</td>
+                                <td>{_player.position}</td>
+                                <td>{_player.rate}</td>   
+                            </tr>  
+                            </>
+                            ))}
         </tbody>
-        
-        </Table>}
-        
+        </Table>
+        </Container>
+     }
+     
         </>)
 }
