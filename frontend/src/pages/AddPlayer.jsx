@@ -30,7 +30,11 @@ function PlayerDetailInfo({id,unable,money,func}){
     const exitClick=()=>{
         func()
     }
+    const history = useHistory();
     const purchase =()=>{
+        const body={
+            id:id
+        }
         if (!unable.indexOf(player.id)){
             alert("이미 보유하고 있는 선수입니다")
         }
@@ -38,7 +42,20 @@ function PlayerDetailInfo({id,unable,money,func}){
             alert("보유하고 있는 금액이 부족합니다")
         }
         else{
-            alert("test")
+            try {
+               
+                axios.post('http://localhost:8000/api/addplayer/',body,header).then((response) => {
+                    
+                
+                    if(response.data.success){
+                        alert("구입이 완료되었습니다")
+                        history.push('/team');
+                    }
+                    else{
+                        alert("비정상적인 접근입니다")
+                    }
+                })
+            } catch (e) { console.log(e); }
         }
     }
     if (player===null){

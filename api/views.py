@@ -1252,3 +1252,29 @@ class RemovePlayer(APIView):
             return Response({"success":False})
 
         return Response({"success":True})
+
+#선수 영입
+class AddPlayer(APIView):
+    def post(self,request):
+        if not request.user.is_authenticated:
+            return HttpResponseRedirect('/login')
+        user=request.user
+      
+        try:
+            my_team=MyTeam.objects.get(user=user)
+            print(request.data['id'])
+            add_player=Player.objects.get(pk=request.data['id'])
+            my_player=MyPlayer(user=user,player=add_player,status1=add_player.status1,status2=add_player.status2,status3=add_player.status3)
+
+            if my_team.sub1!=None:
+                my_team.sub2=my_player
+            else:
+                my_team.sub1=my_player
+            my_player.save()
+            my_team.save()
+            
+            
+        except:
+            return Response({"success":False})
+        
+        return Response({"success":True})
