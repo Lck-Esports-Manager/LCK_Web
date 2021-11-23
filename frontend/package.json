@@ -18,6 +18,7 @@
     "sass": "^1.42.1",
     "styled-components": "^5.3.3",
     "swiper": "^6.8.4",
+    "universal-cookie": "^4.0.4",
     "web-vitals": "^1.0.1"
   },
   "scripts": {

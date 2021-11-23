@@ -56,14 +56,14 @@ export default function Banpick() {
     /* 빨강파랑 고려하여 현재 내턴인지 구분 */
     const isMyturn = (i) => {
         if (api.set_num === 1) { //myteam blue
-            if (i === 0 || i === 2 || i === 4 || i === 7 || i === 8 ||
+            if (i === 1 || i === 3 || i === 5 || i === 7 || i === 8 ||
                 i === 11 || i === 12 || i === 14 || i === 16 || i === 19) {
                 return 0
             }
             else { return 1 }
         }
         else {                   // myteam red
-            if (i === 0 || i === 2 || i === 4 || i === 7 || i === 8 ||
+            if (i === 1 || i === 3 || i === 5 || i === 7 || i === 8 ||
                 i === 11 || i === 12 || i === 14 || i === 16 || i === 19) {
                 return 1
             }
@@ -95,6 +95,7 @@ export default function Banpick() {
         }
         else {
             setTurn(iTurn + 1);
+            console.log("내턴1증가");
             axios.get('http://localhost:8000/api/champion/?position=' + isPos(iTurn + 1) + '&tier=1')
                 .then((response1) => {
                     axios.get('http://localhost:8000/api/champion/?position=' + isPos(iTurn + 1) + '&tier=2')
@@ -106,6 +107,9 @@ export default function Banpick() {
                         })
                 })
         }
+        console.log(`버튼 누르고 지금 ${iTurn}턴 `);
+        console.log(`현재 덱`);
+        console.log(chamList);
     }
     const isBan = (i) => {
         if (i === 0 || i === 1 || i === 2 || i === 3 || i === 4 || i === 5
@@ -134,12 +138,11 @@ export default function Banpick() {
             alert('시작하기를 눌러주세요.');
         if (iTurn !== -1 && isMyturn()) {
             for (let i = 0; i < iTurn; i++) {
-                if (cham.id === chamList[i].id) {
+                if (cham.name === chamList[i].name) {
                     alert('다른 챔피언으로 다시 선택해주십시오.');
                     return
                 }
             }
-            console.log(cham);
             if (cham.position !== isPos(iTurn))
                 alert(`${isPos(iTurn)} 포지션의 챔피언을 선택해주세요.`);
             else {
@@ -148,8 +151,11 @@ export default function Banpick() {
                     [iTurn]: cham,
                 })
             }
-            //console.log(cham);
+            console.log(cham);
             //console.log(chamList);
+            console.log(`챔피언 누르고 지금 ${iTurn}턴 `);
+            console.log(`현재 덱`);
+            console.log(chamList);
         }
     }
     /* 선택된 챔피언들을 출력하는 함수 */
@@ -188,61 +194,58 @@ export default function Banpick() {
         };
         fetch();
     }, []);
-    /* 1티어, 2티어 스테이트 생성 *//*
+    /* 1티어, 2티어 스테이트 생성 */
     useEffect(() => {
-        console.log(`==== i: ${iTurn}+1 ran 새로받아오기 ====`);
         const fetchcham = async () => {
             try {
-                axios.get('http://localhost:8000/api/champion/?position=' + isPos(iTurn + 1) + '&tier=1')
-                    .then((response1) => {
-                        axios.get('http://localhost:8000/api/champion/?position=' + isPos(iTurn + 1) + '&tier=2')
-                            .then((response2) => {
-                                setRanList({
-                                    1: response1.data,
-                                    2: response2.data
-                                });
-                            })
+                if (!isMyturn(iTurn)) {
+                    randT = Math.floor(Math.random() * 2) + 1;
+                    randC = Math.floor(Math.random() * ranList[randT].length);
+                    let temp = 1;
+                    axios.get('http://localhost:8000/api/champion/?position=' + isPos(iTurn + 1) + '&tier=1')
+                        .then((response1) => {
+                            axios.get('http://localhost:8000/api/champion/?position=' + isPos(iTurn + 1) + '&tier=2')
+                                .then((response2) => {
+                                    setRanList({
+                                        1: response1.data,
+                                        2: response2.data
+                                    });
+                                })
+                        })
+                    axios.post('http://localhost:8000/api/progressleague/')
+                        .then((response) => { setApi(response.data); })
+                    console.log(api);
+                    console.log(`지금 ${iTurn}턴인데 ${isMyturn(iTurn)}`);
+                    while (temp) {
+                        temp = 0;
+                        for (let i = 0; i < iTurn; i++) {
+                            if (ranList[randT][randC].id === chamList[i].id) {
+                                randT = Math.floor(Math.random() * 2) + 1;
+                                randC = Math.floor(Math.random() * ranList[randT].length);
+                                temp = 1;
+                            }
+                        }
+                    }
+                    setChamList({
+                        ...chamList,
+                        [iTurn]: ranList[randT][randC],
                     })
+                    setTurn(iTurn + 1);
+                    console.log("오토1증가");
+                }
                 //console.log(ranList);
             } catch (e) { console.log(e); }
         };
         fetchcham();
-    }, [iTurn]);*/
+    }, [iTurn]);
     /* 렌더될때마다 내 턴이 아니면 자동으로 픽하는 동작 */
-    if (!isMyturn(iTurn)) {
-        randT = Math.floor(Math.random() * 2) + 1;
-        randC = Math.floor(Math.random() * ranList[randT].length);
-        let temp = 1;
-        axios.get('http://localhost:8000/api/champion/?position=' + isPos(iTurn + 1) + '&tier=1')
-            .then((response1) => {
-                axios.get('http://localhost:8000/api/champion/?position=' + isPos(iTurn + 1) + '&tier=2')
-                    .then((response2) => {
-                        setRanList({
-                            1: response1.data,
-                            2: response2.data
-                        });
-                    })
-            })
-        axios.post('http://localhost:8000/api/progressleague/')
-            .then((response) => { setApi(response.data); })
-        while (temp) {
-            temp = 0;
-            for (let i = 0; i < iTurn; i++) {
-                if (ranList[randT][randC].id === chamList[i].id) {
-                    randT = Math.floor(Math.random() * 2) + 1;
-                    randC = Math.floor(Math.random() * ranList[randT].length);
-                    temp = 1;
-                }
-            }
-        }
-        setChamList({
-            ...chamList,
-            [iTurn]: ranList[randT][randC],
-        })
-        setTurn(iTurn + 1);
+    const pickcard = (num) => {
+        return <li className="card">
+            <div className="cham">{printList(num)}</div>
+            {chamList[num] !== null ? <img src={`/api/media/images/${chamList[num]?.name}.png`} alt="img" /> : <></>}
+        </li>
     }
     return (<>
-        <Maintitle />
         <div className="BP--main">
             <div className="BP--inner">
                 <div className="BPbox">
@@ -262,31 +265,21 @@ export default function Banpick() {
                             <li className="ban">
                                 <div className="blue--pick">
                                     <ul className="cardbar">
-                                        {/* <div className="top">Top</div> */}
-                                        <li className="card"><div className="cham">{printList(1)}</div> </li>
-                                        {/* <div className="jng">Jungle</div> */}
-                                        <li className="card"><div className="cham">{printList(3)}</div> </li>
-                                        {/* <div className="mid">Middle</div> */}
-                                        <li className="card"><div className="cham">{printList(5)}</div> </li>
-                                        {/* <div className="adc">ADC</div> */}
-                                        <li className="card"><div className="cham">{printList(13)}</div> </li>
-                                        {/* <div className="spt">Support</div> */}
-                                        <li className="card"><div className="cham">{printList(15)}</div> </li>
+                                        {pickcard(0)}
+                                        {pickcard(2)}
+                                        {pickcard(4)}
+                                        {pickcard(13)}
+                                        {pickcard(15)}
                                     </ul>
                                 </div>
                                 <div className="blue--pick">
                                     {/* <div className="title">BAN</div> */}
                                     <ul className="cardbar">
-                                        {/* <div className="top">Top</div> */}
-                                        <li className="card"><div className="cham">{printList(0)}</div> </li>
-                                        {/* <div className="jng">Jungle</div> */}
-                                        <li className="card"><div className="cham">{printList(2)}</div> </li>
-                                        {/* <div className="mid">Middle</div> */}
-                                        <li className="card"><div className="cham">{printList(4)}</div> </li>
-                                        {/* <div className="adc">ADC</div> */}
-                                        <li className="card"><div className="cham">{printList(12)}</div> </li>
-                                        {/* <div className="spt">Support</div> */}
-                                        <li className="card"><div className="cham">{printList(14)}</div> </li>
+                                        {pickcard(1)}
+                                        {pickcard(3)}
+                                        {pickcard(5)}
+                                        {pickcard(12)}
+                                        {pickcard(14)}
                                     </ul>
                                 </div>
                             </li>
@@ -295,15 +288,15 @@ export default function Banpick() {
                                     {/* <div className="title">BLUE</div> */}
                                     <ul className="cardbar">
                                         <div className="pos">Top</div>
-                                        <li className="card"><div className="cham">{printList(6)}</div> </li>
+                                        {pickcard(6)}
                                         <div className="pos">Jungle</div>
-                                        <li className="card"><div className="cham">{printList(9)}</div> </li>
+                                        {pickcard(9)}
                                         <div className="pos">Middle</div>
-                                        <li className="card"><div className="cham">{printList(10)}</div> </li>
+                                        {pickcard(10)}
                                         <div className="pos">ADC</div>
-                                        <li className="card"><div className="cham">{printList(17)}</div> </li>
+                                        {pickcard(17)}
                                         <div className="pos">Support</div>
-                                        <li className="card"><div className="cham">{printList(18)}</div> </li>
+                                        {pickcard(18)}
                                     </ul>
                                 </div>
                             </li>
@@ -326,6 +319,7 @@ export default function Banpick() {
                                             <li className="grade">{cham.grade}</li>
                                             <li className="pos">{cham.position}</li>
                                             <li className="name">{cham.name}</li>
+                                            <img src={`/api/media/images/${cham.name}.png`} alt="img" />
                                         </ul>
                                     ))}
                                 </div>
@@ -335,15 +329,15 @@ export default function Banpick() {
                                     {/* <div className="title">RED</div> */}
                                     <ul className="cardbar">
                                         <div className="pos">Top</div>
-                                        <li className="card"><div className="cham">{printList(7)}</div> </li>
+                                        {pickcard(7)}
                                         <div className="pos">Jungle</div>
-                                        <li className="card"><div className="cham">{printList(8)}</div> </li>
+                                        {pickcard(8)}
                                         <div className="pos">Middle</div>
-                                        <li className="card"><div className="cham">{printList(11)}</div> </li>
+                                        {pickcard(11)}
                                         <div className="pos">ADC</div>
-                                        <li className="card"><div className="cham">{printList(16)}</div> </li>
+                                        {pickcard(16)}
                                         <div className="pos">Support</div>
-                                        <li className="card"><div className="cham">{printList(19)}</div> </li>
+                                        {pickcard(19)}
                                     </ul>
                                 </div>
                             </li>

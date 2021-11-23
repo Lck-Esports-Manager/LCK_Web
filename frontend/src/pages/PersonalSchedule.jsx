@@ -225,7 +225,7 @@ export default function PersonalSchedule() {
             ).then((response) => {
                 console.log(response);
                 setMatch(response.data);
-                if (!response.data.Success) {
+                if (response.data.Success === false) {
                     alert('올바르지 못한 접근입니다.');
                     document.location.href = '/';
                 }
@@ -240,6 +240,13 @@ export default function PersonalSchedule() {
         setRefresh(refresh + 1);
         console.log(refresh);
     }
+    const CondiToString = (num) => {
+        if (num === -2) return "매우 나쁨";
+        else if (num === -1) return "나쁨";
+        else if (num === 0) return "보통";
+        else if (num === 1) return "좋음";
+        else return "매우 좋음";
+    }
     return (<>
         <Maintitle />
         <div className="PS--main">
@@ -253,9 +260,9 @@ export default function PersonalSchedule() {
                     <div className="match--info">
                         <div className="title">TODAY MATCH</div>
                         <div className="VS">
-                            {todayMatch && <div>ㅤ{todayMatch.data[0].team1}</div>}
+                            {todayMatch && <div>ㅤ{todayMatch.data[0]?.team1}</div>}
                             <div className="text"> VS </div>
-                            {todayMatch && <div>ㅤ{todayMatch.data[0].team2}</div>}
+                            {todayMatch && <div>ㅤ{todayMatch.data[0]?.team2}</div>}
                         </div>
                     </div>
                     <div className="schedule--info">
@@ -284,8 +291,8 @@ export default function PersonalSchedule() {
                                 <li>{team.my_team && team.my_team.top.level}</li>
                                 <div>Tier</div>
                                 <li>{team.my_team && team.my_team.top.player.rate}</li>
-                                <div>Season </div>
-                                <li>ㅤ{team.my_team && team.my_team.top.player.year} {team.my_team && team.my_team.top.player.season}</li>
+                                <div>Condition </div>
+                                <li>ㅤ{team.my_team && CondiToString(team.my_team.top.feeling)}</li>
                             </ul>
                             <div className="select">
                                 <ul>
@@ -310,8 +317,8 @@ export default function PersonalSchedule() {
                                 <li>{team.my_team && team.my_team.jungle.level}</li>
                                 <div>Tier</div>
                                 <li>{team.my_team && team.my_team.jungle.player.rate}</li>
-                                <div>Season </div>
-                                <li>ㅤ{team.my_team && team.my_team.jungle.player.year} {team.my_team && team.my_team.jungle.player.season}</li>
+                                <div>Condition </div>
+                                <li>ㅤ{team.my_team && CondiToString(team.my_team.jungle.feeling)}</li>
                             </ul>
                             <div className="select">
                                 <ul>
@@ -336,8 +343,8 @@ export default function PersonalSchedule() {
                                 <li>{team.my_team && team.my_team.mid.level}</li>
                                 <div>Tier</div>
                                 <li>{team.my_team && team.my_team.mid.player.rate}</li>
-                                <div>Season </div>
-                                <li>ㅤ{team.my_team && team.my_team.mid.player.year} {team.my_team && team.my_team.mid.player.season}</li>
+                                <div>Condition </div>
+                                <li>ㅤ{team.my_team && CondiToString(team.my_team.mid.feeling)}</li>
                             </ul>
                             <div className="select">
                                 <ul>
@@ -362,8 +369,8 @@ export default function PersonalSchedule() {
                                 <li>{team.my_team && team.my_team.adc.level}</li>
                                 <div>Tier</div>
                                 <li>{team.my_team && team.my_team.adc.player.rate}</li>
-                                <div>Season </div>
-                                <li>ㅤ{team.my_team && team.my_team.adc.player.year} {team.my_team && team.my_team.adc.player.season}</li>
+                                <div>Condition </div>
+                                <li>ㅤ{team.my_team && CondiToString(team.my_team.adc.feeling)}</li>
                             </ul>
                             <div className="select">
                                 <ul>
@@ -388,9 +395,8 @@ export default function PersonalSchedule() {
                                 <li>{team.my_team && team.my_team.support.level}</li>
                                 <div>Tier</div>
                                 <li>{team.my_team && team.my_team.support.player.rate}</li>
-                                <div>Season </div>
-                                <li>ㅤ{team.my_team && team.my_team.support.player.year} {team.my_team && team.my_team.support.player.season}</li>
-                            </ul>
+                                <div>Condition </div>
+                                <li>ㅤ{team.my_team && CondiToString(team.my_team.support.feeling)}</li></ul>
                             <div className="select">
                                 <ul>
                                     {click5 === 1 ? <li onClick={() => { setbtn(5, 1) }} title="선수의 컨디션이 2단계 증가하고, 경험치가 소폭 감소합니다">휴식</li>

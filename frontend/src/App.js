@@ -14,6 +14,7 @@ import Banpick from './pages/Banpick';
 import Game from './pages/Game';
 import PersonalSchedule from './pages/PersonalSchedule';
 import axios from 'axios';
+// import header from './config';
 
 axios.defaults.withCredentials = true;
 

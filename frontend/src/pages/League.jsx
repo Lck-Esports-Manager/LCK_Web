@@ -4,11 +4,17 @@ import axios from 'axios';
 import Maintitle from './components/Maintitle';
 
 export default function League() {
+    const [playbtn, setPlaybtn] = useState(true);
     const [leagueState, setLeague] = useState({
         league: false,
         my_team: true,
         banpick: false,
     });
+    const [refresh, setRefresh] = useState(0);
+    const pageRefresh = () => {
+        setRefresh(refresh + 1);
+        console.log(refresh);
+    };
     useEffect(() => {
         const getLeague = async () => {
             try {
@@ -22,9 +28,38 @@ export default function League() {
             } catch (e) { console.log(e); }
         };
         getLeague();
+        setPlaybtn(true);
     }, []);
-    const movePage = () => {
+    useEffect(() => {
+        const getLeague = async () => {
+            try {
+                axios.post('http://localhost:8000/api/progressleague/'
+                ).then((response) => {
+                    console.log(response);
+                    setLeague(response.data);
+                }).catch((e) => {
+                    console.log(e.response);
+                })
+            } catch (e) { console.log(e); }
+        };
+        getLeague();
+    }, [refresh]);
+    const loadPage = () => {
+        setPlaybtn(false);
+        pageRefresh();
         console.log(leagueState);
+    }
+    const nextPage = () => {
+        if (leagueState.league === false)       // 리그가 없는 경우 -> 팀생성
+            return "팀생성";
+        else if (leagueState.my_team === false) // 경기가 없는 경우 -> 선수 개인스케줄
+            return "선수 스케줄"
+        else if (leagueState.banpick === true) // 밴픽이 없는 경우 -> 밴픽
+            return "챔피언 선택"
+        else                                    // 다 준비 되어 있는 경우 -> 게임시작
+            return "게임플레이"
+    }
+    const movePage = () => {
         if (leagueState.league === false)       // 리그가 없는 경우 -> 팀생성
             document.location.href = `/maketeam`;
         else if (leagueState.my_team === false) // 경기가 없는 경우 -> 선수 개인스케줄
@@ -52,9 +87,11 @@ export default function League() {
                             중간에 게임을 종료하게 될 경우 자동 저장되며 <br />빠른 종료를 원하실 경우
                             진행된 턴 정보를 바탕으로 머신러닝 모델을 통해 승패를 결정하게 됩니다.
                         </p>
-                        <div className="play--button" onClick={movePage}>
+                        {playbtn ? <div className="play--button" onClick={loadPage}>
                             PLAY
-                        </div>
+                        </div> : <div className="next--button" onClick={movePage}>
+                            {nextPage()}
+                        </div>}
                     </div>
                 </div>
             </div>

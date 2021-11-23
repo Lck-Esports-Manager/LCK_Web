@@ -3,6 +3,7 @@ import axios from 'axios';
 import './Game.css';
 import Tower from './components/Tower';
 import SelectBtn from './components/SelectBtn';
+import Slot from './components/PlayerSlot';
 
 export default function Game() {
     const [clicked, setClick] = useState({
@@ -31,7 +32,51 @@ export default function Game() {
     let buffer = [];
     const [pop, setPop] = useState(true);       //팝업창의 띄움상태
     const [refresh, setRefresh] = useState(0);  //렌더를 돕는 스테이트
-    const [team, setTeam] = useState(null);     //팀정보
+    const [pick, setPick] = useState(null);     //랜덤픽에 버퍼
+    const [myImg, setmyImg] = useState({
+        top: {
+            name: "quinnn",
+            url: "/api/media/images/quinn.png"
+        },
+        jng: {
+            name: "shaco",
+            url: "/api/media/images/shaco.png"
+        },
+        mid: {
+            name: "vex",
+            url: "/api/media/images/vex.png"
+        },
+        adc: {
+            name: "missfortune",
+            url: "/api/media/images/missfortune.png"
+        },
+        sup: {
+            name: "morgana",
+            url: "/api/media/images/morgana.png"
+        }
+    });
+    const [opImg, setopImg] = useState({
+        top: {
+            name: "quinn",
+            url: "/api/media/images/quinn.png"
+        },
+        jng: {
+            name: "shaco",
+            url: "/api/media/images/shaco.png"
+        },
+        mid: {
+            name: "vex",
+            url: "/api/media/images/vex.png"
+        },
+        adc: {
+            name: "missfortune",
+            url: "/api/media/images/missfortune.png"
+        },
+        sup: {
+            name: "morgana",
+            url: "/api/media/images/morgana.png"
+        }
+    });
     const [select, setSelect] = useState({
         "lane_press": {
             "top": [
@@ -99,11 +144,6 @@ export default function Game() {
                 false,
                 3,
                 12
-            ],
-            "normal": [
-                false,
-                3,
-                13
             ]
         },
         "tower_press": {
@@ -141,10 +181,6 @@ export default function Game() {
             ]
         },
         "nexus_destroy": false
-    });
-    const [time, setTime] = useState({
-        min: 5,
-        sec: 0
     });
     const [info, setInfo] = useState({
         score: [
@@ -204,21 +240,81 @@ export default function Game() {
         setRefresh(refresh + 1);
         console.log(refresh);
     };
-    const [tt, setTT] = useState('');
-    const checkCham = (num) => {
-        let temp = 'sdfd';
-        axios.get('http://localhost:8000/api/champion/detail/?id=' + num)
-            .then((response) => {
-                console.log(response.data.name);
-                temp = 'asdasdas'
-                setTT(response.data.name);
-            });
-        return temp;
-    }
-    const randomPick = () => {
-        let sumAct = 0;
-        let rannum = Math.floor(Math.random() * 20) + 1;
-        sumAct = calcAct(rannum);
+    const loadImage = () => {
+        axios.get('http://localhost:8000/api/champion/detail/?id=' + info.data?.my_top)
+            .then((response1) => {
+                axios.get('http://localhost:8000/api/champion/detail/?id=' + info.data?.my_jng)
+                    .then((response2) => {
+                        axios.get('http://localhost:8000/api/champion/detail/?id=' + info.data?.my_mid)
+                            .then((response3) => {
+                                axios.get('http://localhost:8000/api/champion/detail/?id=' + info.data?.my_adc)
+                                    .then((response4) => {
+                                        axios.get('http://localhost:8000/api/champion/detail/?id=' + info.data?.my_sup)
+                                            .then((response5) => {
+                                                setmyImg({
+                                                    top: {
+                                                        name: response1.data.name,
+                                                        url: response1.data.image_url
+                                                    },
+                                                    jng: {
+                                                        name: response2.data.name,
+                                                        url: response2.data.image_url
+                                                    },
+                                                    mid: {
+                                                        name: response3.data.name,
+                                                        url: response3.data.image_url
+                                                    },
+                                                    adc: {
+                                                        name: response4.data.name,
+                                                        url: response4.data.image_url
+                                                    },
+                                                    sup: {
+                                                        name: response5.data.name,
+                                                        url: response5.data.image_url
+                                                    }
+                                                });
+                                            })
+                                    })
+                            })
+                    })
+            })
+        axios.get('http://localhost:8000/api/champion/detail/?id=' + info.data?.op_top)
+            .then((response1) => {
+                axios.get('http://localhost:8000/api/champion/detail/?id=' + info.data?.op_jng)
+                    .then((response2) => {
+                        axios.get('http://localhost:8000/api/champion/detail/?id=' + info.data?.op_mid)
+                            .then((response3) => {
+                                axios.get('http://localhost:8000/api/champion/detail/?id=' + info.data?.op_adc)
+                                    .then((response4) => {
+                                        axios.get('http://localhost:8000/api/champion/detail/?id=' + info.data?.op_sup)
+                                            .then((response5) => {
+                                                setopImg({
+                                                    top: {
+                                                        name: response1.data.name,
+                                                        url: response1.data.image_url
+                                                    },
+                                                    jng: {
+                                                        name: response2.data.name,
+                                                        url: response2.data.image_url
+                                                    },
+                                                    mid: {
+                                                        name: response3.data.name,
+                                                        url: response3.data.image_url
+                                                    },
+                                                    adc: {
+                                                        name: response4.data.name,
+                                                        url: response4.data.image_url
+                                                    },
+                                                    sup: {
+                                                        name: response5.data.name,
+                                                        url: response5.data.image_url
+                                                    }
+                                                });
+                                            })
+                                    })
+                            })
+                    })
+            })
     }
     useEffect(() => {
         const fetch = async () => {
@@ -227,6 +323,7 @@ export default function Game() {
                     .then((response1) => {
                         setInfo(response1.data);
                         console.log(info);
+                        loadImage();
                         axios.get('http://localhost:8000/api/makeselection/?set=' + info.data?.id)
                             .then((response2) => {
                                 setSelect(response2.data);
@@ -239,9 +336,36 @@ export default function Game() {
             } catch (e) { console.log(e); }
         };
         fetch();
-        // if (info.data.turn%2===0){
-        //     Math.floor(Math.random() * 20) + 1;
-        // }
+        setPick({
+            1: { bool: select.lane_press?.top[0], act: select.lane_press?.top[1] },
+            2: { bool: select.lane_press?.mid[0], act: select.lane_press?.mid[1] },
+            3: { bool: select.lane_press?.bot[0], act: select.lane_press?.bot[1] },
+            4: { bool: select.ganking?.top[0], act: select.ganking?.top[1] },
+            5: { bool: select.ganking?.mid[0], act: select.ganking?.mid[1] },
+            6: { bool: select.ganking?.bot[0], act: select.ganking?.bot[1] },
+            7: { bool: select.engage?.top[0], act: select.engage?.top[1] },
+            8: { bool: select.engage?.mid[0], act: select.engage?.mid[1] },
+            9: { bool: select.engage?.bot[0], act: select.engage?.bot[1] },
+            10: { bool: false },
+            11: { bool: false },
+            12: { bool: false },
+            13: { bool: false },
+            14: { bool: select.tower_press?.top[0], act: select.tower_press?.top[1] },
+            15: { bool: select.tower_press?.mid[0], act: select.tower_press?.mid[1] },
+            16: { bool: select.tower_press?.bot[0], act: select.tower_press?.bot[1] },
+            17: { bool: select.tower_destroy?.top[0], act: select.tower_destroy?.top[1] },
+            18: { bool: select.tower_destroy?.mid[0], act: select.tower_destroy?.mid[1] },
+            19: { bool: select.tower_destroy?.bot[0], act: select.tower_destroy?.bot[1] },
+            20: { bool: select.nexus_destroy }
+        });
+        if (info.data?.turn % 2 === info.data?.side) {
+            console.log('턴정보');
+            console.log(info.data.turn);
+            console.log(info.data.side);
+            autoSelect();
+        }
+        console.log(myImg);
+        console.log(select);
     }, [refresh]);
     useEffect(() => {
         const fetch = async () => {
@@ -252,42 +376,17 @@ export default function Game() {
                         console.log(info);
                         console.log(response1.data);
                     });
-                // axios.get('http://localhost:8000/api/makeselection/?set=' + info.data?.id)
-                //     .then((response2) => {
-                //         setSelect(response2.data);
-                //         console.log(response2.data);
-                //     });
             } catch (e) { console.log(e); }
         };
         fetch();
     }, []);
-    const turnStart = () => {
-        console.log('start');
-        while (time.min * time.sec !== 0) {
-            setTimeout(() => {
-                if (time.min > 0) {
-                    setTime({
-                        ...time,
-                        sec: time.sec - 1
-                    })
-                }
-                else {
-                    setTime({
-                        ...time,
-                        min: time.min - 1,
-                        sec: time.sec + 60
-                    })
-                }
-            }, 1000);
-            console.log(time.sec);
-        }
-    }
     const calcAct = (num) => {
-        if (num >= 1 && num <= 6) return 1
-        else if (num === 7 || num === 8 || num === 9) return 2
-        else if (num === 10 || num === 11 || num === 12 || num === 13) return 3
-        else if (num === 14 || num === 15 || num === 16) return 1
-        else if (num === 17 || num === 18 || num === 19) return 2
+        if (num === 1 || num === 2 || num === 3) return select.lane_press?.bot[1];
+        else if (num === 4 || num === 5 || num === 6) return select.ganking?.bot[1];
+        else if (num === 7 || num === 8 || num === 9) return select.engage?.bot[1];
+        else if (num === 10 || num === 11 || num === 12 || num === 13) return 0;
+        else if (num === 14 || num === 15 || num === 16) return select.tower_press?.bot[1];
+        else if (num === 17 || num === 18 || num === 19) return select.tower_destroy?.bot[1];
         else return 3
     }
     const click = (num) => {
@@ -312,6 +411,9 @@ export default function Game() {
         }
     }
     const sendSelect = () => {
+        if (select.fight?.dragon[0]) buffer.push(10);
+        if (select.fight?.elder[0]) buffer.push(11);
+        if (select.fight?.baron[0]) buffer.push(12);
         for (let i = 0; i < 21; i++) {
             if (clicked[i]) {
                 buffer.push(i);
@@ -319,6 +421,7 @@ export default function Game() {
         }
         if (buffer.length === 0) {
             console.log('선택해야합니다.');
+            alert('선택해야합니다.');
         }
         else {
             // api전송 
@@ -330,6 +433,7 @@ export default function Game() {
                 setPop(true);
                 setPopup(response.data.message);
                 if (buffer[0] === 20) {
+                    alert(response.data.message);
                     document.location.href = '/';
                 }
             });
@@ -360,17 +464,76 @@ export default function Game() {
             setAction(3);
             buffer = [];
         }
-        pageRefresh();
     }
     const autoSelect = () => {
-        const rand1 = Math.floor(Math.random() * 2) + 1; //1~2
-        if (rand1 === 1) { // 1만 3개 선택지
-
+        let rand1 = Math.floor(Math.random() * 3); //0~2 선택지 조합 변수
+        let rand2 = 0; //각 행동력 배열안에서 하나 뽑는 랜덤수
+        let act1 = [];
+        let act2 = [];
+        let act3 = [];
+        buffer = [];
+        let i = 0;
+        let temp = 0;
+        // 행동력따라 나눠 저장
+        if (pick !== null) {
+            for (i = 1; i < 20; i++) {
+                if (pick[i]?.bool) {
+                    if (pick[i]?.act === 1) act1.push(i);
+                    if (pick[i]?.act === 2) act2.push(i);
+                    if (pick[i]?.act === 3) act3.push(i);
+                }
+            }
+            if (pick[20].bool) {    //넥서스 파괴 선택지가 있을경우 
+                buffer.push(20);
+            }
+            else {                  //넥서스 파괴 선택지가 없을경우 
+                //3
+                if (rand1 === 0) {
+                    if (act3.length === 0) rand1 = rand1 + 1;
+                    else {
+                        rand2 = Math.floor(Math.random() * act3.length); //0~2
+                        buffer.push(act3[rand2]);
+                    }
+                }
+                //2 1
+                if (rand1 === 1) {
+                    if (act2.length === 0) rand1 = rand1 + 1;
+                    else {
+                        rand2 = Math.floor(Math.random() * act2.length); //0~2
+                        buffer.push(act2[rand2]);
+                        rand2 = Math.floor(Math.random() * act1.length); //0~2
+                        buffer.push(act1[rand2]);
+                    }
+                }
+                // 1 1 1
+                if (rand1 === 2) {
+                    //섞고 pop해서 나온걸로 넣기
+                    while (buffer.length < 3) {
+                        if (act1.length === 0) break;
+                        else {
+                            act1.sort(() => Math.random() - Math.random());
+                            temp = act1.pop();
+                            buffer.push(temp);
+                        }
+                    }
+                }
+                buffer.sort();
+            }
         }
-        else { // 2하나 1하나 선택지
-
-        }
-        /* 해당 행동력중 true인거 리스트에 담고 하나 뽑기 */
+        //버퍼에는 선택가능한 것들이 들어가 있는 상태
+        axios.post('http://localhost:8000/api/selectionprocess/', {
+            set_id: info.data.id,
+            selection: buffer
+        }).then((response) => {
+            console.log(response.data);
+            setPop(true);
+            setPopup(response.data.message);
+            if (buffer[0] === 20) {
+                document.location.href = '/';
+            }
+        });
+        console.log(buffer);
+        buffer = [];
     }
     return (<>
         <div className="game">
@@ -392,79 +555,68 @@ export default function Game() {
                                 </div>
                             }
                             <div className="blue_info">
-                                <ul>
-                                    <li>
-                                        <span class="top--image">ㅤ</span>
-                                        <div>Top</div>
-                                        <span class="material-icons">account_circle</span>
-                                        <div>{info.my_team_data?.top.name}</div>
-                                        {/* <span class="material-icons">pets</span>
-                                        <div>{team && team.top.id}</div> */}
-                                    </li>
-                                    <li>
-                                        <span class="jungle--image">ㅤ</span>
-                                        <div>Jungle</div>
-                                        <span class="material-icons">account_circle</span>
-                                        <div>{info.my_team_data?.jng.name}</div>
-                                        {/* <span class="material-icons">pets</span>
-                                        <div>{team && team.jungle.id}</div> */}
-                                    </li>
-                                    <li>
-                                        <span class="middle--image">ㅤ</span>
-                                        <div>Middle</div>
-                                        <span class="material-icons">account_circle</span>
-                                        <div>{info.my_team_data?.mid.name}</div>
-                                        {/* <span class="material-icons">pets</span>
-                                        <div>{team && team.mid.id}</div> */}
-                                    </li>
-                                    <li>
-                                        <span class="adc--image">ㅤ</span>
-                                        <div>ADC</div>
-                                        <span class="material-icons">account_circle</span>
-                                        <div>{info.my_team_data?.adc.name}</div>
-                                        {/* <span class="material-icons">pets</span>
-                                        <div>{team && team.adc.id}</div> */}
-                                    </li>
-                                    <li>
-                                        <span class="support--image">ㅤ</span>
-                                        <div>Support</div>
-                                        <span class="material-icons">account_circle</span>
-                                        <div>{info.my_team_data?.sup.name}</div>
-                                        {/* <span class="material-icons">pets</span>
-                                        <div>{team && team.support.id}</div> */}
-                                    </li>
-                                </ul>
+                                {info.data?.side === 1 ?
+                                    <ul>
+                                        <Slot pos="Top" teaminfo={info.my_team_data?.top} img={myImg.top} icon="top--image" />
+                                        <Slot pos="Jungle" teaminfo={info.my_team_data?.jng} img={myImg.jng} icon="jungle--image" />
+                                        <Slot pos="Middle" teaminfo={info.my_team_data?.mid} img={myImg.mid} icon="middle--image" />
+                                        <Slot pos="ADC" teaminfo={info.my_team_data?.adc} img={myImg.adc} icon="adc--image" />
+                                        <Slot pos="Support" teaminfo={info.my_team_data?.sup} img={myImg.sup} icon="support--image" />
+                                    </ul> :
+                                    <ul>
+                                        <Slot pos="Top" teaminfo={info.op_team_data?.top} img={opImg.top} icon="top--image" />
+                                        <Slot pos="Jungle" teaminfo={info.op_team_data?.jng} img={opImg.jng} icon="jungle--image" />
+                                        <Slot pos="Middle" teaminfo={info.op_team_data?.mid} img={opImg.mid} icon="middle--image" />
+                                        <Slot pos="ADC" teaminfo={info.op_team_data?.adc} img={opImg.adc} icon="adc--image" />
+                                        <Slot pos="Support" teaminfo={info.op_team_data?.sup} img={opImg.sup} icon="support--image" />
+                                    </ul>}
                             </div>
                             <div className="something">
                                 <div className="head">
                                     {/* <div className="bluestatus2">
                                         <div className="info--gold"></div>
-                                        <div className='goldnum'>ㅤ{info.data?.my_gold}</div>
+                                        <div className='goldnum'>{info.data?.my_gold}</div>
                                         <div className="info--dragon"></div>
-                                        <div>ㅤ{info.data?.my_dragon}</div>
+                                        <div>{info.data?.my_dragon}</div>
                                         <div className="info--baron"></div>
-                                        <div>ㅤ{info.data?.my_baron}</div>
+                                        <div>{info.data?.my_baron}</div>
                                         <div className="info--tower"></div>
-                                        <div>ㅤ{info.data?.my_tower_destroy}</div>
+                                        <div>{info.data?.my_tower_destroy}</div>
                                     </div> */}
                                     <div className="bluestatus">
-                                        <ul>
-                                            <li>글로벌 골드량 : {info.data?.my_gold}</li>
-                                            <li>처치한 드래곤 : {info.data?.my_dragon}</li>
-                                            <li>처치한 바론수 : {info.data?.my_baron}</li>
-                                            <li>처치한 타워수 : {info.data?.my_tower_destroy}</li>
-                                        </ul>
+                                        {info.data?.side === 1 ?
+                                            <ul>
+                                                <li>글로벌 골드량 : {info.data?.my_gold}</li>
+                                                <li>처치한 드래곤 : {info.data?.my_dragon}</li>
+                                                <li>처치한 바론수 : {info.data?.my_baron}</li>
+                                                <li>처치한 타워수 : {info.data?.my_tower_destroy}</li>
+                                            </ul> :
+                                            <ul>
+                                                <li>글로벌 골드량 : {info.data?.op_gold}</li>
+                                                <li>처치한 드래곤 : {info.data?.op_dragon}</li>
+                                                <li>처치한 바론수 : {info.data?.op_baron}</li>
+                                                <li>처치한 타워수 : {info.data?.op_tower_destroy}</li>
+                                            </ul>
+                                        }
                                     </div>
                                     {/* <div className="time">
                                         <div className="back">{() => { return info?.score[0] }} : {() => { return info?.score[1] }}</div>
                                     </div> */}
                                     <div className="redstatus">
-                                        <ul>
-                                            <li>글로벌 골드량 : {info.data?.op_gold}</li>
-                                            <li>처치한 드래곤 : {info.data?.op_dragon}</li>
-                                            <li>처치한 바론수 : {info.data?.op_baron}</li>
-                                            <li>처치한 타워수 : {info.data?.op_tower_destroy}</li>
-                                        </ul>
+                                        {info.data?.side !== 1 ?
+                                            <ul>
+                                                <li>글로벌 골드량 : {info.data?.my_gold}</li>
+                                                <li>처치한 드래곤 : {info.data?.my_dragon}</li>
+                                                <li>처치한 바론수 : {info.data?.my_baron}</li>
+                                                <li>처치한 타워수 : {info.data?.my_tower_destroy}</li>
+                                            </ul> :
+                                            <ul>
+                                                <li>글로벌 골드량 : {info.data?.op_gold}</li>
+                                                <li>처치한 드래곤 : {info.data?.op_dragon}</li>
+                                                <li>처치한 바론수 : {info.data?.op_baron}</li>
+                                                <li>처치한 타워수 : {info.data?.op_tower_destroy}</li>
+                                            </ul>
+                                        }
                                     </div>
                                 </div>
                                 {select.fight?.baron[0] ? <div className='baron'>ㅤ</div> : <></>}
@@ -494,48 +646,21 @@ export default function Game() {
                                 </div>
                             </div>
                             <div className="red_info">
-                                <ul>
-                                    <li>
-                                        <span class="top--image">ㅤ</span>
-                                        <div>Top</div>
-                                        <span class="material-icons">account_circle</span>
-                                        <div>{info.op_team_data?.top.name}</div>
-                                        {/* <span class="material-icons">pets</span>
-                                        <div>{team && team.top.id}</div> */}
-                                    </li>
-                                    <li>
-                                        <span class="jungle--image">ㅤ</span>
-                                        <div>Jungle</div>
-                                        <span class="material-icons">account_circle</span>
-                                        <div>{info.op_team_data?.jng.name}</div>
-                                        {/* <span class="material-icons">pets</span>
-                                        <div>{team && team.jungle.id}</div> */}
-                                    </li>
-                                    <li>
-                                        <span class="middle--image">ㅤ</span>
-                                        <div>Middle</div>
-                                        <span class="material-icons">account_circle</span>
-                                        <div>{info.op_team_data?.mid.name}</div>
-                                        {/* <span class="material-icons">pets</span>
-                                        <div>{team && team.mid.id}</div> */}
-                                    </li>
-                                    <li>
-                                        <span class="adc--image">ㅤ</span>
-                                        <div>ADC</div>
-                                        <span class="material-icons">account_circle</span>
-                                        <div>{info.op_team_data?.adc.name}</div>
-                                        {/* <span class="material-icons">pets</span>
-                                        <div>{team && team.adc.id}</div> */}
-                                    </li>
-                                    <li>
-                                        <span class="support--image">ㅤ</span>
-                                        <div>Support</div>
-                                        <span class="material-icons">account_circle</span>
-                                        <div>{info.op_team_data?.sup.name}</div>
-                                        {/* <span class="material-icons">pets</span>
-                                        <div>{team && team.support.id}</div> */}
-                                    </li>
-                                </ul>
+                                {info.data?.side !== 1 ?
+                                    <ul>
+                                        <Slot pos="Top" teaminfo={info.my_team_data?.top} img={myImg.top} icon="top--image" />
+                                        <Slot pos="Jungle" teaminfo={info.my_team_data?.jng} img={myImg.jng} icon="jungle--image" />
+                                        <Slot pos="Middle" teaminfo={info.my_team_data?.mid} img={myImg.mid} icon="middle--image" />
+                                        <Slot pos="ADC" teaminfo={info.my_team_data?.adc} img={myImg.adc} icon="adc--image" />
+                                        <Slot pos="Support" teaminfo={info.my_team_data?.sup} img={myImg.sup} icon="support--image" />
+                                    </ul> :
+                                    <ul>
+                                        <Slot pos="Top" teaminfo={info.op_team_data?.top} img={opImg.top} icon="top--image" />
+                                        <Slot pos="Jungle" teaminfo={info.op_team_data?.jng} img={opImg.jng} icon="jungle--image" />
+                                        <Slot pos="Middle" teaminfo={info.op_team_data?.mid} img={opImg.mid} icon="middle--image" />
+                                        <Slot pos="ADC" teaminfo={info.op_team_data?.adc} img={opImg.adc} icon="adc--image" />
+                                        <Slot pos="Support" teaminfo={info.op_team_data?.sup} img={opImg.sup} icon="support--image" />
+                                    </ul>}
                             </div>
                             <div className="choice">
                                 <ul>
@@ -545,22 +670,25 @@ export default function Game() {
                                             : <div className="select" onClick={() => { click(0) }}>바텀 (2)</div>)
                                             : <div className="no--select">바텀 (2)</div>*/}
                                         {/*select.engage.bot[0] */}
-                                        <SelectBtn text="바텀 (2)" bool={select.engage?.bot[0]} argu={clicked[9]} func={() => { click(9) }} />
-                                        <SelectBtn text="미드 (2)" bool={select.engage?.mid[0]} argu={clicked[8]} func={() => { click(8) }} />
-                                        <SelectBtn text="탑 (2)" bool={select.engage?.top[0]} argu={clicked[7]} func={() => { click(7) }} />
+                                        <SelectBtn text="바텀" act={select.engage?.bot[1]} bool={select.engage?.bot[0]} argu={clicked[9]} func={() => { click(9) }} />
+                                        <SelectBtn text="미드" act={select.engage?.mid[1]} bool={select.engage?.mid[0]} argu={clicked[8]} func={() => { click(8) }} />
+                                        <SelectBtn text="탑" act={select.engage?.top[1]} bool={select.engage?.top[0]} argu={clicked[7]} func={() => { click(7) }} />
                                     </li>
                                     <li>
                                         <div className="title">한타</div>
-                                        <SelectBtn text="바론 (3)" bool={select.fight?.baron[0]} argu={clicked[12]} func={() => { click(12) }} />
-                                        <SelectBtn text="드래곤 (3)" bool={select.fight?.dragon[0]} argu={clicked[10]} func={() => { click(10) }} />
-                                        <SelectBtn text="엘더 (3)" bool={select.fight?.elder[0]} argu={clicked[11]} func={() => { click(11) }} />
-                                        <SelectBtn text="노멀 (3)" bool={select.fight?.normal[0]} argu={clicked[13]} func={() => { click(13) }} />
+                                        {select.fight?.baron[0] ? <div className="selected" >바론</div>
+                                            : <div className="no--select">바론</div>}
+                                        {select.fight?.dragon[0] ? <div className="selected" >드래곤</div>
+                                            : <div className="no--select">드래곤</div>}
+                                        {select.fight?.elder[0] ? <div className="selected" >엘더</div>
+                                            : <div className="no--select">엘더</div>}
+                                        {/* <SelectBtn text="노멀" act={select.fight?.normal[1]} bool={select.fight?.normal[0]} argu={clicked[13]} func={() => { click(13) }} /> */}
                                     </li>
                                     <li>
                                         <div className="title">갱킹</div>
-                                        <SelectBtn text="바텀 (1)" bool={select.ganking?.bot[0]} argu={clicked[6]} func={() => { click(6) }} />
-                                        <SelectBtn text="미드 (1)" bool={select.ganking?.mid[0]} argu={clicked[5]} func={() => { click(5) }} />
-                                        <SelectBtn text="탑 (1)" bool={select.ganking?.top[0]} argu={clicked[4]} func={() => { click(4) }} />
+                                        <SelectBtn text="바텀" act={select.ganking?.bot[1]} bool={select.ganking?.bot[0]} argu={clicked[6]} func={() => { click(6) }} />
+                                        <SelectBtn text="미드" act={select.ganking?.mid[1]} bool={select.ganking?.mid[0]} argu={clicked[5]} func={() => { click(5) }} />
+                                        <SelectBtn text="탑" act={select.ganking?.top[1]} bool={select.ganking?.top[0]} argu={clicked[4]} func={() => { click(4) }} />
                                     </li>
                                     <li className='turn--info'>
                                         {info.data?.turn % 2 === 1 ?
@@ -572,22 +700,25 @@ export default function Game() {
                                     </li>
                                     <li>
                                         <div className="title">라인압박</div>
-                                        <SelectBtn text="바텀 (1)" bool={select.lane_press?.bot[0]} argu={clicked[3]} func={() => { click(3) }} />
-                                        <SelectBtn text="미드 (1)" bool={select.lane_press?.mid[0]} argu={clicked[2]} func={() => { click(2) }} />
-                                        <SelectBtn text="탑 (1)" bool={select.lane_press?.top[0]} argu={clicked[1]} func={() => { click(1) }} />
-                                        <SelectBtn text="넥서스 파괴" bool={select.nexus_destroy} argu={clicked[20]} func={() => { click(20) }} />
+                                        <SelectBtn text="바텀" act={select.lane_press?.bot[1]} bool={select.lane_press?.bot[0]} argu={clicked[3]} func={() => { click(3) }} />
+                                        <SelectBtn text="미드" act={select.lane_press?.mid[1]} bool={select.lane_press?.mid[0]} argu={clicked[2]} func={() => { click(2) }} />
+                                        <SelectBtn text="탑" act={select.lane_press?.top[1]} bool={select.lane_press?.top[0]} argu={clicked[1]} func={() => { click(1) }} />
+                                        {/* <SelectBtn text="넥서스 파괴" bool={select.nexus_destroy} argu={clicked[20]} func={() => { click(20) }} /> */}
+                                        {select.nexus_destroy ? (clicked[20] ? <div className="selected" onClick={() => { click(20) }} >넥서스 파괴</div>
+                                            : <div className="select" onClick={() => { click(20) }}>넥서스 파괴</div>)
+                                            : <div className="no--select">넥서스 파괴</div>}
                                     </li>
                                     <li>
                                         <div className="title">타워공격</div>
-                                        <SelectBtn text="바텀 (1)" bool={select.tower_press?.bot[0]} argu={clicked[16]} func={() => { click(16) }} />
-                                        <SelectBtn text="미드 (1)" bool={select.tower_press?.mid[0]} argu={clicked[15]} func={() => { click(15) }} />
-                                        <SelectBtn text="탑 (1)" bool={select.tower_press?.top[0]} argu={clicked[14]} func={() => { click(14) }} />
+                                        <SelectBtn text="바텀" act={select.tower_press?.bot[1]} bool={select.tower_press?.bot[0]} argu={clicked[16]} func={() => { click(16) }} />
+                                        <SelectBtn text="미드" act={select.tower_press?.mid[1]} bool={select.tower_press?.mid[0]} argu={clicked[15]} func={() => { click(15) }} />
+                                        <SelectBtn text="탑" act={select.tower_press?.top[1]} bool={select.tower_press?.top[0]} argu={clicked[14]} func={() => { click(14) }} />
                                     </li>
                                     <li>
                                         <div className="title">타워파괴</div>
-                                        <SelectBtn text="바텀 (2)" bool={select.tower_destroy?.bot[0]} argu={clicked[19]} func={() => { click(19) }} />
-                                        <SelectBtn text="미드 (2)" bool={select.tower_destroy?.mid[0]} argu={clicked[18]} func={() => { click(18) }} />
-                                        <SelectBtn text="탑 (2)" bool={select.tower_destroy?.top[0]} argu={clicked[17]} func={() => { click(17) }} />
+                                        <SelectBtn text="바텀" act={select.tower_destroy?.bot[1]} bool={select.tower_destroy?.bot[0]} argu={clicked[19]} func={() => { click(19) }} />
+                                        <SelectBtn text="미드" act={select.tower_destroy?.mid[1]} bool={select.tower_destroy?.mid[0]} argu={clicked[18]} func={() => { click(18) }} />
+                                        <SelectBtn text="탑" act={select.tower_destroy?.top[1]} bool={select.tower_destroy?.top[0]} argu={clicked[17]} func={() => { click(17) }} />
                                     </li>
                                 </ul>
                             </div>

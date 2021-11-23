@@ -32,6 +32,16 @@
     z-index: 2;
     display: flex;
 }
+.game .inner .gamebox .contents .main li{
+    position: relative;
+}
+.game .inner .gamebox .contents .main li img{
+    position: absolute;
+    height: 38px;
+    background-size: cover;
+    top: 74px;
+    left: 8px;
+}
 .game .inner .gamebox .contents .main .top--image{
     background-repeat: no-repeat;
     background-size: contain;
@@ -226,8 +236,8 @@
     background-repeat: no-repeat;
     background-size: contain;
     color: rgb(184, 99, 39);
-    width: 180px;
-    height: 125px;
+    width: 150px;
+    height: 175px;
     padding: 15px;
     box-sizing: border-box;
     border-radius: 5px;
@@ -238,53 +248,54 @@
     flex-wrap: wrap;
 }
 .game .inner .gamebox .contents .main .head .bluestatus2 div{
-    width: 22px;
-    height: 55px;
-    margin: 0px;
+    width: 28px;
+    height: 26px;
+    margin: 5px 0 0 15px;
     padding: 0;
-    font-size: 20px;
+    font-size: 15px;
 }
 .game .inner .gamebox .contents .main .head .bluestatus2 .info--gold{
     z-index: 3;
     width: 35px;
     height: 30px;
-    margin: 10px;
+    margin: 10px 10px 0px 13px;
     background-image: url('../images/gold.png');
     background-repeat: no-repeat;
     background-size: contain;
 }
 .game .inner .gamebox .contents .main .head .bluestatus2 .info--dragon{
     z-index: 3;
-    width: 35px;
+    width: 30px;
     height: 30px;
-    margin: 10px;
+    margin: 0 5px 0px 20px;
     background-image: url('../images/dragon.png');
     background-repeat: no-repeat;
     background-size: contain;
 }
 .game .inner .gamebox .contents .main .head .bluestatus2 .info--baron{
     z-index: 3;
-    width: 35px;
+    width: 30px;
     height: 30px;
-    margin: 10px;
+    margin: 0 0px 0px 25px;
     background-image: url('../images/baron.png');
     background-repeat: no-repeat;
     background-size: contain;
 }
 .game .inner .gamebox .contents .main .head .bluestatus2 .info--tower{
     z-index: 3;
-    width: 35px;
+    width: 30px;
     height: 30px;
-    margin: 10px;
+    margin: 0 0px 0px 25px;
     background-image: url('../images/turret_blue.png');
     background-repeat: no-repeat;
     background-size: contain;
 }
 .game .inner .gamebox .contents .main .head .bluestatus2 .goldnum{
     z-index: 3;
-    width: 70px;
-    height: 30px;
-    margin: 10px;
+    width: 55px;
+    height: 20px;
+    margin: 10px 0 10px;
+    font-size: 15px;
     text-align: center;
 }
 .game .inner .gamebox .contents .main .head .redstatus{

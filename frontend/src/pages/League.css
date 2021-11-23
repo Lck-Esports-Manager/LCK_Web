@@ -51,8 +51,32 @@
     position:absolute;
     top : 430px;
     left: 475px;
+    z-index: 2;
 }
 .league--main .inner .league--box .contents .play--button:hover{
+   border:5px dashed black;
+   cursor: pointer;
+   transform: scale(1.1);
+}
+.league--main .inner .league--box .contents .next--button{
+    background-color: rgb(255, 255, 255);
+    display: block;
+    width: 200px;
+    border-radius: 10px;
+    margin: auto;
+    text-align: center;
+    padding: 20px;
+    font-size: 30px;
+    font-weight: 700;
+    font-family: 'Noto Sans KR', sans-serif;
+    border: 5px solid black;
+    color:black;
+    transition: .3s;
+    position:absolute;
+    top : 430px;
+    left: 475px;
+}
+.league--main .inner .league--box .contents .next--button:hover{
    border:5px dashed black;
    cursor: pointer;
    transform: scale(1.1);
