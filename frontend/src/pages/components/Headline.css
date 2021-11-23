@@ -24,7 +24,6 @@ header .inner ul{
     font-weight: 700;
 }
 header .inner ul li{
-    /* background-color: orangered; */
     position: relative;
 }
 header .inner ul li::before{
@@ -42,7 +41,6 @@ header .inner ul li:first-child:before{
     display: none;
 }
 header .inner ul li a{
-    /* background-color: orangered; */
     padding: 21px 70px;
     font-size: 22px;
     font-weight: 900;
@@ -66,16 +64,13 @@ header img{
     bottom: 0;
     left: 25px;
     border-radius: 5px;
-    /* display: none; */
 }
 
 .top{
-    /* margin: 10px auto; */
     background-color: #c1c1c1;
 }
 .top .maintitle{
     font-size:80px;
-    /* font-family: 'Staatliches', cursive, sans-serif; */
     font-family: 'Signika Negative', sans-serif;
     display: block;
     text-align: center;

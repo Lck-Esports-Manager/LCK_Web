@@ -8,6 +8,7 @@
     padding: 5px;
     line-height: 1.1;
     font-weight: 700;
+    box-sizing: content-box;
 }
 #Card .card--title{
     font-size: 16px;

@@ -29,7 +29,6 @@ function CreateAccount() {
                 alert([`가입을 축하드립니다. \nname : ${user.username} \nemail : ${user.email}`]);
                 document.location.href = '/login';
             }).catch((Error) => {
-                //console.log(Error.response.data);
                 Error.response.data &&
                     alert(`ERROR : ${Error.response.data[`${Object.keys(Error.response.data)[0]}`][0]}`);
             }).then(() => { });

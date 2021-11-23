@@ -1,46 +1,24 @@
-.MT--top{
-    background-color: #c1c1c1;
-}
-.MT--top .inner{
-    display: flex;
-    width: 1200px;
-    margin: auto;
-    position: relative;
-}
-.MT--top .inner .title{
-    font-size:80px;
-    font-family: 'Staatliches', cursive, sans-serif;
-    display: block;
-    text-align: center;
-    margin: auto;
-    font-weight: 700;
-    padding: 20px;
-}
 .MT--main {
-    background-color: #c1c1c1;
-    height: 820px;
+    background-image: url('../images/maketeam_back.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 930px;
 }
 .MT--main .inner {
-    padding: 10px;
-    background-color: #666;
-    width: 1200px;
+    width: 1300px;
     display: flex;
     height: 630px;
     margin: auto;
     position: relative;
     border-radius: 15px;
-    padding: 15px;
-    background-image: url('../images/maketeam_back.jpg');
-    background-repeat: no-repeat;
-    background-size: cover;
+    padding: 65px 15px 15px;
 }
 .MT--main .inner .MTbox{
     background-color: rgba(255,255,255,0.7);
-    /* border: 5px solid black; */
     border-radius: 15px;
     display: block;
     width: 1200px;
-    height: 620px;
+    height: 830px;
     margin: auto;
 }
 .MT--main .inner .MTbox .main--top{
@@ -55,7 +33,8 @@
     text-align: center;
     width: 130px;
     margin: auto;
-    padding: 25px 16px 0px 16px;
+    padding: 15px 16px 0px;
+    box-sizing: content-box;
 }
 .MT--main .inner .MTbox .main--top .money{
     display: block;
@@ -63,7 +42,7 @@
     text-align: center;
     font-family: 'Noto Sans KR', sans-serif;
     font-weight: 700;
-    margin: 15px;
+    margin: 10px 15px;
     font-size: 17px;
 }
 .MT--main .inner .MTbox .main--top .myplayer{
@@ -102,12 +81,11 @@
 }
 .MT--main .inner .MTbox .line{
     background-color: #666;
-    width: 1165px;
+    width: 1230px;
     height: 6px;
     margin: 0px 0px 10px 0px;
 }
 .MT--main .inner .MTbox .contents{
-    /* background-color: orange; */
     font-family: 'Noto Sans KR', sans-serif;
     box-sizing: border-box;
     height: 490px;
@@ -115,8 +93,6 @@
 }
 .MT--main .inner .MTbox .contents .btnbar{
     display: flex;
-    /* background-color: yellow; */
-    /* padding: 10px; */
 }
 .MT--main .inner .MTbox .contents .btnbar .position{
     margin: auto;
@@ -152,6 +128,7 @@
     border-radius: 5px;
     box-sizing: border-box;
     transition: 0.2s;
+    margin: auto 4px;
 }
 .MT--main .inner .MTbox .contents .index ul div{ /*선수선택*/
     padding: 5px;
@@ -162,31 +139,43 @@
     box-sizing: border-box;
     transition: 0.2s;
 }
+.MT--main .inner .MTbox .contents .index ul .ability{ /*능력치*/
+    padding: 5px;
+    font-size: 15px;
+    text-align: center;
+    font-weight: 700;
+    border-radius: 5px;
+    box-sizing: border-box;
+    transition: 0.2s;
+    margin: auto 6px;
+}
 .MT--main .inner .MTbox .contents .index ul li:hover{
     color:white;
     cursor: pointer;
 }
 .MT--main .inner .MTbox .contents .MT--players{
     overflow: auto;
-    /* background-color: tomato; */
-    height: 380px;
+    height: 565px;
 }
 .MT--main .inner .MTbox .contents .MT--players ul{
     display: flex;
     flex-wrap: wrap;
     background-color: rgb(255, 219, 161);
-    padding: 5px;
-    height: 25px;
+    padding: 2px 5px 5px;
+    height: 28px;
     border-radius: 7px;
-    margin: 5px;
+    margin: 4px;
     transition: 0.5s;
+    box-sizing: content-box;
 }
 .MT--main .inner .MTbox .contents .MT--players ul div{
     padding: 0 10px 0;
 }
 .MT--main .inner .MTbox .contents .MT--players ul div button{
     width: 50px;
-    height: 25px;
+    height: 27px;
+    margin: 2px;
+    padding: 0 0 1px;
     border-radius: 5px;
     border:2px solid #666;
     font-family: 'Noto Sans KR', sans-serif;
@@ -201,23 +190,24 @@
 }
 .MT--main .inner .MTbox .contents .MT--players ul li{
     font-weight: 700;
-    margin: auto;
+    margin: 3px auto;
     width: 100px;
     height: 10px;
-    padding: 5px 0px 15px;
+    padding: 0px 0px 15px;
     text-align: center;
     display: block;
 }
 .MT--main .inner .MTbox .contents .MT--players ul .long{
     font-weight: 700;
-    margin: auto;
+    margin: 3px auto;
     width: 150px;
     height: 10px;
-    padding: 5px 0px 15px;
+    padding: 0px 0px 15px;
     text-align: center;
     display: block;
 }
 .MT--main .inner .MTbox .contents .MT--players ul li.status{
     background-color:rgb(255, 192, 90) ;
     border-radius: 5px;
+    box-sizing: content-box;
 }

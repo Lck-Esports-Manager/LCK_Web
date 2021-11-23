@@ -2,7 +2,7 @@
     background-image: url('../images/main_back.jpg');
     background-repeat: no-repeat;
     background-size: cover;
-    height: 820px;
+    height: 830px;
     position: relative;
 }
 .CA--main .top{
@@ -43,17 +43,13 @@
 .CA--main .inner .inputbox .pw{
     padding: 5px;
     display: flex;
-    /* margin: auto; */
     width: 400px;
     height: 45px;
-    /* background-color: orange; */
 }
 .CA--main .inner .inputbox label{
-    /* padding: 10px; */
     display: block;
     width:180px;
     margin: 0 0 0 35px;
-    /* background-color: violet; */
 }
 .CA--main .inner .inputbox input{
     padding: 10px;
@@ -65,7 +61,6 @@
 }
 
 .CA--main .inner .CAbox .btnbox {
-    /* background-color: orange; */
     width: 400px;
     height: 100px;
     margin: auto;

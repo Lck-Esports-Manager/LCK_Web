@@ -9,12 +9,10 @@
 }
 
 .home--top{
-    /* margin: 10px auto; */
     height: 450px;
 }
 .home--top .maintitle{
     font-size:80px;
-    /* font-family: 'Staatliches', cursive, sans-serif; */
     font-family: 'Signika Negative', sans-serif;
     display: block;
     text-align: center;
@@ -25,7 +23,6 @@
     width: 1200px;
     height: 420px;
     border-radius: 10px;
-    /* background-color:beige; */
     display: flex;
     margin: auto;
     position: relative;
@@ -69,7 +66,6 @@
 }
 .home--bottom .inner {
     padding: 10px;
-    /* background-color: #666; */
     width: 1200px;
     display: flex;
     height: 300px;
@@ -87,7 +83,6 @@
     padding: 15px 15px 0 15px;
     border-radius: 20px;
     font-size: 38px;
-    /* font-family: 'Staatliches', cursive, sans-serif; */
     font-family: 'Signika Negative', sans-serif;
 }
 .home--bottom .inner p {
@@ -186,9 +181,9 @@
     height: 25px;
 }
 .underline {
-    /* height: 50px; */
     text-align: center;
     font-size: 13px;
     font-family:Arial, Helvetica, sans-serif;
     padding: 30px;
+    color: rgb(116, 116, 116);
 }

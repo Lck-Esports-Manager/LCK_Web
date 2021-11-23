@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './MakeTeam.css';
 import Card from './components/Card';
-import Maintitle from './components/Maintitle';
 
 export default function MakeTeam() {
     let temp = 'asdf';
@@ -172,7 +171,6 @@ export default function MakeTeam() {
         }
     };
     return (<>
-        <Maintitle />
         <div>
             <div className="MT--main">
                 <div className="inner">
@@ -216,7 +214,7 @@ export default function MakeTeam() {
                                     <li onClick={() => { sortList('position') }}>ㅤㅤㅤㅤ포지션ㅤΞ</li>
                                     <li onClick={() => { sortList('rate') }}>ㅤㅤㅤ티어ㅤΞ</li>
                                     <li onClick={() => { sortList('price') }}>ㅤㅤㅤ영입비용ㅤΞ</li>
-                                    <div >ㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤ 능력치</div>
+                                    <div className="ability">ㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤ 능력치</div>
                                 </ul>
                             </div>
                             <div className="MT--players">

@@ -232,7 +232,6 @@ export default function Banpick() {
                     setTurn(iTurn + 1);
                     console.log("오토1증가");
                 }
-                //console.log(ranList);
             } catch (e) { console.log(e); }
         };
         fetchcham();

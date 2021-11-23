@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import './App.css';
-import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Team from "./pages/Team";
@@ -24,7 +24,7 @@ axios.defaults.withCredentials = true;
 function App() {
   useEffect(() => {
     if (window.localStorage.getItem('isLogin')) {
-      console.log('isLogin : ', JSON.parse(window.localStorage.getItem('isLogin')));
+      // console.log('isLogin : ', JSON.parse(window.localStorage.getItem('isLogin')));
       if (JSON.parse(window.localStorage.getItem('isLogin'))) {
         axios.defaults.headers.common['Authorization'] = window.localStorage.getItem('token');
       }

@@ -1,5 +1,5 @@
 .login--main{
-    height: 820px;
+    height: 830px;
     position: relative;
     background-image: url('../images/main_back.jpg');
     background-repeat: no-repeat;
@@ -46,14 +46,11 @@
     margin: auto;
     width: 400px;
     height: 45px;
-    /* background-color: orange; */
 }
 .login--main .inner .inputbox label{
-    /* padding: 10px; */
     display: block;
     width: 80px;
     margin: 0 0 0 20px;
-    /* background-color: violet; */
 }
 .login--main .inner .inputbox input{
     padding: 10px;
@@ -66,19 +63,16 @@
 }
 
 .login--main .inner .loginbox .btnbox {
-    /* background-color: orange; */
     width: 400px;
     height: 100px;
     margin: auto;
 }
 .login--main .inner .loginbox .btnbox a {
-    /* background-color: orange; */
     color:#333;
     padding: 10px;
     font-size: 20px;
     display: block;
     margin: auto;
-    /* text-decoration: none; */
 }
 .login--main .inner .loginbox .btnbox a:hover {
     color:red;

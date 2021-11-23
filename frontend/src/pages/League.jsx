@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './League.css';
 import axios from 'axios';
-import Maintitle from './components/Maintitle';
+import PersonalSchedule from './PersonalSchedule';
 
 export default function League() {
     const [playbtn, setPlaybtn] = useState(true);
@@ -70,6 +70,7 @@ export default function League() {
             document.location.href = `/game`;
     }
     return (<>
+        {/* <PersonalSchedule /> */}
         <div className="league--main">
             <div className="inner">
                 <div className="league--box">
