@@ -8,7 +8,7 @@
     margin: auto;
 }
 .league--main .inner .league--box{
-    height: 580px;
+    height: 600px;
     padding: 10px;
     border-radius: 15px;
     background-image: url('../images/league_back.jpg');
@@ -28,6 +28,7 @@
 .league--main .inner .league--box .contents h2{
     font-size: 40px;
     padding: 30px;
+    font-weight: 700;
 }
 .league--main .inner .league--box .contents p{
     font-size: 20px;
@@ -50,7 +51,7 @@
     transition: .3s;
     position:absolute;
     top : 430px;
-    left: 475px;
+    left: 500px;
     z-index: 2;
 }
 .league--main .inner .league--box .contents .play--button:hover{
@@ -74,7 +75,7 @@
     transition: .3s;
     position:absolute;
     top : 430px;
-    left: 475px;
+    left: 500px;
 }
 .league--main .inner .league--box .contents .next--button:hover{
    border:5px dashed black;

@@ -38,7 +38,7 @@
 }
 .CA--main .inner .boxtitle{
     font-size: 40px;
-    padding: 40px;
+    padding: 40px 40px 30px;
     margin-top: 20px;
 }
 .CA--main .inner .inputbox{
@@ -51,7 +51,7 @@
     display: flex;
     margin: auto;
     width: 600px;
-    height: 40px;
+    height: 45px;
 }
 .CA--main .inner .inputbox .pw{
     padding: 5px;
@@ -62,9 +62,10 @@
     /* background-color: orange; */
 }
 .CA--main .inner .inputbox label{
-    padding: 10px;
+    /* padding: 10px; */
     display: block;
     width:180px;
+    margin: 0 0 0 35px;
     /* background-color: violet; */
 }
 .CA--main .inner .inputbox input{
@@ -73,6 +74,7 @@
     display: block;
     border-radius: 5px;
     font-size: 16px;
+    height: 35px;
 }
 
 .CA--main .inner .CAbox .btnbox {

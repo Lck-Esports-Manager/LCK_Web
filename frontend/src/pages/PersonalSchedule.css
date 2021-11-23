@@ -140,10 +140,11 @@
     padding: 20px;
     border-radius: 8px;
     margin: 10px 5px 10px;
-    width: 190px;
+    width: 189px;
     height: 440px;
     font-size: 18px;
     box-shadow: inset 0 0 10px rgb(87, 87, 87);
+    box-sizing: content-box;
 }
 .PS--main .inner .contents .schedule--info .card .pos{
     font-size: 25px;

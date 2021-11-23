@@ -38,7 +38,7 @@
 }
 .login--main .inner .boxtitle{
     font-size: 40px;
-    padding: 70px;
+    padding: 60px;
     margin-top: 20px;
 }
 .login--main .inner .inputbox{
@@ -62,13 +62,16 @@
     /* background-color: orange; */
 }
 .login--main .inner .inputbox label{
-    padding: 10px;
+    /* padding: 10px; */
     display: block;
     width: 80px;
+    margin: 0 0 0 20px;
     /* background-color: violet; */
 }
 .login--main .inner .inputbox input{
     padding: 10px;
+    height: 35px;
+    margin: 3px;
     width: 250px;
     display: block;
     border-radius: 5px;
@@ -99,7 +102,7 @@
     padding: 5px;
     border-radius: 5px;
     margin: 7px;
-    width: 350px;
+    width: 320px;
     transition: 0.2s;
 }
 .login--main .inner .loginbox .btnbox input:hover{

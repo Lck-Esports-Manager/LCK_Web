@@ -23,9 +23,9 @@
 .player--main .inner {
   padding: 10px;
   background-color: #666;
-  width: 1200px;
+  width: 1230px;
   display: flex;
-  height: 630px;
+  height: 660px;
   margin: auto;
   position: relative;
   border-radius: 15px;
@@ -111,28 +111,28 @@
 .player--main .inner .playerbox .contents .players {
   overflow: auto;
   /* background-color: tomato; */
-  height: 420px;
+  height: 390px;
 }
 .player--main .inner .playerbox .contents .players ul {
   display: flex;
   flex-wrap: wrap;
   background-color: rgb(255, 219, 161);
   padding: 5px;
-  height: 25px;
+  height: 40px;
   border-radius: 7px;
   margin: 5px;
   transition: 0.5s;
   overflow: hidden;
 }
 .player--main .inner .playerbox .contents .players ul:hover {
-  height: 70px;
+  height: 80px;
 }
 .player--main .inner .playerbox .contents .players ul li {
   /* background-color: tomato; */
   font-weight: 700;
   margin: auto;
   width: 180px;
-  height: 10px;
+  height: 35px;
   padding: 5px 0px 15px;
   text-align: center;
   display: block;
