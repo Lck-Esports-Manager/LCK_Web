@@ -12,6 +12,7 @@
     width: 100px;
     height: 20px;
     display: flex;
+    box-sizing: content-box;
 }
 .tower--main .hpbar .hp--blue{
     background-color: rgb(35, 98, 156);

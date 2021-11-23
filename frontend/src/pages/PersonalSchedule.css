@@ -1,9 +1,17 @@
 .PS--main{
-    background-color: #c1c1c1;
-    height: 820px;
+    height: 850px;
     padding: 0 20px 0;
     font-family: 'Noto Sans KR', sans-serif;
     font-weight: 700;
+    background-image: url('../images/main_back.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.PS--main .top{
+    background-color: rgba(0, 0, 0, 0);
+}
+.PS--main .top .title{
+    padding: 15px;
 }
 .PS--main .inner{
     width: 1300px;
@@ -18,20 +26,18 @@
     background-repeat: no-repeat;
     background-size: cover;
     position: relative;
-    border: 10px solid;
     display: flex;
     flex-wrap: wrap;
 }
 .PS--main .inner .contents .match--info{
-    background-color: rgba(204, 121, 44, 0.698);
-    padding: 20px;
+    background-color: rgb(204, 121, 44);
+    padding: 10px 20px;
+    height: 50px;
     border-radius: 8px;
-    margin: 5px;
     display: flex;
-    width: 640px;
-    margin: auto;
+    width: 660px;
+    margin: auto 5px;
     overflow: hidden;
-    height: 20px;
 }
 .PS--main .inner .contents .match--info .title{
     font-size: 20px;
@@ -50,12 +56,12 @@
     width: 220px;
 }
 .PS--main .inner .contents .team--info{
-    background-color: rgba(61, 153, 118, 0.63);
-    padding: 20px;
+    background-color: rgb(61, 153, 118);
+    padding: 10px 20px;
     border-radius: 8px;
-    margin: auto;
+    margin: auto 5px;
     display: flex;
-    width: 520px;
+    width: 580px;
     font-size: 20px;
 }
 .PS--main .inner .contents .team--info .teamname{
@@ -70,44 +76,48 @@
     text-align: center;
 }
 .PS--main .inner .contents .schedule--info{
-    background-color: rgba(68, 134, 68, 0.52);
-    padding: 20px 20px 15px;
+    background-color: rgba(68, 134, 68, 0);
+    padding: 5px 15px 5px;
     border-radius: 8px;
     margin: 10px 5px 10px;
     width: 1300px;
-    height: 530px;
+    height: 620px;
     display: flex;
     flex-wrap: wrap;
     position: relative;
 }
 .PS--main .inner .contents .schedule--info .title{
     width: 200px;
-    height: 20px;
+    height: 40px;
     font-size: 25px;
     padding: 5px;
     margin:0 0 10px 10px;
+    color: blanchedalmond;
+    text-shadow: 2px 2px 2px black;
 }
 .PS--main .inner .contents .schedule--info .blank{
     width: 580px;
-    height: 20px;
+    height: 40px;
     font-size: 25px;
     padding: 0px;
     margin:0 ;
 }
 .PS--main .inner .contents .schedule--info .blank .help{
-    width: 20px;
-    height: 20px;
+    width:30px;
+    height: 30px;
     margin: 3px 0;
     font-size: 20px;
     border-radius: 50px;
     border:2px solid;
-    padding: 0px 5px 8px;
+    padding: 0px;
     text-align: center;
     position: absolute;
-    top: 19px;
-    left: 230px;
+    top: 12px;
+    left: 220px;
     overflow: hidden;
     line-height: 1.4;
+    color: blanchedalmond;
+    text-shadow: 2px 2px 2px black;
 }
 .PS--main .inner .contents .schedule--info .blank .help:hover{
     width: 600px;
@@ -118,11 +128,15 @@
     border:3px solid;
     padding: 15px;
     text-align: left;
+    color: black;
+    text-shadow: none;
     background-color: rgb(185, 185, 185);
+    z-index: 2;
+    box-sizing: content-box;
 }
 .PS--main .inner .contents .schedule--info .send{
     width: 150px;
-    height: 20px;
+    height: 25px;
     background-color: white;
     border-radius: 5px;
     padding: 5px;
@@ -130,6 +144,7 @@
     text-align: center;
     transition: 0.3s;
     margin: auto;
+    box-sizing: content-box;
 }
 .PS--main .inner .contents .schedule--info .send:hover{
     cursor: pointer;
@@ -140,8 +155,8 @@
     padding: 20px;
     border-radius: 8px;
     margin: 10px 5px 10px;
-    width: 189px;
-    height: 440px;
+    width: 195px;
+    height: 510px;
     font-size: 18px;
     box-shadow: inset 0 0 10px rgb(87, 87, 87);
     box-sizing: content-box;
@@ -185,6 +200,7 @@
 .PS--main .inner .contents .schedule--info .card .select ul{
     display: flex;
     flex-wrap: wrap;
+    padding: 0;
 }
 .PS--main .inner .contents .schedule--info .card .select div{
     background-color: rgb(255, 255, 255);
@@ -197,6 +213,7 @@
     font-size: 15px;
     text-align: center;
     transition: 0.2s;
+    box-sizing: content-box;
 }
 .PS--main .inner .contents .schedule--info .card .select div:hover{
     cursor: pointer;

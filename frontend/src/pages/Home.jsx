@@ -56,7 +56,7 @@ function Home() {
         console.log(refresh);
     }
     return (
-        <div>
+        <div className="home--main">
             <Maintitle />
             <div className="home--top">
                 <div className="inner">

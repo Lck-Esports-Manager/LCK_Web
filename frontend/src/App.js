@@ -26,15 +26,6 @@ function App() {
     if (window.localStorage.getItem('isLogin')) {
       console.log('isLogin : ', JSON.parse(window.localStorage.getItem('isLogin')));
       if (JSON.parse(window.localStorage.getItem('isLogin'))) {
-        // axios.post('http://localhost:8000/api/rest-auth/login/', {
-        //   username: JSON.parse(window.localStorage.getItem('user')).username,
-        //   password: JSON.parse(window.localStorage.getItem('user')).password
-        // }
-        // ).then((response) => {
-        //   axios.defaults.headers.common['Authorization'] = `jwt ${response.data.token}`;
-        // }).catch((Error) => {
-        //   console.log(Error.response);
-        // });
         axios.defaults.headers.common['Authorization'] = window.localStorage.getItem('token');
       }
     }

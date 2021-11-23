@@ -6,6 +6,7 @@
   width: 1200px;
   margin: auto;
   position: relative;
+  
 }
 .player--top .inner .title {
   font-size: 80px;
@@ -18,21 +19,21 @@
 }
 .player--main {
   background-color: #c1c1c1;
-  height: 820px;
-}
-.player--main .inner {
-  padding: 10px;
-  background-color: #666;
-  width: 1230px;
-  display: flex;
-  height: 660px;
-  margin: auto;
-  position: relative;
-  border-radius: 15px;
-  padding: 15px;
+  height: 920px;
   background-image: url("../images/players_back.jpg");
   background-repeat: no-repeat;
   background-size: cover;
+}
+.player--main .inner {
+  padding: 10px;
+  /* background-color: #666; */
+  width: 1230px;
+  display: flex;
+  height: 820px;
+  margin: auto;
+  position: relative;
+  border-radius: 15px;
+  padding: 65px 15px 15px;
 }
 .player--main .inner .playerbox {
   background-color: rgba(255, 255, 255, 0.7);
@@ -40,7 +41,7 @@
   border-radius: 15px;
   display: block;
   width: 1200px;
-  height: 620px;
+  height: 820px;
   margin: auto;
 }
 .player--main .inner .playerbox .title {
@@ -111,7 +112,7 @@
 .player--main .inner .playerbox .contents .players {
   overflow: auto;
   /* background-color: tomato; */
-  height: 390px;
+  height: 590px;
 }
 .player--main .inner .playerbox .contents .players ul {
   display: flex;

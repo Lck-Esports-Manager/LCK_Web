@@ -1,6 +1,8 @@
 .BP--main{
-    background-color: #c1c1c1;
-    height: 950px;
+    height: 960px;
+    background-image: url('../images/ban_back.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 .BP--main .BP--inner{
     display: flex;
@@ -9,24 +11,20 @@
     position: relative;
 }
 .BP--main .BP--inner .BPbox{
-    background-color: #666;
-    width: 1200px;
+    width: 1230px;
     display: flex;
-    height: 865px;
+    height: 895px;
     margin: 30px auto;
     position: relative;
     border-radius: 15px;
     padding: 15px;
-    background-image: url('../images/ban_back.jpg');
-    background-repeat: no-repeat;
-    background-size: cover;
 }
 .BP--main .BP--inner .BPbox .contents{
-    background-color: rgba(255,255,255,0.7);
+    background-color: rgba(255, 255, 255, 0);
     border-radius: 15px;
     display: block;
     width: 1200px;
-    height: 865px;
+    height: 870px;
     margin: auto;
     font-family: 'Noto Sans KR', sans-serif;
     font-weight: 700;
@@ -40,18 +38,19 @@
     width: 300px;
     padding: 15px;
     margin: 10px 0 0 0;
+    color: rgb(249, 255, 214);
 }
 .BP--main .BP--inner .BPbox .contents .titles .BP--Subtitle{
     background-color: white;
     border:10px solid #18373a;
     color: #18373a;
     border-radius: 15px;
-    margin: 10px 15px 0;
-    width: 500px;
-    height: 30px;
+    margin: 15px 15px 0;
+    width: 550px;
+    height: 80px;
     font-size: 30px;
     text-align: center;
-    padding: 15px;
+    padding: 8px 15px;
 }
 .BP--main .BP--inner .BPbox .contents .titles .nextBtn{
     background-color: #EFEFEF;
@@ -61,7 +60,7 @@
     border-radius: 5px;
     border:2px solid #666;
     width: 150px;
-    height: 30px;
+    height: 70px;
     margin: 22px auto 0px;
     text-align: center;
     padding: 13px 10px 10px;
@@ -89,6 +88,7 @@
     height: 125px;
     border-radius: 10px;
     display: flex;
+    padding: 0 10px;
 }
 .BP--main .BP--inner .BPbox .contents ul .ban .blue--pick{
     background-color: white;
@@ -97,7 +97,7 @@
     border-radius: 10px;
     opacity: 0.7;
     display: flex;
-    width: 525px;
+    width: 550px;
     padding: 0 15px 0 15px;
 }
 .BP--main .BP--inner .BPbox .contents ul .ban .blue--pick .cardbar{
@@ -199,8 +199,8 @@
     border-radius: 30px;
     display: block;
     font-size:15px;
-    width: 15px;
-    height: 15px;
+    width: 25px;
+    height: 25px;
     margin: 0px 5px 0 0;
 }
 .BP--main .BP--inner .BPbox .contents ul .ban .blue--pick .cardbar .card .pos{
@@ -216,7 +216,7 @@
     display: block;
     font-size:20px;
     width: 80px;
-    height: 25px;
+    height: 45px;
     overflow: hidden;
     margin: 0 5px 5px 0;
 }
@@ -286,6 +286,7 @@
     width: 100px;
     text-align: center;
     margin: 3px 0 0 0;
+    height: 23px;
 }
 .BP--main .BP--inner .BPbox .contents ul .red .pick .cardbar .card .name{
     padding: 2px;
@@ -363,6 +364,7 @@
     width: 100px;
     text-align: center;
     margin: 3px 0 0 0;
+    height: 23px;
 }
 .BP--main .BP--inner .BPbox .contents ul .blue .pick .cardbar .card .name{
     padding: 2px;
@@ -420,7 +422,7 @@
 .BP--main .BP--inner .BPbox .contents ul .chams .list{
     background-color: white;
     margin: 10px;
-    height: 550px;
+    height: 540px;
     border-radius: 10px;
     opacity: 0.7;
     overflow: auto;
@@ -449,8 +451,8 @@
     border:2px solid #666;
     display: block;
     font-size:17px;
-    width: 20px;
-    height: 20px;
+    width: 30px;
+    height: 30px;
     margin: 0 5px 5px 0;
     border-radius: 30px;
 }

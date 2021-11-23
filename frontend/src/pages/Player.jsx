@@ -38,7 +38,6 @@ export default function Player() {
         setPlayer(newList);
     }
     return (<>
-        <Maintitle />
         <div>
             <div className="player--main">
                 <div className="inner">

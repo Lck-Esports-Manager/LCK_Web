@@ -529,6 +529,7 @@ export default function Game() {
             setPop(true);
             setPopup(response.data.message);
             if (buffer[0] === 20) {
+                alert(response.data.message);
                 document.location.href = '/';
             }
         });

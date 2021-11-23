@@ -1,25 +1,12 @@
-.CA--top{
-    background-color: #c1c1c1;
-}
-.CA--top .inner{
-    display: flex;
-    width: 1200px;
-    margin: auto;
-    position: relative;
-}
-.CA--top .inner .title{
-    font-size:80px;
-    font-family: 'Staatliches', cursive, sans-serif;
-    display: block;
-    text-align: center;
-    margin: auto;
-    font-weight: 700;
-    padding: 20px;
-}
 .CA--main{
-    background-color: #c1c1c1;
+    background-image: url('../images/main_back.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
     height: 820px;
     position: relative;
+}
+.CA--main .top{
+    background-color: rgba(0, 0, 0, 0);
 }
 .CA--main .inner{
     width: 1200px;

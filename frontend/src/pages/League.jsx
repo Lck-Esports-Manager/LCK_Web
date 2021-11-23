@@ -70,7 +70,6 @@ export default function League() {
             document.location.href = `/game`;
     }
     return (<>
-        <Maintitle />
         <div className="league--main">
             <div className="inner">
                 <div className="league--box">

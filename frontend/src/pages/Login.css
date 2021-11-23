@@ -1,25 +1,12 @@
-.login--top{
-    background-color: #c1c1c1;
-}
-.login--top .inner{
-    display: flex;
-    width: 1200px;
-    margin: auto;
-    position: relative;
-}
-.login--top .inner .title{
-    font-size:80px;
-    font-family: 'Staatliches', cursive, sans-serif;
-    display: block;
-    text-align: center;
-    margin: auto;
-    font-weight: 700;
-    padding: 20px;
-}
 .login--main{
-    background-color: #c1c1c1;
     height: 820px;
     position: relative;
+    background-image: url('../images/main_back.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.login--main .top{
+    background-color: rgba(0, 0, 0, 0);
 }
 .login--main .inner{
     width: 1200px;

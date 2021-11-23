@@ -1,5 +1,5 @@
 header{
-    background-color: #666;
+    background-color: #011e46;
  
 }
 img {
@@ -8,7 +8,7 @@ img {
 }
 
 header .inner{
-    background-color: #666;
+    background-color: rgba(102, 102, 102, 0);
     width: 1200px;
     height: 110px;
     margin: 0 auto;
@@ -46,13 +46,13 @@ header .inner ul li a{
     padding: 21px 70px;
     font-size: 22px;
     font-weight: 900;
-    color: #333;
+    color: rgb(255, 255, 255);
     text-decoration: none;
     display: block;
     transition: 0.3s;
 }
 header .inner ul li a:hover{
-    color:white;
+    color:rgb(170, 255, 251);
     font-size: 25px;
 }
 header img{

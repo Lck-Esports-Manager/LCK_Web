@@ -45,8 +45,8 @@ function Login() {
     }
     return (
         <div>
-            <Maintitle />
             <div className="login--main">
+                <Maintitle />
                 <div className="inner">
                     <div className="loginbox">
                         <div className="boxtitle">로그인</div>

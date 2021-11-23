@@ -248,8 +248,8 @@ export default function PersonalSchedule() {
         else return "매우 좋음";
     }
     return (<>
-        <Maintitle />
         <div className="PS--main">
+            <Maintitle />
             <div className="inner">
                 <div className="contents">
                     <div className="team--info">

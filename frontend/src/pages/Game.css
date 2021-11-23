@@ -1,7 +1,10 @@
 .game{
     background-color: #c1c1c1;
-    height: 1000px;
+    height: 930px;
     padding: 20px;
+    background-image: url('../images/game_back.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 .game .inner{
     width: 1300px;
@@ -19,7 +22,6 @@
 }
 .game .inner .gamebox .contents{
     font-family: 'Noto Sans KR', sans-serif;
-    background-color: rgba(0, 0, 0, 0.8);
     font-weight: 700;
     text-align: center;
     border-radius: 15px;
@@ -90,6 +92,10 @@
     left: 8px;
     overflow: hidden;
     box-shadow: inset 0 0 15px rgb(33, 49, 139);
+    box-sizing: content-box;
+}
+.game .inner .gamebox .contents .main .blue_info ul{
+    padding: 0;
 }
 .game .inner .gamebox .contents .main .blue_info li{
     background-color: rgba(255, 255, 255, 0.26);
@@ -103,6 +109,7 @@
     padding: 10px;
     overflow: hidden;
     box-shadow: inset 0 0 5px rgb(87, 87, 87);
+    box-sizing: content-box;
 }
 .game .inner .gamebox .contents .main .blue_info span{
     width: 30px;
@@ -127,6 +134,11 @@
     right: 8px;
     overflow: hidden;
     box-shadow: inset 0 0 15px rgb(133, 47, 47);
+    box-sizing: content-box;
+}
+.game .inner .gamebox .contents .main .red_info ul{
+    padding: 0;
+    
 }
 .game .inner .gamebox .contents .main .red_info li{
     background-color: rgba(255, 255, 255, 0.5);
@@ -140,6 +152,7 @@
     padding: 10px;
     overflow: hidden;
     box-shadow: inset 0 0 5px rgb(87, 87, 87);
+    box-sizing: content-box;
 }
 .game .inner .gamebox .contents .main .red_info span{
     width: 30px;
@@ -178,9 +191,12 @@
     width: 150px;
     padding: 15px;
     margin: 35px auto 0;
+    color: black;
+    font-weight: 700;
     border-radius: 15px;
     transition: 0.2s;
-    box-shadow: inset 0 0 5px black;
+    border: 0;
+    box-shadow: inset 0 0 10px black;
 }
 .game .inner .gamebox .contents .main .popup .btn:hover{
     background-color: #666; 
@@ -225,11 +241,16 @@
 }
 .game .inner .gamebox .contents .main .head .bluestatus{
     background-color: rgb(184, 99, 39);
-    width: 180px;
+    width: 160px;
     text-align: left;
     padding: 5px;
     border-radius: 5px;
     border:4px solid;
+    box-sizing: content-box;
+    height: 85px;
+}
+.game .inner .gamebox .contents .main .head .bluestatus ul{
+    padding: 0;
 }
 .game .inner .gamebox .contents .main .head .bluestatus2{
     background-image: url('../images/statusboard.png');
@@ -300,13 +321,17 @@
 }
 .game .inner .gamebox .contents .main .head .redstatus{
     background-color: rgb(184, 99, 39);
-    width: 180px;
+    width: 160px;
     text-align: left;
-    border-radius: 5px;
     padding: 5px;
+    border-radius: 5px;
     border:4px solid;
-    margin-right: 0;
-    margin: 0 0 0 500px;
+    box-sizing: content-box;
+    height: 85px;
+    margin: 0 0 0 520px;
+}
+.game .inner .gamebox .contents .main .head .redstatus ul{
+    padding: 0;
 }
 .game .inner .gamebox .contents .main .head .time{
     font-size: 50px;
@@ -331,8 +356,8 @@
 
 .game .inner .gamebox .contents .main .map{
     background-image: url('../images/map.jpg');
-    width: 900px;
-    height: 705px;
+    width: 910px;
+    height: 725px;
     background-size: contain;
     background-repeat: no-repeat;
     position: absolute;
@@ -340,15 +365,15 @@
     left: 185px;
     border-radius: 15px;
     z-index: 1;
-    border: 5px solid;
+    border: 5px solid black;
 }
 .game .inner .gamebox .contents .main .choice{
     z-index: 2;
     position: absolute;
-    background-color: #666;
-    bottom: 30px;
-    width: 1250px;
-    height: 75px;
+    background-color: rgb(102, 102, 102);
+    bottom: 10px;
+    width: 1260px;
+    height: 80px;
     left: 10px;
     border-radius: 10px;
     border:4px solid;
@@ -356,7 +381,7 @@
     overflow: hidden;
 }
 .game .inner .gamebox .contents .main .choice:hover{
-    height: 240px;
+    height: 260px;
 }
 .game .inner .gamebox .contents .main .choice .turn--info{
     background-color: rgb(83, 83, 83);
@@ -370,7 +395,6 @@
     width: 150px;
     font-family: Arial, Helvetica, sans-serif;
     font-weight: 700;
-    padding: 8px;
     margin: auto;
     font-size: 30px;
     border-radius: 10px;
@@ -380,7 +404,6 @@
     width: 150px;
     font-family: Arial, Helvetica, sans-serif;
     font-weight: 700;
-    padding: 8px;
     margin: auto;
     font-size: 30px;
     border-radius: 10px;
@@ -391,23 +414,25 @@
     height: 40px;
     font-size: 20px;
     margin: 20px auto;
-    padding: 13px 5px 0;
+    padding: 10px 5px 0;
     border-radius: 5px;
+    box-sizing: content-box;
 }
 .game .inner .gamebox .contents .main .choice .turn--info .complete{
     width: 120px;
     height: 40px;
     margin: 10px auto;
     font-size: 25px;
-    padding: 10px 5px 0;
+    padding: 5px 5px;
     border-radius: 5px;
     background-color: rgb(189, 189, 189);
     cursor: pointer;
     box-shadow: inset 0 0 5px rgb(87, 87, 87);
+    box-sizing: content-box;
 }
 .game .inner .gamebox .contents .main .choice ul{
     display: flex;
-    padding: 0 10px 0;
+    padding: 0 15px 0;
 }
 .game .inner .gamebox .contents .main .choice ul li{
     /* background-color: rgb(55, 73, 128); */
@@ -417,20 +442,22 @@
 .game .inner .gamebox .contents .main .choice ul .title{
     background-color: rgba(255, 255, 255, 0.5);
     margin: 10px 5px 5px;
-    padding: 10px;
+    padding: 6px 10px 10px;
     border-radius: 15px;
     width: 100px;
     height: 30px;
     font-size: 25px;
-    border:4px solid;
+    border:4px solid rgb(68, 68, 68);
+    box-sizing: content-box;
+    box-shadow: inset 0 0 5px rgb(87, 87, 87);
 }
 .game .inner .gamebox .contents .main .choice ul .selected{
     width: 120px;
-    height: 30px;
+    height: 33px;
     margin: 10px 9px 0;
     font-size: 19px;
     border-radius: 5px;
-    padding: 5px;
+    padding: 2px;
     box-sizing: border-box;
     background-color: rgb(184, 99, 39);
     cursor: pointer;
@@ -438,11 +465,11 @@
 }
 .game .inner .gamebox .contents .main .choice ul .select{
     width: 120px;
-    height: 30px;
+    height: 33px;
     margin: 10px 9px 0;
     font-size: 19px;
     border-radius: 5px;
-    padding: 5px;
+    padding: 2px;
     box-sizing: border-box;
     background-color: rgb(189, 189, 189);
     cursor: pointer;
@@ -453,11 +480,11 @@
 }
 .game .inner .gamebox .contents .main .choice ul .no--select{
     width: 120px;
-    height: 30px;
+    height: 33px;
     margin: 10px 9px 0;
     font-size: 20px;
     border-radius: 5px;
-    padding: 5px;
+    padding: 2px;
     box-sizing: border-box;
     background-color: rgb(100, 100, 100);
     box-shadow: inset 0 0 5px rgb(87, 87, 87);

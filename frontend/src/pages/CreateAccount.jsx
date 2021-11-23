@@ -39,8 +39,8 @@ function CreateAccount() {
         }
     }
     return (<div>
-        <Maintitle />
         <div className="CA--main">
+            <Maintitle />
             <div className="inner">
                 <div className="CAbox">
                     <div className="boxtitle">회원가입</div>

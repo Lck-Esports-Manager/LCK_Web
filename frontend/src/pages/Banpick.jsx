@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import "./Banpick.css";
-import Maintitle from './components/Maintitle';
 
 export default function Banpick() {
     /* 해당 계정에 대한 정보 */
