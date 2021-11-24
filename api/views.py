@@ -750,7 +750,7 @@ class MakeSelection(APIView):
     def model_use(self):
         turn = self.set.turn
         if turn % 2 == 1 and turn > 10:
-            self.data["nexus_destroy"][0] = True
+            self.data["model_use"][0] = True
 
     def get(self, request):
         if not request.user.is_authenticated:
