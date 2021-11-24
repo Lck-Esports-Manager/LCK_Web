@@ -65,10 +65,15 @@ function PlayerDetailInfo({ id, unable, money, func }) {
         <>
             <Container style={
                 {
-                    width: '1500px',
-                    height: '500px',
+                    width: '1250px',
+                    height: '320px',
                     borderWidth: 'thin',
                     borderStyle: "solid",
+                    margin: '30px',
+                    position: 'absolute',
+                    backgroundColor: 'white',
+                    zIndex: '2',
+                    top: '155px',
                 }}>
                 <CloseButton onClick={exitClick} />
                 <Row>
@@ -255,7 +260,8 @@ export default function AddPlayer() {
                             <Container style={
                                 {
                                     width: '1250px',
-                                    height: '630px',
+                                    height: '810px',
+                                    margin: '10px auto',
                                     overflow: 'auto'
                                 }}>
                                 <Table size="sm" style={{ alignContent: "center" }}>

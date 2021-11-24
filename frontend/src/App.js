@@ -31,33 +31,39 @@ function App() {
     }
   }, []);
   return (
-    <BrowserRouter>
-      <Headline />
-      <Switch>
-        <Route path="/personalschedule" component={PersonalSchedule} />
-        <Route path="/game" component={Game} />
-        <Route path="/banpick" component={Banpick} />
-        <Route path="/maketeam" component={MakeTeam} />
-        <Route path="/createaccount" component={CreateAccount} />
-        <Route
-          path="/login"
-          render={() => <Login />} />
-        <Route path="/team" component={Team} />
-        <Route
-          path="/league"
-          render={() => <League />} />
-        <Route path="/player" component={Player} />
-        <Route path="/lck/:username" exact component={Home} />
-        <Route path="/playerdetail/:id" exact component={PlayerDetail} />
-        <Route path="/changeteam" exact component={TeamChange} />
-        <Route path="/addplayer" exact component={AddPlayer} />
-        <Route
-          exact
-          path="/"
-          render={() => <Home />} />
-        <Route component={NotFound} />
-      </Switch>
-    </BrowserRouter>
+    <>
+      <audio loop
+        src='https://docs.google.com/uc?export=open&id=14JlzHWUE2TqAsN237ft43SOw02xDPori'
+        autoPlay={true}>
+      </audio>
+      <BrowserRouter>
+        <Headline />
+        <Switch>
+          <Route path="/personalschedule" component={PersonalSchedule} />
+          <Route path="/game" component={Game} />
+          <Route path="/banpick" component={Banpick} />
+          <Route path="/maketeam" component={MakeTeam} />
+          <Route path="/createaccount" component={CreateAccount} />
+          <Route
+            path="/login"
+            render={() => <Login />} />
+          <Route path="/team" component={Team} />
+          <Route
+            path="/league"
+            render={() => <League />} />
+          <Route path="/player" component={Player} />
+          <Route path="/lck/:username" exact component={Home} />
+          <Route path="/playerdetail/:id" exact component={PlayerDetail} />
+          <Route path="/changeteam" exact component={TeamChange} />
+          <Route path="/addplayer" exact component={AddPlayer} />
+          <Route
+            exact
+            path="/"
+            render={() => <Home />} />
+          <Route component={NotFound} />
+        </Switch>
+      </BrowserRouter>
+    </>
   );
 }
 

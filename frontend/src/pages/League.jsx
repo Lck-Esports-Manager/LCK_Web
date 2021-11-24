@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './League.css';
 import axios from 'axios';
-import PersonalSchedule from './PersonalSchedule';
+import { Link } from "react-router-dom";
 
 export default function League() {
     const [playbtn, setPlaybtn] = useState(true);
@@ -61,13 +61,13 @@ export default function League() {
     }
     const movePage = () => {
         if (leagueState.league === false)       // 리그가 없는 경우 -> 팀생성
-            document.location.href = `/maketeam`;
+            return `/maketeam`;
         else if (leagueState.my_team === false) // 경기가 없는 경우 -> 선수 개인스케줄
-            document.location.href = `/personalschedule`;
+            return `/personalschedule`;
         else if (leagueState.banpick === true) // 밴픽이 없는 경우 -> 밴픽
-            document.location.href = `/banpick`;
+            return `/banpick`;
         else                                    // 다 준비 되어 있는 경우 -> 게임시작
-            document.location.href = `/game`;
+            return `/game`;
     }
     return (<>
         {/* <PersonalSchedule /> */}
@@ -89,9 +89,11 @@ export default function League() {
                         </p>
                         {playbtn ? <div className="play--button" onClick={loadPage}>
                             PLAY
-                        </div> : <div className="next--button" onClick={movePage}>
-                            {nextPage()}
-                        </div>}
+                        </div> :
+                            <Link className="next--button" to={movePage}>
+                                {nextPage()}
+                            </Link>
+                        }
                     </div>
                 </div>
             </div>

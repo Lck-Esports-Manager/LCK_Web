@@ -76,6 +76,7 @@
     position:absolute;
     top : 530px;
     left: 500px;
+    text-decoration: none;
 }
 .league--main .inner .league--box .contents .next--button:hover{
    border:5px dashed black;

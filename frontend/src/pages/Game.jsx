@@ -26,7 +26,8 @@ export default function Game() {
         17: false,
         18: false,
         19: false,
-        20: false
+        20: false,
+        21: false
     });
     const [action, setAction] = useState(3);
     let buffer = [];
@@ -180,7 +181,8 @@ export default function Game() {
                 19
             ]
         },
-        "nexus_destroy": false
+        "nexus_destroy": false,
+        "model_use": [false, 3, 21]
     });
     const [info, setInfo] = useState({
         score: [
@@ -432,7 +434,7 @@ export default function Game() {
                 console.log(response.data);
                 setPop(true);
                 setPopup(response.data.message);
-                if (buffer[0] === 20) {
+                if (buffer.indexOf(20) > 0) {
                     alert(response.data.message);
                     document.location.href = '/';
                 }
@@ -528,7 +530,7 @@ export default function Game() {
             console.log(response.data);
             setPop(true);
             setPopup(response.data.message);
-            if (buffer[0] === 20) {
+            if (buffer.indexOf(20) > 0) {
                 alert(response.data.message);
                 document.location.href = '/';
             }
@@ -536,8 +538,33 @@ export default function Game() {
         console.log(buffer);
         buffer = [];
     }
+    const useModel = () => {
+        buffer = [21];
+        axios.post('http://localhost:8000/api/selectionprocess/', {
+            set_id: info.data.id,
+            selection: buffer
+        }).then((response) => {
+            console.log(response.data);
+            setPop(true);
+            setPopup(response.data.message);
+            alert(response.data.message);
+            document.location.href = '/';
+        });
+        console.log(buffer);
+        buffer = [];
+    }
+    // const play = () => {
+    //     var audio = document.getElementById('audio_play');
+    //     if (audio.paused) {
+    //         audio.play();
+    //     } else {
+    //         audio.pause();
+    //         audio.currentTime = 0
+    //     }
+    // }
     return (<>
         <div className="game">
+            {/* <audio id='audio_play' src='../sound/button-27.mp3'></audio> */}
             <div className="inner">
                 <div className="gamebox">
                     <div className="contents">
@@ -550,6 +577,7 @@ export default function Game() {
                                     <div className="btn" onClick={() => {
                                         setPop(false);
                                         pageRefresh();
+                                        // play();
                                     }}>
                                         확인
                                     </div>
@@ -697,7 +725,10 @@ export default function Game() {
                                             : <div className='red--turn'>TURN {info.data?.turn}</div>
                                         }
                                         <div className='action'>남은 행동력 {action}</div>
-                                        <div className='complete' onClick={sendSelect}>진행</div>
+                                        <div className='complete' onClick={sendSelect}>선택지 진행</div>
+                                        {select?.model_use[0] ? <div className='complete' onClick={useModel}>빠른실행</div>
+                                            : <div className='no--complete' onClick={useModel}>빠른실행</div>}
+
                                     </li>
                                     <li>
                                         <div className="title">라인압박</div>

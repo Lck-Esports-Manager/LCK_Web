@@ -128,7 +128,6 @@
     border-radius: 5px;
     box-sizing: border-box;
     transition: 0.2s;
-    margin: auto 4px;
 }
 .MT--main .inner .MTbox .contents .index ul div{ /*선수선택*/
     padding: 5px;

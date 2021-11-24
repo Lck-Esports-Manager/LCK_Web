@@ -41,6 +41,7 @@ function TeamInfo({ myTeam }) {
     }
     return (
         <>
+            <Button onClick={routeChange}>팀 수정</Button>
             <h2 text={myTeam.name}>{myTeam.name}</h2>
             <h3 class='my-2'>주전</h3>
             <Container>
@@ -59,7 +60,6 @@ function TeamInfo({ myTeam }) {
                     <Col><Player player={myTeam.sub2} pos="Sub2"></Player></Col>
                 </Row>
             </Container>
-            <Button onClick={routeChange}>팀 수정</Button>
         </>
     )
 }

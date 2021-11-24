@@ -47,7 +47,7 @@ export default function MakeTeam() {
     });
     if (myteam.name === '') {
         temp = prompt('생성할 팀 이름을 입력해주세요.');
-        while (temp.length <= 4) {
+        while (temp === null || temp.length <= 4) {
             alert('팀 이름이 너무 짧습니다. 다시 입력해주세요');
             temp = prompt('생성할 팀 이름을 입력해주세요.');
         }

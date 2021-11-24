@@ -1,5 +1,7 @@
 {
   "dependencies": {
+    "howl": "^0.2.0",
+    "howler": "^2.2.3",
     "universal-cookie": "^4.0.4"
   }
 }

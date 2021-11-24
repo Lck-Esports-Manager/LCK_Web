@@ -219,6 +219,7 @@ export default function TeamChange() {
                 <div className="inner">
                     <div className="contents">
                         <div className="title">팀 관리</div>
+                        <Button onClick={submitRoaster}>로스터 저장</Button>
                         <h3 class='my-2'>주전</h3>
                         <Container>
                             <Row className="justify-content-md-center">
@@ -236,7 +237,6 @@ export default function TeamChange() {
                                 <Col><Player player={data.sub2} pos="Sub2" func={changeRoaster}></Player></Col>
                             </Row>
                         </Container>
-                        <Button onClick={submitRoaster}>로스터 저장</Button>
                     </div>
                 </div>
             </div>
