@@ -435,7 +435,7 @@ export default function Game() {
                 console.log(response.data);
                 setPop(true);
                 setPopup(response.data.message);
-                if (buffer.indexOf(20) > 0) {
+                if (buffer.indexOf(20) >= 0) {
                     alert(response.data.message);
                     document.location.href = '/';
                 }
@@ -532,7 +532,7 @@ export default function Game() {
             console.log(response.data);
             setPop(true);
             setPopup(response.data.message);
-            if (buffer.indexOf(20) > 0) {
+            if (buffer.indexOf(20) >= 0) {
                 alert(response.data.message);
                 document.location.href = '/';
             }
