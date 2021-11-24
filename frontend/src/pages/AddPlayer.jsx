@@ -32,8 +32,10 @@ function PlayerDetailInfo({ id, unable, money, func }) {
     }
     const history = useHistory();
     const purchase = () => {
+        const remain_money=money-player.price
         const body = {
-            id: id
+            id: id,
+            money:remain_money
         }
         if (!unable.indexOf(player.id)) {
             alert("이미 보유하고 있는 선수입니다")

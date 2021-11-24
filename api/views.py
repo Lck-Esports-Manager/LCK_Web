@@ -1270,6 +1270,8 @@ class AddPlayer(APIView):
                 my_team.sub2=my_player
             else:
                 my_team.sub1=my_player
+
+            my_team.money=request.data['money']
             my_player.save()
             my_team.save()
             
