@@ -843,36 +843,58 @@ class ProcessSelection(APIView):
 
     def acquire_money_by_sponsor(self):
         my_team = self.league.my_team
+        money=0
+        flag=False
         if my_team.sponsor1!=None:
             sponsor=my_team.sponsor1
+            money=money+sponsor.earning
             my_team.money=my_team.money+sponsor.earning
+            flag=True
         if my_team.sponsor2!=None:
             sponsor=my_team.sponsor2
+            money=money+sponsor.earning
             my_team.money=my_team.money+sponsor.earning
+            flag=True
         if my_team.sponsor3!=None:
             sponsor=my_team.sponsor3
+            money=money+sponsor.earning
             my_team.money=my_team.money+sponsor.earning
-
+            flag=True
+        if flag:
+            self.response.append("스폰서에 의해 {0}원 만큼 얻습니다".format(money))
         my_team.save()
 
     def acquire_money_by_enterprise(self):
         my_team = self.league.my_team
+        money=0
+        flag=False
         if my_team.enterprise1!=None:
             enterprise=my_team.enterprise1
             my_team.money=my_team.money+enterprise.earning
+            money=money+enterprise.earning
+            flag=True
         if my_team.enterprise2!=None:
             enterprise=my_team.enterprise2
             my_team.money=my_team.money+enterprise.earning
-        
-
+            money=money+enterprise.earning
+            flag=True
+        if flag:
+            self.response.append("사업 성공으로 {0}원 만큼 얻습니다".format(money))
         my_team.save()
 
     def acquire_money(self, win):
         my_team = self.league.my_team
         money = 10000 if win else 8000
+        
         if win:
+            self.response.append("{0}팀이 승리하였습니다".format( my_team.name))
+            self.response.append("수당으로 {0}원 만큼 얻습니다".format( money))
             self.acquire_money_by_enterprise()
             self.acquire_money_by_sponsor()
+        else:
+            self.response.append("{0}팀이 패배하였습니다".format( my_team.name))
+            self.response.append("수당으로 {0}원 만큼 얻습니다".format( money))
+        
         my_team.money = my_team.money+money
         my_team.save()
         return
