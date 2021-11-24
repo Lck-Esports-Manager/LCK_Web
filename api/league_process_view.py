@@ -841,9 +841,38 @@ class ProcessSelection(APIView):
             elem.save()
         return
 
+    def acquire_money_by_sponsor(self):
+        my_team = self.league.my_team
+        if my_team.sponsor1!=None:
+            sponsor=my_team.sponsor1
+            my_team.money=my_team.money+sponsor.earning
+        if my_team.sponsor2!=None:
+            sponsor=my_team.sponsor2
+            my_team.money=my_team.money+sponsor.earning
+        if my_team.sponsor3!=None:
+            sponsor=my_team.sponsor3
+            my_team.money=my_team.money+sponsor.earning
+
+        my_team.save()
+
+    def acquire_money_by_enterprise(self):
+        my_team = self.league.my_team
+        if my_team.enterprise1!=None:
+            enterprise=my_team.enterprise1
+            my_team.money=my_team.money+enterprise.earning
+        if my_team.enterprise2!=None:
+            enterprise=my_team.enterprise2
+            my_team.money=my_team.money+enterprise.earning
+        
+
+        my_team.save()
+
     def acquire_money(self, win):
         my_team = self.league.my_team
-        money = 20000 if win else 8000
+        money = 10000 if win else 8000
+        if win:
+            self.acquire_money_by_enterprise()
+            self.acquire_money_by_sponsor()
         my_team.money = my_team.money+money
         my_team.save()
         return
