@@ -1,22 +1,3 @@
-.player--top {
-  background-color: #c1c1c1;
-}
-.player--top .inner {
-  display: flex;
-  width: 1200px;
-  margin: auto;
-  position: relative;
-  
-}
-.player--top .inner .title {
-  font-size: 80px;
-  font-family: "Staatliches", cursive, sans-serif;
-  display: block;
-  text-align: center;
-  margin: auto;
-  font-weight: 700;
-  padding: 20px;
-}
 .player--main {
   background-color: #c1c1c1;
   height: 930px;
@@ -25,7 +6,6 @@
   background-size: cover;
 }
 .player--main .inner {
-  padding: 10px;
   width: 1230px;
   display: flex;
   height: 820px;

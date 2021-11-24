@@ -1,0 +1,32 @@
+.Team--main {
+    background-color: #c1c1c1;
+    height: 1130px;
+    background-image: url("../images/main_back.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+  .Team--main .inner {
+    width: 1320px;
+    display: flex;
+    height: 820px;
+    margin: auto;
+    position: relative;
+    border-radius: 15px;
+    padding: 65px 15px 15px;
+  }
+  .Team--main .inner .contents {
+    background-color: rgba(255, 255, 255, 0.8);
+    border-radius: 15px;
+    display: block;
+    width: 1320px;
+    height: 1020px;
+    margin: auto;
+    padding: 20px;
+  }
+  .Team--main .inner .contents .title {
+    font-family: "Noto Sans KR", sans-serif;
+    font-weight: 700;
+    font-size: 40px;
+    text-align: center;
+    padding: 0px 0px 16px;
+  }
