@@ -358,7 +358,8 @@ export default function Game() {
             17: { bool: select.tower_destroy?.top[0], act: select.tower_destroy?.top[1] },
             18: { bool: select.tower_destroy?.mid[0], act: select.tower_destroy?.mid[1] },
             19: { bool: select.tower_destroy?.bot[0], act: select.tower_destroy?.bot[1] },
-            20: { bool: select.nexus_destroy }
+            20: { bool: select.nexus_destroy },
+            21: { bool: select?.model_use[0] }
         });
         if (info.data?.turn % 2 === info.data?.side) {
             console.log('턴정보');
@@ -460,7 +461,8 @@ export default function Game() {
                 17: false,
                 18: false,
                 19: false,
-                20: false
+                20: false,
+                21: false
             })
             // 행동력 3
             setAction(3);
@@ -727,7 +729,7 @@ export default function Game() {
                                         <div className='action'>남은 행동력 {action}</div>
                                         <div className='complete' onClick={sendSelect}>선택지 진행</div>
                                         {select?.model_use[0] ? <div className='complete' onClick={useModel}>빠른실행</div>
-                                            : <div className='no--complete' onClick={useModel}>빠른실행</div>}
+                                            : <div className='no--complete'>빠른실행</div>}
 
                                     </li>
                                     <li>
