@@ -12,6 +12,7 @@ export default function Banpick() {
             "banpick": true,
             "set_num": 1,
             "set_id": 9,
+            "side": 1
         }
     );
     let randT = 0;
@@ -54,7 +55,7 @@ export default function Banpick() {
 
     /* 빨강파랑 고려하여 현재 내턴인지 구분 */
     const isMyturn = (i) => {
-        if (api.set_num === 1) { //myteam blue
+        if (api.side === 1) { //myteam blue
             if (i === 1 || i === 3 || i === 5 || i === 7 || i === 8 ||
                 i === 11 || i === 12 || i === 14 || i === 16 || i === 19) {
                 return 0

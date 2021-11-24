@@ -573,9 +573,11 @@ export default function Game() {
                         <div className="main">
                             {pop &&
                                 <div className="popup">
-                                    {popup && popup.map((text) => {
-                                        return <p>{text}</p>
-                                    })}
+                                    <div className="response">
+                                        {popup && popup.map((text) => {
+                                            return <p>{text}</p>
+                                        })}
+                                    </div>
                                     <div className="btn" onClick={() => {
                                         setPop(false);
                                         pageRefresh();
