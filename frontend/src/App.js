@@ -41,6 +41,7 @@ function App() {
         <Switch>
           <Route path="/personalschedule" component={PersonalSchedule} />
           <Route path="/game" component={Game} />
+          <Route path="/banpick/:side" component={Banpick} />
           <Route path="/banpick" component={Banpick} />
           <Route path="/maketeam" component={MakeTeam} />
           <Route path="/createaccount" component={CreateAccount} />

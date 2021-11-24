@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import './League.css';
 import axios from 'axios';
 import { Link } from "react-router-dom";
+import Banpick from './Banpick';
 
 export default function League() {
     const [playbtn, setPlaybtn] = useState(true);
@@ -12,7 +13,8 @@ export default function League() {
         score: [0, 0],
         my_team_data: { name: 'blue team' },
         op_team_data: { name: 'red team' },
-        data: { turn: 1 }
+        data: { turn: 1 },
+        side: 0
     });
     const [refresh, setRefresh] = useState(0);
     const pageRefresh = () => {
@@ -94,7 +96,25 @@ export default function League() {
                                         : <div className="makeTeam"><div className="black--img"></div><div className="title">팀 생성완료</div></div>
                                     }
                                     {leagueState.league === true && leagueState.banpick === true && leagueState.my_team === true ?
-                                        <div className="on banPick"><Link className="img" to={movePage}></Link><Link className="title" to={movePage}>챔피언 선택</Link></div>
+                                        <div className="on banPick">
+                                            {/* <Link className="img" to={movePage}></Link> */}
+                                            {leagueState.side === 1 ?
+                                                <><Link className="img"
+                                                    to='/banpick/1'
+                                                    render={() => <Banpick />} ></Link>
+                                                    <Link className="title"
+                                                        to='/banpick/1'
+                                                        render={() => <Banpick />} >챔피언 선택</Link></>
+                                                : <><Link className="img"
+                                                    to='/banpick/0'
+                                                    render={() => <Banpick />} ></Link>
+                                                    <Link className="title"
+                                                        to='/banpick/0'
+                                                        render={() => <Banpick />} >챔피언 선택</Link></>
+                                            }
+
+                                            {/* <Link className="title" to={movePage} side={leagueState?.side}>챔피언 선택</Link> */}
+                                        </div>
                                         : <div className="banPick"><div className="black--img"></div><div className="title">챔피언 선택</div></div>
                                     }
                                     {leagueState.league === true && leagueState.banpick === false && leagueState.my_team === true ?

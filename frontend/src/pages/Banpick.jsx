@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import "./Banpick.css";
 
-export default function Banpick() {
+export default function Banpick(props) {
     /* 해당 계정에 대한 정보 */
     const [api, setApi] = useState(
         {
@@ -24,6 +24,7 @@ export default function Banpick() {
         'Middle Pick', 'Bottom Ban', 'Bottom Ban', 'Support Ban',
         'Support Ban', 'Bottom Pick', 'Bottom Pick', 'Support Pick', 'Support Pick', 'Selection complete !!'];
     let [iTurn, setTurn] = useState(-1);
+    const [side, setSide] = useState(Number(props.match.params.side));
 
     /* 선택된 챔피언 리스트 밴픽, 픽 모두 포함 */
     const [chamList, setChamList] = useState({
@@ -55,7 +56,7 @@ export default function Banpick() {
 
     /* 빨강파랑 고려하여 현재 내턴인지 구분 */
     const isMyturn = (i) => {
-        if (api.side === 1) { //myteam blue
+        if (side === 1) { //myteam blue
             if (i === 1 || i === 3 || i === 5 || i === 7 || i === 8 ||
                 i === 11 || i === 12 || i === 14 || i === 16 || i === 19) {
                 return 0
@@ -96,6 +97,7 @@ export default function Banpick() {
         else {
             setTurn(iTurn + 1);
             console.log("내턴1증가");
+            console.log(props.match.params.side);
             axios.get('http://localhost:8000/api/champion/?position=' + isPos(iTurn + 1) + '&tier=1')
                 .then((response1) => {
                     axios.get('http://localhost:8000/api/champion/?position=' + isPos(iTurn + 1) + '&tier=2')
@@ -107,16 +109,9 @@ export default function Banpick() {
                         })
                 })
         }
-        console.log(`버튼 누르고 지금 ${iTurn}턴 `);
+        console.log(`버튼 누르고 지금 ${iTurn}턴 내턴? ${isMyturn(iTurn)} 팀색 블루1 ${api.side}`);
         console.log(`현재 덱`);
         console.log(chamList);
-    }
-    const isBan = (i) => {
-        if (i === 0 || i === 1 || i === 2 || i === 3 || i === 4 || i === 5
-            || i === 12 || i === 13 || i === 14 || i === 15)
-            return 1
-        else
-            return 0
     }
     const isPos = (i) => {
         if (i === 0 || i === 1 || i === 6 || i === 7)
@@ -136,7 +131,7 @@ export default function Banpick() {
     const Pick = (cham) => {
         if (iTurn === -1)
             alert('시작하기를 눌러주세요.');
-        if (iTurn !== -1 && isMyturn()) {
+        if (iTurn !== -1 && isMyturn(iTurn)) {
             for (let i = 0; i < iTurn; i++) {
                 if (cham.name === chamList[i].name) {
                     alert('다른 챔피언으로 다시 선택해주십시오.');
@@ -153,7 +148,7 @@ export default function Banpick() {
             }
             console.log(cham);
             //console.log(chamList);
-            console.log(`챔피언 누르고 지금 ${iTurn}턴 `);
+            console.log(`챔피언 누르고 지금 ${iTurn}턴 내턴 ? ${isMyturn(iTurn)} 팀색 블루1 ${api.side}`);
             console.log(`현재 덱`);
             console.log(chamList);
         }
@@ -178,7 +173,7 @@ export default function Banpick() {
                 axios.get('http://localhost:8000/api/champion/?position=top')
                     .then((response) => { setPntList(response.data); })
                 axios.get('http://localhost:8000/api/progressleague/')
-                    .then((response) => { setApi(response.data); })
+                    .then((response) => { setApi(response.data); console.log(response.data) })
 
                 axios.get('http://localhost:8000/api/champion/?position=' + 'top' + '&tier=1')
                     .then((response1) => {
@@ -213,13 +208,13 @@ export default function Banpick() {
                                 })
                         })
                     axios.post('http://localhost:8000/api/progressleague/')
-                        .then((response) => { setApi(response.data); })
+                        .then((response) => { setApi(response.data); console.log(response.data); })
                     console.log(api);
                     console.log(`지금 ${iTurn}턴인데 ${isMyturn(iTurn)}`);
                     while (temp) {
                         temp = 0;
                         for (let i = 0; i < iTurn; i++) {
-                            if (ranList[randT][randC].id === chamList[i].id) {
+                            if (ranList[randT][randC].name === chamList[i].name) {
                                 randT = Math.floor(Math.random() * 2) + 1;
                                 randC = Math.floor(Math.random() * ranList[randT].length);
                                 temp = 1;

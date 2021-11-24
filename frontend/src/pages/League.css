@@ -130,6 +130,7 @@
     margin: auto;
     overflow: hidden;
     position: relative;
+    transition: 0.2s;
 }
 .league--main .inner .league--box .contents .current .on.banPick:hover{
     transform:scale(1.2);
@@ -157,6 +158,7 @@
     margin: auto;
     overflow: hidden;
     position: relative;
+    transition: 0.2s;
 }
 .league--main .inner .league--box .contents .current .on.playGame:hover{
     transform:scale(1.2);
@@ -184,6 +186,7 @@
     margin: auto;
     overflow: hidden;
     position: relative;
+    transition: 0.2s;
 }
 .league--main .inner .league--box .contents .current .on.personalSchedule:hover{
     transform:scale(1.2);

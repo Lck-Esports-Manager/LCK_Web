@@ -64,14 +64,14 @@
     font-size: 20px;
 }
 .PS--main .inner .contents .team--info .teamname{
-    width: 150px;
+    width: 250px;
 }
 .PS--main .inner .contents .team--info .money{
-    width: 150px;
+    width: 170px;
     text-align: right;
 }
 .PS--main .inner .contents .team--info .popularity{
-    width: 200px;
+    width: 130px;
     text-align: center;
 }
 .PS--main .inner .contents .schedule--info{
