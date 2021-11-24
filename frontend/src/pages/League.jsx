@@ -6,12 +6,13 @@ import { Link } from "react-router-dom";
 export default function League() {
     const [playbtn, setPlaybtn] = useState(true);
     const [leagueState, setLeague] = useState({
-        league: false,
-        my_team: false,
-        banpick: true,
+        league: true,
+        my_team: true,
+        banpick: false,
         score: [0, 0],
         my_team_data: { name: 'blue team' },
-        op_team_data: { name: 'red team' }
+        op_team_data: { name: 'red team' },
+        data: { turn: 1 }
     });
     const [refresh, setRefresh] = useState(0);
     const pageRefresh = () => {
@@ -74,6 +75,7 @@ export default function League() {
                         {playbtn ?
                             <>
                                 <p>
+                                    Tip!<br /><br />
                                     아래 PLAY를 눌러 게임을 진행해주세요.<br />
                                     처음 오신 경우 팀 생성을 하게 됩니다.<br />
                                     팀 생성 후 리그에 본격적으로 진입합니다. <br />
@@ -91,16 +93,22 @@ export default function League() {
                                         <div className="on makeTeam"><Link className="img" to={movePage}></Link><Link className="title" to={movePage}>ㅤ팀 생성ㅤ</Link></div>
                                         : <div className="makeTeam"><div className="black--img"></div><div className="title">팀 생성완료</div></div>
                                     }
-                                    {leagueState.league === true && leagueState.banpick === true ?
+                                    {leagueState.league === true && leagueState.banpick === true && leagueState.my_team === true ?
                                         <div className="on banPick"><Link className="img" to={movePage}></Link><Link className="title" to={movePage}>챔피언 선택</Link></div>
                                         : <div className="banPick"><div className="black--img"></div><div className="title">챔피언 선택</div></div>
                                     }
                                     {leagueState.league === true && leagueState.banpick === false && leagueState.my_team === true ?
-                                        <div className="on playGame"><Link className="img" to={movePage}></Link>
+                                        (leagueState.data?.turn === 1 ? <div className="on playGame"><Link className="img" to={movePage}></Link>
                                             <Link className="title" to={movePage}>
-                                                <div className="playtitle">게임 시작<br />{leagueState?.score[0]} : {leagueState?.score[0]}</div>
+                                                <div className="title">게임 시작<br />{leagueState?.score[0]} : {leagueState?.score[1]}</div>
                                             </Link>
-                                        </div>
+                                        </div> :
+                                            <div className="on playGame"><Link className="img" to={movePage}></Link>
+                                                <Link className="title" to={movePage}>
+                                                    <div className="playtitle">게임 진행중<br />{leagueState?.score[0]} : {leagueState?.score[1]}<br /> {leagueState.data?.turn} 턴</div>
+                                                </Link>
+                                            </div>)
+
                                         : <div className="playGame"><div className="black--img"></div><div className="title">게임 진행</div></div>
                                     }
                                     {leagueState.league === true && leagueState.my_team === false ?

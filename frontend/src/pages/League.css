@@ -83,7 +83,7 @@
     text-shadow: 2px 2px 2px black;
     position: absolute;
     z-index: 8;
-    font-size: 40px;
+    font-size: 35px;
     height: 110px;
     opacity: 1;
     padding: 170px 30px;
@@ -212,6 +212,7 @@
     font-size: 20px;
     padding: 40px;
     height: 300px;
+    margin: 0px auto;
 }
 .league--main .inner .league--box .contents .play--button{
     background-color: white;
@@ -228,12 +229,12 @@
     color:black;
     transition: .3s;
     position:absolute;
-    top : 530px;
+    top : 550px;
     left: 500px;
     z-index: 2;
 }
 .league--main .inner .league--box .contents .play--button:hover{
-   border:5px dashed black;
+   border:5px solid black;
    cursor: pointer;
    transform: scale(1.1);
 }
