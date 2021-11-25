@@ -31,7 +31,6 @@ export default function Game(props) {
     });
     const [action, setAction] = useState(3);
     let buffer = [];
-    let resultMessage = '';
     const [pop, setPop] = useState(true);       //팝업창의 띄움상태
     const [refresh, setRefresh] = useState(0);  //렌더를 돕는 스테이트
     const [pick, setPick] = useState(null);
@@ -121,7 +120,7 @@ export default function Game(props) {
         data: {
             id: 54,
             side: 0,
-            turn: 1,
+            turn: 0,
             my_tower1: 5,
             my_tower2: 5,
             my_tower3: 5,
@@ -167,11 +166,12 @@ export default function Game(props) {
         }
     });
     const [side, setSide] = useState(Number(props.match.params.side));
+    const [turn, setTurn] = useState(Number(props.match.params.turn));
+    const [set_id, setId] = useState(props.match.params.id);
     const [popup, setPopup] = useState(['게임을 진행합니다.']); //팝업창
     const pageRefresh = () => {
         setRefresh(refresh + 1);
         console.log(refresh);
-        console.log(`이거 사이드 ${side}`);
     };
     const loadImage = () => {
         axios.get('http://localhost:8000/api/champion/detail/?id=' + info.data?.my_top)
@@ -257,7 +257,7 @@ export default function Game(props) {
                         setInfo(response1.data);
                         console.log(info);
                         loadImage();
-                        axios.get('http://localhost:8000/api/makeselection/?set=' + info.data?.id)
+                        axios.get('http://localhost:8000/api/makeselection/?set=' + set_id)
                             .then((response2) => {
                                 setSelect(response2.data);
                                 console.log(response2.data);
@@ -329,28 +329,40 @@ export default function Game(props) {
             20: { bool: select.nexus_destroy },
             21: { bool: select?.model_use[0] }
         });
-        if (info.data?.turn % 2 === side) {
-            console.log('턴정보');
-            console.log(info.data.turn);
-            console.log(side);
-            autoSelect();
+        console.log(`이거 turn : ${info.data?.turn} side: ${info.data?.side}`);
+
+        if (turn % 2 === side) { //myturn
+            if (refresh > 1 && info.data?.turn % 2 === info.data?.side) {
+                console.log('턴정보');
+                console.log(turn);
+                console.log(side);
+                autoSelect();
+            }
         }
-        console.log(myImg);
+        else { //auto
+            if (refresh === 1 || info.data?.turn % 2 === info.data?.side) {
+                console.log('턴정보');
+                console.log(turn);
+                console.log(side);
+                autoSelect();
+            }
+        }
+        // console.log(myImg);
         console.log(select);
     }, [refresh]);
-    useEffect(() => {
-        const fetch = async () => {
-            try {
-                axios.post('http://localhost:8000/api/progressleague/')
-                    .then((response1) => {
-                        setInfo(response1.data);
-                        console.log(info);
-                        console.log(response1.data);
-                    });
-            } catch (e) { console.log(e); }
-        };
-        fetch();
-    }, []);
+    // useEffect(() => {
+    //     const fetch = async () => {
+    //         try {
+    //             axios.post('http://localhost:8000/api/progressleague/')
+    //                 .then((response1) => {
+    //                     setInfo(response1.data);
+    //                     console.log(info);
+    //                     console.log(response1.data);
+    //                 });
+    //         } catch (e) { console.log(e); }
+    //     };
+    //     fetch();
+    // }, []);
     const calcAct = (num) => {
         if (num === 1 || num === 2 || num === 3) return select.lane_press?.bot[1];
         else if (num === 4 || num === 5 || num === 6) return select.ganking?.bot[1];
@@ -391,7 +403,6 @@ export default function Game(props) {
             }
         }
         if (buffer.length === 0) {
-            console.log('선택해야합니다.');
             alert('선택해야합니다.');
         }
         else {
@@ -401,10 +412,12 @@ export default function Game(props) {
             if (buffer.indexOf(20) >= 0) {
                 axios.post('http://localhost:8000/api/selectionprocess/', {
                     set_id: info.data.id,
-                    selection: buffer
+                    selection: [20]
                 }).then((response) => {
                     console.log(response.data);
                     alert(response.data.message);
+                }).catch((e) => {
+                    alert('축하합니다 승리하셨습니다.');
                 });
                 document.location.href = '/';
             }
@@ -506,10 +519,12 @@ export default function Game(props) {
         if (buffer.indexOf(20) >= 0) {
             axios.post('http://localhost:8000/api/selectionprocess/', {
                 set_id: info.data.id,
-                selection: buffer
+                selection: [20]
             }).then((response) => {
                 console.log(response.data);
                 alert(response.data.message);
+            }).catch((e) => {
+                alert('축하합니다 승리하셨습니다.');
             });
             document.location.href = '/';
         }

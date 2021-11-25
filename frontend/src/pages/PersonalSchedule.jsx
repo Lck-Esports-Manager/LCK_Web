@@ -148,10 +148,10 @@ export default function PersonalSchedule() {
                 ).then((response) => {
                     console.log(response);
                     setMatch(response.data);
-                    if (!response.data.Success) {
-                        alert('올바르지 못한 접근입니다.');
-                        document.location.href = '/';
-                    }
+                    // if (!response.data.Success) {
+                    //     alert('올바르지 못한 접근입니다.');
+                    //     document.location.href = '/';
+                    // }
                 }).catch((e) => {
                     console.log(e.response);
                 })
@@ -225,10 +225,10 @@ export default function PersonalSchedule() {
             ).then((response) => {
                 console.log(response);
                 setMatch(response.data);
-                if (response.data.Success === false) {
-                    alert('올바르지 못한 접근입니다.');
-                    document.location.href = '/';
-                }
+                // if (response.data.Success === false) {
+                //     alert('올바르지 못한 접근입니다.');
+                //     document.location.href = '/';
+                // }
             }).catch((e) => {
                 console.log(e.response);
             })
