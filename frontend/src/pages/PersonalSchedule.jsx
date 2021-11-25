@@ -292,7 +292,7 @@ export default function PersonalSchedule() {
                                 <div>Tier</div>
                                 <li>{team.my_team && team.my_team.top.player.rate}</li>
                                 <div>Condition </div>
-                                <li>ㅤ{team.my_team && CondiToString(team.my_team.top.feeling)}</li>
+                                <li>{team.my_team && CondiToString(team.my_team.top.feeling)}</li>
                             </ul>
                             <div className="select">
                                 <ul>
@@ -318,7 +318,7 @@ export default function PersonalSchedule() {
                                 <div>Tier</div>
                                 <li>{team.my_team && team.my_team.jungle.player.rate}</li>
                                 <div>Condition </div>
-                                <li>ㅤ{team.my_team && CondiToString(team.my_team.jungle.feeling)}</li>
+                                <li>{team.my_team && CondiToString(team.my_team.jungle.feeling)}</li>
                             </ul>
                             <div className="select">
                                 <ul>
@@ -344,7 +344,7 @@ export default function PersonalSchedule() {
                                 <div>Tier</div>
                                 <li>{team.my_team && team.my_team.mid.player.rate}</li>
                                 <div>Condition </div>
-                                <li>ㅤ{team.my_team && CondiToString(team.my_team.mid.feeling)}</li>
+                                <li>{team.my_team && CondiToString(team.my_team.mid.feeling)}</li>
                             </ul>
                             <div className="select">
                                 <ul>
@@ -370,7 +370,7 @@ export default function PersonalSchedule() {
                                 <div>Tier</div>
                                 <li>{team.my_team && team.my_team.adc.player.rate}</li>
                                 <div>Condition </div>
-                                <li>ㅤ{team.my_team && CondiToString(team.my_team.adc.feeling)}</li>
+                                <li>{team.my_team && CondiToString(team.my_team.adc.feeling)}</li>
                             </ul>
                             <div className="select">
                                 <ul>
@@ -396,7 +396,7 @@ export default function PersonalSchedule() {
                                 <div>Tier</div>
                                 <li>{team.my_team && team.my_team.support.player.rate}</li>
                                 <div>Condition </div>
-                                <li>ㅤ{team.my_team && CondiToString(team.my_team.support.feeling)}</li></ul>
+                                <li>{team.my_team && CondiToString(team.my_team.support.feeling)}</li></ul>
                             <div className="select">
                                 <ul>
                                     {click5 === 1 ? <li onClick={() => { setbtn(5, 1) }} title="선수의 컨디션이 2단계 증가하고, 경험치가 소폭 감소합니다">휴식</li>

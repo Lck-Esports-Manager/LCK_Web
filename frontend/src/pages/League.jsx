@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import './League.css';
 import axios from 'axios';
 import { Link } from "react-router-dom";
-import Banpick from './Banpick';
 
 export default function League() {
     const [playbtn, setPlaybtn] = useState(true);
@@ -13,7 +12,7 @@ export default function League() {
         score: [0, 0],
         my_team_data: { name: 'blue team' },
         op_team_data: { name: 'red team' },
-        data: { turn: 1 },
+        data: { turn: 1, side: 0 },
         side: 0
     });
     const [refresh, setRefresh] = useState(0);
@@ -98,35 +97,33 @@ export default function League() {
                                     {leagueState.league === true && leagueState.banpick === true && leagueState.my_team === true ?
                                         <div className="on banPick">
                                             {/* <Link className="img" to={movePage}></Link> */}
-                                            {leagueState.side === 1 ?
-                                                <><Link className="img"
-                                                    to='/banpick/1'
-                                                    render={() => <Banpick />} ></Link>
-                                                    <Link className="title"
-                                                        to='/banpick/1'
-                                                        render={() => <Banpick />} >챔피언 선택</Link></>
-                                                : <><Link className="img"
-                                                    to='/banpick/0'
-                                                    render={() => <Banpick />} ></Link>
-                                                    <Link className="title"
-                                                        to='/banpick/0'
-                                                        render={() => <Banpick />} >챔피언 선택</Link></>
-                                            }
-
+                                            {leagueState?.side === 1 ?
+                                                <><Link className="img" to='/banpick/1'  ></Link>
+                                                    <Link className="title" to='/banpick/1'  >챔피언 선택</Link></>
+                                                : <><Link className="img" to='/banpick/0'  ></Link>
+                                                    <Link className="title" to='/banpick/0'  >챔피언 선택</Link></>}
                                             {/* <Link className="title" to={movePage} side={leagueState?.side}>챔피언 선택</Link> */}
                                         </div>
                                         : <div className="banPick"><div className="black--img"></div><div className="title">챔피언 선택</div></div>
                                     }
                                     {leagueState.league === true && leagueState.banpick === false && leagueState.my_team === true ?
-                                        (leagueState.data?.turn === 1 ? <div className="on playGame"><Link className="img" to={movePage}></Link>
+                                        (leagueState.data?.turn === 1 ? <div className="on playGame">
+                                            {leagueState.data?.side === 1 ?
+                                                <><Link className="img" to='/game/1'  ></Link>
+                                                    <Link className="title" to='/game/1'  ><div className="playtitle">게임 시작<br />{leagueState?.score[0]} : {leagueState?.score[1]} </div></Link></>
+                                                : <><Link className="img" to='/game/0'  ></Link>
+                                                    <Link className="title" to='/game/0'  ><div className="playtitle">게임 시작<br />{leagueState?.score[0]} : {leagueState?.score[1]}</div></Link></>}
+                                            {/* <Link className="img" to={movePage}></Link>
                                             <Link className="title" to={movePage}>
                                                 <div className="title">게임 시작<br />{leagueState?.score[0]} : {leagueState?.score[1]}</div>
-                                            </Link>
+                                            </Link> */}
                                         </div> :
-                                            <div className="on playGame"><Link className="img" to={movePage}></Link>
-                                                <Link className="title" to={movePage}>
-                                                    <div className="playtitle">게임 진행중<br />{leagueState?.score[0]} : {leagueState?.score[1]}<br /> {leagueState.data?.turn} 턴</div>
-                                                </Link>
+                                            <div className="on playGame">
+                                                {leagueState.data?.side === 1 ?
+                                                    <><Link className="img" to='/game/1'  ></Link>
+                                                        <Link className="title" to='/game/1'  ><div className="playtitle">게임 진행중<br />{leagueState?.score[0]} : {leagueState?.score[1]}<br /> {leagueState.data?.turn} 턴</div></Link></>
+                                                    : <><Link className="img" to='/game/0'  ></Link>
+                                                        <Link className="title" to='/game/0'  ><div className="playtitle">게임 진행중<br />{leagueState?.score[0]} : {leagueState?.score[1]}<br /> {leagueState.data?.turn} 턴</div></Link></>}
                                             </div>)
 
                                         : <div className="playGame"><div className="black--img"></div><div className="title">게임 진행</div></div>

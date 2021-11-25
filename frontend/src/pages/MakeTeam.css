@@ -31,14 +31,17 @@
     font-size: 38px;
     display: block;
     text-align: center;
-    width: 130px;
+    line-height: 1;
+    width: 220px;
     margin: auto;
-    padding: 15px 16px 0px;
+    height: 40px;
+    padding: 15px 0px;
+    overflow: hidden;
     box-sizing: content-box;
 }
 .MT--main .inner .MTbox .main--top .money{
     display: block;
-    width: 160px;
+    width: 180px;
     text-align: center;
     font-family: 'Noto Sans KR', sans-serif;
     font-weight: 700;
@@ -69,7 +72,7 @@
     width: 90px;
     height: 40px;
     text-align: center;
-    margin: 5px 0 5px 35px;
+    margin: 5px 0 5px 25px;
 }
 .MT--main .inner .MTbox .main--top .send button:hover{
     color:tomato;

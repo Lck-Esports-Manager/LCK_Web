@@ -42,16 +42,16 @@
     text-shadow: 2px 2px 2px black;
 }
 .BP--main .BP--inner .BPbox .contents .titles .BP--Subtitle{
-    background-color: white;
-    border:10px solid #18373a;
-    color: #18373a;
+    background-color: #18373a;
+    color: #ffffff;
+    text-shadow: 2px 2px 2px black;
     border-radius: 15px;
     margin: 15px 15px 0;
     width: 550px;
     height: 80px;
-    font-size: 30px;
+    font-size: 45px;
     text-align: center;
-    padding: 8px 15px;
+    padding: 4px 15px;
 }
 .BP--main .BP--inner .BPbox .contents .titles .nextBtn{
     background-color: #EFEFEF;
@@ -471,7 +471,7 @@
     display: block;
     font-size:20px;
     width: 80px;
-    height: 25px;
+    height: 35px;
     overflow: hidden;
     margin: 0 5px 5px 0;
 }

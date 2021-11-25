@@ -43,6 +43,7 @@ function App() {
         <Headline />
         <Switch>
           <Route path="/personalschedule" component={PersonalSchedule} />
+          <Route path="/game/:side" component={Game} />
           <Route path="/game" component={Game} />
           <Route path="/banpick/:side" component={Banpick} />
           <Route path="/banpick" component={Banpick} />

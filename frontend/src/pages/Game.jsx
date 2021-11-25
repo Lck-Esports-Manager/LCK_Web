@@ -5,7 +5,7 @@ import Tower from './components/Tower';
 import SelectBtn from './components/SelectBtn';
 import Slot from './components/PlayerSlot';
 
-export default function Game() {
+export default function Game(props) {
     const [clicked, setClick] = useState({
         1: false,
         2: false,
@@ -31,9 +31,10 @@ export default function Game() {
     });
     const [action, setAction] = useState(3);
     let buffer = [];
+    let resultMessage = '';
     const [pop, setPop] = useState(true);       //팝업창의 띄움상태
     const [refresh, setRefresh] = useState(0);  //렌더를 돕는 스테이트
-    const [pick, setPick] = useState(null);     //랜덤픽에 버퍼
+    const [pick, setPick] = useState(null);
     const [myImg, setmyImg] = useState({
         top: {
             name: "quinnn",
@@ -80,106 +81,34 @@ export default function Game() {
     });
     const [select, setSelect] = useState({
         "lane_press": {
-            "top": [
-                false,
-                1,
-                1
-            ],
-            "mid": [
-                false,
-                1,
-                2
-            ],
-            "bot": [
-                false,
-                1,
-                3
-            ]
+            "top": [false, 1, 1],
+            "mid": [false, 1, 2],
+            "bot": [false, 1, 3]
         },
         "ganking": {
-            "top": [
-                true,
-                1,
-                4
-            ],
-            "mid": [
-                true,
-                1,
-                5
-            ],
-            "bot": [
-                true,
-                1,
-                6
-            ]
+            "top": [true, 1, 4],
+            "mid": [true, 1, 5],
+            "bot": [true, 1, 6]
         },
         "engage": {
-            "top": [
-                true,
-                2,
-                7
-            ],
-            "mid": [
-                true,
-                2,
-                8
-            ],
-            "bot": [
-                true,
-                2,
-                9
-            ]
+            "top": [true, 2, 7],
+            "mid": [true, 2, 8],
+            "bot": [true, 2, 9]
         },
         "fight": {
-            "dragon": [
-                false,
-                3,
-                10
-            ],
-            "elder": [
-                false,
-                3,
-                11
-            ],
-            "baron": [
-                false,
-                3,
-                12
-            ]
+            "dragon": [false, 3, 10],
+            "elder": [false, 3, 11],
+            "baron": [false, 3, 12]
         },
         "tower_press": {
-            "top": [
-                false,
-                1,
-                14
-            ],
-            "mid": [
-                false,
-                1,
-                15
-            ],
-            "bot": [
-                false,
-                1,
-                16
-            ]
+            "top": [false, 1, 14],
+            "mid": [false, 1, 15],
+            "bot": [false, 1, 16]
         },
         "tower_destroy": {
-            "top": [
-                false,
-                2,
-                17
-            ],
-            "mid": [
-                false,
-                2,
-                18
-            ],
-            "bot": [
-                false,
-                2,
-                19
-            ]
+            "top": [false, 2, 17],
+            "mid": [false, 2, 18],
+            "bot": [false, 2, 19]
         },
         "nexus_destroy": false,
         "model_use": [false, 3, 21]
@@ -237,10 +166,12 @@ export default function Game() {
             match: 38
         }
     });
+    const [side, setSide] = useState(Number(props.match.params.side));
     const [popup, setPopup] = useState(['게임을 진행합니다.']); //팝업창
     const pageRefresh = () => {
         setRefresh(refresh + 1);
         console.log(refresh);
+        console.log(`이거 사이드 ${side}`);
     };
     const loadImage = () => {
         axios.get('http://localhost:8000/api/champion/detail/?id=' + info.data?.my_top)
@@ -338,6 +269,43 @@ export default function Game() {
             } catch (e) { console.log(e); }
         };
         fetch();
+        if (select.nexus_destroy) {
+            console.log('========================');
+            setSelect({
+                "lane_press": {
+                    "top": [false, 1, 1],
+                    "mid": [false, 1, 2],
+                    "bot": [false, 1, 3]
+                },
+                "ganking": {
+                    "top": [false, 1, 4],
+                    "mid": [false, 1, 5],
+                    "bot": [false, 1, 6]
+                },
+                "engage": {
+                    "top": [false, 2, 7],
+                    "mid": [false, 2, 8],
+                    "bot": [false, 2, 9]
+                },
+                "fight": {
+                    "dragon": [false, 3, 10],
+                    "elder": [false, 3, 11],
+                    "baron": [false, 3, 12]
+                },
+                "tower_press": {
+                    "top": [false, 1, 14],
+                    "mid": [false, 1, 15],
+                    "bot": [false, 1, 16]
+                },
+                "tower_destroy": {
+                    "top": [false, 2, 17],
+                    "mid": [false, 2, 18],
+                    "bot": [false, 2, 19]
+                },
+                "nexus_destroy": true,
+                "model_use": [false, 3, 21]
+            });
+        }
         setPick({
             1: { bool: select.lane_press?.top[0], act: select.lane_press?.top[1] },
             2: { bool: select.lane_press?.mid[0], act: select.lane_press?.mid[1] },
@@ -361,10 +329,10 @@ export default function Game() {
             20: { bool: select.nexus_destroy },
             21: { bool: select?.model_use[0] }
         });
-        if (info.data?.turn % 2 === info.data?.side) {
+        if (info.data?.turn % 2 === side) {
             console.log('턴정보');
             console.log(info.data.turn);
-            console.log(info.data.side);
+            console.log(side);
             autoSelect();
         }
         console.log(myImg);
@@ -428,18 +396,28 @@ export default function Game() {
         }
         else {
             // api전송 
-            axios.post('http://localhost:8000/api/selectionprocess/', {
-                set_id: info.data.id,
-                selection: buffer
-            }).then((response) => {
-                console.log(response.data);
-                setPop(true);
-                setPopup(response.data.message);
-                if (buffer.indexOf(20) >= 0) {
+            console.log('보내기전');
+            console.log(buffer);
+            if (buffer.indexOf(20) >= 0) {
+                axios.post('http://localhost:8000/api/selectionprocess/', {
+                    set_id: info.data.id,
+                    selection: buffer
+                }).then((response) => {
+                    console.log(response.data);
                     alert(response.data.message);
-                    document.location.href = '/';
-                }
-            });
+                });
+                document.location.href = '/';
+            }
+            else {
+                axios.post('http://localhost:8000/api/selectionprocess/', {
+                    set_id: info.data.id,
+                    selection: buffer
+                }).then((response) => {
+                    console.log(response.data);
+                    setPop(true);
+                    setPopup(response.data.message);
+                });
+            }
             // 선택 초기화
             setClick({
                 1: false,
@@ -525,18 +503,26 @@ export default function Game() {
             }
         }
         //버퍼에는 선택가능한 것들이 들어가 있는 상태
-        axios.post('http://localhost:8000/api/selectionprocess/', {
-            set_id: info.data.id,
-            selection: buffer
-        }).then((response) => {
-            console.log(response.data);
-            setPop(true);
-            setPopup(response.data.message);
-            if (buffer.indexOf(20) >= 0) {
+        if (buffer.indexOf(20) >= 0) {
+            axios.post('http://localhost:8000/api/selectionprocess/', {
+                set_id: info.data.id,
+                selection: buffer
+            }).then((response) => {
+                console.log(response.data);
                 alert(response.data.message);
-                document.location.href = '/';
-            }
-        });
+            });
+            document.location.href = '/';
+        }
+        else {
+            axios.post('http://localhost:8000/api/selectionprocess/', {
+                set_id: info.data.id,
+                selection: buffer
+            }).then((response) => {
+                console.log(response.data);
+                setPop(true);
+                setPopup(response.data.message);
+            });
+        }
         console.log(buffer);
         buffer = [];
     }
@@ -555,15 +541,6 @@ export default function Game() {
         console.log(buffer);
         buffer = [];
     }
-    // const play = () => {
-    //     var audio = document.getElementById('audio_play');
-    //     if (audio.paused) {
-    //         audio.play();
-    //     } else {
-    //         audio.pause();
-    //         audio.currentTime = 0
-    //     }
-    // }
     return (<>
         <div className="game">
             {/* <audio id='audio_play' src='../sound/button-27.mp3'></audio> */}
@@ -588,7 +565,7 @@ export default function Game() {
                                 </div>
                             }
                             <div className="blue_info">
-                                {info.data?.side === 1 ?
+                                {side === 1 ?
                                     <ul>
                                         <Slot pos="Top" teaminfo={info.my_team_data?.top} img={myImg.top} icon="top--image" />
                                         <Slot pos="Jungle" teaminfo={info.my_team_data?.jng} img={myImg.jng} icon="jungle--image" />
@@ -617,7 +594,7 @@ export default function Game() {
                                         <div>{info.data?.my_tower_destroy}</div>
                                     </div> */}
                                     <div className="bluestatus">
-                                        {info.data?.side === 1 ?
+                                        {side === 1 ?
                                             <ul>
                                                 <li>글로벌 골드량 : {info.data?.my_gold}</li>
                                                 <li>처치한 드래곤 : {info.data?.my_dragon}</li>
@@ -636,7 +613,7 @@ export default function Game() {
                                         <div className="back">{() => { return info?.score[0] }} : {() => { return info?.score[1] }}</div>
                                     </div> */}
                                     <div className="redstatus">
-                                        {info.data?.side !== 1 ?
+                                        {side !== 1 ?
                                             <ul>
                                                 <li>글로벌 골드량 : {info.data?.my_gold}</li>
                                                 <li>처치한 드래곤 : {info.data?.my_dragon}</li>
@@ -679,7 +656,7 @@ export default function Game() {
                                 </div>
                             </div>
                             <div className="red_info">
-                                {info.data?.side !== 1 ?
+                                {side !== 1 ?
                                     <ul>
                                         <Slot pos="Top" teaminfo={info.my_team_data?.top} img={myImg.top} icon="top--image" />
                                         <Slot pos="Jungle" teaminfo={info.my_team_data?.jng} img={myImg.jng} icon="jungle--image" />

@@ -177,7 +177,7 @@ export default function MakeTeam() {
                     <div className="MTbox">
                         <div className="main--top">
                             <div>
-                                <div className="title">팀 생성</div>
+                                <div className="title">{myteam.name}</div>
                                 <div className="money">남은 비용 : ￦{myteam.total
                                     - myteam.Top.price
                                     - myteam.Jungle.price
