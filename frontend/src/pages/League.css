@@ -194,7 +194,7 @@
 }
 .league--main .inner .league--box .contents .current .personalSchedule .img{
     box-shadow: inset 0 0 65px rgb(0, 0, 0);
-    background-image: url('../images/game_back.jpg');
+    background-image: url('../images/main_back.jpg');
     background-repeat: no-repeat;
     background-size: cover;
     left: -230px;

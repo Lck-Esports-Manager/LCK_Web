@@ -32,7 +32,10 @@ function App() {
   }, []);
   return (
     <>
-      <audio loop
+      <audio
+        controls
+        id="bgm"
+        loop
         src='https://docs.google.com/uc?export=open&id=14JlzHWUE2TqAsN237ft43SOw02xDPori'
         autoPlay={true}>
       </audio>

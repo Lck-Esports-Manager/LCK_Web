@@ -36,3 +36,11 @@
     transform: rotate(360deg);
   }
 }
+
+#bgm{
+  position: absolute;
+  opacity: 0.9;
+  width: 300px;
+  top: 120px;
+  right: -350px;
+}

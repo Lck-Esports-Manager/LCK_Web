@@ -1,5 +1,5 @@
 .home--main{
-    height: 1080px;
+    height: 1180px;
     background-image: url('../images/main_back.jpg');
     background-repeat: no-repeat;
     background-size: cover;
@@ -9,7 +9,7 @@
 }
 
 .home--top{
-    height: 450px;
+    height: 550px;
 }
 .home--top .maintitle{
     font-size:80px;
@@ -28,12 +28,12 @@
     position: relative;
 }
 .home--top .inner img{
-    height: 400px;
-    width: 650px;
+    height: 540px;
+    width: 960px;
     display: block;
     margin: auto;
-    border: 8px solid black;
-    border-radius: 10px;
+    border: 10px solid rgba(97, 97, 97, 0);
+    border-radius: 15px;
 }
 .home--top .inner .material-icons{
     width: 50px;
@@ -48,17 +48,17 @@
     background-color: #666;
 }
 .home--top .inner .material-icons.L{
-    top:0;
+    top:100px;
     bottom: 0;
-    left: 150px;
+    left: 50px;
     margin: auto;
     position: absolute;
 }
 .home--top .inner .material-icons.R{
     position: absolute;
-    top:0;
+    top:100px;
     bottom: 0;
-    right: 150px;
+    right: 50px;
     margin: auto;
 }
 .home--bottom {
