@@ -479,7 +479,16 @@ export default function Game(props) {
                 }
             }
             if (pick[20].bool) {    //넥서스 파괴 선택지가 있을경우 
-                buffer.push(20);
+                axios.post('http://localhost:8000/api/selectionprocess/', {
+                    set_id: info.data.id,
+                    selection: [20]
+                }).then((response) => {
+                    console.log(response.data);
+                    alert(response.data.message);
+                }).catch((e) => {
+                    alert('축하합니다 승리하셨습니다.');
+                });
+                document.location.href = '/';
             }
             else {                  //넥서스 파괴 선택지가 없을경우 
                 //3
@@ -560,6 +569,20 @@ export default function Game(props) {
         <div className="game">
             {/* <audio id='audio_play' src='../sound/button-27.mp3'></audio> */}
             <div className="inner">
+                <div className="gameinfo">
+                    {side === 1 ?
+                        <>
+                            <div className="blueteam">{info.my_team_data?.name}</div>
+                            <div className="score">{info.score[0]} : {info.score[1]}</div>
+                            <div className="redteam">{info.op_team_data?.name}</div>
+                        </>
+                        : <>
+                            <div className="blueteam">{info.op_team_data?.name}</div>
+                            <div className="score">{info.score[0]} : {info.score[1]}</div>
+                            <div className="redteam">{info.my_team_data?.name}</div>
+                        </>
+                    }
+                </div>
                 <div className="gamebox">
                     <div className="contents">
                         <div className="main">

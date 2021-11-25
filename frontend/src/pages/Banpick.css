@@ -1,5 +1,5 @@
 .BP--main{
-    height: 960px;
+    height: 1050px;
     background-image: url('../images/ban_back.jpg');
     background-repeat: no-repeat;
     background-size: cover;
@@ -9,15 +9,57 @@
     width: 1200px;
     margin: auto;
     position: relative;
+    flex-wrap: wrap;
 }
 .BP--main .BP--inner .BPbox{
     width: 1230px;
     display: flex;
     height: 895px;
-    margin: 30px auto;
+    margin: 10px auto;
     position: relative;
     border-radius: 15px;
     padding: 15px;
+}
+.BP--main .BP--inner .gameinfo{
+    height: 50px;
+    padding: 10px;
+    width: 1200px;
+    margin: 20px auto;
+    /* background-color: turquoise; */
+    border-radius: 15px;
+    position: relative;
+    display: flex;
+    font-size: 50px;
+    font-weight: 700;
+    box-sizing: content-box;
+}
+.BP--main .BP--inner .blueteam{
+    background-color: #6464FF;
+    box-shadow: inset 0 0 15px rgb(0, 0, 255);
+    border-radius: 8px;
+    text-align: center;
+    color: #ffffff;
+    text-shadow: 2px 2px 2px black;
+    margin-top: -10px;
+    width: 430px;
+    height: 75px;
+}
+.BP--main .BP--inner .score{
+    margin: auto;
+    color: #ffffff;
+    text-shadow: 2px 2px 2px black;
+    margin-top: -15px;
+}
+.BP--main .BP--inner .redteam{
+    border-radius: 8px;
+    background-color: #DF7878;
+    color: #ffffff;
+    text-shadow: 2px 2px 2px black;
+    box-shadow: inset 0 0 15px rgb(255, 0, 0);
+    margin-top: -10px;
+    width: 430px;
+    text-align: center;
+    height: 75px;
 }
 .BP--main .BP--inner .BPbox .contents{
     background-color: rgba(255, 255, 255, 0);

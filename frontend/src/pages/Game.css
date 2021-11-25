@@ -11,12 +11,51 @@
     display: block;
     margin: auto;
 }
+.game .inner .gameinfo{
+    height: 50px;
+    padding: 10px;
+    width: 1200px;
+    margin: auto;
+    /* background-color: turquoise; */
+    border-radius: 15px;
+    position: relative;
+    display: flex;
+    font-size: 50px;
+    font-weight: 700;
+    box-sizing: content-box;
+}
+.game .inner .gameinfo .blueteam{
+    background-color: #6464FF;
+    box-shadow: inset 0 0 15px rgb(0, 0, 255);
+    border-radius: 8px;
+    text-align: center;
+    color: #ffffff;
+    text-shadow: 2px 2px 2px black;
+    margin-top: -10px;
+    width: 430px;
+    height: 75px;
+}
+.game .inner .gameinfo .score{
+    margin: auto;
+    color: #ffffff;
+    text-shadow: 2px 2px 2px black;
+    margin-top: -15px;
+}
+.game .inner .gameinfo .redteam{
+    border-radius: 8px;
+    background-color: #DF7878;
+    color: #ffffff;
+    text-shadow: 2px 2px 2px black;
+    box-shadow: inset 0 0 15px rgb(255, 0, 0);
+    margin-top: -10px;
+    width: 430px;
+    text-align: center;
+    height: 75px;
+}
 .game .inner .gamebox{
     height: 810px;
     padding: 10px;
     border-radius: 15px;
-    background-repeat: no-repeat;
-    background-size: cover;
     position: relative;
 }
 .game .inner .gamebox .contents{

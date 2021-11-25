@@ -12,7 +12,10 @@ export default function Banpick(props) {
             "banpick": true,
             "set_num": 1,
             "set_id": 9,
-            "side": 1
+            "side": 1,
+            my_team_data: { name: 'team name' },
+            op_team_data: { name: 'team name' },
+            score: [0, 0]
         }
     );
     let randT = 0;
@@ -256,6 +259,20 @@ export default function Banpick(props) {
                             </div>
                         </div>
                         <ul>
+                            <div className="gameinfo">
+                                {side === 1 ?
+                                    <>
+                                        <div className="blueteam">{api.my_team_data?.name}</div>
+                                        <div className="score">{api.score[0]} : {api.score[1]}</div>
+                                        <div className="redteam">{api.op_team_data?.name}</div>
+                                    </>
+                                    : <>
+                                        <div className="blueteam">{api.op_team_data?.name}</div>
+                                        <div className="score">{api.score[0]} : {api.score[1]}</div>
+                                        <div className="redteam">{api.my_team_data?.name}</div>
+                                    </>
+                                }
+                            </div>
                             <li className="ban">
                                 <div className="blue--pick">
                                     <ul className="cardbar">
