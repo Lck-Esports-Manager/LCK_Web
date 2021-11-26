@@ -34,6 +34,7 @@
     margin-top: -10px;
     width: 430px;
     height: 75px;
+    overflow: hidden;
 }
 .game .inner .gameinfo .score{
     margin: auto;
@@ -51,6 +52,7 @@
     width: 430px;
     text-align: center;
     height: 75px;
+    overflow: hidden;
 }
 .game .inner .gamebox{
     height: 810px;
