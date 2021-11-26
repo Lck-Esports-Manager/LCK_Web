@@ -7,6 +7,7 @@ import slide4 from '../images/main-4.png';
 import slide5 from '../images/main-5.png';
 import './Home.css';
 import Maintitle from './components/Maintitle';
+import { header } from "../config.js";
 
 let imgs = [slide1, slide2, slide3, slide4, slide5];
 
@@ -30,7 +31,7 @@ function Home() {
     }, []);
     const [match, setMatch] = useState(null);
     useEffect(() => {
-        axios.get('http://localhost:8000/api/getschedule/'
+        axios.get('http://localhost:8000/api/getschedule/',header
         ).then((response) => {
             console.log(response.data.schedule);
             setHave(true);
