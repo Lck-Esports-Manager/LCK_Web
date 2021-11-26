@@ -35,6 +35,13 @@ export default function Headline() {
     return (
         <header>
             <div className='inner'>
+                <audio
+                    controls
+                    id="bgm"
+                    loop
+                    src='https://docs.google.com/uc?export=open&id=14JlzHWUE2TqAsN237ft43SOw02xDPori'
+                    autoPlay={true}>
+                </audio>
                 <NavLink to="/"><img src={logo} alt="Home" /></NavLink>
                 <ul>
                     {
