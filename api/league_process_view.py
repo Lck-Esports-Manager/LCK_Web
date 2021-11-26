@@ -303,10 +303,12 @@ class ProcessSelection(APIView):
 
                 mine = self.my_team['top'][1]+self.my_team['jng'][1]
                 op = self.op_team['top'][1]+self.op_team['jng'][1]
+                print(mine,op)
                 if self.set.turn % 2 == 1:
-
+                    
                     rate = (mine/(mine+op))*0.7+(
                         self.set.my_gold/(self.set.my_gold+self.set.op_gold))*0.3
+                    print(rate)
                     rand_n = random.random()
                     if rand_n < rate:
                         self.set.my_gold = self.set.my_gold+800
@@ -320,6 +322,7 @@ class ProcessSelection(APIView):
                 else:
                     rate = (op/(mine+op))*0.8+(
                         self.set.op_gold/(self.set.my_gold+self.set.op_gold))*0.2
+                    print(rate)
                     rand_n = random.random()
                     if rand_n < rate:
                         self.set.op_gold = self.set.op_gold+800
@@ -331,11 +334,14 @@ class ProcessSelection(APIView):
                             "{0} : {1}팀 탑에서의 교전이 패배하여를 상대팀이 800골드를 추가로 얻습니다.".format(self.set.turn, self.op_team['side']))
 
             elif elem == 8:
+                
                 mine = self.my_team['mid'][1]+self.my_team['jng'][1]
                 op = self.op_team['mid'][1]+self.op_team['jng'][1]
+                print(mine,op)
                 if self.set.turn % 2 == 1:
                     rate = (mine/(mine+op))*0.7+(
                         self.set.my_gold/(self.set.my_gold+self.set.op_gold))*0.3
+                    print(rate)
                     rand_n = random.random()
                     if rand_n < rate:
                         self.set.my_gold = self.set.my_gold+800
@@ -349,6 +355,7 @@ class ProcessSelection(APIView):
                 else:
                     rate = (op/(mine+op))*0.8+(
                         self.set.op_gold/(self.set.my_gold+self.set.op_gold))*0.2
+                    print(rate)
                     rand_n = random.random()
                     if rand_n < rate:
                         self.set.op_gold = self.set.op_gold+800
@@ -364,9 +371,11 @@ class ProcessSelection(APIView):
                     self.my_team['sup'][1]+self.my_team['jng'][1]
                 op = self.op_team['adc'][1] + \
                     self.op_team['sup'][1]+self.op_team['jng'][1]
+                print(mine,op)
                 if self.set.turn % 2 == 1:
                     rate = (mine/(mine+op))*0.7+(
                         self.set.my_gold/(self.set.my_gold+self.set.op_gold))*0.3
+                    print(rate)
                     rand_n = random.random()
                     if rand_n < rate:
                         self.set.my_gold = self.set.my_gold+800
@@ -380,6 +389,7 @@ class ProcessSelection(APIView):
                 else:
                     rate = (op/(mine+op))*0.8+(
                         self.set.op_gold/(self.set.my_gold+self.set.op_gold))*0.2
+                    print(rate)
                     rand_n = random.random()
                     if rand_n < rate:
                         self.set.op_gold = self.set.op_gold+800
@@ -395,6 +405,7 @@ class ProcessSelection(APIView):
                     rate = self.my_fight_score/(self.my_fight_score+self.op_fight_score)*0.6 + \
                         self.set.my_gold/(self.set.my_gold +
                                           self.set.op_gold)*0.4
+                    print(self.my_fight_score,self.op_fight_score,rate)
                     rand_n = random.random()
                     if rand_n < rate:
                         self.set.my_gold = self.set.my_gold+1000
