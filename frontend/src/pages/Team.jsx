@@ -53,6 +53,18 @@ const style5={
     backgroundColor:'#011e46',
     color:'white'
 }
+const containerStyle={
+    borderRadius:"10px",
+
+    margin:"auto",
+    marginTop:"10px",
+    marginBottom:"10px",
+    paddingTop:"80px",
+    paddingBottom:"26px",
+    height:"700px",
+    backgroundColor:'#011e46',
+    color:'white'
+}
 function Player({ player, pos }) {
     const history = useHistory();
     const routeChange = () => {
@@ -291,8 +303,10 @@ function LeagueScheduleTable() {
     else {
         return (
             <>
-                <h2>리그 스케줄</h2>
-                <Table responsive>
+                <h2 style={style2}>리그 스케줄</h2>
+                <Container style={containerStyle}>
+                
+                <Table style={{color:"white"}}responsive>
                     <thead>
                         <tr>
                             <th>Date</th>
@@ -314,6 +328,7 @@ function LeagueScheduleTable() {
 
                     </tbody>
                 </Table>
+                </Container>
             </>
         )
     }
@@ -337,8 +352,11 @@ function LeagueRank() {
     else {
         return (
             <>
-                <h2>리그 랭킹</h2>
-                <Table responsive>
+                
+                <h2 style={style2}>리그 랭킹</h2>
+                <Container style={containerStyle}>
+                
+                <Table style={{color:"white"}} responsive>
                     <thead>
                         <tr>
                             <th>순위</th>
@@ -360,6 +378,7 @@ function LeagueRank() {
 
                     </tbody>
                 </Table>
+                </Container>
             </>
         )
     }
