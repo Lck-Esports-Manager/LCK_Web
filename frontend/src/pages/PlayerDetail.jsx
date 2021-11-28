@@ -2,7 +2,43 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './Player.css';
 import { header } from "../config.js";
-import { Button, Col, Row } from 'react-bootstrap'
+import { Row, Col, Button, Container, Image, ProgressBar } from 'react-bootstrap'
+
+
+
+const right={
+    border:'none',
+    backgroundColor:'#ffdba1',
+    width:'70px',
+    color:'#011e46',
+    float:'right'
+}
+const left={
+    border:'none',
+    backgroundColor:'#ffdba1',
+    width:'70px',
+    color:'#011e46',
+    float:'left'
+}
+const containerStyle={ width: '560px',
+    height: '300px',
+    borderRadius:"10px",
+    margin: 'auto',
+    color:"white",
+    backgroundColor:'#011e46',
+    padding:'10px'
+}
+function ExpManage({level,exp}){
+    const [_exp, setExp] = useState(exp)
+    const [_level, setLevel] = useState(level)
+
+    return(
+        <>
+        <div style={{padding:'30px',fontSize:'30px'}}>Lv {_level}</div>
+        <div style={{padding:'30px'}}><ProgressBar now={30} /></div>
+        </>
+    )
+}
 
 function StatusManage({ status1, status2, status3, remain, id }) {
 
@@ -67,23 +103,61 @@ function StatusManage({ status1, status2, status3, remain, id }) {
     }
     return (
         <>
-            <Row>
-                <Col><Button variant="outline-primary" onClick={sub1} disabled={_status1 > status1 ? false : true}>-</Button></Col>
-                <Col>라인전: {_status1}</Col>
-                <Col><Button variant="outline-primary" onClick={add1} disabled={_remain > 0 ? false : true}>+</Button></Col>
+            <Row style={{padding:'10px'}}>
+                <Col style={{textAlign:"center"}}>라인전</Col>
+                <Col>
+                <Row>
+                <Col>
+                <Button  style={right} onClick={sub1} disabled={_status1 > status1 ? false : true}>-</Button>
+                </Col>
+                <Col>
+                <div style={{textAlign:"center"}}>{_status1}</div>
+                </Col >
+                <Col>
+                <Button  style={left} onClick={add1} disabled={_remain > 0 ? false : true}>+</Button>
+                </Col>
+                </Row>
+                </Col>
             </Row>
-            <Row>
-                <Col><Button variant="outline-primary" onClick={sub2} disabled={_status2 > status2 ? false : true}>-</Button></Col>
-                <Col>교전: {_status2}</Col>
-                <Col><Button variant="outline-primary" onClick={add2} disabled={_remain > 0 ? false : true}>+</Button></Col>
+            <Row style={{padding:'10px'}}>
+                <Col style={{textAlign:"center"}}>교전</Col>
+                <Col>
+                <Row>
+                <Col>
+                <Button  style={right} onClick={sub2} disabled={_status2 > status2 ? false : true}>-</Button>
+                </Col>
+                <Col>
+                <div style={{textAlign:"center"}}>{_status1}</div>
+                </Col >
+                <Col>
+                <Button  style={left} onClick={add2} disabled={_remain > 0 ? false : true}>+</Button>
+                </Col>
+                </Row>
+                </Col>
             </Row>
-            <Row>
-                <Col><Button variant="outline-primary" onClick={sub3} disabled={_status3 > status3 ? false : true}>-</Button></Col>
-                <Col>한타: {_status3}</Col>
-                <Col><Button variant="outline-primary" onClick={add3} disabled={_remain > 0 ? false : true}>+</Button></Col>
+            <Row style={{padding:'10px'}}>
+                <Col style={{textAlign:"center"}}>한타</Col>
+                <Col>
+                <Row>
+                <Col>
+                <Button  style={right} onClick={sub3} disabled={_status3 > status3 ? false : true}>-</Button>
+                </Col>
+                <Col>
+                <div style={{textAlign:"center"}}>{_status1}</div>
+                </Col >
+                <Col>
+                <Button  style={left} onClick={add3} disabled={_remain > 0 ? false : true}>+</Button>
+                </Col>
+                </Row>
+                </Col>
             </Row>
-            <div>남은거: {_remain}</div>
-            <Button disabled={_remain === remain ? true : false} onClick={changeStatus}>저장</Button>
+            <div style={{
+                textAlign:'left',
+                padding:'10px'
+                }}>남은 포인트: {_remain}
+                <Button style={right} disabled={_remain === remain ? true : false} onClick={changeStatus}>저장</Button></div>
+                
+            
         </>
     )
 
@@ -103,9 +177,10 @@ export default function PlayerDetail(props) {
                 },
             }
             try {
-
+                
                 axios.get('http://localhost:8000/api/myplayerdetail/', config).then((response) => {
                     setMyPlayer(response.data);
+                    console.log(response.data);
                 })
             } catch (e) { console.log(e); }
         };
@@ -122,10 +197,54 @@ export default function PlayerDetail(props) {
                 <div className="contents">
                     <div className="title">선수 상세정보</div>
                     <div>
-                        <div>이름: {MyPlayer.player.name}</div>
-                        <div>티어:{MyPlayer.player.rate}</div>
-                        <div>{MyPlayer.player.position}</div>
-                        <StatusManage status1={MyPlayer.status1} status2={MyPlayer.status2} status3={MyPlayer.status3} remain={MyPlayer.remain} id={MyPlayer.id}></StatusManage>
+                    <Container style={
+                {
+                    width: '1200px',
+                    height: '389px',
+                    borderRadius:"10px",
+                    margin: '30px',
+                    color:"white",
+                    backgroundColor:'#011e46',
+                }}>
+                
+                <Row>
+                    <Col >
+                        <Container style={{margin:'auto',padding:'50px'}}>
+                        <Image style={{width:"350px"}}src={`http://localhost:8000${MyPlayer.player.images}`} />
+                        </Container>
+                    </Col> 
+                    <Col >
+                    <Container style={{margin:"auto",fontSize:"22px",padding:'50px'}}>
+                        <div style={{padding:"15px"}}>이름 : {MyPlayer.player.name}</div>
+                        <div style={{padding:"15px"}}>포지션 : {MyPlayer.player.position}</div>
+                        <div style={{padding:"15px"}}>연도 및 시즌 : {MyPlayer.player.year} {MyPlayer.player.season}</div>
+                        <div style={{padding:"15px"}}>등급 : {MyPlayer.player.rate}</div>
+                        </Container>
+                    </Col>
+                </Row>
+            </Container>
+            <Row>
+                <Col>
+                <Container style={containerStyle}>
+                <div style={{textAlign:'center',
+                             fontSize:'20px',
+                             color:'#ffdba1',
+                             margin:'10px'}}>경험치</div>
+                <ExpManage exp={MyPlayer.exp} level={MyPlayer.level}></ExpManage>
+                </Container></Col>
+                <Col>
+                <Container style={containerStyle}>
+                <div style={{textAlign:'center',
+                             fontSize:'20px',
+                             color:'#ffdba1',
+                             margin:'10px'}}>스텟 관리</div>
+                <StatusManage status1={MyPlayer.status1} status2={MyPlayer.status2} status3={MyPlayer.status3} remain={MyPlayer.remain} id={MyPlayer.id}></StatusManage>
+                </Container>
+                </Col>
+                
+            </Row>
+
+                        
                     </div>
                 </div>
             </div>
