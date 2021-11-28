@@ -1243,6 +1243,9 @@ class RemovePlayer(APIView):
             pos=request.data['pos']
             if pos=='Sub1':
                 my_team.sub1=None
+                if my_team.sub2!=None:
+                    my_team.sub1=my_team.sub2
+                    my_team.sub2=None
             else:
                 my_team.sub2=None
             my_team.save()
