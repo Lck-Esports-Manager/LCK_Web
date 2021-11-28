@@ -5,6 +5,50 @@ import { Row, Card, Col, Button, Modal, Container, Table } from 'react-bootstrap
 import { header } from "../config.js";
 
 
+const button1={
+    border:'none',
+    backgroundColor:'#011e46',
+    width:'79px'
+}
+const button2={
+    border:'none',
+    backgroundColor:'red',
+    width:'79px'
+}
+const button3={
+    border:'none',
+    backgroundColor:'#011e46',
+
+}
+const head_style={
+    borderRadius:"10px",
+    textAlign:'center',
+    width:'300px',
+    alignContent:"center",
+    margin:"auto",
+    marginTop:"10px",
+    marginBottom:"10px",
+    padding:"5px",
+    backgroundColor:'#011e46',
+    color:'#ffdba1'
+}
+
+
+const position_style={
+    borderRadius:"10px",
+    textAlign:'center',
+    width:'150px',
+    alignContent:"center",
+    margin:"auto",
+    marginTop:"10px",
+    marginBottom:"10px",
+    padding:"5px",
+    backgroundColor:'#011e46',
+    color:'white'
+}
+
+
+
 function RemoveButton({ func }) {
     const [show, setShow] = useState(false);
 
@@ -16,7 +60,7 @@ function RemoveButton({ func }) {
     }
     return (
         <>
-            <Button variant="danger" onClick={handleShow}>
+            <Button style={button2} onClick={handleShow}>
                 방출
             </Button>
 
@@ -72,19 +116,21 @@ function Player({ player, pos, func }) {
     }
     return (
         <>
-            <h3 class='my-2'>
+            <h3 style={position_style}>
                 {pos}
             </h3>
-            <Card style={{ width: '12rem' }}>
+            <Card style={{ width: '12rem',margin:"auto" }}>
                 <Card.Img class='m-3' variant="top" src={`http://localhost:8000${player.player.images}`} />
                 <Card.Body>
                     <Card.Title>{player.player.name}</Card.Title>
                     <Card.Subtitle className="mb-2 text-muted">{player.player.year} {player.player.season}</Card.Subtitle>
-                    {pos === 'Sub1' || pos === 'Sub2' ? <div>{player.player.position}</div> : <div></div>}
+                    {pos === 'Sub1' || pos === 'Sub2' ?  <Card.Text className="mb-2 text-muted"> {player.player.position}</Card.Text> : <div></div>}
+                    {pos === 'Sub1' || pos === 'Sub2' ? <div><Button style={button1} onClick={changeRoasterToHigh}>등록</Button>
+                                            <RemoveButton func={removePlayer}></RemoveButton></div> : <div></div>}
                 </Card.Body>
             </Card>
-            {pos === 'Sub1' || pos === 'Sub2' ? <Button variant="secondary" onClick={changeRoasterToHigh}>등록</Button> : <div></div>}
-            {pos === 'Sub1' || pos === 'Sub2' ? <RemoveButton func={removePlayer}></RemoveButton> : <div></div>}
+            
+           
         </>
     );
 }
@@ -219,8 +265,8 @@ export default function TeamChange() {
                 <div className="inner">
                     <div className="contents">
                         <div className="title">팀 관리</div>
-                        <Button onClick={submitRoaster}>로스터 저장</Button>
-                        <h3 class='my-2'>주전</h3>
+                        <Button style={button3} onClick={submitRoaster}>로스터 저장</Button>
+                        <h3 style={head_style}>주전</h3>
                         <Container>
                             <Row className="justify-content-md-center">
                                 <Col><Player player={data.top} pos="Top"></Player></Col>
@@ -230,11 +276,14 @@ export default function TeamChange() {
                                 <Col><Player player={data.sup} pos="Supporter"></Player></Col>
                             </Row>
                         </Container>
-                        <h3 class='my-2'>서브</h3>
+                        <h3 style={head_style}>서브</h3>
                         <Container>
                             <Row className="justify-content-md-center">
                                 <Col><Player player={data.sub1} pos="Sub1" func={changeRoaster}></Player></Col>
                                 <Col><Player player={data.sub2} pos="Sub2" func={changeRoaster}></Player></Col>
+                                <Col></Col>
+                                <Col></Col>
+                                <Col></Col>
                             </Row>
                         </Container>
                     </div>

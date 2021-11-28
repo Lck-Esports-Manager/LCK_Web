@@ -3,7 +3,29 @@ import axios from 'axios';
 import { useHistory } from "react-router-dom";
 import { Row, DropdownButton, Col, Button, Dropdown, Table, Spinner, Container, Image, CloseButton } from 'react-bootstrap'
 import { header } from "../config.js";
-
+const button={
+    border:'none',
+    backgroundColor:'#011e46',
+    width:'79px'
+}
+const button2={
+    border:'none',
+    backgroundColor:'white',
+    width:'175px',
+    color:'#011e46'
+}
+const style2={
+    borderRadius:"10px",
+    textAlign:'center',
+    width:'300px',
+    alignContent:"center",
+    margin:"auto",
+    marginTop:"10px",
+    marginBottom:"10px",
+    padding:"5px",
+    backgroundColor:'#011e46',
+    color:'#ffdba1'
+}
 
 function PlayerDetailInfo({ id, unable, money, func }) {
     const [player, setPlayer] = useState(null);
@@ -67,32 +89,41 @@ function PlayerDetailInfo({ id, unable, money, func }) {
         <>
             <Container style={
                 {
-                    width: '1250px',
-                    height: '320px',
-                    borderWidth: 'thin',
-                    borderStyle: "solid",
+                    width: '1180px',
+                    height: '290px',
+                    borderRadius:"10px",
                     margin: '30px',
                     position: 'absolute',
-                    backgroundColor: 'white',
-                    zIndex: '2',
-                    top: '155px',
+                    backgroundColor: '#011e46',
+                    zIndex: '1',
+                    color:"white"
                 }}>
-                <CloseButton onClick={exitClick} />
+                <div style={{margin:'10px'}}><CloseButton variant='white' style={{float:"right"}} onClick={exitClick} /></div>
+                
                 <Row>
-                    <Col sm={4}>
-                        <Image src={`http://localhost:8000${player.images}`} rounded />
-                        <div>이름 : {player.name}</div>
-                        <div>포지션 : {player.position}</div>
-                        <div>연도 및 시즌 : {player.year} {player.season}</div>
-                        <div>소속 팀 : {player.team.name}</div>
-                        <div>등급 : {player.rate}</div>
+                    <Col >
+                        <Container style={{margin:'auto',padding:'60px'}}>
+                        <Image src={`http://localhost:8000${player.images}`} />
+                        </Container>
+                    </Col> 
+                    <Col >
+                    <Container style={{margin:"auto",fontSize:"22px"}}>
+                        <div style={{padding:"8px"}}>이름 : {player.name}</div>
+                        <div style={{padding:"8px"}}>포지션 : {player.position}</div>
+                        <div style={{padding:"8px"}}>연도 및 시즌 : {player.year} {player.season}</div>
+                        <div style={{padding:"8px"}}>소속 팀 : {player.team.name}</div>
+                        <div style={{padding:"8px"}}>등급 : {player.rate}</div>
+                        </Container>
                     </Col>
-                    <Col sm={8}>
-                        <div>라인전 능력 : {player.status1}</div>
-                        <div>교전 능력 : {player.status2}</div>
-                        <div>한타 능력 : {player.status3}</div>
-                        <div>가격 : {player.price}</div>
-                        <Button variant="secondary" onClick={purchase}>구입하기</Button>
+                    <Col>
+                    <Container style={{margin:"auto",fontSize:"22px"}}>
+                        <div style={{padding:"8px"}}>라인전 능력 : {player.status1}</div>
+                        <div style={{padding:"8px"}}>교전 능력 : {player.status2}</div>
+                        <div style={{padding:"8px"}}>한타 능력 : {player.status3}</div>
+                        <div style={{padding:"8px"}}>가격 : {player.price}</div>
+                        <div style={{padding:"8px"}}><Button style={button2} onClick={purchase}>구입하기</Button></div>
+                        
+                        </Container>
                     </Col>
                 </Row>
             </Container>
@@ -195,7 +226,7 @@ export default function AddPlayer() {
                 <div className="inner">
                     <div className="contents">
                         <div className="title">선수 영입</div>
-                        <div>여유 금액 :{myTeam.money}</div>
+                        <div style={style2}>여유 금액 :{myTeam.money}원</div>
                         {clickEvent ? <PlayerDetailInfo id={clickPlayer} unable={unable} money={myTeam.money} func={exit} /> : <></>}
 
                         <Container style={
@@ -203,18 +234,19 @@ export default function AddPlayer() {
                                 width: '1250px',
                                 borderWidth: 'thin',
                                 borderStyle: "solid",
+                                padding:"10px"
                             }}>
                             <Row>
-                                <Col>포지션</Col>
-                                <Col>연도</Col>
-                                <Col>시즌</Col>
-                                <Col>등급</Col>
+                                <Col style={{margin:"auto"}}>포지션</Col>
+                                <Col style={{margin:"auto"}}>연도</Col>
+                                <Col style={{margin:"auto"}}>시즌</Col>
+                                <Col style={{margin:"auto"}}>등급</Col>
                                 <Col></Col>
                             </Row>
                             <Row>
                                 <Col>
 
-                                    <DropdownButton variant='outline-secondary' style={{ width: '100px' }} id="dropdown-item-button" title={position}>
+                                    <DropdownButton variant='outline-secondary'  id="dropdown-item-button" title={position}>
                                         {positionArr && positionArr.map((_position) => (
                                             <Dropdown.Item as="button" onClick={changePosition} value={_position}>{_position}</Dropdown.Item>
                                         ))}
@@ -252,7 +284,7 @@ export default function AddPlayer() {
                                     {
                                         alignContent: "center"
                                     }}>
-                                    <Button variant="secondary" onClick={fetchPlayer}>
+                                    <Button style={button} onClick={fetchPlayer}>
                                         검색
                                     </Button>
                                 </Col>
@@ -266,6 +298,7 @@ export default function AddPlayer() {
                                     margin: '10px auto',
                                     overflow: 'auto'
                                 }}>
+                                
                                 <Table size="sm" style={{ alignContent: "center" }}>
                                     <thead>
                                         <tr>
