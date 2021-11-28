@@ -35,7 +35,7 @@ function ExpManage({level,exp}){
     return(
         <>
         <div style={{padding:'30px',fontSize:'30px'}}>Lv {_level}</div>
-        <div style={{padding:'30px'}}><ProgressBar now={30} /></div>
+        <div style={{padding:'30px'}}><ProgressBar now={_exp*10} /></div>
         </>
     )
 }
