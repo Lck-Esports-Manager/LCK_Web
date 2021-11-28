@@ -26,7 +26,7 @@
 }
 .game .inner .gameinfo .blueteam{
     background-color: #6464FF;
-    box-shadow: inset 0 0 15px rgb(0, 0, 255);
+    box-shadow: inset 0 0 35px rgb(0, 0, 255);
     border-radius: 8px;
     text-align: center;
     color: #ffffff;
@@ -35,6 +35,7 @@
     width: 430px;
     height: 75px;
     overflow: hidden;
+    background-image: url('../images/blue_back.jpg');
 }
 .game .inner .gameinfo .score{
     margin: auto;
@@ -47,12 +48,13 @@
     background-color: #DF7878;
     color: #ffffff;
     text-shadow: 2px 2px 2px black;
-    box-shadow: inset 0 0 15px rgb(255, 0, 0);
+    box-shadow: inset 0 0 35px rgb(255, 0, 0);
     margin-top: -10px;
     width: 430px;
     text-align: center;
     height: 75px;
     overflow: hidden;
+    background-image: url('../images/red_back.jpg');
 }
 .game .inner .gamebox{
     height: 810px;
@@ -79,10 +81,15 @@
 }
 .game .inner .gamebox .contents .main li img{
     position: absolute;
-    height: 38px;
+    height: 120px;
     background-size: cover;
-    top: 74px;
-    left: 8px;
+    top: 0px;
+    left: 0px;
+    opacity: 0.9;
+    transition: 0.2s;
+}
+.game .inner .gamebox .contents .main li img:hover{
+    opacity: 0.1;
 }
 .game .inner .gamebox .contents .main .top--image{
     background-repeat: no-repeat;
@@ -122,24 +129,38 @@
 .game .inner .gamebox .contents .main .blue_info{
     background-color: rgb(100, 100, 255);
     padding: 10px;
-    width: 150px;
+    width: 120px;
     height: 660px;
     position: absolute;
     z-index: 2;
     display: flex;
     border-radius: 15px;
     transition: 0.5s;
-    left: 8px;
-    overflow: hidden;
+    left: 35px;
     box-shadow: inset 0 0 15px rgb(33, 49, 139);
     box-sizing: content-box;
+
+    overflow: hidden;
 }
+.game .inner .gamebox .contents .main .blue_info .img{
+    background-image: url("../images/blue_back.jpg");
+    z-index: 2;
+    width: 670px;
+    height: 680px;
+    position: absolute;
+    top: 0;
+    left: -250px;
+    box-shadow: inset 225px 0 125px rgb(33, 49, 139);
+    opacity: 0.8;
+}
+
 .game .inner .gamebox .contents .main .blue_info ul{
     padding: 0;
 }
 .game .inner .gamebox .contents .main .blue_info li{
-    background-color: rgba(255, 255, 255, 0.26);
-    width: 130px;
+    z-index: 3;
+    background-color: rgba(255, 255, 255, 0.575);
+    width: 100px;
     display: flex;
     flex-wrap: wrap;
     font-size: 20px;
@@ -154,35 +175,56 @@
 .game .inner .gamebox .contents .main .blue_info span{
     width: 30px;
     height: 30px;
-    margin: 0px 0 5px;
+    margin: 10px 0 5px;
 }
-.game .inner .gamebox .contents .main .blue_info div{
+.game .inner .gamebox .contents .main .blue_info ul div{
     font-size: 20px;
-    width: 100px;
+    width: 65px;
     display: block;
+    overflow: hidden;
+    margin: 10px 0 0 3px;
+    height: 40px;
+}
+.game .inner .gamebox .contents .main .blue_info .name{
+    font-size: 20px;
+    width: 90px;
+    display: block;
+    overflow: hidden;
+    margin: 0 0 0 8px;
 }
 .game .inner .gamebox .contents .main .red_info{
     background-color: rgb(253, 120, 120);
     padding: 10px;
-    width: 150px;
+    width: 120px;
     height: 660px;
     position: absolute;
     z-index: 2;
     display: flex;
     border-radius: 15px;
     transition: 0.5s;
-    right: 8px;
+    right: 35px;
     overflow: hidden;
     box-shadow: inset 0 0 15px rgb(133, 47, 47);
     box-sizing: content-box;
+}
+.game .inner .gamebox .contents .main .red_info .img{
+    background-image: url("../images/red_back.jpg");
+    z-index: 2;
+    width: 670px;
+    height: 680px;
+    position: absolute;
+    top: 0;
+    left: -350px;
+    box-shadow: inset 225px 0 125px rgb(133, 47, 47);
+    opacity: 0.8;
 }
 .game .inner .gamebox .contents .main .red_info ul{
     padding: 0;
     
 }
 .game .inner .gamebox .contents .main .red_info li{
-    background-color: rgba(255, 255, 255, 0.5);
-    width: 130px;
+    background-color: rgba(255, 255, 255, 0.644);
+    width: 100px;
     display: flex;
     flex-wrap: wrap;
     font-size: 20px;
@@ -193,16 +235,27 @@
     overflow: hidden;
     box-shadow: inset 0 0 5px rgb(87, 87, 87);
     box-sizing: content-box;
+    z-index: 3;
 }
 .game .inner .gamebox .contents .main .red_info span{
     width: 30px;
     height: 30px;
-    margin: 0px 0 5px;
+    margin: 10px 0 5px;
 }
-.game .inner .gamebox .contents .main .red_info div{
+.game .inner .gamebox .contents .main .red_info ul div{
     font-size: 20px;
-    width: 100px;
+    width: 65px;
     display: block;
+    overflow: hidden;
+    margin: 10px 0 0 3px;
+    height: 40px;
+}
+.game .inner .gamebox .contents .main .red_info .name{
+    font-size: 20px;
+    width: 90px;
+    display: block;
+    overflow: hidden;
+    margin: 0 0 0 8px;
 }
 .game .inner .gamebox .contents .main .popup{
     padding: 30px;
@@ -210,7 +263,7 @@
     left: 340px;
     width: 600px;
     border-radius: 20px;
-    border: 5px solid black;
+    border: 3px solid black;
     position: absolute;
     z-index: 3;
     background-image: url('../images/popup_back.jpg');
@@ -284,12 +337,13 @@
     line-height: 1.3;
 }
 .game .inner .gamebox .contents .main .head .bluestatus{
-    background-color: rgb(184, 99, 39);
+    background-color: #152021;
+    color: wheat;
     width: 160px;
     text-align: left;
     padding: 5px;
     border-radius: 5px;
-    border:4px solid;
+    border:2px solid;
     box-sizing: content-box;
     height: 85px;
 }
@@ -364,15 +418,16 @@
     text-align: center;
 }
 .game .inner .gamebox .contents .main .head .redstatus{
-    background-color: rgb(184, 99, 39);
+    background-color: #152021;
+    color: wheat;
     width: 160px;
     text-align: left;
     padding: 5px;
     border-radius: 5px;
-    border:4px solid;
+    border:2px solid;
     box-sizing: content-box;
     height: 85px;
-    margin: 0 0 0 520px;
+    margin: 0 0 0 530px;
 }
 .game .inner .gamebox .contents .main .head .redstatus ul{
     padding: 0;
@@ -409,16 +464,16 @@
     left: 185px;
     border-radius: 15px;
     z-index: 1;
-    border: 5px solid black;
+    border: 3px solid black;
 }
 .game .inner .gamebox .contents .main .choice{
     z-index: 2;
     position: absolute;
-    background-color: rgb(102, 102, 102);
+    background-color: #0d1516;
     bottom: 10px;
-    width: 1260px;
+    width: 1210px;
     height: 80px;
-    left: 10px;
+    left: 35px;
     border-radius: 10px;
     border:4px solid;
     transition: 0.3s;
@@ -428,32 +483,39 @@
     height: 260px;
 }
 .game .inner .gamebox .contents .main .choice .turn--info{
-    background-color: rgb(83, 83, 83);
+    background-color: #152021;
     padding: 10px 10px 6px;
     width: 180px;
     margin: 10px;
     border-radius: 8px;
 }
 .game .inner .gamebox .contents .main .choice .turn--info .blue--turn{
-    background-color: rgb(100, 100, 255);
+    background-color: #152021;
+    box-shadow: inset 0 0 35px rgb(0, 0, 255);
+    color: white;
     width: 150px;
     font-family: Arial, Helvetica, sans-serif;
     font-weight: 700;
     margin: auto;
     font-size: 30px;
     border-radius: 10px;
+    text-shadow: 2px 2px 2px black;
 }
 .game .inner .gamebox .contents .main .choice .turn--info .red--turn{
-    background-color: rgb(253, 120, 120);
+    background-color: #152021;
+    box-shadow: inset 0 0 35px rgb(255, 0, 0);
+    color: white;
     width: 150px;
     font-family: Arial, Helvetica, sans-serif;
     font-weight: 700;
     margin: auto;
     font-size: 30px;
     border-radius: 10px;
+    text-shadow: 2px 2px 2px black;
 }
 .game .inner .gamebox .contents .main .choice .turn--info .action{
-    background-color: rgb(158, 158, 158);
+    background-color: wheat;
+    color: #152021;
     width: 120px;
     height: 40px;
     font-size: 20px;
@@ -469,10 +531,15 @@
     font-size: 20px;
     padding: 5px 5px;
     border-radius: 5px;
-    background-color: rgb(189, 189, 189);
+    background-color: #152021;
+    color: wheat;
     cursor: pointer;
-    box-shadow: inset 0 0 5px rgb(87, 87, 87);
+    box-shadow: inset 0 0 10px wheat;
     box-sizing: content-box;
+}
+.game .inner .gamebox .contents .main .choice .turn--info .complete:hover{
+    background-color: rgb(184, 99, 39);
+    
 }
 .game .inner .gamebox .contents .main .choice .turn--info .no--complete{
     width: 120px;
@@ -481,8 +548,8 @@
     font-size: 20px;
     padding: 5px 5px;
     border-radius: 5px;
-    background-color: rgb(100, 100, 100);
-    box-shadow: inset 0 0 5px rgb(87, 87, 87);
+    background-color: #152021;
+    box-shadow: inset 0 0 3px rgb(87, 87, 87);
     box-sizing: content-box;
 }
 .game .inner .gamebox .contents .main .choice ul{
@@ -495,13 +562,14 @@
     width: 150px;
 }
 .game .inner .gamebox .contents .main .choice ul .title{
-    background-color: rgba(255, 255, 255, 0.5);
-    margin: 10px 5px 5px;
-    padding: 6px 10px 10px;
-    border-radius: 15px;
+    background-color: #152021;
+    margin: 10px 5px 15px;
+    padding: 2px 10px 14px;
+    border-radius: 12px;
     width: 100px;
-    height: 30px;
+    height: 25px;
     font-size: 25px;
+    color: wheat;
     border:4px solid rgb(68, 68, 68);
     box-sizing: content-box;
     box-shadow: inset 0 0 5px rgb(87, 87, 87);
@@ -514,9 +582,10 @@
     border-radius: 5px;
     padding: 2px;
     box-sizing: border-box;
+    color: wheat;
     background-color: rgb(184, 99, 39);
     cursor: pointer;
-    box-shadow: inset 0 0 5px rgb(87, 87, 87);
+    box-shadow: inset 0 0 5px wheat;
 }
 .game .inner .gamebox .contents .main .choice ul .select{
     width: 120px;
@@ -526,9 +595,10 @@
     border-radius: 5px;
     padding: 2px;
     box-sizing: border-box;
-    background-color: rgb(189, 189, 189);
+    background-color: #152021;
+    color: wheat;
     cursor: pointer;
-    box-shadow: inset 0 0 5px rgb(87, 87, 87);
+    box-shadow: inset 0 0 5px wheat;
 }
 .game .inner .gamebox .contents .main .choice ul .select:hover{
     background-color: rgb(184, 99, 39);
@@ -541,8 +611,8 @@
     border-radius: 5px;
     padding: 2px;
     box-sizing: border-box;
-    background-color: rgb(100, 100, 100);
-    box-shadow: inset 0 0 5px rgb(87, 87, 87);
+    box-shadow: inset 0 0 3px rgb(87, 87, 87);
+    background-color: #152021;
 }
 
 .game .my1{

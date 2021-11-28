@@ -35,7 +35,7 @@
 }
 .BP--main .BP--inner .blueteam{
     background-color: #6464FF;
-    box-shadow: inset 0 0 15px rgb(0, 0, 255);
+    box-shadow: inset 0 0 35px rgb(0, 0, 255);
     border-radius: 8px;
     text-align: center;
     color: #ffffff;
@@ -44,6 +44,7 @@
     width: 430px;
     height: 75px;
     overflow: hidden;
+    background-image: url('../images/blue_back.jpg');
 }
 .BP--main .BP--inner .score{
     margin: auto;
@@ -56,12 +57,13 @@
     background-color: #DF7878;
     color: #ffffff;
     text-shadow: 2px 2px 2px black;
-    box-shadow: inset 0 0 15px rgb(255, 0, 0);
+    box-shadow: inset 0 0 35px rgb(255, 0, 0);
     margin-top: -10px;
     width: 430px;
     text-align: center;
     height: 75px;
     overflow: hidden;
+    background-image: url('../images/red_back.jpg');
 }
 .BP--main .BP--inner .BPbox .contents{
     background-color: rgba(255, 255, 255, 0);
@@ -96,6 +98,7 @@
     font-size: 45px;
     text-align: center;
     padding: 4px 15px;
+    box-shadow: inset 0 0 5px rgb(0, 0, 0);
 }
 .BP--main .BP--inner .BPbox .contents .titles .nextBtn{
     background-color: #EFEFEF;
@@ -135,13 +138,14 @@
     display: flex;
     padding: 0 10px;
     box-shadow: inset 0 0 5px rgb(0, 0, 0);
+    filter: grayscale(1);
+    background-image: url('../images/gray_back.jpg');
 }
 .BP--main .BP--inner .BPbox .contents ul .ban .blue--pick{
-    background-color: white;
     margin: 10px;
     height:105px;
     border-radius: 10px;
-    opacity: 0.7;
+    color: white;
     display: flex;
     width: 550px;
     padding: 0 15px 0 15px;
@@ -166,14 +170,15 @@
     opacity: 0;
 }
 .BP--main .BP--inner .BPbox .contents ul .ban .blue--pick .cardbar .card{
-    background-color:orange;
     height: 94px;
     width: 94px;
     display: flex;
     flex-wrap: wrap;
     margin: 5px;
     font-size: 18px;
-    background-color: #c1c1c1;
+    background-color: #4e4e4e;
+    box-shadow: inset 0 0 35px rgb(0, 0, 0);
+    border: 0;
     overflow: hidden;
     box-sizing: border-box;
     border-radius: 10px;
@@ -269,14 +274,14 @@
     margin: 0 10px 0 10px;
     height: 620px;
     border-radius: 10px;
-    box-shadow: inset 0 0 5px rgb(0, 0, 0);
+    box-shadow: inset 0 0 35px rgb(255, 0, 0);
+    background-image: url('../images/red_back.jpg');
 }
 .BP--main .BP--inner .BPbox .contents ul .red .pick{
-    background-color: white;
     margin: 10px;
     height: 600px;
     border-radius: 10px;
-    opacity: 0.7;
+    color: white;
 }
 .BP--main .BP--inner .BPbox .contents ul .red .pick .title{
     padding: 10px 10px 5px;
@@ -287,13 +292,14 @@
     margin: auto;
 }
 .BP--main .BP--inner .BPbox .contents ul .red .pick .cardbar .card{
-    background-color:orange;
     height: 88px;
     width: 94px;
     display: flex;
     margin: 5px 5px 0;
     font-size: 18px;
-    background-color: #c1c1c1;
+    background-color: #4e4e4e65;
+    box-shadow: inset 0 0 35px rgb(0, 0, 0);
+    border: 0;
     overflow: hidden;
     box-sizing: border-box;
     border-radius: 10px;
@@ -347,14 +353,14 @@
     margin: 0 10px 0 10px;
     height: 620px;
     border-radius: 10px;
-    box-shadow: inset 0 0 5px rgb(0, 0, 0);
+    box-shadow: inset 0 0 35px rgb(0, 0, 255);
+    background-image: url('../images/blue_back.jpg');
 }
 .BP--main .BP--inner .BPbox .contents ul .blue .pick{
-    background-color: white;
+    color: rgb(255, 255, 255);
     margin: 10px;
     height: 600px;
     border-radius: 10px;
-    opacity: 0.7;
 }
 .BP--main .BP--inner .BPbox .contents ul .blue .pick .title{
     padding: 10px 10px 5px;
@@ -365,13 +371,14 @@
     margin: auto;
 }
 .BP--main .BP--inner .BPbox .contents ul .blue .pick .cardbar .card{
-    background-color:orange;
     height: 88px;
     width: 94px;
     display: flex;
     margin: 5px 5px 0;
     font-size: 18px;
-    background-color: #c1c1c1;
+    background-color: #4e4e4e65;
+    box-shadow: inset 0 0 35px rgb(0, 0, 0);
+    border: 0;
     overflow: hidden;
     box-sizing: border-box;
     border-radius: 10px;
@@ -433,7 +440,8 @@
     margin: 10px;
 }
 .BP--main .BP--inner .BPbox .contents ul .chams .btnbar .position{
-    background-color: rgba(255,255,255,0.7);
+    background-color: #102021;
+    color: wheat;
     padding: 8px;
     width: 140px;
     font-size: 20px;
@@ -444,12 +452,14 @@
     border: 1px solid #18373a;
 }
 .BP--main .BP--inner .BPbox .contents ul .chams .btnbar .position:hover{
-    background-color: #18373a;
-    color:white;
-    border: 1px solid rgba(255,255,255,0.7);
+    background-color: #102021;
+    color:wheat;
+    border: 1px solid wheat;
+    box-shadow: inset 0 0 15px wheat;
 }
 .BP--main .BP--inner .BPbox .contents ul .chams .btnbar .special{
-    background-color: #0f3a43;
+    background-color: #102021;
+    color: wheat;
     padding: 8px;
     width: 140px;
     font-size: 20px;
@@ -457,65 +467,70 @@
     margin: 0 15px 0 15px;
     cursor: pointer;
     transition: 0.2s;
-    color:white;
     border: 1px solid #18373a;
+    box-shadow: inset 0 0 15px wheat;
 }
 .BP--main .BP--inner .BPbox .contents ul .chams .btnbar .special:hover{
-    background-color: #18373a;
-    color:white;
-    border: 1px solid rgba(255,255,255,0.7);
+    background-color: #102021;
+    color:wheat;
+    border: 1px solid wheat;
+    box-shadow: inset 0 0 15px wheat;
 }
 .BP--main .BP--inner .BPbox .contents ul .chams .list{
-    background-color: white;
+    background-color: #0d1516;
     margin: 10px;
     height: 540px;
     border-radius: 10px;
-    opacity: 0.7;
     overflow: auto;
     display: flex;
     flex-wrap: wrap;
 }
-.BP--main .BP--inner .BPbox .contents ul .chams .list ul{
+.BP--main .BP--inner .BPbox .contents ul .chams .list .select{
     height: 94px;
     width: 94px;
     display: flex;
+    position: relative;
+    color: white;
+    flex-wrap: wrap;
     margin: 10px 0 0 10px;
     font-size: 18px;
-    background-color: #c1c1c1;
     cursor: pointer;
+    background-color: #4e4e4e;
+    box-shadow: inset 0 0 35px rgb(0, 0, 0);
+    border: 0;
     overflow: hidden;
-    transition: 0.2s;
     box-sizing: border-box;
-    padding: 10px 7px 10px;
-    position: relative;
+    border-radius: 10px;
+    transition: 0.2s;
+    padding: 5px;
 }
-.BP--main .BP--inner .BPbox .contents ul .chams .list ul:hover{
-    background-color: white;
-    border: 2px solid #c1c1c1;
+.BP--main .BP--inner .BPbox .contents ul .chams .list .select img:hover{
+    opacity: 0;
 }
 .BP--main .BP--inner .BPbox .contents ul .chams .list ul .grade{
     border:2px solid #666;
     display: block;
-    font-size:17px;
-    width: 30px;
-    height: 30px;
-    margin: 0 5px 5px 0;
+    font-size:14px;
+    width: 23px;
+    height: 24px;
+    margin: 8px 2px 5px 0;
     border-radius: 30px;
 }
 .BP--main .BP--inner .BPbox .contents ul .chams .list ul .pos{
     padding: 2px;
     display: block;
     font-size:15px;
-    width: 35px;
-    height: 20px;
-    margin: 0 5px 5px 0;
+    width: 58px;
+    height: 25px;
+    overflow: hidden;
+    margin: 8px 0px 5px 0;
 }
 .BP--main .BP--inner .BPbox .contents ul .chams .list ul .name{
     padding: 2px;
     display: block;
     font-size:20px;
     width: 80px;
-    height: 35px;
+    height: 40px;
     overflow: hidden;
     margin: 0 5px 5px 0;
 }
@@ -527,6 +542,24 @@
     width: 95px;
     height: 95px;
 }
-.BP--main .BP--inner .BPbox .contents ul .chams .list ul img:hover{
-    opacity: 0;
+.BP--main .BP--inner .BPbox .contents ul .chams .list .selected{
+    height: 94px;
+    width: 94px;
+    display: flex;
+    position: relative;
+    color: white;
+    flex-wrap: wrap;
+    margin: 10px 0 0 10px;
+    font-size: 18px;
+    background-color: #4e4e4e;
+    box-shadow: inset 0 0 35px rgb(0, 0, 0);
+    border: 0;
+    overflow: hidden;
+    box-sizing: border-box;
+    border-radius: 10px;
+    transition: 0.2s;
+    padding: 5px;
+}
+.BP--main .BP--inner .BPbox .contents ul .chams .list .selected img{
+    filter: grayscale(100%);
 }

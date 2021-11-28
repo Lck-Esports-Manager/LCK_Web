@@ -28,6 +28,7 @@ export default function Banpick(props) {
         'Support Ban', 'Bottom Pick', 'Bottom Pick', 'Support Pick', 'Support Pick', 'Selection complete !!'];
     let [iTurn, setTurn] = useState(-1);
     const [side, setSide] = useState(Number(props.match.params.side));
+    const [refresh, setRefresh] = useState(0);  //렌더를 돕는 스테이트
 
     /* 선택된 챔피언 리스트 밴픽, 픽 모두 포함 */
     const [chamList, setChamList] = useState({
@@ -76,6 +77,7 @@ export default function Banpick(props) {
     }
     /* 선택완료 버튼 눌렀을때의 동작 */
     const nextTurn = () => {
+        setRefresh(refresh + 1);
         if (iTurn >= 19) {
             alert('챔피언 선택이 완료되었습니다.');
             axios.post('http://localhost:8000/api/banpick/', {
@@ -99,6 +101,7 @@ export default function Banpick(props) {
         }
         else {
             setTurn(iTurn + 1);
+
             console.log("내턴1증가");
             console.log(props.match.params.side);
             axios.get('http://localhost:8000/api/champion/?position=' + isPos(iTurn + 1) + '&tier=1')
@@ -129,6 +132,14 @@ export default function Banpick(props) {
             return 'Support'
         else
             return
+    }
+    const checkOverlap = (cham) => {
+        for (let i = 0; i < iTurn; i++) {
+            if (cham.name === chamList[i].name) {
+                return 0;
+            }
+        }
+        return 1;
     }
     /* 챔피언을 하나 눌렀을때 동작 */
     const Pick = (cham) => {
@@ -200,6 +211,8 @@ export default function Banpick(props) {
                     randT = Math.floor(Math.random() * 2) + 1;
                     randC = Math.floor(Math.random() * ranList[randT].length);
                     let temp = 1;
+                    axios.get('http://localhost:8000/api/champion/?position=' + isPos(iTurn + 1))
+                        .then((response) => { setPntList(response.data); console.log(`현재 ${iTurn + 1}턴이고 ${isPos(iTurn + 1)} 이걸로 적용함`); })
                     axios.get('http://localhost:8000/api/champion/?position=' + isPos(iTurn + 1) + '&tier=1')
                         .then((response1) => {
                             axios.get('http://localhost:8000/api/champion/?position=' + isPos(iTurn + 1) + '&tier=2')
@@ -234,7 +247,7 @@ export default function Banpick(props) {
             } catch (e) { console.log(e); }
         };
         fetchcham();
-    }, [iTurn]);
+    }, [iTurn, refresh]);
     /* 렌더될때마다 내 턴이 아니면 자동으로 픽하는 동작 */
     const pickcard = (num) => {
         return <li className="card">
@@ -296,7 +309,6 @@ export default function Banpick(props) {
                             </li>
                             <li className="blue">
                                 <div className="pick">
-                                    {/* <div className="title">BLUE</div> */}
                                     <ul className="cardbar">
                                         <div className="pos">Top</div>
                                         {pickcard(6)}
@@ -326,12 +338,19 @@ export default function Banpick(props) {
                                 </div>
                                 <div className="list">
                                     {pntList && pntList.map((cham) => (
-                                        <ul onClick={() => { Pick(cham) }}>
-                                            <li className="grade">{cham.grade}</li>
-                                            <li className="pos">{cham.position}</li>
-                                            <li className="name">{cham.name}</li>
-                                            <img src={`/api/media/images/${cham.name}.png`} alt="img" />
-                                        </ul>
+                                        checkOverlap(cham) === 1 ?
+                                            <ul className="select" onClick={() => { Pick(cham) }}>
+                                                <li className="grade">{cham.grade}</li>
+                                                <li className="pos">{cham.position}</li>
+                                                <li className="name">{cham.name}</li>
+                                                <img src={`/api/media/images/${cham.name}.png`} alt="img" />
+                                            </ul> :
+                                            <ul className="selected">
+                                                <li className="grade">{cham.grade}</li>
+                                                <li className="pos">{cham.position}</li>
+                                                <li className="name">{cham.name}</li>
+                                                <img src={`/api/media/images/${cham.name}.png`} alt="img" />
+                                            </ul>
                                     ))}
                                 </div>
                             </li>

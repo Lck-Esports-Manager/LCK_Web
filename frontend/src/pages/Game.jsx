@@ -567,17 +567,16 @@ export default function Game(props) {
     }
     return (<>
         <div className="game">
-            {/* <audio id='audio_play' src='../sound/button-27.mp3'></audio> */}
             <div className="inner">
                 <div className="gameinfo">
                     {side === 1 ?
                         <>
-                            <div className="blueteam">{info.my_team_data?.name}</div>
+                            <div className="blueteam"><div className="img" />{info.my_team_data?.name}</div>
                             <div className="score">{info.score[0]} : {info.score[1]}</div>
                             <div className="redteam">{info.op_team_data?.name}</div>
                         </>
                         : <>
-                            <div className="blueteam">{info.op_team_data?.name}</div>
+                            <div className="blueteam"><div className="img" />{info.op_team_data?.name}</div>
                             <div className="score">{info.score[0]} : {info.score[1]}</div>
                             <div className="redteam">{info.my_team_data?.name}</div>
                         </>
@@ -603,6 +602,7 @@ export default function Game(props) {
                                 </div>
                             }
                             <div className="blue_info">
+                                <div className="img" />
                                 {side === 1 ?
                                     <ul>
                                         <Slot pos="Top" teaminfo={info.my_team_data?.top} img={myImg.top} icon="top--image" />
@@ -694,6 +694,7 @@ export default function Game(props) {
                                 </div>
                             </div>
                             <div className="red_info">
+                                <div className="img" />
                                 {side !== 1 ?
                                     <ul>
                                         <Slot pos="Top" teaminfo={info.my_team_data?.top} img={myImg.top} icon="top--image" />
@@ -718,9 +719,9 @@ export default function Game(props) {
                                             : <div className="select" onClick={() => { click(0) }}>바텀 (2)</div>)
                                             : <div className="no--select">바텀 (2)</div>*/}
                                         {/*select.engage.bot[0] */}
-                                        <SelectBtn text="바텀" act={select.engage?.bot[1]} bool={select.engage?.bot[0]} argu={clicked[9]} func={() => { click(9) }} />
-                                        <SelectBtn text="미드" act={select.engage?.mid[1]} bool={select.engage?.mid[0]} argu={clicked[8]} func={() => { click(8) }} />
                                         <SelectBtn text="탑" act={select.engage?.top[1]} bool={select.engage?.top[0]} argu={clicked[7]} func={() => { click(7) }} />
+                                        <SelectBtn text="미드" act={select.engage?.mid[1]} bool={select.engage?.mid[0]} argu={clicked[8]} func={() => { click(8) }} />
+                                        <SelectBtn text="바텀" act={select.engage?.bot[1]} bool={select.engage?.bot[0]} argu={clicked[9]} func={() => { click(9) }} />
                                     </li>
                                     <li>
                                         <div className="title">한타</div>
@@ -734,9 +735,9 @@ export default function Game(props) {
                                     </li>
                                     <li>
                                         <div className="title">갱킹</div>
-                                        <SelectBtn text="바텀" act={select.ganking?.bot[1]} bool={select.ganking?.bot[0]} argu={clicked[6]} func={() => { click(6) }} />
-                                        <SelectBtn text="미드" act={select.ganking?.mid[1]} bool={select.ganking?.mid[0]} argu={clicked[5]} func={() => { click(5) }} />
                                         <SelectBtn text="탑" act={select.ganking?.top[1]} bool={select.ganking?.top[0]} argu={clicked[4]} func={() => { click(4) }} />
+                                        <SelectBtn text="미드" act={select.ganking?.mid[1]} bool={select.ganking?.mid[0]} argu={clicked[5]} func={() => { click(5) }} />
+                                        <SelectBtn text="바텀" act={select.ganking?.bot[1]} bool={select.ganking?.bot[0]} argu={clicked[6]} func={() => { click(6) }} />
                                     </li>
                                     <li className='turn--info'>
                                         {info.data?.turn % 2 === 1 ?
@@ -751,9 +752,9 @@ export default function Game(props) {
                                     </li>
                                     <li>
                                         <div className="title">라인압박</div>
-                                        <SelectBtn text="바텀" act={select.lane_press?.bot[1]} bool={select.lane_press?.bot[0]} argu={clicked[3]} func={() => { click(3) }} />
-                                        <SelectBtn text="미드" act={select.lane_press?.mid[1]} bool={select.lane_press?.mid[0]} argu={clicked[2]} func={() => { click(2) }} />
                                         <SelectBtn text="탑" act={select.lane_press?.top[1]} bool={select.lane_press?.top[0]} argu={clicked[1]} func={() => { click(1) }} />
+                                        <SelectBtn text="미드" act={select.lane_press?.mid[1]} bool={select.lane_press?.mid[0]} argu={clicked[2]} func={() => { click(2) }} />
+                                        <SelectBtn text="바텀" act={select.lane_press?.bot[1]} bool={select.lane_press?.bot[0]} argu={clicked[3]} func={() => { click(3) }} />
                                         {/* <SelectBtn text="넥서스 파괴" bool={select.nexus_destroy} argu={clicked[20]} func={() => { click(20) }} /> */}
                                         {select.nexus_destroy ? (clicked[20] ? <div className="selected" onClick={() => { click(20) }} >넥서스 파괴</div>
                                             : <div className="select" onClick={() => { click(20) }}>넥서스 파괴</div>)
@@ -761,15 +762,15 @@ export default function Game(props) {
                                     </li>
                                     <li>
                                         <div className="title">타워공격</div>
-                                        <SelectBtn text="바텀" act={select.tower_press?.bot[1]} bool={select.tower_press?.bot[0]} argu={clicked[16]} func={() => { click(16) }} />
-                                        <SelectBtn text="미드" act={select.tower_press?.mid[1]} bool={select.tower_press?.mid[0]} argu={clicked[15]} func={() => { click(15) }} />
                                         <SelectBtn text="탑" act={select.tower_press?.top[1]} bool={select.tower_press?.top[0]} argu={clicked[14]} func={() => { click(14) }} />
+                                        <SelectBtn text="미드" act={select.tower_press?.mid[1]} bool={select.tower_press?.mid[0]} argu={clicked[15]} func={() => { click(15) }} />
+                                        <SelectBtn text="바텀" act={select.tower_press?.bot[1]} bool={select.tower_press?.bot[0]} argu={clicked[16]} func={() => { click(16) }} />
                                     </li>
                                     <li>
                                         <div className="title">타워파괴</div>
-                                        <SelectBtn text="바텀" act={select.tower_destroy?.bot[1]} bool={select.tower_destroy?.bot[0]} argu={clicked[19]} func={() => { click(19) }} />
-                                        <SelectBtn text="미드" act={select.tower_destroy?.mid[1]} bool={select.tower_destroy?.mid[0]} argu={clicked[18]} func={() => { click(18) }} />
                                         <SelectBtn text="탑" act={select.tower_destroy?.top[1]} bool={select.tower_destroy?.top[0]} argu={clicked[17]} func={() => { click(17) }} />
+                                        <SelectBtn text="미드" act={select.tower_destroy?.mid[1]} bool={select.tower_destroy?.mid[0]} argu={clicked[18]} func={() => { click(18) }} />
+                                        <SelectBtn text="바텀" act={select.tower_destroy?.bot[1]} bool={select.tower_destroy?.bot[0]} argu={clicked[19]} func={() => { click(19) }} />
                                     </li>
                                 </ul>
                             </div>
