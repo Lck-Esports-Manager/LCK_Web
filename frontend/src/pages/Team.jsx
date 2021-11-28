@@ -41,10 +41,11 @@ function TeamInfo({ myTeam }) {
     }
     return (
         <>
-            <Button onClick={routeChange}>팀 수정</Button>
-            <h2 text={myTeam.name}>{myTeam.name}</h2>
-            <h3 class='my-2'>주전</h3>
+            <Button variant='secondary' onClick={routeChange}>팀 수정</Button>
+            
+            
             <Container>
+                <h3  style={{border:"solid",textAlign:'center',width:'100px',alignContent:"center",margin:"auto",padding:"5px"}} >주전</h3>
                 <Row className="justify-content-md-center">
                     <Col><Player player={myTeam.top} pos="Top"></Player></Col>
                     <Col><Player player={myTeam.jungle} pos="Jungle"></Player></Col>
@@ -53,8 +54,9 @@ function TeamInfo({ myTeam }) {
                     <Col><Player player={myTeam.support} pos="Supporter"></Player></Col>
                 </Row>
             </Container>
-            <h3 class='my-2'>서브</h3>
+            
             <Container>
+            <h3  style={{border:"solid",textAlign:'center',width:'100px',alignContent:"center",margin:"auto", marginTop:"10px",padding:"5px"}} >서브</h3>
                 <Row className="justify-content-md-center">
                     <Col><Player player={myTeam.sub1} pos="Sub1"></Player></Col>
                     <Col><Player player={myTeam.sub2} pos="Sub2"></Player></Col>
@@ -356,8 +358,8 @@ export default function Team() {
                     <div className="contents">
                         <div className="title">팀 관리</div>
                         <Tabs defaultActiveKey="team" id="uncontrolled-tab-example" className="mb-3">
-                            <Tab eventKey="team" title="로스터 정보">
-                                {data.my_team.sub1 === null || data.my_team.sub2 === null ? <Button onClick={moveAddPlayer}>선수 영입하기</Button> : <div></div>}
+                            <Tab  eventKey="team" title="로스터 정보">
+                                {data.my_team.sub1 === null || data.my_team.sub2 === null ? <Button variant ='secondary' onClick={moveAddPlayer}>선수 영입하기</Button> : <div></div>}
                                 <TeamInfo myTeam={data.my_team}></TeamInfo>
                             </Tab>
                             <Tab eventKey="sponsor" title="스폰서">
