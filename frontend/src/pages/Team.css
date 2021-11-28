@@ -30,3 +30,8 @@
     text-align: center;
     padding: 0px 0px 16px;
   }
+
+  .Team--main .inner .contents ul > li > button {
+    
+    color: black;
+}
