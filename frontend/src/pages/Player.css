@@ -91,7 +91,8 @@
 .player--main .inner .playerbox .contents .players ul {
   display: flex;
   flex-wrap: wrap;
-  background-color: rgb(255, 219, 161);
+  background-color: rgb(1, 30, 70);
+  color: wheat;
   padding: 0px 5px;
   height: 34px;
   border-radius: 7px;
@@ -114,4 +115,5 @@
 .player--main .inner .playerbox .contents .players ul li.status {
   background-color: rgb(255, 192, 90);
   border-radius: 5px;
+  color: rgb(1, 30, 70);
 }

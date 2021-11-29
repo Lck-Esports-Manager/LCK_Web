@@ -73,7 +73,8 @@
     position: relative;
 }
 .home--bottom .inner .info {
-    background-color: rgba(160, 160, 160, 0.692);
+    background-color: #0d1516;
+    color: wheat;
     border-radius: 15px;
     width: 500px;
     height: 380px;
@@ -94,7 +95,8 @@
     font-family: 'Noto Sans KR', sans-serif;
 }
 .home--bottom .inner .match {
-    background-color: rgba(160, 160, 160, 0.658);
+    background-color: #0d1516;
+    color: wheat;
     border-radius: 15px;
     width: 620px;
     height: 380px;
@@ -160,6 +162,7 @@
     display: flex;
     background-color: antiquewhite;
     border-radius: 10px;
+    color: black;
     margin: 0px;
 }
 .home--bottom .inner .match .match--list .index .date{

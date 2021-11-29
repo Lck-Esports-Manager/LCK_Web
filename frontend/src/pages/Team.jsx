@@ -5,65 +5,78 @@ import { Row, Card, Col, Button, Tabs, Tab, Container, Table } from 'react-boots
 import { header } from "../config.js";
 import './Team.css';
 
-const style1={
-    border:'none',
-    backgroundColor:'#011e46'
+const style0 = {
+    borderRadius: "10px",
+    textAlign: 'center',
+    width: '600px',
+    alignContent: "center",
+    margin: "auto",
+    marginTop: "10px",
+    marginBottom: "10px",
+    padding: "5px",
+    backgroundColor: '#011e46',
+    color: '#ffdba1',
+    fontSize: '20px'
 }
-const style1_1={
-    border:'none',
-    backgroundColor:'#ffdba1',
-    color:'#011e46'
+const style1 = {
+    border: 'none',
+    backgroundColor: '#011e46'
 }
-const style2={
-    borderRadius:"10px",
-    textAlign:'center',
-    width:'300px',
-    alignContent:"center",
-    margin:"auto",
-    marginTop:"10px",
-    marginBottom:"10px",
-    padding:"5px",
-    backgroundColor:'#011e46',
-    color:'#ffdba1'
+const style1_1 = {
+    border: 'none',
+    backgroundColor: '#ffdba1',
+    color: '#011e46'
 }
-const style3={
-    width:"600px",
-    marginTop:"50px",
-    marginBottom:"50px",
-    height:"200px",
-    borderRadius:"10px",
-    backgroundColor:'#011e46',
-    color:"white"
+const style2 = {
+    borderRadius: "10px",
+    textAlign: 'center',
+    width: '300px',
+    alignContent: "center",
+    margin: "auto",
+    marginTop: "10px",
+    marginBottom: "10px",
+    padding: "5px",
+    backgroundColor: '#011e46',
+    color: '#ffdba1'
 }
-const style4={
-    width:"600px",
-    marginTop:"50px",
-    marginBottom:"50px",
-    height:"200px",
+const style3 = {
+    width: "600px",
+    marginTop: "50px",
+    marginBottom: "50px",
+    height: "200px",
+    borderRadius: "10px",
+    backgroundColor: '#011e46',
+    color: "white"
 }
-const style5={
-    borderRadius:"10px",
-    textAlign:'center',
-    width:'150px',
-    alignContent:"center",
-    margin:"auto",
-    marginTop:"10px",
-    marginBottom:"10px",
-    padding:"5px",
-    backgroundColor:'#011e46',
-    color:'white'
+const style4 = {
+    width: "600px",
+    marginTop: "50px",
+    marginBottom: "50px",
+    height: "200px",
 }
-const containerStyle={
-    borderRadius:"10px",
+const style5 = {
+    borderRadius: "10px",
+    textAlign: 'center',
+    width: '150px',
+    alignContent: "center",
+    margin: "auto",
+    marginTop: "10px",
+    marginBottom: "10px",
+    padding: "5px",
+    backgroundColor: '#011e46',
+    color: 'white'
+}
+const containerStyle = {
+    borderRadius: "10px",
 
-    margin:"auto",
-    marginTop:"10px",
-    marginBottom:"10px",
-    paddingTop:"80px",
-    paddingBottom:"26px",
-    height:"700px",
-    backgroundColor:'#011e46',
-    color:'white'
+    margin: "auto",
+    marginTop: "10px",
+    marginBottom: "10px",
+    paddingTop: "80px",
+    paddingBottom: "26px",
+    height: "700px",
+    backgroundColor: '#011e46',
+    color: 'white'
 }
 function Player({ player, pos }) {
     const history = useHistory();
@@ -81,7 +94,7 @@ function Player({ player, pos }) {
             <h4 style={style5}>
                 {pos}
             </h4>
-            <Card style={{ width: '12rem',margin:"auto" }} onClick={routeChange}>
+            <Card style={{ width: '12rem', margin: "auto" }} onClick={routeChange}>
                 <Card.Img class='m-3' variant="top" src={`http://localhost:8000${player.player.images}`} />
                 <Card.Body>
                     <Card.Title>{player.player.name}</Card.Title>
@@ -98,14 +111,14 @@ function TeamInfo({ myTeam }) {
         let path = '/changeteam/';
         history.push(path);
     }
-    
+
     return (
         <>
             <Button style={style1} onClick={routeChange}>팀 수정</Button>
-            
-            
+
+
             <Container>
-                <h3  style={style2} >주전</h3>
+                <h3 style={style2} >주전</h3>
                 <Row className="justify-content-md-center">
                     <Col><Player player={myTeam.top} pos="Top"></Player></Col>
                     <Col><Player player={myTeam.jungle} pos="Jungle"></Player></Col>
@@ -114,9 +127,9 @@ function TeamInfo({ myTeam }) {
                     <Col><Player player={myTeam.support} pos="Supporter"></Player></Col>
                 </Row>
             </Container>
-            
+
             <Container>
-            <h3  style={style2} >서브</h3>
+                <h3 style={style2} >서브</h3>
                 <Row className="justify-content-md-center">
                     <Col><Player player={myTeam.sub1} pos="Sub1"></Player></Col>
                     <Col><Player player={myTeam.sub2} pos="Sub2"></Player></Col>
@@ -186,7 +199,7 @@ function SponsorInfo({ sponsor1, sponsor2, sponsor3, _available_sponsor }) {
         <>
 
             <h3 style={style2}>계약 중인 스폰서</h3>
-            <Container style={{height:"300px"}}>
+            <Container style={{ height: "300px" }}>
                 <Row className="justify-content-md-center">
 
                     <Col><Sponsor1 sponsor={sponsor1}></Sponsor1></Col>
@@ -196,7 +209,7 @@ function SponsorInfo({ sponsor1, sponsor2, sponsor3, _available_sponsor }) {
                 </Row>
             </Container>
             <h3 style={style2}>계약 가능한 스폰서</h3>
-            <Container style={{height:"300px"}}>
+            <Container style={{ height: "300px" }}>
                 <Row className="justify-content-md-center">
                     {_available_sponsor && _available_sponsor.map((sponsor) => (
                         <Col><Sponsor2 sponsor={sponsor}></Sponsor2></Col>
@@ -265,14 +278,14 @@ function EnterpriseInfo({ enterprise1, enterprise2, _available_enterprise, money
         <>
 
             <h3 style={style2}>진행 중인 사업</h3>
-            <Container style={{height:"300px"}}>
+            <Container style={{ height: "300px" }}>
                 <Row className="justify-content-md-center">
                     <Col><Enterprise1 enterprise={enterprise1}></Enterprise1></Col>
                     <Col><Enterprise1 enterprise={enterprise2}></Enterprise1></Col>
                 </Row>
             </Container>
             <h3 style={style2}>시작 가능한 사업</h3>
-            <Container style={{height:"300px"}}>
+            <Container style={{ height: "300px" }}>
                 <Row className="justify-content-md-center">
                     {_available_enterprise && _available_enterprise.map((enterprise) => (
                         <Col><Enterprise2 enterprise={enterprise} money={money}></Enterprise2></Col>
@@ -305,29 +318,29 @@ function LeagueScheduleTable() {
             <>
                 <h2 style={style2}>리그 스케줄</h2>
                 <Container style={containerStyle}>
-                
-                <Table style={{color:"white"}}responsive>
-                    <thead>
-                        <tr>
-                            <th>Date</th>
-                            <th>Blue Team</th>
-                            <th>Red Team</th>
-                        </tr>
-                    </thead>
-                    <tbody>
 
-
-                        {schedule.map((elem) => (
+                    <Table style={{ color: "white" }} responsive>
+                        <thead>
                             <tr>
-                                <td>{elem.date}</td>
-                                <td>{elem.team1}</td>
-                                <td>{elem.team2}</td>
+                                <th>Date</th>
+                                <th>Blue Team</th>
+                                <th>Red Team</th>
                             </tr>
-                        ))}
+                        </thead>
+                        <tbody>
 
 
-                    </tbody>
-                </Table>
+                            {schedule.map((elem) => (
+                                <tr>
+                                    <td>{elem.date}</td>
+                                    <td>{elem.team1}</td>
+                                    <td>{elem.team2}</td>
+                                </tr>
+                            ))}
+
+
+                        </tbody>
+                    </Table>
                 </Container>
             </>
         )
@@ -352,32 +365,32 @@ function LeagueRank() {
     else {
         return (
             <>
-                
+
                 <h2 style={style2}>리그 랭킹</h2>
                 <Container style={containerStyle}>
-                
-                <Table style={{color:"white"}} responsive>
-                    <thead>
-                        <tr>
-                            <th>순위</th>
-                            <th>팀 이름</th>
-                            <th>승</th>
-                            <th>패</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {data.map((elem, index) => (
+
+                    <Table style={{ color: "white" }} responsive>
+                        <thead>
                             <tr>
-                                <td>{index + 1}</td>
-                                <td>{elem.name}</td>
-                                <td>{elem.win}</td>
-                                <td>{elem.lose}</td>
+                                <th>순위</th>
+                                <th>팀 이름</th>
+                                <th>승</th>
+                                <th>패</th>
                             </tr>
-                        ))}
+                        </thead>
+                        <tbody>
+                            {data.map((elem, index) => (
+                                <tr>
+                                    <td>{index + 1}</td>
+                                    <td>{elem.name}</td>
+                                    <td>{elem.win}</td>
+                                    <td>{elem.lose}</td>
+                                </tr>
+                            ))}
 
 
-                    </tbody>
-                </Table>
+                        </tbody>
+                    </Table>
                 </Container>
             </>
         )
@@ -429,10 +442,11 @@ export default function Team() {
                 <div className="inner">
                     <div className="contents">
                         <div className="title">팀 관리</div>
+                        <div style={style0}>Team {data.my_team.name}ㅤㅤ인기도 : {data.my_team.popularity}ㅤㅤ여유 금액 :{data.my_team.money}원</div>
                         <Tabs defaultActiveKey="team" id="uncontrolled-tab-example" className="mb-3">
-                            <Tab  eventKey="team" title="로스터 정보">
-                                {data.my_team.sub1 === null || data.my_team.sub2 === null ? <Button style={style1} 
-                                onClick={moveAddPlayer}>선수 영입하기</Button> : <div></div>}
+                            <Tab eventKey="team" title="로스터 정보">
+                                {data.my_team.sub1 === null || data.my_team.sub2 === null ? <Button style={style1}
+                                    onClick={moveAddPlayer}>선수 영입하기</Button> : <div></div>}
                                 <TeamInfo myTeam={data.my_team}></TeamInfo>
                             </Tab>
                             <Tab eventKey="sponsor" title="스폰서">

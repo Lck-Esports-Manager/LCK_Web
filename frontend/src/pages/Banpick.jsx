@@ -115,7 +115,6 @@ export default function Banpick(props) {
                         })
                 })
         }
-        console.log(`버튼 누르고 지금 ${iTurn}턴 내턴? ${isMyturn(iTurn)} 팀색 블루1 ${api.side}`);
         console.log(`현재 덱`);
         console.log(chamList);
     }
@@ -161,10 +160,6 @@ export default function Banpick(props) {
                 })
             }
             console.log(cham);
-            //console.log(chamList);
-            console.log(`챔피언 누르고 지금 ${iTurn}턴 내턴 ? ${isMyturn(iTurn)} 팀색 블루1 ${api.side}`);
-            console.log(`현재 덱`);
-            console.log(chamList);
         }
     }
     /* 선택된 챔피언들을 출력하는 함수 */
@@ -207,15 +202,15 @@ export default function Banpick(props) {
     useEffect(() => {
         const fetchcham = async () => {
             try {
+                axios.get('http://localhost:8000/api/champion/?position=' + isPos(iTurn))
+                    .then((response) => { setPntList(response.data); console.log(`현재 ${iTurn + 1}턴이고 ${isPos(iTurn + 1)} 이걸로 적용함`); })
                 if (!isMyturn(iTurn)) {
                     randT = Math.floor(Math.random() * 2) + 1;
                     randC = Math.floor(Math.random() * ranList[randT].length);
                     let temp = 1;
-                    axios.get('http://localhost:8000/api/champion/?position=' + isPos(iTurn + 1))
-                        .then((response) => { setPntList(response.data); console.log(`현재 ${iTurn + 1}턴이고 ${isPos(iTurn + 1)} 이걸로 적용함`); })
-                    axios.get('http://localhost:8000/api/champion/?position=' + isPos(iTurn + 1) + '&tier=1')
+                    axios.get('http://localhost:8000/api/champion/?position=' + isPos(iTurn) + '&tier=1')
                         .then((response1) => {
-                            axios.get('http://localhost:8000/api/champion/?position=' + isPos(iTurn + 1) + '&tier=2')
+                            axios.get('http://localhost:8000/api/champion/?position=' + isPos(iTurn) + '&tier=2')
                                 .then((response2) => {
                                     setRanList({
                                         1: response1.data,
@@ -225,8 +220,6 @@ export default function Banpick(props) {
                         })
                     axios.post('http://localhost:8000/api/progressleague/')
                         .then((response) => { setApi(response.data); console.log(response.data); })
-                    console.log(api);
-                    console.log(`지금 ${iTurn}턴인데 ${isMyturn(iTurn)}`);
                     while (temp) {
                         temp = 0;
                         for (let i = 0; i < iTurn; i++) {
