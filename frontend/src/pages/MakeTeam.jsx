@@ -4,7 +4,6 @@ import './MakeTeam.css';
 import Card from './components/Card';
 
 export default function MakeTeam() {
-    let temp = 'asdf';
     const [players, setPlayer] = useState(null);
     const [myteam, setTeam] = useState({
         name: '',
@@ -45,18 +44,18 @@ export default function MakeTeam() {
             choice: false
         }
     });
-    if (myteam.name === '') {
-        temp = prompt('생성할 팀 이름을 입력해주세요.');
-        while (temp === null || temp.length <= 4) {
-            alert('팀 이름이 너무 짧습니다. 다시 입력해주세요');
-            temp = prompt('생성할 팀 이름을 입력해주세요.');
-        }
-        setTeam({
-            ...myteam,
-            name: temp
-        });
-        alert(`팀이름 : ${temp} 이 되었습니다.`);
-    }
+    // if (myteam.name === '') {
+    //     temp = prompt('생성할 팀 이름을 입력해주세요.');
+    //     while (temp === null || temp.length <= 4) {
+    //         alert('팀 이름이 너무 짧습니다. 다시 입력해주세요');
+    //         temp = prompt('생성할 팀 이름을 입력해주세요.');
+    //     }
+    //     setTeam({
+    //         ...myteam,
+    //         name: temp
+    //     });
+    //     alert(`팀이름 : ${temp} 이 되었습니다.`);
+    // }
     const getList = (props) => {
         axios.get('http://localhost:8000/api/playerlist/?position=' + props).then((response) => { setPlayer(response.data); })
     };
@@ -141,7 +140,13 @@ export default function MakeTeam() {
         })
     };
     const sendTeam = () => { // 모두 골랐는지 체크, 돈이 안넘었는지 체크
-        if (myteam.Top.price * myteam.Jungle.price * myteam.Middle.price
+        if (myteam.name === "") {
+            alert("팀 이름을 입력해주세요.");
+        }
+        else if (myteam.name.length <= 4) {
+            alert("팀 이름이 너무 짧습니다. 다시 입력해주세요.");
+        }
+        else if (myteam.Top.price * myteam.Jungle.price * myteam.Middle.price
             * myteam.ADC.price * myteam.Support.price === 0) {
             alert("모든 포지션에 선수를 선택해주세요.");
         }
@@ -170,6 +175,13 @@ export default function MakeTeam() {
             document.location.href = `/league`;
         }
     };
+    const input_info = (e) => {
+        const { value } = e.target;
+        setTeam({
+            ...myteam,
+            name: value
+        });
+    }
     return (<>
         <div>
             <div className="MT--main">
@@ -177,7 +189,9 @@ export default function MakeTeam() {
                     <div className="MTbox">
                         <div className="main--top">
                             <div>
-                                <div className="title">{myteam.name}</div>
+                                <div className="title">TEAM NAME
+                                    <input type="text" onChange={input_info} value={myteam.name} />
+                                </div>
                                 <div className="money">남은 비용 : ￦{myteam.total
                                     - myteam.Top.price
                                     - myteam.Jungle.price

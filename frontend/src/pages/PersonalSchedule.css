@@ -167,6 +167,7 @@
     font-size: 18px;
     box-shadow: inset 0 0 10px rgb(87, 87, 87);
     box-sizing: content-box;
+    border: 0;
 }
 .PS--main .inner .contents .schedule--info .null--card{
     background-color: #0d1516;

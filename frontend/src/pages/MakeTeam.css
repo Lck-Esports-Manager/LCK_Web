@@ -27,17 +27,24 @@
     padding: 5px 15px 0;
 }
 .MT--main .inner .MTbox .main--top .title{
+    font-family: 'Noto Sans KR', sans-serif;
     font-weight: 700;
-    font-size: 38px;
+    font-size: 20px;
     display: block;
     text-align: center;
     line-height: 1;
     width: 220px;
     margin: auto;
-    height: 40px;
+    height: 48px;
     padding: 15px 0px;
     overflow: hidden;
     box-sizing: content-box;
+}
+.MT--main .inner .MTbox .main--top .title input{
+    margin: 9px auto 0px;
+    border-radius: 3px;
+    width: 200px;
+    text-align: center;
 }
 .MT--main .inner .MTbox .main--top .money{
     display: block;
@@ -45,7 +52,7 @@
     text-align: center;
     font-family: 'Noto Sans KR', sans-serif;
     font-weight: 700;
-    margin: 10px 15px;
+    margin: 7px 15px;
     font-size: 17px;
 }
 .MT--main .inner .MTbox .main--top .myplayer{
@@ -162,7 +169,8 @@
 .MT--main .inner .MTbox .contents .MT--players ul{
     display: flex;
     flex-wrap: wrap;
-    background-color: rgb(255, 219, 161);
+    background-color: rgb(1,30,70);
+    color: rgb(255, 255, 255);
     padding: 2px 5px 5px;
     height: 28px;
     border-radius: 7px;
@@ -212,4 +220,5 @@
     background-color:rgb(255, 192, 90) ;
     border-radius: 5px;
     box-sizing: content-box;
+    color: black;
 }

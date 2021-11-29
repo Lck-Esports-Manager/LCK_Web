@@ -350,19 +350,6 @@ export default function Game(props) {
         // console.log(myImg);
         console.log(select);
     }, [refresh]);
-    // useEffect(() => {
-    //     const fetch = async () => {
-    //         try {
-    //             axios.post('http://localhost:8000/api/progressleague/')
-    //                 .then((response1) => {
-    //                     setInfo(response1.data);
-    //                     console.log(info);
-    //                     console.log(response1.data);
-    //                 });
-    //         } catch (e) { console.log(e); }
-    //     };
-    //     fetch();
-    // }, []);
     const calcAct = (num) => {
         if (num === 1 || num === 2 || num === 3) return select.lane_press?.bot[1];
         else if (num === 4 || num === 5 || num === 6) return select.ganking?.bot[1];

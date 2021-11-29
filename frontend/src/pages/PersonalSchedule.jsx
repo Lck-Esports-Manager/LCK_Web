@@ -10,21 +10,6 @@ import './PersonalSchedule.css';
 
 let imgs = [s0, s1, s2, s3, s4];
 
-function exp(props) {
-    return (<>
-        <ul className="exp">
-            <div>Name</div>
-            <li>{props.pos.player.name}</li>
-            <div>Level</div>
-            <li>{props.pos.level}</li>
-            <div>Tier</div>
-            <li>{props.pos.player.rate}</li>
-            <div>Condition </div>
-            {/* <li>{CondiToString(props.pos.feeling)}</li> */}
-        </ul>
-
-    </>);
-}
 function PlayinfoCard(props) {
     const CondiToString = (num) => {
         if (num === -2) return "매우 나쁨";
