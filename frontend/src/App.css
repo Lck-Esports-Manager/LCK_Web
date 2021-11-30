@@ -42,5 +42,6 @@
   opacity: 0.9;
   width: 300px;
   top: 120px;
-  right: -350px;
+  right: 0px;
+  z-index: 9;
 }

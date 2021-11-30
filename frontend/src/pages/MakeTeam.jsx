@@ -155,7 +155,6 @@ export default function MakeTeam() {
             alert("주어진 금액을 초과했습니다. 다시 선택해주세요.");
         }
         else {
-            console.log(myteam);
             alert(`${myteam.name} 팀이 생성되었습니다.`);
             axios.post('http://localhost:8000/api/maketeam/', {
                 name: myteam.name,
@@ -168,7 +167,6 @@ export default function MakeTeam() {
                     + myteam.Middle.price + myteam.ADC.price + myteam.Support.price)
             }
             ).then((response) => {
-                console.log(response);
             }).catch((e) => {
                 console.log(e.response);
             })

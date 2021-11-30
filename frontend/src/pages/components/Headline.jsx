@@ -16,12 +16,11 @@ export default function Headline() {
     const logout = () => {
         axios.post('http://localhost:8000/api/rest-auth/logout/'
         ).then((response) => {
-            console.log(response.data);
             alert(response.data.detail);
             window.localStorage.setItem('isLogin', 'false');
             window.localStorage.removeItem('token');
             window.localStorage.removeItem('user');
-            removeToken()
+            removeToken();
             setRender(render + 1);
             removeToken();
         }).catch((Error) => {
@@ -35,13 +34,6 @@ export default function Headline() {
     return (
         <header>
             <div className='inner'>
-                <audio
-                    controls
-                    id="bgm"
-                    loop
-                    src='https://docs.google.com/uc?export=open&id=14JlzHWUE2TqAsN237ft43SOw02xDPori'
-                    autoPlay={true}>
-                </audio>
                 <NavLink to="/"><img src={logo} alt="Home" /></NavLink>
                 <ul>
                     {

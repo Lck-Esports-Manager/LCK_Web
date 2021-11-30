@@ -171,7 +171,6 @@ export default function Game(props) {
     const [popup, setPopup] = useState(['게임을 진행합니다.']); //팝업창
     const pageRefresh = () => {
         setRefresh(refresh + 1);
-        console.log(refresh);
     };
     const loadImage = () => {
         axios.get('http://localhost:8000/api/champion/detail/?id=' + info.data?.my_top)
@@ -255,12 +254,10 @@ export default function Game(props) {
                 axios.post('http://localhost:8000/api/progressleague/')
                     .then((response1) => {
                         setInfo(response1.data);
-                        console.log(info);
                         loadImage();
                         axios.get('http://localhost:8000/api/makeselection/?set=' + set_id)
                             .then((response2) => {
                                 setSelect(response2.data);
-                                console.log(response2.data);
                             }).catch((e) => {
                                 console.log(e.response);
                                 // console.log(e.response.data);
@@ -328,8 +325,6 @@ export default function Game(props) {
             20: { bool: select.nexus_destroy },
             21: { bool: select?.model_use[0] }
         });
-        console.log(`이거 turn : ${info.data?.turn} side: ${info.data?.side}`);
-
         // if (turn % 2 === side) {
         //     if (refresh > 1 && info.data?.turn % 2 === info.data?.side) {
         //         console.log('턴정보');
@@ -348,23 +343,14 @@ export default function Game(props) {
         // }
         if (turn % 2 === 1) { //myturn
             if (refresh > 1 && info.data?.turn % 2 === 1) {
-                console.log('턴정보');
-                console.log(turn);
-                console.log(side);
                 autoSelect();
             }
         }
         else { //auto
             if (refresh === 1 || info.data?.turn % 2 === 1) {
-                console.log('턴정보');
-                console.log(turn);
-                console.log(side);
                 autoSelect();
             }
         }
-
-        // console.log(myImg);
-        console.log(select);
     }, [refresh]);
     const calcAct = (num) => {
         if (num === 1 || num === 2 || num === 3) return select.lane_press?.bot[1];
@@ -410,14 +396,11 @@ export default function Game(props) {
         }
         else {
             // api전송 
-            console.log('보내기전');
-            console.log(buffer);
             if (buffer.indexOf(20) >= 0) {
                 axios.post('http://localhost:8000/api/selectionprocess/', {
                     set_id: info.data.id,
                     selection: [20]
                 }).then((response) => {
-                    console.log(response.data);
                     alert(response.data.message);
                 }).catch((e) => {
                     alert('축하합니다 승리하셨습니다.');
@@ -429,7 +412,6 @@ export default function Game(props) {
                     set_id: info.data.id,
                     selection: buffer
                 }).then((response) => {
-                    console.log(response.data);
                     setPop(true);
                     setPopup(response.data.message);
                 });
@@ -486,7 +468,6 @@ export default function Game(props) {
                     set_id: info.data.id,
                     selection: [20]
                 }).then((response) => {
-                    console.log(response.data);
                     alert(response.data.message);
                 }).catch((e) => {
                     alert('축하합니다 승리하셨습니다.');
@@ -533,7 +514,6 @@ export default function Game(props) {
                 set_id: info.data.id,
                 selection: [20]
             }).then((response) => {
-                console.log(response.data);
                 alert(response.data.message);
             }).catch((e) => {
                 alert('축하합니다 승리하셨습니다.');
@@ -545,12 +525,10 @@ export default function Game(props) {
                 set_id: info.data.id,
                 selection: buffer
             }).then((response) => {
-                console.log(response.data);
                 setPop(true);
                 setPopup(response.data.message);
             });
         }
-        console.log(buffer);
         buffer = [];
     }
     const useModel = () => {
@@ -559,13 +537,11 @@ export default function Game(props) {
             set_id: info.data.id,
             selection: buffer
         }).then((response) => {
-            console.log(response.data);
             setPop(true);
             setPopup(response.data.message);
             alert(response.data.message);
-            // document.location.href = '/';
+            document.location.href = '/';
         });
-        console.log(buffer);
         buffer = [];
     }
     return (<>

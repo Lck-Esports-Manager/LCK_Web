@@ -167,7 +167,6 @@ export default function PersonalSchedule() {
             try {
                 axios.get('http://localhost:8000/api/getdayschedule/'
                 ).then((response) => {
-                    console.log(response);
                     setMatch(response.data);
                     // if (!response.data.Success) {
                     //     alert('올바르지 못한 접근입니다.');
@@ -178,7 +177,6 @@ export default function PersonalSchedule() {
                 })
                 axios.get('http://localhost:8000/api/teaminfo/'
                 ).then((response) => {
-                    console.log(response);
                     setTeam(response.data);
                 }).catch((e) => {
                     console.log(e.response);
@@ -211,7 +209,6 @@ export default function PersonalSchedule() {
                 "sub2": click7
             }
             ).then((response) => {
-                console.log(response.data);
             }).catch((e) => {
                 console.log(e.response);
             })
@@ -222,21 +219,18 @@ export default function PersonalSchedule() {
             setClick5(0)
             axios.post('http://localhost:8000/api/otherteamprocess/',
             ).then((response) => {
-                console.log(response);
             }).catch((e) => {
                 console.log(e.response);
             })
             pageRefresh();
             axios.get('http://localhost:8000/api/teaminfo/'
             ).then((response) => {
-                console.log(response);
                 setTeam(response.data);
             }).catch((e) => {
                 console.log(e.response);
             })
             axios.get('http://localhost:8000/api/getdayschedule/'
             ).then((response) => {
-                console.log(response);
                 setMatch(response.data);
                 // if (response.data.Success === false) {
                 //     alert('올바르지 못한 접근입니다.');
@@ -251,7 +245,6 @@ export default function PersonalSchedule() {
     }
     const pageRefresh = () => {
         setRefresh(refresh + 1);
-        console.log(refresh);
     }
     const schedulebtn = (click, num) => {
         return (

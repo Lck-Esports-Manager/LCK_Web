@@ -17,21 +17,28 @@ import PlayerDetail from './pages/PlayerDetail'
 import TeamChange from './pages/TeamChange'
 import AddPlayer from './pages/AddPlayer';
 import axios from 'axios';
-// import header from './config';
 
 axios.defaults.withCredentials = true;
 
 function App() {
   useEffect(() => {
     if (window.localStorage.getItem('isLogin')) {
-      // console.log('isLogin : ', JSON.parse(window.localStorage.getItem('isLogin')));
       if (JSON.parse(window.localStorage.getItem('isLogin'))) {
         axios.defaults.headers.common['Authorization'] = window.localStorage.getItem('token');
       }
     }
+    var bgm = document.getElementById("bgm");
+    bgm.volume = 0.15;
   }, []);
   return (
     <>
+      <audio
+        controls
+        id="bgm"
+        loop
+        src='https://docs.google.com/uc?export=open&id=14JlzHWUE2TqAsN237ft43SOw02xDPori'
+        autoPlay={true}>
+      </audio>
       <BrowserRouter>
         <Headline />
         <Switch>

@@ -18,14 +18,12 @@ export default function League() {
     const [refresh, setRefresh] = useState(0);
     const pageRefresh = () => {
         setRefresh(refresh + 1);
-        console.log(refresh);
     };
     useEffect(() => {
         const getLeague = async () => {
             try {
                 axios.post('http://localhost:8000/api/progressleague/'
                 ).then((response) => {
-                    console.log(response);
                     setLeague(response.data);
                 }).catch((e) => {
                     console.log(e.response);
