@@ -283,6 +283,8 @@ class ProgressLeague(APIView):
         else:
             if match.result == 1:
                 return [1, 0]
+            elif match.result==0:
+                return [1,1]
             else:
                 return [0, 1]
 
