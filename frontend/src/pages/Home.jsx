@@ -22,8 +22,6 @@ function Home() {
             try {
                 axios.get('http://localhost:8000/api/teaminfo/')
                     .then((response) => {
-                        console.log(response);
-                        console.log(response.data);
                     });
             } catch (e) { console.log(e); }
         };
@@ -31,14 +29,11 @@ function Home() {
     }, []);
     const [match, setMatch] = useState(null);
     useEffect(() => {
-        axios.get('http://localhost:8000/api/getschedule/',header
+        axios.get('http://localhost:8000/api/getschedule/', header
         ).then((response) => {
-            console.log(response.data.schedule);
             setHave(true);
             setMatch(response.data);
-            console.log(match);
         }).catch((Error) => {
-            console.log(Error);
             console.log(Error.response);
             setHave(false);
         });
@@ -54,7 +49,6 @@ function Home() {
     }
     const pageRefresh = () => {
         setRefresh(refresh + 1);
-        console.log(refresh);
     }
     return (
         <div className="home--main">

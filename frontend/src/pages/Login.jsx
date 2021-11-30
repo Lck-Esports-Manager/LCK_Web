@@ -27,11 +27,9 @@ function Login() {
     const login_request = () => {
         axios.post('http://localhost:8000/api/rest-auth/login/', user
         ).then((response) => {
-            console.log(response.data);
             var cookies = new Cookies();
             cookies.set("auth", response.data.token);
             axios.defaults.headers.common['Authorization'] = `jwt ${response.data.token}`;
-            console.log(axios.defaults.headers.common['Authorization']);
             alert(`${response.data.user.username}님 환영합니다.`);
             window.localStorage.setItem('user', JSON.stringify(user.username));
             window.localStorage.setItem('isLogin', 'true');

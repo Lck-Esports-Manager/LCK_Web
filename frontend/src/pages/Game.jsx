@@ -171,7 +171,6 @@ export default function Game(props) {
     const [popup, setPopup] = useState(['게임을 진행합니다.']); //팝업창
     const pageRefresh = () => {
         setRefresh(refresh + 1);
-        console.log(refresh);
     };
     const loadImage = () => {
         axios.get('http://localhost:8000/api/champion/detail/?id=' + info.data?.my_top)
@@ -255,12 +254,10 @@ export default function Game(props) {
                 axios.post('http://localhost:8000/api/progressleague/')
                     .then((response1) => {
                         setInfo(response1.data);
-                        console.log(info);
                         loadImage();
                         axios.get('http://localhost:8000/api/makeselection/?set=' + set_id)
                             .then((response2) => {
                                 setSelect(response2.data);
-                                console.log(response2.data);
                             }).catch((e) => {
                                 console.log(e.response);
                                 // console.log(e.response.data);
@@ -270,7 +267,6 @@ export default function Game(props) {
         };
         fetch();
         if (select.nexus_destroy) {
-            console.log('========================');
             setSelect({
                 "lane_press": {
                     "top": [false, 1, 1],
@@ -329,26 +325,32 @@ export default function Game(props) {
             20: { bool: select.nexus_destroy },
             21: { bool: select?.model_use[0] }
         });
-        console.log(`이거 turn : ${info.data?.turn} side: ${info.data?.side}`);
-
-        if (turn % 2 === side) { //myturn
-            if (refresh > 1 && info.data?.turn % 2 === info.data?.side) {
-                console.log('턴정보');
-                console.log(turn);
-                console.log(side);
+        // if (turn % 2 === side) {
+        //     if (refresh > 1 && info.data?.turn % 2 === info.data?.side) {
+        //         console.log('턴정보');
+        //         console.log(turn);
+        //         console.log(side);
+        //         autoSelect();
+        //     }
+        // }
+        // else { //auto
+        //     if (refresh === 1 || info.data?.turn % 2 === info.data?.side) {
+        //         console.log('턴정보');
+        //         console.log(turn);
+        //         console.log(side);
+        //         autoSelect();
+        //     }
+        // }
+        if (turn % 2 === 1) { //myturn
+            if (refresh > 1 && info.data?.turn % 2 === 1) {
                 autoSelect();
             }
         }
         else { //auto
-            if (refresh === 1 || info.data?.turn % 2 === info.data?.side) {
-                console.log('턴정보');
-                console.log(turn);
-                console.log(side);
+            if (refresh === 1 || info.data?.turn % 2 === 1) {
                 autoSelect();
             }
         }
-        // console.log(myImg);
-        console.log(select);
     }, [refresh]);
     const calcAct = (num) => {
         if (num === 1 || num === 2 || num === 3) return select.lane_press?.bot[1];
@@ -394,14 +396,11 @@ export default function Game(props) {
         }
         else {
             // api전송 
-            console.log('보내기전');
-            console.log(buffer);
             if (buffer.indexOf(20) >= 0) {
                 axios.post('http://localhost:8000/api/selectionprocess/', {
                     set_id: info.data.id,
                     selection: [20]
                 }).then((response) => {
-                    console.log(response.data);
                     alert(response.data.message);
                 }).catch((e) => {
                     alert('축하합니다 승리하셨습니다.');
@@ -413,7 +412,6 @@ export default function Game(props) {
                     set_id: info.data.id,
                     selection: buffer
                 }).then((response) => {
-                    console.log(response.data);
                     setPop(true);
                     setPopup(response.data.message);
                 });
@@ -470,7 +468,6 @@ export default function Game(props) {
                     set_id: info.data.id,
                     selection: [20]
                 }).then((response) => {
-                    console.log(response.data);
                     alert(response.data.message);
                 }).catch((e) => {
                     alert('축하합니다 승리하셨습니다.');
@@ -517,7 +514,6 @@ export default function Game(props) {
                 set_id: info.data.id,
                 selection: [20]
             }).then((response) => {
-                console.log(response.data);
                 alert(response.data.message);
             }).catch((e) => {
                 alert('축하합니다 승리하셨습니다.');
@@ -529,12 +525,10 @@ export default function Game(props) {
                 set_id: info.data.id,
                 selection: buffer
             }).then((response) => {
-                console.log(response.data);
                 setPop(true);
                 setPopup(response.data.message);
             });
         }
-        console.log(buffer);
         buffer = [];
     }
     const useModel = () => {
@@ -543,13 +537,11 @@ export default function Game(props) {
             set_id: info.data.id,
             selection: buffer
         }).then((response) => {
-            console.log(response.data);
             setPop(true);
             setPopup(response.data.message);
             alert(response.data.message);
             document.location.href = '/';
         });
-        console.log(buffer);
         buffer = [];
     }
     return (<>
@@ -575,14 +567,11 @@ export default function Game(props) {
                             {pop &&
                                 <div className="popup">
                                     <div className="response">
-                                        {popup && popup.map((text) => {
-                                            return <p>{text}</p>
-                                        })}
+                                        {popup && popup.map((text) => { return <p>{text}</p> })}
                                     </div>
                                     <div className="btn" onClick={() => {
                                         setPop(false);
                                         pageRefresh();
-                                        // play();
                                     }}>
                                         확인
                                     </div>
@@ -656,24 +645,49 @@ export default function Game(props) {
                                 </div>
                                 {select.fight?.baron[0] ? <div className='baron'>ㅤ</div> : <></>}
                                 {select.fight?.dragon[0] || select.fight?.elder[0] ? <div className='dragon'>ㅤ</div> : <></>}
-                                <div className="my1"><Tower color={0} num={info.data?.my_tower1} /></div>
-                                <div className="my2"><Tower color={0} num={info.data?.my_tower2} /></div>
-                                <div className="my3"><Tower color={0} num={info.data?.my_tower3} /></div>
-                                <div className="my4"><Tower color={0} num={info.data?.my_tower4} /></div>
-                                <div className="my5"><Tower color={0} num={info.data?.my_tower5} /></div>
-                                <div className="my6"><Tower color={0} num={info.data?.my_tower6} /></div>
-                                <div className="my7"><Tower color={0} num={info.data?.my_tower7} /></div>
-                                <div className="my8"><Tower color={0} num={info.data?.my_tower8} /></div>
-                                <div className="my9"><Tower color={0} num={info.data?.my_tower9} /></div>
-                                <div className="op1"><Tower color={1} num={info.data?.op_tower1} /></div>
-                                <div className="op2"><Tower color={1} num={info.data?.op_tower2} /></div>
-                                <div className="op3"><Tower color={1} num={info.data?.op_tower3} /></div>
-                                <div className="op4"><Tower color={1} num={info.data?.op_tower4} /></div>
-                                <div className="op5"><Tower color={1} num={info.data?.op_tower5} /></div>
-                                <div className="op6"><Tower color={1} num={info.data?.op_tower6} /></div>
-                                <div className="op7"><Tower color={1} num={info.data?.op_tower7} /></div>
-                                <div className="op8"><Tower color={1} num={info.data?.op_tower8} /></div>
-                                <div className="op9"><Tower color={1} num={info.data?.op_tower9} /></div>
+                                {side === 1 ?
+                                    <>
+                                        <div className="my1"><Tower color={0} num={info.data?.my_tower1} /></div>
+                                        <div className="my2"><Tower color={0} num={info.data?.my_tower2} /></div>
+                                        <div className="my3"><Tower color={0} num={info.data?.my_tower3} /></div>
+                                        <div className="my4"><Tower color={0} num={info.data?.my_tower4} /></div>
+                                        <div className="my5"><Tower color={0} num={info.data?.my_tower5} /></div>
+                                        <div className="my6"><Tower color={0} num={info.data?.my_tower6} /></div>
+                                        <div className="my7"><Tower color={0} num={info.data?.my_tower7} /></div>
+                                        <div className="my8"><Tower color={0} num={info.data?.my_tower8} /></div>
+                                        <div className="my9"><Tower color={0} num={info.data?.my_tower9} /></div>
+                                        <div className="op1"><Tower color={1} num={info.data?.op_tower1} /></div>
+                                        <div className="op2"><Tower color={1} num={info.data?.op_tower2} /></div>
+                                        <div className="op3"><Tower color={1} num={info.data?.op_tower3} /></div>
+                                        <div className="op4"><Tower color={1} num={info.data?.op_tower4} /></div>
+                                        <div className="op5"><Tower color={1} num={info.data?.op_tower5} /></div>
+                                        <div className="op6"><Tower color={1} num={info.data?.op_tower6} /></div>
+                                        <div className="op7"><Tower color={1} num={info.data?.op_tower7} /></div>
+                                        <div className="op8"><Tower color={1} num={info.data?.op_tower8} /></div>
+                                        <div className="op9"><Tower color={1} num={info.data?.op_tower9} /></div>
+                                    </>
+                                    :
+                                    <>
+                                        <div className="my1"><Tower color={0} num={info.data?.op_tower1} /></div>
+                                        <div className="my2"><Tower color={0} num={info.data?.op_tower2} /></div>
+                                        <div className="my3"><Tower color={0} num={info.data?.op_tower3} /></div>
+                                        <div className="my4"><Tower color={0} num={info.data?.op_tower4} /></div>
+                                        <div className="my5"><Tower color={0} num={info.data?.op_tower5} /></div>
+                                        <div className="my6"><Tower color={0} num={info.data?.op_tower6} /></div>
+                                        <div className="my7"><Tower color={0} num={info.data?.op_tower7} /></div>
+                                        <div className="my8"><Tower color={0} num={info.data?.op_tower8} /></div>
+                                        <div className="my9"><Tower color={0} num={info.data?.op_tower9} /></div>
+                                        <div className="op1"><Tower color={1} num={info.data?.my_tower1} /></div>
+                                        <div className="op2"><Tower color={1} num={info.data?.my_tower2} /></div>
+                                        <div className="op3"><Tower color={1} num={info.data?.my_tower3} /></div>
+                                        <div className="op4"><Tower color={1} num={info.data?.my_tower4} /></div>
+                                        <div className="op5"><Tower color={1} num={info.data?.my_tower5} /></div>
+                                        <div className="op6"><Tower color={1} num={info.data?.my_tower6} /></div>
+                                        <div className="op7"><Tower color={1} num={info.data?.my_tower7} /></div>
+                                        <div className="op8"><Tower color={1} num={info.data?.my_tower8} /></div>
+                                        <div className="op9"><Tower color={1} num={info.data?.my_tower9} /></div>
+                                    </>
+                                }
                             </div>
                             <div className="map">
                                 <div className="element">
@@ -728,8 +742,12 @@ export default function Game(props) {
                                     </li>
                                     <li className='turn--info'>
                                         {info.data?.turn % 2 === 1 ?
-                                            <div className='blue--turn'>TURN {info.data?.turn}</div>
-                                            : <div className='red--turn'>TURN {info.data?.turn}</div>
+                                            (side === 1 ?
+                                                <div className='blue--turn'>TURN {info.data?.turn}</div> :
+                                                <div className='red--turn'>TURN {info.data?.turn}</div>)
+                                            : (side === 0 ?
+                                                <div className='blue--turn'>TURN {info.data?.turn}</div> :
+                                                <div className='red--turn'>TURN {info.data?.turn}</div>)
                                         }
                                         <div className='action'>남은 행동력 {action}</div>
                                         <div className='complete' onClick={sendSelect}>선택지 진행</div>

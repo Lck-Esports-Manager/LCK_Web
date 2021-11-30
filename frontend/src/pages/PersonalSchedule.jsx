@@ -32,15 +32,15 @@ function PlayinfoCard(props) {
     return (<>
         <ul className="info">
             <div>Name</div>
-            <li>{props.pos.player.name}</li>
+            <li>{props.pos?.player.name}</li>
             <div>Level</div>
-            <li>{props.pos.level}</li>
+            <li>{props.pos?.level}</li>
             <div>EXP </div>
-            <li>{props.pos.exp * 10} %{Exp(props.choice)}</li>
+            <li>{props.pos?.exp * 10} %{Exp(props?.choice)}</li>
             <div>Tier</div>
-            <li>{props.pos.player.rate}</li>
+            <li>{props.pos?.player.rate}</li>
             <div>Condition </div>
-            <li>{CondiToString(props.pos.feeling)}{Condi(props.choice)}</li>
+            <li>{CondiToString(props.pos?.feeling)}{Condi(props?.choice)}</li>
         </ul>
 
     </>);
@@ -167,7 +167,6 @@ export default function PersonalSchedule() {
             try {
                 axios.get('http://localhost:8000/api/getdayschedule/'
                 ).then((response) => {
-                    console.log(response);
                     setMatch(response.data);
                     // if (!response.data.Success) {
                     //     alert('올바르지 못한 접근입니다.');
@@ -178,7 +177,6 @@ export default function PersonalSchedule() {
                 })
                 axios.get('http://localhost:8000/api/teaminfo/'
                 ).then((response) => {
-                    console.log(response);
                     setTeam(response.data);
                 }).catch((e) => {
                     console.log(e.response);
@@ -211,7 +209,6 @@ export default function PersonalSchedule() {
                 "sub2": click7
             }
             ).then((response) => {
-                console.log(response.data);
             }).catch((e) => {
                 console.log(e.response);
             })
@@ -222,21 +219,18 @@ export default function PersonalSchedule() {
             setClick5(0)
             axios.post('http://localhost:8000/api/otherteamprocess/',
             ).then((response) => {
-                console.log(response);
             }).catch((e) => {
                 console.log(e.response);
             })
             pageRefresh();
             axios.get('http://localhost:8000/api/teaminfo/'
             ).then((response) => {
-                console.log(response);
                 setTeam(response.data);
             }).catch((e) => {
                 console.log(e.response);
             })
             axios.get('http://localhost:8000/api/getdayschedule/'
             ).then((response) => {
-                console.log(response);
                 setMatch(response.data);
                 // if (response.data.Success === false) {
                 //     alert('올바르지 못한 접근입니다.');
@@ -251,7 +245,6 @@ export default function PersonalSchedule() {
     }
     const pageRefresh = () => {
         setRefresh(refresh + 1);
-        console.log(refresh);
     }
     const schedulebtn = (click, num) => {
         return (
@@ -282,7 +275,7 @@ export default function PersonalSchedule() {
             <div className="inner">
                 <div className="contents">
                     <div className="team--info">
-                        <div className="teamname">Teamㅤ{team.my_team && team.my_team.name}</div>
+                        <div className="teamname">Team : {team.my_team && team.my_team.name}</div>
                         <div className="popularity">인기도 : {team.my_team && team.my_team.popularity}{ingido()}</div>
                         <div className="money">예산 : ￦ {team.my_team && team.my_team.money}{money()}</div>
                     </div>
@@ -312,48 +305,48 @@ export default function PersonalSchedule() {
                         <div className="card">
                             <div className="pos">Top</div>
                             <img src={imgs[click1]} className="image" alt="images" />
-                            <PlayinfoCard pos={team.my_team.top} choice={click1} />
+                            <PlayinfoCard pos={team.my_team?.top} choice={click1} />
                             {schedulebtn(click1, 1)}
                         </div>
                         <div className="card">
                             <div className="pos">Jungle</div>
                             <img src={imgs[click2]} className="image" alt="images" />
-                            <PlayinfoCard pos={team.my_team.jungle} choice={click2} />
+                            <PlayinfoCard pos={team.my_team?.jungle} choice={click2} />
                             {schedulebtn(click2, 2)}
                         </div>
                         <div className="card">
                             <div className="pos">Middle</div>
                             <img src={imgs[click3]} className="image" alt="images" />
-                            <PlayinfoCard pos={team.my_team.mid} choice={click3} />
+                            <PlayinfoCard pos={team.my_team?.mid} choice={click3} />
                             {schedulebtn(click3, 3)}
                         </div>
                         <div className="card">
                             <div className="pos">ADC</div>
                             <img src={imgs[click4]} className="image" alt="images" />
-                            <PlayinfoCard pos={team.my_team.adc} choice={click4} />
+                            <PlayinfoCard pos={team.my_team?.adc} choice={click4} />
                             {schedulebtn(click4, 4)}
                         </div>
                         <div className="card">
                             <div className="pos">Support</div>
                             <img src={imgs[click5]} className="image" alt="images" />
-                            <PlayinfoCard pos={team.my_team.support} choice={click5} />
+                            <PlayinfoCard pos={team.my_team?.support} choice={click5} />
                             {schedulebtn(click5, 5)}
                         </div>
-                        {team.my_team.sub1 ?
+                        {team.my_team?.sub1 ?
                             <div className="card">
                                 <div className="pos">Sub1</div>
                                 <img src={imgs[click6]} className="image" alt="images" />
-                                <PlayinfoCard pos={team.my_team.sub1} choice={click6} />
+                                <PlayinfoCard pos={team.my_team?.sub1} choice={click6} />
                                 {schedulebtn(click6, 6)}
                             </div> :
                             <div className="null--card">
                                 <div className="pos">선수없음</div>
                             </div>}
-                        {team.my_team.sub2 ?
+                        {team.my_team?.sub2 ?
                             <div className="card">
                                 <div className="pos">Sub2</div>
                                 <img src={imgs[click7]} className="image" alt="images" />
-                                <PlayinfoCard pos={team.my_team.sub2} choice={click7} />
+                                <PlayinfoCard pos={team.my_team?.sub2} choice={click7} />
                                 {schedulebtn(click7, 7)}
                             </div> :
                             <div className="null--card">

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import "./Banpick.css";
+import { header } from "../config.js";
 
 export default function Banpick(props) {
     /* 해당 계정에 대한 정보 */
@@ -101,9 +102,6 @@ export default function Banpick(props) {
         }
         else {
             setTurn(iTurn + 1);
-
-            console.log("내턴1증가");
-            console.log(props.match.params.side);
             axios.get('http://localhost:8000/api/champion/?position=' + isPos(iTurn + 1) + '&tier=1')
                 .then((response1) => {
                     axios.get('http://localhost:8000/api/champion/?position=' + isPos(iTurn + 1) + '&tier=2')
@@ -115,8 +113,6 @@ export default function Banpick(props) {
                         })
                 })
         }
-        console.log(`현재 덱`);
-        console.log(chamList);
     }
     const isPos = (i) => {
         if (i === 0 || i === 1 || i === 6 || i === 7)
@@ -159,7 +155,6 @@ export default function Banpick(props) {
                     [iTurn]: cham,
                 })
             }
-            console.log(cham);
         }
     }
     /* 선택된 챔피언들을 출력하는 함수 */
@@ -181,8 +176,8 @@ export default function Banpick(props) {
             try {
                 axios.get('http://localhost:8000/api/champion/?position=top')
                     .then((response) => { setPntList(response.data); })
-                axios.get('http://localhost:8000/api/progressleague/')
-                    .then((response) => { setApi(response.data); console.log(response.data) })
+                axios.get('http://localhost:8000/api/progressleague/', header)
+                    .then((response) => { setApi(response.data); })
 
                 axios.get('http://localhost:8000/api/champion/?position=' + 'top' + '&tier=1')
                     .then((response1) => {
@@ -203,7 +198,9 @@ export default function Banpick(props) {
         const fetchcham = async () => {
             try {
                 axios.get('http://localhost:8000/api/champion/?position=' + isPos(iTurn))
-                    .then((response) => { setPntList(response.data); console.log(`현재 ${iTurn + 1}턴이고 ${isPos(iTurn + 1)} 이걸로 적용함`); })
+                    .then((response) => { setPntList(response.data); })
+                axios.post('http://localhost:8000/api/progressleague/', header)
+                    .then((response) => { setApi(response.data); })
                 if (!isMyturn(iTurn)) {
                     randT = Math.floor(Math.random() * 2) + 1;
                     randC = Math.floor(Math.random() * ranList[randT].length);
@@ -219,7 +216,7 @@ export default function Banpick(props) {
                                 })
                         })
                     axios.post('http://localhost:8000/api/progressleague/')
-                        .then((response) => { setApi(response.data); console.log(response.data); })
+                        .then((response) => { setApi(response.data); })
                     while (temp) {
                         temp = 0;
                         for (let i = 0; i < iTurn; i++) {
@@ -235,7 +232,6 @@ export default function Banpick(props) {
                         [iTurn]: ranList[randT][randC],
                     })
                     setTurn(iTurn + 1);
-                    console.log("오토1증가");
                 }
             } catch (e) { console.log(e); }
         };
