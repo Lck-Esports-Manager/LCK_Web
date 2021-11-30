@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import "./Banpick.css";
+import { header } from "../config.js";
 
 export default function Banpick(props) {
     /* 해당 계정에 대한 정보 */
@@ -181,7 +182,7 @@ export default function Banpick(props) {
             try {
                 axios.get('http://localhost:8000/api/champion/?position=top')
                     .then((response) => { setPntList(response.data); })
-                axios.get('http://localhost:8000/api/progressleague/')
+                axios.get('http://localhost:8000/api/progressleague/', header)
                     .then((response) => { setApi(response.data); console.log(response.data) })
 
                 axios.get('http://localhost:8000/api/champion/?position=' + 'top' + '&tier=1')
@@ -204,6 +205,8 @@ export default function Banpick(props) {
             try {
                 axios.get('http://localhost:8000/api/champion/?position=' + isPos(iTurn))
                     .then((response) => { setPntList(response.data); console.log(`현재 ${iTurn + 1}턴이고 ${isPos(iTurn + 1)} 이걸로 적용함`); })
+                axios.post('http://localhost:8000/api/progressleague/', header)
+                    .then((response) => { setApi(response.data); console.log(response.data); })
                 if (!isMyturn(iTurn)) {
                     randT = Math.floor(Math.random() * 2) + 1;
                     randC = Math.floor(Math.random() * ranList[randT].length);

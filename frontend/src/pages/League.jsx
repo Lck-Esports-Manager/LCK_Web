@@ -77,7 +77,7 @@ export default function League() {
                                 <div className="current">
                                     {leagueState.league === false ?
                                         <div className="on makeTeam"><Link className="img" to={movePage}></Link><Link className="title" to={movePage}>ㅤ팀 생성ㅤ</Link></div>
-                                        : <div className="makeTeam"><div className="black--img"></div><div className="title">팀 생성완료</div></div>
+                                        : <div className="makeTeam"><div className="black--img"></div><div className="teamtitle">TEAM<br />{leagueState.my_team_data?.name}</div></div>
                                     }
                                     {leagueState.league === true && leagueState.banpick === true && leagueState.my_team === true ?
                                         <div className="on banPick">
