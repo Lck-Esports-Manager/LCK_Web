@@ -503,7 +503,7 @@ class ProcessSelection(APIView):
                         self.set.my_baron = self.set.my_baron+1
                         self.set.is_baron = 1
                         self.response.append(
-                            "{0} : {1}팀이 한타를 패배하여 상대팀이 바론을 획득하고 2000골드를 추가로 얻습니다.".format(self.set.turn, self.my_team['side']))
+                            "{0} : {1}팀이 한타를 패배하여 상대팀이 바론을 획득 하고 2000골드를 추가로 얻습니다.".format(self.set.turn, self.my_team['side']))
 
             elif elem == 13:
                 if self.set.turn % 2 == 1:
@@ -958,7 +958,7 @@ class ProcessSelection(APIView):
                     self.acquire_money(False)
                     self.acquire_popularity(False)
                     op_team = LeagueTeam.objects.get(
-                        league=self.league, team_num=self.match.team_num2)
+                        league=self.league, team_num=self.match.team_num1)
                     op_team.win = op_team.win+1
                     op_team.save()
             else:
@@ -977,7 +977,7 @@ class ProcessSelection(APIView):
                     self.acquire_money(True)
                     self.acquire_popularity(True)
                     op_team = LeagueTeam.objects.get(
-                        league=self.league, team_num=self.match.team_num2)
+                        league=self.league, team_num=self.match.team_num1)
                     op_team.lose = op_team.lose+1
                     op_team.save()
             self.other()
