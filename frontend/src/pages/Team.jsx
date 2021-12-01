@@ -142,6 +142,8 @@ function TeamInfo({ myTeam }) {
     )
 }
 
+
+
 function Sponsor1({ sponsor }) {
 
     if (sponsor == null) {

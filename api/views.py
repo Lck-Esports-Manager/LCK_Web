@@ -1285,3 +1285,17 @@ class AddPlayer(APIView):
             return Response({"success":False})
         
         return Response({"success":True})
+
+#스폰서 및 사업
+
+class SponsorView(APIView):
+    def get(self,requset):
+        sponsor=Sponsor.objects.all()
+        serializers = SponsorSerializer(sponsor,many=True)
+        return Response(serializers.data)
+
+class EnterpriseView(APIView):
+    def get(self,requset):
+        enterprise=Enterprise.objects.all()
+        serializers = EnterpriseSerializer(enterprise,many=True)
+        return Response(serializers.data)

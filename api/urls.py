@@ -72,6 +72,9 @@ urlpatterns = [
     # 테스트
     path('addsub/', AddSub.as_view()),
     # 로그인 회원가입 관련 api
+    path('sponsor/', SponsorView.as_view()),
+    path('enterprise/', EnterpriseView.as_view()),
+    
 
     path('rest-auth/', include('rest_auth.urls')),
     path('rest-auth/signup/', include('rest_auth.registration.urls')),

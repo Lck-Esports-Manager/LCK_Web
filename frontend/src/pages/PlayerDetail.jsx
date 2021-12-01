@@ -62,13 +62,14 @@ function StatusManage({ status1, status2, status3, remain, id }) {
         } catch (e) { console.log(e); }
     }
     const add1 = () => {
+        
         const new_status1 = _status1 + 1
         setStatus1(new_status1)
         const new_remain = _remain - 1
         setRemain(new_remain)
     }
     const add2 = () => {
-
+   
         const new_status2 = _status2 + 1
         setStatus2(new_status2)
         const new_remain = _remain - 1
@@ -127,7 +128,7 @@ function StatusManage({ status1, status2, status3, remain, id }) {
                 <Button  style={right} onClick={sub2} disabled={_status2 > status2 ? false : true}>-</Button>
                 </Col>
                 <Col>
-                <div style={{textAlign:"center"}}>{_status1}</div>
+                <div style={{textAlign:"center"}}>{_status2}</div>
                 </Col >
                 <Col>
                 <Button  style={left} onClick={add2} disabled={_remain > 0 ? false : true}>+</Button>
@@ -143,7 +144,7 @@ function StatusManage({ status1, status2, status3, remain, id }) {
                 <Button  style={right} onClick={sub3} disabled={_status3 > status3 ? false : true}>-</Button>
                 </Col>
                 <Col>
-                <div style={{textAlign:"center"}}>{_status1}</div>
+                <div style={{textAlign:"center"}}>{_status3}</div>
                 </Col >
                 <Col>
                 <Button  style={left} onClick={add3} disabled={_remain > 0 ? false : true}>+</Button>
