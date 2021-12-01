@@ -28,7 +28,7 @@ const containerStyle={ width: '560px',
     backgroundColor:'#011e46',
     padding:'10px'
 }
-function ExpManage({level,exp}){
+function ExpManage({level,exp,feeling}){
     const [_exp, setExp] = useState(exp)
     const [_level, setLevel] = useState(level)
 
@@ -168,6 +168,7 @@ export default function PlayerDetail(props) {
 
     const { id } = props.match.params
     const [MyPlayer, setMyPlayer] = useState(null)
+    const feeling=['보통','좋음','매우 좋음','매우 나쁨','나쁨']
     useEffect(() => {
         const fetchPlayer = async () => {
 
@@ -220,6 +221,7 @@ export default function PlayerDetail(props) {
                         <div style={{padding:"15px"}}>포지션 : {MyPlayer.player.position}</div>
                         <div style={{padding:"15px"}}>연도 및 시즌 : {MyPlayer.player.year} {MyPlayer.player.season}</div>
                         <div style={{padding:"15px"}}>등급 : {MyPlayer.player.rate}</div>
+                        <div style={{padding:"15px"}}>컨디션 : {feeling[MyPlayer.feeling]}</div>
                         </Container>
                     </Col>
                 </Row>
@@ -230,7 +232,7 @@ export default function PlayerDetail(props) {
                 <div style={{textAlign:'center',
                              fontSize:'20px',
                              color:'#ffdba1',
-                             margin:'10px'}}>경험치</div>
+                             margin:'10px'}}>레벨</div>
                 <ExpManage exp={MyPlayer.exp} level={MyPlayer.level}></ExpManage>
                 </Container></Col>
                 <Col>
