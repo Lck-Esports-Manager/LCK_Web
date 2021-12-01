@@ -199,6 +199,7 @@
 }
 .PS--main .inner .contents .schedule--info .card .info{
     background-color: #0d1516;
+    width: 200px;
     border-radius: 5px;
     padding: 10px;
     box-shadow: inset 0 0 10px rgb(87, 87, 87);
@@ -208,7 +209,7 @@
 }
 .PS--main .inner .contents .schedule--info .card .info li{
     margin: 0px 5px 8px;
-    width: 100px;
+    width: 106px;
     text-align: center;
 }
 .PS--main .inner .contents .schedule--info .card .info div{

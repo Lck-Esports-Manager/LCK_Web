@@ -35,7 +35,6 @@ export default function League() {
     const loadPage = () => {
         setPlaybtn(false);
         pageRefresh();
-        console.log(leagueState);
     }
     const movePage = () => {
         if (leagueState.league === false)       // 리그가 없는 경우 -> 팀생성

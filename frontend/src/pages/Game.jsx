@@ -4,8 +4,150 @@ import './Game.css';
 import Tower from './components/Tower';
 import SelectBtn from './components/SelectBtn';
 import Slot from './components/PlayerSlot';
+import { header } from "../config.js";
+
+function Result(props) {
+    const isOver = () => {
+        if (props.turn % 2 === 1) {
+            if (props.side === 1) {
+                if (props.num?.score[0] + 1 === 2) return true;
+            }
+            else {
+                if (props.num?.score[1] + 1 === 2) return true;
+            }
+        }
+        else { //상대턴에 종료
+            if (props.side === 1) {
+                if (props.num?.score[1] + 1 === 2) return true;
+            }
+            else {
+                if (props.num?.score[0] + 1 === 2) return true;
+            }
+        }
+        return false;
+    }
+    return (<>
+        <div className="gameover">
+            <div className="response">
+                {props.turn % 2 === 1 ?
+                    (props.side === 1 ? <div className="title">BlueTeam Win</div> : <div className="title">RedTeam Win</div>
+                    ) : (props.side === 1 ? <div className="title">RedTeam Win</div> : <div className="title">BlueTeam Win</div>)}
+                <div className="matchinfo">
+                    {props.side === 1 ? <div className="blue">{props.num.blue?.name}</div> : <div className="blue">{props.num.blue?.name}</div>}
+                    {props.turn % 2 === 1 ?
+                        (props.side === 1
+                            ? <div className="score">{props.num?.score[0] + 1} : {props.num?.score[1]}</div>
+                            : <div className="score">{props.num?.score[0]} : {props.num?.score[1] + 1}</div>)
+                        : (props.side === 1
+                            ? <div className="score">{props.num?.score[0]} : {props.num?.score[1] + 1}</div>
+                            : <div className="score">{props.num?.score[0] + 1} : {props.num?.score[1]}</div>)}
+                    <div className="red">{props.num.red?.name}</div>
+                </div>
+                <ul className="score">
+                    <li><div className="blue">{props.num.blue?.gold}</div><div className="subtitle">글로벌 골드량</div><div className="red">{props.num.red?.gold}</div></li>
+                    <li><div className="blue">{props.num.blue?.dragon}</div><div className="subtitle">처치한 드래곤</div><div className="red">{props.num.red?.dragon}</div></li>
+                    <li><div className="blue">{props.num.blue?.baron}</div><div className="subtitle">처치한 바론수</div><div className="red">{props.num.red?.baron}</div></li>
+                    <li><div className="blue">{props.num.blue?.tower}</div><div className="subtitle">파괴한 타워수</div><div className="red">{props.num.red?.tower}</div></li>
+
+                    {isOver() === true ? <li className="money">
+                        <ul className="title">
+                            <li>현재 예산</li>
+                            <li>사업 수익</li>
+                            <li>스폰서 수익</li>
+                            <li>경기 보상</li>
+                            <li>합계</li>
+                        </ul>
+                        <ul className="data">
+                            <li>{props.num.money?.current}</li>
+                            <li>{props.num.money?.enterprise}</li>
+                            <li>{props.num.money?.sponsor}</li>
+                            <li>{props.num.money?.playresult}</li>
+                            <li>{props.num.money?.current + props.num.money?.enterprise +
+                                props.num.money?.sponsor + props.num.money?.playresult}</li>
+                        </ul>
+                    </li> : <></>}
+                </ul>
+            </div>
+            <div className="btn" onClick={() => {
+                document.location.href = '/league';
+            }}>
+                확인
+            </div>
+        </div>
+    </>);
+}
 
 export default function Game(props) {
+    const over = (model) => {
+        let money = 10000;
+        if (model) buffer = [21];
+        else buffer = [20];
+        axios.post('http://localhost:8000/api/progressleague/').then((leagueData) => {
+            axios.get('http://localhost:8000/api/teaminfo/').then((teamInfo) => {
+                if (side === 1) //blue
+                {
+                    if (info.data?.turn % 2 === 0) money = 8000;
+                    setR({
+                        score: [leagueData.data.score[0], leagueData.data.score[1]],
+                        blue: {
+                            name: leagueData.data.my_team_data.name,
+                            gold: leagueData.data.data.my_gold,
+                            dragon: leagueData.data.data.my_dragon,
+                            baron: leagueData.data.data.my_baron,
+                            tower: leagueData.data.data.my_tower_destroy
+                        },
+                        red: {
+                            name: leagueData.data.op_team_data.name,
+                            gold: leagueData.data.data.op_gold,
+                            dragon: leagueData.data.data.op_dragon,
+                            baron: leagueData.data.data.op_baron,
+                            tower: leagueData.data.data.op_tower_destroy
+                        },
+                        money: {
+                            current: teamInfo.data.my_team.money,
+                            enterprise: teamInfo.data.my_team.enterprise1?.earning,
+                            sponsor: 0,
+                            playresult: money
+                        }
+                    });
+                }
+                else {
+                    if (info.data?.turn % 2 === 0) money = 8000;
+                    setR({
+                        score: [leagueData.data.score[0], leagueData.data.score[1]],
+                        blue: {
+                            name: leagueData.data.op_team_data.name,
+                            gold: leagueData.data.data.op_gold,
+                            dragon: leagueData.data.data.op_dragon,
+                            baron: leagueData.data.data.op_baron,
+                            tower: leagueData.data.data.op_tower_destroy
+                        },
+                        red: {
+                            name: leagueData.data.my_team_data.name,
+                            gold: leagueData.data.data.my_gold,
+                            dragon: leagueData.data.data.my_dragon,
+                            baron: leagueData.data.data.my_baron,
+                            tower: leagueData.data.data.my_tower_destroy
+                        },
+                        money: {
+                            current: teamInfo.data.my_team.money,
+                            enterprise: teamInfo.data.my_team.enterprise1?.earning,
+                            sponsor: 0,
+                            playresult: money
+                        }
+                    });
+                }
+            });
+        });
+        axios.post('http://localhost:8000/api/selectionprocess/', {
+            set_id: info.data.id,
+            selection: buffer
+        }).then((response) => {
+            alert(response.data.message);
+            document.location.href = '/league';
+        });
+        // setGameover(true);
+    }
     const [clicked, setClick] = useState({
         1: false,
         2: false,
@@ -31,7 +173,6 @@ export default function Game(props) {
     });
     const [action, setAction] = useState(3);
     let buffer = [];
-    const [pop, setPop] = useState(true);       //팝업창의 띄움상태
     const [refresh, setRefresh] = useState(0);  //렌더를 돕는 스테이트
     const [pick, setPick] = useState(null);
     const [myImg, setmyImg] = useState({
@@ -168,20 +309,48 @@ export default function Game(props) {
     const [side, setSide] = useState(Number(props.match.params.side));
     const [turn, setTurn] = useState(Number(props.match.params.turn));
     const [set_id, setId] = useState(props.match.params.id);
+    const [pop, setPop] = useState(true);       //팝업창의 띄움상태
     const [popup, setPopup] = useState(['게임을 진행합니다.']); //팝업창
+    const [check, setCheck] = useState(false);
+    const [gameover, setGameover] = useState(false);
+    const [gameresult, setResult] = useState(['결과창']); //팝업창
+    const [result, setR] = useState({
+        score: [0, 1],
+        blue: {
+            name: "blue team",
+            gold: 2500,
+            dragon: 0,
+            baron: 0,
+            tower: 0
+        },
+        red: {
+            name: "red team",
+            gold: 2500,
+            dragon: 0,
+            baron: 0,
+            tower: 0
+        },
+        money: {
+            current: 2500,
+            enterprise: 0,
+            sponsor: 0,
+            playresult: 0
+        }
+    }); //팝업창
     const pageRefresh = () => {
         setRefresh(refresh + 1);
+        console.log(refresh);
     };
     const loadImage = () => {
-        axios.get('http://localhost:8000/api/champion/detail/?id=' + info.data?.my_top)
+        axios.get('http://localhost:8000/api/champion/detail/?id=' + info.data?.my_top, header)
             .then((response1) => {
-                axios.get('http://localhost:8000/api/champion/detail/?id=' + info.data?.my_jng)
+                axios.get('http://localhost:8000/api/champion/detail/?id=' + info.data?.my_jng, header)
                     .then((response2) => {
-                        axios.get('http://localhost:8000/api/champion/detail/?id=' + info.data?.my_mid)
+                        axios.get('http://localhost:8000/api/champion/detail/?id=' + info.data?.my_mid, header)
                             .then((response3) => {
-                                axios.get('http://localhost:8000/api/champion/detail/?id=' + info.data?.my_adc)
+                                axios.get('http://localhost:8000/api/champion/detail/?id=' + info.data?.my_adc, header)
                                     .then((response4) => {
-                                        axios.get('http://localhost:8000/api/champion/detail/?id=' + info.data?.my_sup)
+                                        axios.get('http://localhost:8000/api/champion/detail/?id=' + info.data?.my_sup, header)
                                             .then((response5) => {
                                                 setmyImg({
                                                     top: {
@@ -210,15 +379,15 @@ export default function Game(props) {
                             })
                     })
             })
-        axios.get('http://localhost:8000/api/champion/detail/?id=' + info.data?.op_top)
+        axios.get('http://localhost:8000/api/champion/detail/?id=' + info.data?.op_top, header)
             .then((response1) => {
-                axios.get('http://localhost:8000/api/champion/detail/?id=' + info.data?.op_jng)
+                axios.get('http://localhost:8000/api/champion/detail/?id=' + info.data?.op_jng, header)
                     .then((response2) => {
-                        axios.get('http://localhost:8000/api/champion/detail/?id=' + info.data?.op_mid)
+                        axios.get('http://localhost:8000/api/champion/detail/?id=' + info.data?.op_mid, header)
                             .then((response3) => {
-                                axios.get('http://localhost:8000/api/champion/detail/?id=' + info.data?.op_adc)
+                                axios.get('http://localhost:8000/api/champion/detail/?id=' + info.data?.op_adc, header)
                                     .then((response4) => {
-                                        axios.get('http://localhost:8000/api/champion/detail/?id=' + info.data?.op_sup)
+                                        axios.get('http://localhost:8000/api/champion/detail/?id=' + info.data?.op_sup, header)
                                             .then((response5) => {
                                                 setopImg({
                                                     top: {
@@ -251,106 +420,96 @@ export default function Game(props) {
     useEffect(() => {
         const fetch = async () => {
             try {
-                axios.post('http://localhost:8000/api/progressleague/')
+                if (gameover === false && check === false) {
+                    if (turn % 2 === 1) { //myturn
+                        if (refresh > 1 && info.data?.turn % 2 === 1) {
+                            autoSelect();
+                        }
+                    }
+                    else { //auto
+                        if (refresh === 1 || info.data?.turn % 2 === 1) {
+                            autoSelect();
+                        }
+                    }
+                    if (refresh === 0 || refresh === 1 || refresh === 2) loadImage();
+                }
+                axios.get('http://localhost:8000/api/makeselection/?set=' + set_id, header)
+                    .then((response2) => {
+                        setSelect(response2.data);
+                        console.log(response2.data);
+                        console.log(select);
+                        setPick({
+                            1: { bool: select.lane_press?.top[0], act: response2.data.lane_press?.top[1] },
+                            2: { bool: select.lane_press?.mid[0], act: response2.data.lane_press?.mid[1] },
+                            3: { bool: select.lane_press?.bot[0], act: response2.data.lane_press?.bot[1] },
+                            4: { bool: select.ganking?.top[0], act: response2.data.ganking?.top[1] },
+                            5: { bool: select.ganking?.mid[0], act: response2.data.ganking?.mid[1] },
+                            6: { bool: select.ganking?.bot[0], act: response2.data.ganking?.bot[1] },
+                            7: { bool: select.engage?.top[0], act: response2.data.engage?.top[1] },
+                            8: { bool: select.engage?.mid[0], act: response2.data.engage?.mid[1] },
+                            9: { bool: select.engage?.bot[0], act: response2.data.engage?.bot[1] },
+                            10: { bool: false },
+                            11: { bool: false },
+                            12: { bool: false },
+                            13: { bool: false },
+                            14: { bool: select.tower_press?.top[0], act: select.tower_press?.top[1] },
+                            15: { bool: select.tower_press?.mid[0], act: select.tower_press?.mid[1] },
+                            16: { bool: select.tower_press?.bot[0], act: select.tower_press?.bot[1] },
+                            17: { bool: select.tower_destroy?.top[0], act: select.tower_destroy?.top[1] },
+                            18: { bool: select.tower_destroy?.mid[0], act: select.tower_destroy?.mid[1] },
+                            19: { bool: select.tower_destroy?.bot[0], act: select.tower_destroy?.bot[1] },
+                            20: { bool: select.nexus_destroy },
+                            21: { bool: select?.model_use[0] }
+                        });
+                        // if (select.nexus_destroy) {
+                        //     setSelect({
+                        //         "lane_press": {
+                        //             "top": [false, 1, 1],
+                        //             "mid": [false, 1, 2],
+                        //             "bot": [false, 1, 3]
+                        //         },
+                        //         "ganking": {
+                        //             "top": [false, 1, 4],
+                        //             "mid": [false, 1, 5],
+                        //             "bot": [false, 1, 6]
+                        //         },
+                        //         "engage": {
+                        //             "top": [false, 2, 7],
+                        //             "mid": [false, 2, 8],
+                        //             "bot": [false, 2, 9]
+                        //         },
+                        //         "fight": {
+                        //             "dragon": [false, 3, 10],
+                        //             "elder": [false, 3, 11],
+                        //             "baron": [false, 3, 12]
+                        //         },
+                        //         "tower_press": {
+                        //             "top": [false, 1, 14],
+                        //             "mid": [false, 1, 15],
+                        //             "bot": [false, 1, 16]
+                        //         },
+                        //         "tower_destroy": {
+                        //             "top": [false, 2, 17],
+                        //             "mid": [false, 2, 18],
+                        //             "bot": [false, 2, 19]
+                        //         },
+                        //         "nexus_destroy": true,
+                        //         "model_use": [false, 3, 21]
+                        //     });
+                        // }
+                    }).catch((e) => {
+                        console.log(e.response);
+                        // console.log(e.response.data);
+                    });
+                axios.post('http://localhost:8000/api/progressleague/', header)
                     .then((response1) => {
                         setInfo(response1.data);
-                        loadImage();
-                        axios.get('http://localhost:8000/api/makeselection/?set=' + set_id)
-                            .then((response2) => {
-                                setSelect(response2.data);
-                            }).catch((e) => {
-                                console.log(e.response);
-                                // console.log(e.response.data);
-                            });
+                        // loadImage();
                     });
             } catch (e) { console.log(e); }
         };
+
         fetch();
-        if (select.nexus_destroy) {
-            setSelect({
-                "lane_press": {
-                    "top": [false, 1, 1],
-                    "mid": [false, 1, 2],
-                    "bot": [false, 1, 3]
-                },
-                "ganking": {
-                    "top": [false, 1, 4],
-                    "mid": [false, 1, 5],
-                    "bot": [false, 1, 6]
-                },
-                "engage": {
-                    "top": [false, 2, 7],
-                    "mid": [false, 2, 8],
-                    "bot": [false, 2, 9]
-                },
-                "fight": {
-                    "dragon": [false, 3, 10],
-                    "elder": [false, 3, 11],
-                    "baron": [false, 3, 12]
-                },
-                "tower_press": {
-                    "top": [false, 1, 14],
-                    "mid": [false, 1, 15],
-                    "bot": [false, 1, 16]
-                },
-                "tower_destroy": {
-                    "top": [false, 2, 17],
-                    "mid": [false, 2, 18],
-                    "bot": [false, 2, 19]
-                },
-                "nexus_destroy": true,
-                "model_use": [false, 3, 21]
-            });
-        }
-        setPick({
-            1: { bool: select.lane_press?.top[0], act: select.lane_press?.top[1] },
-            2: { bool: select.lane_press?.mid[0], act: select.lane_press?.mid[1] },
-            3: { bool: select.lane_press?.bot[0], act: select.lane_press?.bot[1] },
-            4: { bool: select.ganking?.top[0], act: select.ganking?.top[1] },
-            5: { bool: select.ganking?.mid[0], act: select.ganking?.mid[1] },
-            6: { bool: select.ganking?.bot[0], act: select.ganking?.bot[1] },
-            7: { bool: select.engage?.top[0], act: select.engage?.top[1] },
-            8: { bool: select.engage?.mid[0], act: select.engage?.mid[1] },
-            9: { bool: select.engage?.bot[0], act: select.engage?.bot[1] },
-            10: { bool: false },
-            11: { bool: false },
-            12: { bool: false },
-            13: { bool: false },
-            14: { bool: select.tower_press?.top[0], act: select.tower_press?.top[1] },
-            15: { bool: select.tower_press?.mid[0], act: select.tower_press?.mid[1] },
-            16: { bool: select.tower_press?.bot[0], act: select.tower_press?.bot[1] },
-            17: { bool: select.tower_destroy?.top[0], act: select.tower_destroy?.top[1] },
-            18: { bool: select.tower_destroy?.mid[0], act: select.tower_destroy?.mid[1] },
-            19: { bool: select.tower_destroy?.bot[0], act: select.tower_destroy?.bot[1] },
-            20: { bool: select.nexus_destroy },
-            21: { bool: select?.model_use[0] }
-        });
-        // if (turn % 2 === side) {
-        //     if (refresh > 1 && info.data?.turn % 2 === info.data?.side) {
-        //         console.log('턴정보');
-        //         console.log(turn);
-        //         console.log(side);
-        //         autoSelect();
-        //     }
-        // }
-        // else { //auto
-        //     if (refresh === 1 || info.data?.turn % 2 === info.data?.side) {
-        //         console.log('턴정보');
-        //         console.log(turn);
-        //         console.log(side);
-        //         autoSelect();
-        //     }
-        // }
-        if (turn % 2 === 1) { //myturn
-            if (refresh > 1 && info.data?.turn % 2 === 1) {
-                autoSelect();
-            }
-        }
-        else { //auto
-            if (refresh === 1 || info.data?.turn % 2 === 1) {
-                autoSelect();
-            }
-        }
     }, [refresh]);
     const calcAct = (num) => {
         if (num === 1 || num === 2 || num === 3) return select.lane_press?.bot[1];
@@ -397,15 +556,7 @@ export default function Game(props) {
         else {
             // api전송 
             if (buffer.indexOf(20) >= 0) {
-                axios.post('http://localhost:8000/api/selectionprocess/', {
-                    set_id: info.data.id,
-                    selection: [20]
-                }).then((response) => {
-                    alert(response.data.message);
-                }).catch((e) => {
-                    alert('축하합니다 승리하셨습니다.');
-                });
-                document.location.href = '/';
+                over(false);
             }
             else {
                 axios.post('http://localhost:8000/api/selectionprocess/', {
@@ -456,6 +607,7 @@ export default function Game(props) {
         let temp = 0;
         // 행동력따라 나눠 저장
         if (pick !== null) {
+            console.log(pick);
             for (i = 1; i < 20; i++) {
                 if (pick[i]?.bool) {
                     if (pick[i]?.act === 1) act1.push(i);
@@ -464,15 +616,7 @@ export default function Game(props) {
                 }
             }
             if (pick[20].bool) {    //넥서스 파괴 선택지가 있을경우 
-                axios.post('http://localhost:8000/api/selectionprocess/', {
-                    set_id: info.data.id,
-                    selection: [20]
-                }).then((response) => {
-                    alert(response.data.message);
-                }).catch((e) => {
-                    alert('축하합니다 승리하셨습니다.');
-                });
-                document.location.href = '/';
+                over(false);
             }
             else {                  //넥서스 파괴 선택지가 없을경우 
                 //3
@@ -509,40 +653,17 @@ export default function Game(props) {
             }
         }
         //버퍼에는 선택가능한 것들이 들어가 있는 상태
-        if (buffer.indexOf(20) >= 0) {
-            axios.post('http://localhost:8000/api/selectionprocess/', {
-                set_id: info.data.id,
-                selection: [20]
-            }).then((response) => {
-                alert(response.data.message);
-            }).catch((e) => {
-                alert('축하합니다 승리하셨습니다.');
-            });
-            document.location.href = '/';
-        }
-        else {
-            axios.post('http://localhost:8000/api/selectionprocess/', {
-                set_id: info.data.id,
-                selection: buffer
-            }).then((response) => {
-                setPop(true);
-                setPopup(response.data.message);
-            });
-        }
-        buffer = [];
-    }
-    const useModel = () => {
-        buffer = [21];
         axios.post('http://localhost:8000/api/selectionprocess/', {
             set_id: info.data.id,
             selection: buffer
         }).then((response) => {
             setPop(true);
             setPopup(response.data.message);
-            alert(response.data.message);
-            document.location.href = '/';
         });
         buffer = [];
+    }
+    const useModel = () => {
+        over(true);
     }
     return (<>
         <div className="game">
@@ -577,6 +698,9 @@ export default function Game(props) {
                                     </div>
                                 </div>
                             }
+                            {gameover &&
+                                <Result num={result} side={side} turn={info.data?.turn} />
+                            }
                             <div className="blue_info">
                                 <div className="img" />
                                 {side === 1 ?
@@ -597,16 +721,6 @@ export default function Game(props) {
                             </div>
                             <div className="something">
                                 <div className="head">
-                                    {/* <div className="bluestatus2">
-                                        <div className="info--gold"></div>
-                                        <div className='goldnum'>{info.data?.my_gold}</div>
-                                        <div className="info--dragon"></div>
-                                        <div>{info.data?.my_dragon}</div>
-                                        <div className="info--baron"></div>
-                                        <div>{info.data?.my_baron}</div>
-                                        <div className="info--tower"></div>
-                                        <div>{info.data?.my_tower_destroy}</div>
-                                    </div> */}
                                     <div className="bluestatus">
                                         {side === 1 ?
                                             <ul>
@@ -750,8 +864,9 @@ export default function Game(props) {
                                                 <div className='red--turn'>TURN {info.data?.turn}</div>)
                                         }
                                         <div className='action'>남은 행동력 {action}</div>
-                                        <div className='complete' onClick={sendSelect}>선택지 진행</div>
-                                        {select?.model_use[0] ? <div className='complete' onClick={useModel}>빠른실행</div>
+                                        {gameover === false ? <div className='complete' onClick={sendSelect}>선택지 진행</div>
+                                            : <div className='no--complete' >선택지 진행</div>}
+                                        {gameover === false && select?.model_use[0] ? <div className='complete' onClick={useModel}>빠른실행</div>
                                             : <div className='no--complete'>빠른실행</div>}
 
                                     </li>
