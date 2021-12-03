@@ -28,7 +28,7 @@ function App() {
       }
     }
     var bgm = document.getElementById("bgm");
-    bgm.volume = 0.15;
+    bgm.volume = 0;
   }, []);
   return (
     <>
