@@ -2,49 +2,49 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useHistory } from "react-router-dom";
 import { Row, Card, Col, Button, Modal, Container, Table } from 'react-bootstrap'
-import { header,domain } from "../config.js";
+import { header, domain } from "../config.js";
 
 
-const button1={
-    border:'none',
-    backgroundColor:'#011e46',
-    width:'79px'
+const button1 = {
+    border: 'none',
+    backgroundColor: '#011e46',
+    width: '79px'
 }
-const button2={
-    border:'none',
-    backgroundColor:'red',
-    width:'79px'
+const button2 = {
+    border: 'none',
+    backgroundColor: 'red',
+    width: '79px'
 }
-const button3={
-    border:'none',
-    backgroundColor:'#011e46',
+const button3 = {
+    border: 'none',
+    backgroundColor: '#011e46',
 
 }
-const head_style={
-    borderRadius:"10px",
-    textAlign:'center',
-    width:'300px',
-    alignContent:"center",
-    margin:"auto",
-    marginTop:"10px",
-    marginBottom:"10px",
-    padding:"5px",
-    backgroundColor:'#011e46',
-    color:'#ffdba1'
+const head_style = {
+    borderRadius: "10px",
+    textAlign: 'center',
+    width: '300px',
+    alignContent: "center",
+    margin: "auto",
+    marginTop: "10px",
+    marginBottom: "10px",
+    padding: "5px",
+    backgroundColor: '#011e46',
+    color: '#ffdba1'
 }
 
 
-const position_style={
-    borderRadius:"10px",
-    textAlign:'center',
-    width:'150px',
-    alignContent:"center",
-    margin:"auto",
-    marginTop:"10px",
-    marginBottom:"10px",
-    padding:"5px",
-    backgroundColor:'#011e46',
-    color:'white'
+const position_style = {
+    borderRadius: "10px",
+    textAlign: 'center',
+    width: '150px',
+    alignContent: "center",
+    margin: "auto",
+    marginTop: "10px",
+    marginBottom: "10px",
+    padding: "5px",
+    backgroundColor: '#011e46',
+    color: 'white'
 }
 
 
@@ -98,7 +98,7 @@ function Player({ player, pos, func }) {
                 id: player.id,
                 pos: pos
             }
-            axios.post(`${domain}/api/removeplayer/`, body, header).then((response) => {
+            axios.post(`${domain}:8000/api/removeplayer/`, body, header).then((response) => {
                 if (response.data.success) {
                     routeChange();
                 }
@@ -119,18 +119,18 @@ function Player({ player, pos, func }) {
             <h3 style={position_style}>
                 {pos}
             </h3>
-            <Card style={{ width: '12rem',margin:"auto" }}>
-                <Card.Img class='m-3' variant="top" src={`${domain}${player.player.images}`} />
+            <Card style={{ width: '12rem', margin: "auto" }}>
+                <Card.Img class='m-3' variant="top" src={`${domain}:8000${player.player.images}`} />
                 <Card.Body>
                     <Card.Title>{player.player.name}</Card.Title>
                     <Card.Subtitle className="mb-2 text-muted">{player.player.year} {player.player.season}</Card.Subtitle>
-                    {pos === 'Sub1' || pos === 'Sub2' ?  <Card.Text className="mb-2 text-muted"> {player.player.position}</Card.Text> : <div></div>}
+                    {pos === 'Sub1' || pos === 'Sub2' ? <Card.Text className="mb-2 text-muted"> {player.player.position}</Card.Text> : <div></div>}
                     {pos === 'Sub1' || pos === 'Sub2' ? <div><Button style={button1} onClick={changeRoasterToHigh}>등록</Button>
-                                            <RemoveButton func={removePlayer}></RemoveButton></div> : <div></div>}
+                        <RemoveButton func={removePlayer}></RemoveButton></div> : <div></div>}
                 </Card.Body>
             </Card>
-            
-           
+
+
         </>
     );
 }
@@ -224,7 +224,7 @@ export default function TeamChange() {
                 sub2: sub2
 
             }
-            axios.post(`${domain}/api/changeroaster/`, body, header).then((response) => {
+            axios.post(`${domain}:8000/api/changeroaster/`, body, header).then((response) => {
                 if (response.data.success) {
                     routeChange();
                 }
@@ -238,7 +238,7 @@ export default function TeamChange() {
     useEffect(() => {
         const fetchTeam = async () => {
             try {
-                axios.get(`${domain}/api/teaminfo/`, header).then((response) => {
+                axios.get(`${domain}:8000/api/teaminfo/`, header).then((response) => {
                     const myTeam = response.data.my_team
 
                     const setting = {
