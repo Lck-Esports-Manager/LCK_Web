@@ -55,7 +55,7 @@ function StatusManage({ status1, status2, status3, remain, id }) {
             remain: _remain
         }
         try {
-            axios.post(`${domain}/api/updatestatus/`, data, header).then((response) => {
+            axios.post(`${domain}:8000/api/updatestatus/`, data, header).then((response) => {
                 alert("status가 저장되었습니다.");
                 document.location.href = `/playerdetail/${id}`;
             })
@@ -180,7 +180,7 @@ export default function PlayerDetail(props) {
             }
             try {
                 
-                axios.get(`${domain}/api/myplayerdetail/`, config).then((response) => {
+                axios.get(`${domain}:8000/api/myplayerdetail/`, config).then((response) => {
                     setMyPlayer(response.data);
                     console.log(response.data);
                 })
@@ -212,7 +212,7 @@ export default function PlayerDetail(props) {
                 <Row>
                     <Col >
                         <Container style={{margin:'auto',padding:'50px'}}>
-                        <Image style={{width:"350px"}}src={`${domain}${MyPlayer.player.images}`} />
+                        <Image style={{width:"350px"}}src={`${domain}:8000${MyPlayer.player.images}`} />
                         </Container>
                     </Col> 
                     <Col >
