@@ -653,7 +653,7 @@ export default function Game(props) {
             }
         }
         //버퍼에는 선택가능한 것들이 들어가 있는 상태
-        axios.post(`${domain}:8000:8000/api/selectionprocess/`, {
+        axios.post(`${domain}:8000/api/selectionprocess/`, {
             set_id: info.data.id,
             selection: buffer
         }).then((response) => {
