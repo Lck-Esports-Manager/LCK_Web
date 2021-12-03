@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import './CreateAccount.css';
 import Maintitle from './components/Maintitle';
 import axios from 'axios';
-
+import { domain } from '../config';
 function CreateAccount() {
     const [user, setInfo] = useState({
         username: '',
@@ -24,7 +24,7 @@ function CreateAccount() {
     }
     const new_request = () => {
         if (user.password1 === user.password2) {
-            axios.post('http://localhost:8000/api/rest-auth/registration/', user
+            axios.post(`${domain}:8000/api/rest-auth/registration/`, user
             ).then(() => {
                 alert([`가입을 축하드립니다. \nname : ${user.username} \nemail : ${user.email}`]);
                 document.location.href = '/login';

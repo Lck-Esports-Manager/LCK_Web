@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useHistory } from "react-router-dom";
 import { Row, Card, Col, Button, Modal, Container, Table } from 'react-bootstrap'
-import { header } from "../config.js";
+import { header,domain } from "../config.js";
 
 
 const button1={
@@ -98,7 +98,7 @@ function Player({ player, pos, func }) {
                 id: player.id,
                 pos: pos
             }
-            axios.post('http://localhost:8000/api/removeplayer/', body, header).then((response) => {
+            axios.post(`${domain}/api/removeplayer/`, body, header).then((response) => {
                 if (response.data.success) {
                     routeChange();
                 }
@@ -120,7 +120,7 @@ function Player({ player, pos, func }) {
                 {pos}
             </h3>
             <Card style={{ width: '12rem',margin:"auto" }}>
-                <Card.Img class='m-3' variant="top" src={`http://localhost:8000${player.player.images}`} />
+                <Card.Img class='m-3' variant="top" src={`${domain}${player.player.images}`} />
                 <Card.Body>
                     <Card.Title>{player.player.name}</Card.Title>
                     <Card.Subtitle className="mb-2 text-muted">{player.player.year} {player.player.season}</Card.Subtitle>
@@ -224,7 +224,7 @@ export default function TeamChange() {
                 sub2: sub2
 
             }
-            axios.post('http://localhost:8000/api/changeroaster/', body, header).then((response) => {
+            axios.post(`${domain}/api/changeroaster/`, body, header).then((response) => {
                 if (response.data.success) {
                     routeChange();
                 }
@@ -238,7 +238,7 @@ export default function TeamChange() {
     useEffect(() => {
         const fetchTeam = async () => {
             try {
-                axios.get('http://localhost:8000/api/teaminfo/', header).then((response) => {
+                axios.get(`${domain}/api/teaminfo/`, header).then((response) => {
                     const myTeam = response.data.my_team
 
                     const setting = {

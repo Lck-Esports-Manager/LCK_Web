@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './MakeTeam.css';
 import Card from './components/Card';
-
+import { domain } from '../config';
 export default function MakeTeam() {
     const [players, setPlayer] = useState(null);
     const [myteam, setTeam] = useState({
@@ -57,12 +57,12 @@ export default function MakeTeam() {
     //     alert(`팀이름 : ${temp} 이 되었습니다.`);
     // }
     const getList = (props) => {
-        axios.get('http://localhost:8000/api/playerlist/?position=' + props).then((response) => { setPlayer(response.data); })
+        axios.get(`${domain}:8000/api/playerlist/?position=` + props).then((response) => { setPlayer(response.data); })
     };
     useEffect(() => {
         const fetchUsers = async () => {
             try {
-                axios.get('http://localhost:8000/api/playerlist/?position=top'
+                axios.get(`${domain}:8000/api/playerlist/?position=top`
                 ).then((response) => {
                     setPlayer(response.data);
                 })
@@ -156,7 +156,7 @@ export default function MakeTeam() {
         }
         else {
             alert(`${myteam.name} 팀이 생성되었습니다.`);
-            axios.post('http://localhost:8000/api/maketeam/', {
+            axios.post(`${domain}:8000/api/maketeam/`, {
                 name: myteam.name,
                 top: myteam.Top.id,
                 jungle: myteam.Jungle.id,

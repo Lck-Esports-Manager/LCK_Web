@@ -7,7 +7,7 @@ import s2 from '../images/S2-1.PNG';
 import s3 from '../images/S3.PNG';
 import s4 from '../images/S4.PNG';
 import './PersonalSchedule.css';
-
+import { domain } from '../config';
 let imgs = [s0, s1, s2, s3, s4];
 
 function PlayinfoCard(props) {
@@ -165,7 +165,7 @@ export default function PersonalSchedule() {
     useEffect(() => {
         const getTeam = async () => {
             try {
-                axios.get('http://localhost:8000/api/getdayschedule/'
+                axios.get(`${domain}:8000/api/getdayschedule/`
                 ).then((response) => {
                     setMatch(response.data);
                     // if (!response.data.Success) {
@@ -175,7 +175,7 @@ export default function PersonalSchedule() {
                 }).catch((e) => {
                     console.log(e.response);
                 })
-                axios.get('http://localhost:8000/api/teaminfo/'
+                axios.get(`${domain}:8000/api/teaminfo/`
                 ).then((response) => {
                     setTeam(response.data);
                 }).catch((e) => {
@@ -198,7 +198,7 @@ export default function PersonalSchedule() {
         if (click1 * click2 * click3 * click4 * click5 === 0)
             alert('모든 선수에게 스케줄을 부여해주세요.');
         else {
-            axios.post('http://localhost:8000/api/progresspersonalschedule/', {
+            axios.post(`${domain}:8000/api/progresspersonalschedule/`, {
                 "my_team": team.my_team.id,
                 "top": click1,
                 "jng": click2,
@@ -217,19 +217,19 @@ export default function PersonalSchedule() {
             setClick3(0)
             setClick4(0)
             setClick5(0)
-            axios.post('http://localhost:8000/api/otherteamprocess/',
+            axios.post(`${domain}:8000/api/otherteamprocess/`,
             ).then((response) => {
             }).catch((e) => {
                 console.log(e.response);
             })
             pageRefresh();
-            axios.get('http://localhost:8000/api/teaminfo/'
+            axios.get(`${domain}:8000/api/teaminfo/`
             ).then((response) => {
                 setTeam(response.data);
             }).catch((e) => {
                 console.log(e.response);
             })
-            axios.get('http://localhost:8000/api/getdayschedule/'
+            axios.get(`${domain}:8000/api/getdayschedule/`
             ).then((response) => {
                 setMatch(response.data);
                 // if (response.data.Success === false) {

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useHistory } from "react-router-dom";
 import { Row, Card, Col, Button, Tabs, Tab, Container, Table } from 'react-bootstrap'
-import { header } from "../config.js";
+import { header,domain } from "../config.js";
 import './Team.css';
 
 const style0 = {
@@ -95,7 +95,7 @@ function Player({ player, pos }) {
                 {pos}
             </h4>
             <Card style={{ width: '12rem', margin: "auto" }} onClick={routeChange}>
-                <Card.Img class='m-3' variant="top" src={`http://localhost:8000${player.player.images}`} />
+                <Card.Img class='m-3' variant="top" src={`${domain}:8000${player.player.images}`} />
                 <Card.Body>
                     <Card.Title>{player.player.name}</Card.Title>
                     <Card.Subtitle className="mb-2 text-muted">{player.player.year} {player.player.season}</Card.Subtitle>
@@ -170,7 +170,7 @@ function Sponsor2({ sponsor }) {
             "sponsor": sponsor.id
         }
         try {
-            axios.post('http://localhost:8000/api/sponsorstart/', data, header).then((response) => {
+            axios.post(`${domain}:8000/api/sponsorstart/`, data, header).then((response) => {
                 alert("사업이 등록되었습니다");
                 document.location.href = '/team';
             })
@@ -233,7 +233,7 @@ function Enterprise2({ enterprise, money }) {
                 "enterprise": enterprise.id
             }
             try {
-                axios.post('http://localhost:8000/api/enterprisestart/', data, header).then((response) => {
+                axios.post(`${domain}:8000/api/enterprisestart/`, data, header).then((response) => {
                     alert("사업이 등록되었습니다");
                     document.location.href = '/team';
                 })
@@ -304,7 +304,7 @@ function LeagueScheduleTable() {
     useEffect(() => {
         const fetchSchdule = async () => {
             try {
-                axios.get('http://localhost:8000/api/getschedule/', header).then((response) => {
+                axios.get(`${domain}:8000/api/getschedule/`, header).then((response) => {
                     setSchedule(response.data.schedule);
 
                 })
@@ -353,7 +353,7 @@ function LeagueRank() {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                axios.get('http://localhost:8000/api/leaguerank/', header).then((response) => {
+                axios.get(`${domain}:8000/api/leaguerank/`, header).then((response) => {
                     setData(response.data.Data);
 
                 })
@@ -430,7 +430,7 @@ export default function Team() {
     useEffect(() => {
         const fetchTeam = async () => {
             try {
-                axios.get('http://localhost:8000/api/teaminfo/', header).then((response) => {
+                axios.get(`${domain}:8000/api/teaminfo/`, header).then((response) => {
                     setData(response.data);
                     console.log(response.data);
                 })

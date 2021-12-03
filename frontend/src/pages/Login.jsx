@@ -4,7 +4,7 @@ import './Login.css';
 import axios from 'axios';
 import Maintitle from './components/Maintitle';
 import Cookies from "universal-cookie";
-
+import { domain } from '../config';
 axios.defaults.withCredentials = true;
 
 function Login() {
@@ -25,7 +25,7 @@ function Login() {
         }
     }
     const login_request = () => {
-        axios.post('http://localhost:8000/api/rest-auth/login/', user
+        axios.post(`${domain}:8000/api/rest-auth/login/`, user
         ).then((response) => {
             var cookies = new Cookies();
             cookies.set("auth", response.data.token);

@@ -7,7 +7,7 @@ import slide4 from '../images/main-4.png';
 import slide5 from '../images/main-5.png';
 import './Home.css';
 import Maintitle from './components/Maintitle';
-import { header } from "../config.js";
+import { header,domain } from "../config.js";
 
 let imgs = [slide1, slide2, slide3, slide4, slide5];
 
@@ -20,7 +20,7 @@ function Home() {
     useEffect(() => {
         const fetch = async () => {
             try {
-                axios.get('http://localhost:8000/api/teaminfo/')
+                axios.get(`${domain}:8000/api/teaminfo/`)
                     .then((response) => {
                     });
             } catch (e) { console.log(e); }
@@ -29,7 +29,7 @@ function Home() {
     }, []);
     const [match, setMatch] = useState(null);
     useEffect(() => {
-        axios.get('http://localhost:8000/api/getschedule/', header
+        axios.get(`${domain}:8000/api/getschedule/`, header
         ).then((response) => {
             setHave(true);
             setMatch(response.data);

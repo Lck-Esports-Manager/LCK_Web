@@ -2,7 +2,8 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useHistory } from "react-router-dom";
 import { Row, DropdownButton, Col, Button, Dropdown, Table, Spinner, Container, Image, CloseButton } from 'react-bootstrap'
-import { header } from "../config.js";
+import { header,domain } from "../config.js";
+
 const button={
     border:'none',
     backgroundColor:'#011e46',
@@ -38,7 +39,7 @@ function PlayerDetailInfo({ id, unable, money, func }) {
                 }
             }
             try {
-                axios.get('http://localhost:8000/api/playerlist/detail/', config).then((response) => {
+                axios.get(`${domain}:8000/api/playerlist/detail/`, config).then((response) => {
 
                     setPlayer(response.data);
                 })
@@ -68,7 +69,7 @@ function PlayerDetailInfo({ id, unable, money, func }) {
         else {
             try {
 
-                axios.post('http://localhost:8000/api/addplayer/', body, header).then((response) => {
+                axios.post(`${domain}:8000/api/addplayer/`, body, header).then((response) => {
 
 
                     if (response.data.success) {
@@ -103,7 +104,7 @@ function PlayerDetailInfo({ id, unable, money, func }) {
                 <Row>
                     <Col >
                         <Container style={{margin:'auto',padding:'60px'}}>
-                        <Image src={`http://localhost:8000${player.images}`} />
+                        <Image src={`${domain}:8000${player.images}`} />
                         </Container>
                     </Col> 
                     <Col >
@@ -149,7 +150,7 @@ export default function AddPlayer() {
     useEffect(() => {
         const fetchTeam = async () => {
             try {
-                axios.get('http://localhost:8000/api/teaminfo/', header).then((response) => {
+                axios.get(`${domain}:8000/api/teaminfo/`, header).then((response) => {
                     var lst = []
                     setMyTeam(response.data.my_team);
                     lst.push(response.data.my_team.top.player.id)
@@ -207,7 +208,7 @@ export default function AddPlayer() {
         }
         try {
 
-            axios.get('http://localhost:8000/api/playerlist/', config).then((response) => {
+            axios.get(`${domain}:8000/api/playerlist/`, config).then((response) => {
                 setPlayer(response.data);
                 setClick(false)
             })

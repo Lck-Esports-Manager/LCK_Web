@@ -4,7 +4,7 @@ import './Game.css';
 import Tower from './components/Tower';
 import SelectBtn from './components/SelectBtn';
 import Slot from './components/PlayerSlot';
-import { header } from "../config.js";
+import { header,domain } from "../config.js";
 
 function Result(props) {
     const isOver = () => {
@@ -82,8 +82,8 @@ export default function Game(props) {
         let money = 10000;
         if (model) buffer = [21];
         else buffer = [20];
-        axios.post('http://localhost:8000/api/progressleague/').then((leagueData) => {
-            axios.get('http://localhost:8000/api/teaminfo/').then((teamInfo) => {
+        axios.post(`${domain}/api/progressleague/`).then((leagueData) => {
+            axios.get(`${domain}/api/teaminfo/`).then((teamInfo) => {
                 if (side === 1) //blue
                 {
                     if (info.data?.turn % 2 === 0) money = 8000;
@@ -139,7 +139,7 @@ export default function Game(props) {
                 }
             });
         });
-        axios.post('http://localhost:8000/api/selectionprocess/', {
+        axios.post(`${domain}/api/selectionprocess/`, {
             set_id: info.data.id,
             selection: buffer
         }).then((response) => {
@@ -342,15 +342,15 @@ export default function Game(props) {
         console.log(refresh);
     };
     const loadImage = () => {
-        axios.get('http://localhost:8000/api/champion/detail/?id=' + info.data?.my_top, header)
+        axios.get(`${domain}/api/champion/detail/?id=` + info.data?.my_top, header)
             .then((response1) => {
-                axios.get('http://localhost:8000/api/champion/detail/?id=' + info.data?.my_jng, header)
+                axios.get(`${domain}/api/champion/detail/?id=` + info.data?.my_jng, header)
                     .then((response2) => {
-                        axios.get('http://localhost:8000/api/champion/detail/?id=' + info.data?.my_mid, header)
+                        axios.get(`${domain}/api/champion/detail/?id=` + info.data?.my_mid, header)
                             .then((response3) => {
-                                axios.get('http://localhost:8000/api/champion/detail/?id=' + info.data?.my_adc, header)
+                                axios.get(`${domain}/api/champion/detail/?id=` + info.data?.my_adc, header)
                                     .then((response4) => {
-                                        axios.get('http://localhost:8000/api/champion/detail/?id=' + info.data?.my_sup, header)
+                                        axios.get(`${domain}/api/champion/detail/?id=` + info.data?.my_sup, header)
                                             .then((response5) => {
                                                 setmyImg({
                                                     top: {
@@ -379,15 +379,15 @@ export default function Game(props) {
                             })
                     })
             })
-        axios.get('http://localhost:8000/api/champion/detail/?id=' + info.data?.op_top, header)
+        axios.get(`${domain}/api/champion/detail/?id=` + info.data?.op_top, header)
             .then((response1) => {
-                axios.get('http://localhost:8000/api/champion/detail/?id=' + info.data?.op_jng, header)
+                axios.get(`${domain}/api/champion/detail/?id=` + info.data?.op_jng, header)
                     .then((response2) => {
-                        axios.get('http://localhost:8000/api/champion/detail/?id=' + info.data?.op_mid, header)
+                        axios.get(`${domain}/api/champion/detail/?id=` + info.data?.op_mid, header)
                             .then((response3) => {
-                                axios.get('http://localhost:8000/api/champion/detail/?id=' + info.data?.op_adc, header)
+                                axios.get(`${domain}/api/champion/detail/?id=` + info.data?.op_adc, header)
                                     .then((response4) => {
-                                        axios.get('http://localhost:8000/api/champion/detail/?id=' + info.data?.op_sup, header)
+                                        axios.get(`${domain}/api/champion/detail/?id=` + info.data?.op_sup, header)
                                             .then((response5) => {
                                                 setopImg({
                                                     top: {
@@ -433,7 +433,7 @@ export default function Game(props) {
                     }
                     if (refresh === 0 || refresh === 1 || refresh === 2) loadImage();
                 }
-                axios.get('http://localhost:8000/api/makeselection/?set=' + set_id, header)
+                axios.get(`${domain}/api/makeselection/?set=` + set_id, header)
                     .then((response2) => {
                         setSelect(response2.data);
                         console.log(response2.data);
@@ -501,7 +501,7 @@ export default function Game(props) {
                         console.log(e.response);
                         // console.log(e.response.data);
                     });
-                axios.post('http://localhost:8000/api/progressleague/', header)
+                axios.post(`${domain}/api/progressleague/`, header)
                     .then((response1) => {
                         setInfo(response1.data);
                         // loadImage();
@@ -559,7 +559,7 @@ export default function Game(props) {
                 over(false);
             }
             else {
-                axios.post('http://localhost:8000/api/selectionprocess/', {
+                axios.post(`${domain}/api/selectionprocess/`, {
                     set_id: info.data.id,
                     selection: buffer
                 }).then((response) => {
@@ -653,7 +653,7 @@ export default function Game(props) {
             }
         }
         //버퍼에는 선택가능한 것들이 들어가 있는 상태
-        axios.post('http://localhost:8000/api/selectionprocess/', {
+        axios.post(`${domain}/api/selectionprocess/`, {
             set_id: info.data.id,
             selection: buffer
         }).then((response) => {

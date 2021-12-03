@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import './League.css';
 import axios from 'axios';
 import { Link } from "react-router-dom";
-
+import { domain } from '../config';
 export default function League() {
     const [playbtn, setPlaybtn] = useState(true);
     const [leagueState, setLeague] = useState({
@@ -22,7 +22,7 @@ export default function League() {
     useEffect(() => {
         const getLeague = async () => {
             try {
-                axios.post('http://localhost:8000/api/progressleague/'
+                axios.post(`${domain}:8000/api/progressleague/`
                 ).then((response) => {
                     setLeague(response.data);
                 }).catch((e) => {

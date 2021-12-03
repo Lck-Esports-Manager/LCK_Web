@@ -1,16 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './Player.css';
-
+import { domain } from '../config';
 export default function Player() {
     const [players, setPlayer] = useState(null);
     const getList = (props) => {
-        axios.get('http://localhost:8000/api/playerlist/?position=' + props).then((response) => { setPlayer(response.data); })
+        axios.get(`${domain}:8000/api/playerlist/?position=` + props).then((response) => { setPlayer(response.data); })
     }
     useEffect(() => {
         const fetchUsers = async () => {
             try {
-                axios.get('http://localhost:8000/api/playerlist/?position=top'
+                axios.get(`${domain}:8000/api/playerlist/?position=top`
                 ).then((response) => {
                     setPlayer(response.data);
                 })

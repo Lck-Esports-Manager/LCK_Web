@@ -4,7 +4,7 @@ import "./Headline.css";
 import logo from '../../images/logo.png';
 import axios from 'axios';
 import { removeToken } from '../../cookies';
-
+import { domain } from '../../config';
 const actStyle = {
     color: "rgb(255, 219, 161)",
     fontSize: 25
@@ -14,7 +14,7 @@ export default function Headline() {
     const [render, setRender] = useState(0);
 
     const logout = () => {
-        axios.post('http://localhost:8000/api/rest-auth/logout/'
+        axios.post(`${domain}:8000/api/rest-auth/logout/`
         ).then((response) => {
             alert(response.data.detail);
             window.localStorage.setItem('isLogin', 'false');
