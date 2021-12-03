@@ -2,30 +2,30 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useHistory } from "react-router-dom";
 import { Row, DropdownButton, Col, Button, Dropdown, Table, Spinner, Container, Image, CloseButton } from 'react-bootstrap'
-import { header,domain } from "../config.js";
+import { header, domain } from "../config.js";
 
-const button={
-    border:'none',
-    backgroundColor:'#011e46',
-    width:'79px'
+const button = {
+    border: 'none',
+    backgroundColor: '#011e46',
+    width: '79px'
 }
-const button2={
-    border:'none',
-    backgroundColor:'white',
-    width:'175px',
-    color:'#011e46'
+const button2 = {
+    border: 'none',
+    backgroundColor: 'white',
+    width: '175px',
+    color: '#011e46'
 }
-const style2={
-    borderRadius:"10px",
-    textAlign:'center',
-    width:'300px',
-    alignContent:"center",
-    margin:"auto",
-    marginTop:"10px",
-    marginBottom:"10px",
-    padding:"5px",
-    backgroundColor:'#011e46',
-    color:'#ffdba1'
+const style2 = {
+    borderRadius: "10px",
+    textAlign: 'center',
+    width: '300px',
+    alignContent: "center",
+    margin: "auto",
+    marginTop: "10px",
+    marginBottom: "10px",
+    padding: "5px",
+    backgroundColor: '#011e46',
+    color: '#ffdba1'
 }
 
 function PlayerDetailInfo({ id, unable, money, func }) {
@@ -55,10 +55,10 @@ function PlayerDetailInfo({ id, unable, money, func }) {
     }
     const history = useHistory();
     const purchase = () => {
-        const remain_money=money-player.price
+        const remain_money = money - player.price
         const body = {
             id: id,
-            money:remain_money
+            money: remain_money
         }
         if (!unable.indexOf(player.id)) {
             alert("이미 보유하고 있는 선수입니다")
@@ -92,38 +92,38 @@ function PlayerDetailInfo({ id, unable, money, func }) {
                 {
                     width: '1180px',
                     height: '290px',
-                    borderRadius:"10px",
+                    borderRadius: "10px",
                     margin: '30px',
                     position: 'absolute',
                     backgroundColor: '#011e46',
                     zIndex: '1',
-                    color:"white"
+                    color: "white"
                 }}>
-                <div style={{margin:'10px'}}><CloseButton variant='white' style={{float:"right"}} onClick={exitClick} /></div>
-                
+                <div style={{ margin: '10px' }}><CloseButton variant='white' style={{ float: "right" }} onClick={exitClick} /></div>
+
                 <Row>
                     <Col >
-                        <Container style={{margin:'auto',padding:'60px'}}>
-                        <Image src={`${domain}:8000${player.images}`} />
+                        <Container style={{ margin: 'auto', padding: '60px' }}>
+                            <Image style={{ width: '200px' }} src={`${domain}:8000${player.images}`} />
                         </Container>
-                    </Col> 
+                    </Col>
                     <Col >
-                    <Container style={{margin:"auto",fontSize:"22px"}}>
-                        <div style={{padding:"8px"}}>이름 : {player.name}</div>
-                        <div style={{padding:"8px"}}>포지션 : {player.position}</div>
-                        <div style={{padding:"8px"}}>연도 및 시즌 : {player.year} {player.season}</div>
-                        <div style={{padding:"8px"}}>소속 팀 : {player.team.name}</div>
-                        <div style={{padding:"8px"}}>등급 : {player.rate}</div>
+                        <Container style={{ margin: "auto", fontSize: "22px" }}>
+                            <div style={{ padding: "8px" }}>이름 : {player.name}</div>
+                            <div style={{ padding: "8px" }}>포지션 : {player.position}</div>
+                            <div style={{ padding: "8px" }}>연도 및 시즌 : {player.year} {player.season}</div>
+                            <div style={{ padding: "8px" }}>소속 팀 : {player.team.name}</div>
+                            <div style={{ padding: "8px" }}>등급 : {player.rate}</div>
                         </Container>
                     </Col>
                     <Col>
-                    <Container style={{margin:"auto",fontSize:"22px"}}>
-                        <div style={{padding:"8px"}}>라인전 능력 : {player.status1}</div>
-                        <div style={{padding:"8px"}}>교전 능력 : {player.status2}</div>
-                        <div style={{padding:"8px"}}>한타 능력 : {player.status3}</div>
-                        <div style={{padding:"8px"}}>가격 : {player.price}</div>
-                        <div style={{padding:"8px"}}><Button style={button2} onClick={purchase}>구입하기</Button></div>
-                        
+                        <Container style={{ margin: "auto", fontSize: "22px" }}>
+                            <div style={{ padding: "8px" }}>라인전 능력 : {player.status1}</div>
+                            <div style={{ padding: "8px" }}>교전 능력 : {player.status2}</div>
+                            <div style={{ padding: "8px" }}>한타 능력 : {player.status3}</div>
+                            <div style={{ padding: "8px" }}>가격 : {player.price}</div>
+                            <div style={{ padding: "8px" }}><Button style={button2} onClick={purchase}>구입하기</Button></div>
+
                         </Container>
                     </Col>
                 </Row>
@@ -235,19 +235,19 @@ export default function AddPlayer() {
                                 width: '1250px',
                                 borderWidth: 'thin',
                                 borderStyle: "solid",
-                                padding:"10px"
+                                padding: "10px"
                             }}>
                             <Row>
-                                <Col style={{margin:"auto"}}>포지션</Col>
-                                <Col style={{margin:"auto"}}>연도</Col>
-                                <Col style={{margin:"auto"}}>시즌</Col>
-                                <Col style={{margin:"auto"}}>등급</Col>
+                                <Col style={{ margin: "auto" }}>포지션</Col>
+                                <Col style={{ margin: "auto" }}>연도</Col>
+                                <Col style={{ margin: "auto" }}>시즌</Col>
+                                <Col style={{ margin: "auto" }}>등급</Col>
                                 <Col></Col>
                             </Row>
                             <Row>
                                 <Col>
 
-                                    <DropdownButton variant='outline-secondary'  id="dropdown-item-button" title={position}>
+                                    <DropdownButton variant='outline-secondary' id="dropdown-item-button" title={position}>
                                         {positionArr && positionArr.map((_position) => (
                                             <Dropdown.Item as="button" onClick={changePosition} value={_position}>{_position}</Dropdown.Item>
                                         ))}
@@ -299,7 +299,7 @@ export default function AddPlayer() {
                                     margin: '10px auto',
                                     overflow: 'auto'
                                 }}>
-                                
+
                                 <Table size="sm" style={{ alignContent: "center" }}>
                                     <thead>
                                         <tr>
