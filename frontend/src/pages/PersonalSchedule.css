@@ -201,15 +201,15 @@
     background-color: #0d1516;
     width: 200px;
     border-radius: 5px;
-    padding: 10px;
+    padding: 5px;
     box-shadow: inset 0 0 10px rgb(87, 87, 87);
     display: flex;
     flex-wrap: wrap;
     margin: auto auto 7px;
 }
 .PS--main .inner .contents .schedule--info .card .info li{
-    margin: 0px 5px 8px;
-    width: 106px;
+    margin: 0px 0px 8px;
+    width: 124px;
     text-align: center;
 }
 .PS--main .inner .contents .schedule--info .card .info div{
