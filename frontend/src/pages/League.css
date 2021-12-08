@@ -25,6 +25,35 @@
     border-radius: 15px;
     height: 625px;
 }
+.league--main .inner .league--box .contents .victory{
+    position: absolute;
+    background-color: blanchedalmond;
+    width: 100px;
+    padding: 5px;
+    border-radius: 5px;
+    top: 680px;
+    right: 50px;
+    transition: 0.2s;
+}
+.league--main .inner .league--box .contents .victory:hover{
+    cursor: pointer;
+    background-color: rgb(255, 215, 155);
+}
+.league--main .inner .league--box .contents .season{
+    position:absolute;
+    background-color: blanchedalmond;
+    width: 100px;
+    padding: 5px;
+    border-radius: 5px;
+    top: 680px;
+    right: 170px;
+    transition: 0.2s;
+    
+}
+.league--main .inner .league--box .contents .season:hover{
+    cursor: pointer;
+    background-color: rgb(255, 215, 155);
+}
 .league--main .inner .league--box .contents .current{
     display: flex;
     padding: 0 20px;

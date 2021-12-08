@@ -25,6 +25,7 @@ export default function League() {
                 axios.post(`${domain}:8000/api/progressleague/`
                 ).then((response) => {
                     setLeague(response.data);
+                    console.log(leagueState);
                 }).catch((e) => {
                     console.log(e.response);
                 })
@@ -45,6 +46,35 @@ export default function League() {
             return `/banpick`;
         else                                    // 다 준비 되어 있는 경우 -> 게임시작
             return `/game/${leagueState.data?.side}/${leagueState.data?.turn}/${leagueState.data?.id}`;
+    }
+    const seasonEnd = () => {
+        axios.post(`${domain}:8000/api/leagueend/`
+        ).then((response) => {
+        })
+        alert("리그의 마지막 날이 되었습니다.");
+        document.location.href = "/";
+    }
+    const setVictory = () => {
+        axios.post(`${domain}:8000/api/banpick/`, {
+            set_id: leagueState?.set_id,
+            btop: 217,
+            bjng: 273,
+            bmid: 313,
+            badc: 366,
+            bsup: 391,
+            rtop: 218,
+            rjng: 274,
+            rmid: 314,
+            radc: 367,
+            rsup: 390
+        })
+        axios.post(`${domain}:8000/api/selectionprocess/`, {
+            set_id: leagueState.data?.id,
+            selection: [20]
+        }).then((response) => {
+            alert(response.data.message);
+        });
+        document.location.href = "/league";
     }
     return (<>
         {/* <PersonalSchedule /> */}
@@ -71,6 +101,8 @@ export default function League() {
                                 </div>
                             </> :
                             <>
+                                <div className="victory" onClick={setVictory}>세트 승리</div>
+                                <div className="season" onClick={seasonEnd}>시즌 종료</div>
                                 <div className="current">
                                     {leagueState.league === false ?
                                         <div className="on makeTeam"><Link className="img" to={movePage}></Link><Link className="title" to={movePage}>ㅤ팀 생성ㅤ</Link></div>
@@ -81,9 +113,9 @@ export default function League() {
                                             {/* <Link className="img" to={movePage}></Link> */}
                                             {leagueState?.side === 1 ?
                                                 <><Link className="img" to='/banpick/1'  ></Link>
-                                                    <Link className="title" to='/banpick/1'  >챔피언 선택<br />{leagueState?.score[0]} : {leagueState?.score[1]}</Link></>
+                                                    <Link className="title" to='/banpick/1'  ><div className="playtitle">챔피언 선택<br />{leagueState?.score[0]} : {leagueState?.score[1]}</div></Link></>
                                                 : <><Link className="img" to='/banpick/0'  ></Link>
-                                                    <Link className="title" to='/banpick/0'  >챔피언 선택<br />{leagueState?.score[0]} : {leagueState?.score[1]}</Link></>}
+                                                    <Link className="title" to='/banpick/0'  ><div className="playtitle">챔피언 선택<br />{leagueState?.score[0]} : {leagueState?.score[1]}</div></Link></>}
                                             {/* <Link className="title" to={movePage} side={leagueState?.side}>챔피언 선택</Link> */}
                                         </div>
                                         : <div className="banPick"><div className="black--img"></div><div className="title">챔피언 선택</div></div>
@@ -92,7 +124,7 @@ export default function League() {
                                         (leagueState.data?.turn === 1 ? <div className="on playGame">
                                             {leagueState.data?.side === 1 ?
                                                 <><Link className="img" to={movePage}  ></Link>
-                                                    <Link className="title" to={movePage}  ><div className="playtitle">게임 시작<br />{leagueState?.score[0]} : {leagueState?.score[1]} </div></Link></>
+                                                    <Link className="title" to={movePage}  ><div className="playtitle">게임 시작<br />{leagueState?.score[0]} : {leagueState?.score[1]}</div></Link></>
                                                 : <><Link className="img" to={movePage}  ></Link>
                                                     <Link className="title" to={movePage}  ><div className="playtitle">게임 시작<br />{leagueState?.score[0]} : {leagueState?.score[1]}</div></Link></>}
                                             {/* <Link className="img" to={movePage}></Link>
