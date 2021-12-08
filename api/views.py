@@ -981,6 +981,7 @@ class GetPersonalSchedule(APIView):
 
 
 class ProgressSchedule(APIView):
+
     def progress_schedule(self, my_player, id):
 
         if id == None:
@@ -1299,3 +1300,22 @@ class EnterpriseView(APIView):
         enterprise=Enterprise.objects.all()
         serializers = EnterpriseSerializer(enterprise,many=True)
         return Response(serializers.data)
+
+class Make68(APIView):
+
+    def post(self,request):
+        if not request.user.is_authenticated:
+            return HttpResponseRedirect('/login')
+        user=request.user
+
+        try:
+            my_team=MyTeam.objects.get(user=user)
+            my_league=League.objects.get(my_team=my_team)
+            my_league.current_date=68
+            my_league.save()
+            
+            
+        except:
+            return Response({"success":False})
+        
+        return Response({"success":True})

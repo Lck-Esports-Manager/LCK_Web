@@ -65,7 +65,8 @@ urlpatterns = [
     # 리그 랭킹
     path('leaguerank/', LeagueRank.as_view()),
     path('modeltest/', MachineLearningModel.as_view()),
-
+    #리그 68만들기
+    path('leagueend/', Make68.as_view()),
     # 내 선수 상세보기
     path('myplayerdetail/', MyPlayerInfo.as_view()),
 
