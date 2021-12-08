@@ -142,10 +142,8 @@ class MakeTeam(APIView):
             my_team = None
 
         if my_team:
-            return Response({
-                "success": False,
-                "message": "There is your team already"
-            })
+            my_team.delete()
+            
 
         name = request.data['name']
         top = Player.objects.get(pk=request.data['top'])
@@ -267,6 +265,8 @@ class GetSchedules(APIView):
                     return_data.append(elem)
                     count += 1
             i += 1
+            if i==69:
+                break
             if count == 10:
                 break
 
