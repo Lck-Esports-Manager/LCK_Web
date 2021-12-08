@@ -295,7 +295,7 @@ export default function AddPlayer() {
                             <Container style={
                                 {
                                     width: '1250px',
-                                    height: '810px',
+                                    height: '755px',
                                     margin: '10px auto',
                                     overflow: 'auto'
                                 }}>
