@@ -9,7 +9,7 @@ export default function League() {
         league: true,
         my_team: true,
         banpick: false,
-        past_league: true,
+        past_league: false,
         score: [0, 0],
         my_team_data: { name: 'blue team' },
         op_team_data: { name: 'red team' },
@@ -83,7 +83,7 @@ export default function League() {
             console.log(response);
         })
         alert(`기존 ${leagueState.my_team_data?.name}팀으로 리그가 생성되었습니다.`);
-        return '/';
+        document.location.href = '/';
     }
     return (<>
         <div className="league--main">
