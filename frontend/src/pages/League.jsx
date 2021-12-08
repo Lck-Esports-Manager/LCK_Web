@@ -82,7 +82,7 @@ export default function League() {
         ).then((response) => {
             console.log(response);
         })
-        alert(`기존 ${leagueState.my_team_data?.name}팀으로 리그가 생성되었습니다.`);
+        alert(`기존 팀으로 리그가 생성되었습니다.`);
         document.location.href = '/';
     }
     return (<>
@@ -112,7 +112,7 @@ export default function League() {
                                         <div className="end makeTeam"><Link className="img" to={movePage}></Link><Link className="title" to={movePage}>새로운 팀<br />생성</Link></div>
                                         <div className="end banPick">
                                             <><div className="img" onClick={() => { newleague(); }}  ></div>
-                                                <div className="title" onClick={() => { newleague(); }}  ><div className="playtitle">기존<br />{leagueState.my_team_data?.name}<br />팀으로 진행</div></div></>
+                                                <div className="title" onClick={() => { newleague(); }}  ><div className="playtitle">기존팀으로 진행</div></div></>
                                         </div>
 
                                     </div>
