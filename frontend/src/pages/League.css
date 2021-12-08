@@ -71,7 +71,7 @@
     filter: grayscale(100%);
 }
 .league--main .inner .league--box .contents .current .img{
-    width: 600px;
+    width: 700px;
     height: 450px;
     border-radius: 8px;
     box-shadow: inset 0 0 5px rgb(87, 87, 87);
@@ -148,6 +148,20 @@
     position: relative;
     transition: 0.2s;
 }
+.league--main .inner .league--box .contents .current .end.makeTeam{
+    background-color: rgb(255, 255, 255);
+    width: 450px;
+    height: 450px;
+    margin: auto;
+    border-radius: 8px;
+    overflow: hidden;
+    position: relative;
+    transition: 0.2s;
+}
+.league--main .inner .league--box .contents .current .end.makeTeam:hover{
+    transform:scale(1.2);
+    cursor: pointer;
+}
 .league--main .inner .league--box .contents .current .on.makeTeam:hover{
     transform:scale(1.2);
     cursor: pointer;
@@ -177,6 +191,20 @@
     transition: 0.2s;
 }
 .league--main .inner .league--box .contents .current .on.banPick:hover{
+    transform:scale(1.2);
+    cursor: pointer;
+}
+.league--main .inner .league--box .contents .current .end.banPick{
+    /* background-color: rgb(130, 198, 238); */
+    width: 450px;
+    height: 450px;
+    border-radius: 8px;
+    margin: auto;
+    overflow: hidden;
+    position: relative;
+    transition: 0.2s;
+}
+.league--main .inner .league--box .contents .current .end.banPick:hover{
     transform:scale(1.2);
     cursor: pointer;
 }
