@@ -9,7 +9,7 @@ export default function League() {
         league: true,
         my_team: true,
         banpick: false,
-        past_league: true,
+        past_league: false,
         score: [0, 0],
         my_team_data: { name: 'blue team' },
         op_team_data: { name: 'red team' },
@@ -77,13 +77,20 @@ export default function League() {
         });
         document.location.href = "/league";
     }
+    const newleague = () => {
+        axios.post(`${domain}:8000/api/makenewleague/`
+        ).then((response) => {
+            console.log(response);
+        })
+        alert(`기존 ${leagueState.my_team_data?.name}팀으로 리그가 생성되었습니다.`);
+        document.location.href = '/';
+    }
     return (<>
-        {/* <PersonalSchedule /> */}
         <div className="league--main">
             <div className="inner">
                 <div className="league--box">
                     <div className="contents">
-                        {leagueState.past_league === true ? <h2>리그가 종료되었습니다</h2> : <h2>소환사의 계곡에 오신 것을 환영합니다</h2>}
+                        {leagueState.past_league === true ? <h2>이번 시즌 리그가 종료되었습니다</h2> : <h2>소환사의 계곡에 오신 것을 환영합니다</h2>}
                         {playbtn ?
                             <>
                                 <p>
@@ -104,11 +111,8 @@ export default function League() {
                                     <div className="current">
                                         <div className="end makeTeam"><Link className="img" to={movePage}></Link><Link className="title" to={movePage}>새로운 팀<br />생성</Link></div>
                                         <div className="end banPick">
-                                            {leagueState?.side === 1 ?
-                                                <><Link className="img" to='/banpick/1'  ></Link>
-                                                    <Link className="title" to='/banpick/1'  ><div className="playtitle">기존<br />{leagueState.my_team_data?.name}<br />팀으로 진행</div></Link></>
-                                                : <><Link className="img" to='/banpick/0'  ></Link>
-                                                    <Link className="title" to='/banpick/0'  ><div className="playtitle">기존<br />{leagueState.my_team_data?.name}<br />팀으로 진행</div></Link></>}
+                                            <><div className="img" onClick={() => { newleague(); }}  ></div>
+                                                <div className="title" onClick={() => { newleague(); }}  ><div className="playtitle">기존<br />{leagueState.my_team_data?.name}<br />팀으로 진행</div></div></>
                                         </div>
 
                                     </div>
