@@ -505,7 +505,7 @@ class ProgressLeague(APIView):
         else:
             try:
                 past_league = League.objects.filter(
-                    user=user, state_finish=False)
+                    user=user, state_finish=True)
             except:
                 past_league = None
             if past_league:
