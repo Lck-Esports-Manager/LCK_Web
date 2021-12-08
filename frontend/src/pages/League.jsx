@@ -81,9 +81,9 @@ export default function League() {
                                             {/* <Link className="img" to={movePage}></Link> */}
                                             {leagueState?.side === 1 ?
                                                 <><Link className="img" to='/banpick/1'  ></Link>
-                                                    <Link className="title" to='/banpick/1'  >챔피언 선택</Link></>
+                                                    <Link className="title" to='/banpick/1'  >챔피언 선택<br />{leagueState?.score[0]} : {leagueState?.score[1]}</Link></>
                                                 : <><Link className="img" to='/banpick/0'  ></Link>
-                                                    <Link className="title" to='/banpick/0'  >챔피언 선택</Link></>}
+                                                    <Link className="title" to='/banpick/0'  >챔피언 선택<br />{leagueState?.score[0]} : {leagueState?.score[1]}</Link></>}
                                             {/* <Link className="title" to={movePage} side={leagueState?.side}>챔피언 선택</Link> */}
                                         </div>
                                         : <div className="banPick"><div className="black--img"></div><div className="title">챔피언 선택</div></div>

@@ -4,7 +4,7 @@ import './Game.css';
 import Tower from './components/Tower';
 import SelectBtn from './components/SelectBtn';
 import Slot from './components/PlayerSlot';
-import { header,domain } from "../config.js";
+import { header, domain } from "../config.js";
 
 function Result(props) {
     const isOver = () => {
