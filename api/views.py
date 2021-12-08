@@ -1310,7 +1310,7 @@ class Make68(APIView):
 
         try:
             my_team=MyTeam.objects.get(user=user)
-            my_league=League.objects.get(my_team=my_team)
+            my_league=League.objects.get(my_team=my_team,state_finish=False)
             my_league.current_date=68
             my_league.save()
             
