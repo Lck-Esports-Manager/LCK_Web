@@ -187,6 +187,13 @@
     background-size: cover;
     left: -235px;
 }
+.league--main .inner .league--box .contents .current .end.makeTeam .img{
+    box-shadow: inset 0 0 65px rgb(0, 0, 0);
+    background-image: url('../images/maketeam_back.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    left: -135px;
+}
 .league--main .inner .league--box .contents .current .makeTeam .black--img{
     box-shadow: inset 0 0 65px rgb(0, 0, 0);
     background-image: url('../images/maketeam_back.jpg');
@@ -228,6 +235,13 @@
     background-repeat: no-repeat;
     background-size: cover;
     left: -220px;
+}
+.league--main .inner .league--box .contents .current .end.banPick .img{
+    box-shadow: inset 0 0 65px rgb(0, 0, 0);
+    background-image: url('../images/ban_back.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    left: -105px;
 }
 .league--main .inner .league--box .contents .current .banPick .black--img{
     box-shadow: inset 0 0 65px rgb(0, 0, 0);
