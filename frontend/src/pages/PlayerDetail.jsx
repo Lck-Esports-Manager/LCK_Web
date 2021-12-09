@@ -168,7 +168,7 @@ export default function PlayerDetail(props) {
 
     const { id } = props.match.params
     const [MyPlayer, setMyPlayer] = useState(null)
-    const feeling=['보통','좋음','매우 좋음','매우 나쁨','나쁨']
+    const feeling=['매우 나쁨','나쁨','보통','좋음','매우 좋음']
     useEffect(() => {
         const fetchPlayer = async () => {
 
@@ -221,7 +221,7 @@ export default function PlayerDetail(props) {
                         <div style={{padding:"15px"}}>포지션 : {MyPlayer.player.position}</div>
                         <div style={{padding:"15px"}}>연도 및 시즌 : {MyPlayer.player.year} {MyPlayer.player.season}</div>
                         <div style={{padding:"15px"}}>등급 : {MyPlayer.player.rate}</div>
-                        <div style={{padding:"15px"}}>컨디션 : {feeling[MyPlayer.feeling]}</div>
+                        <div style={{padding:"15px"}}>컨디션 : {feeling[MyPlayer.feeling+2]}</div>
                         </Container>
                     </Col>
                 </Row>
