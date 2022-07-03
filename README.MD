@@ -58,6 +58,12 @@ LoL이라고 불리는 **League of Legends**는 세계최고의  MOBA(Multiplaye
 <br>
 
 * 팀 관리 및 선수 관리
+
+<p align="center">
+ <img src = "./img/teamMamage.PNG">
+ <img src = "./img/playerInfo.PNG">
+</p>
+
 <br>
 
     - 팀의 사업관리 및 주전 선수 등록을 할 수 있는 페이지입니다.
@@ -67,6 +73,11 @@ LoL이라고 불리는 **League of Legends**는 세계최고의  MOBA(Multiplaye
 <br>
 
 * 스케줄 진행
+
+<p align="center">
+ <img src = "./img/schedule.PNG">
+</p>
+
 <br>
 
     - 리그 외에 헬스, 스트리밍, 휴식등의 활동 중 하나를 선택할 수 있습니다.
@@ -74,6 +85,12 @@ LoL이라고 불리는 **League of Legends**는 세계최고의  MOBA(Multiplaye
 <br>
 
 * 게임 진행
+
+<p align="center">
+ <img src = "./img/banPick.PNG">
+ <img src = "./img/gamePlay.PNG">
+</p>
+
 <br>
 
     - 챔피언 밴픽을 진행하고 선택지에 따라서 게임을 진행합니다.
