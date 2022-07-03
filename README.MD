@@ -3,7 +3,11 @@ LCK Esports Manager
 <p align="center">
  <img src = "./img/poster.PNG">
 </p>
-CAU 2021-2 Capstone Design Project Repository
+
+[More Detail](https://github.com/Lck-Esports-Manager/LCK-Documents/blob/main/%EC%BA%A1%EC%8A%A4%ED%86%A4%20%EB%94%94%EC%9E%90%EC%9D%B8%20Final%20-%20LCK%20Esports%20Manager.pdf)
+<br>
+
+[Manual](https://github.com/Lck-Esports-Manager/LCK-Documents/blob/main/LCK_Esports_Manager_MANUAL.pdf)
 
 개요
 --------
@@ -102,6 +106,8 @@ LoL이라고 불리는 **League of Legends**는 세계최고의  MOBA(Multiplaye
 구현
 --------
 
+<p align="center">
+ <img src = "./img/infra.PNG">
 <br>
 
 * Web FE
