@@ -65,18 +65,15 @@ LoL이라고 불리는 **League of Legends**는 세계최고의  MOBA(Multiplaye
 * Web FE
     - React, html, css
 <br>
-<br>
 
 * Web BE
     - Django Rest FrameWork
     - Django
 <br>
-<br>
 
 * AI for Match Prediction
     - Tensorflow
     - Jupyter Notebook
-<br>
 <br>
 
 * Infra
