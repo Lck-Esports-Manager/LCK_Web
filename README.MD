@@ -25,6 +25,11 @@ LoL이라고 불리는 **League of Legends**는 세계최고의  MOBA(Multiplaye
 <br>
 
 * 메인페이지
+
+<p align="center">
+ <img src = "./img/main.PNG">
+</p>
+
 <br>
 
     - 게임에 대한 설명, 매치 스케줄이 나타납니다.
@@ -36,6 +41,12 @@ LoL이라고 불리는 **League of Legends**는 세계최고의  MOBA(Multiplaye
 <br>
 
 * 선수 도감 및 팀 생성
+
+<p align="center">
+ <img src = "./img/index.PNG">
+ <img src = "./img/makeTeam.PNG">
+</p>
+
 <br>
 
     - Lck Esports Manager에 등록되어 있는 LCK의 선수들을 볼 수 있습니다.
