@@ -9,7 +9,6 @@ LCK Esports Manager
 
 [Manual](https://github.com/Lck-Esports-Manager/LCK-Documents/blob/main/LCK_Esports_Manager_MANUAL.pdf)
 
-<a href="./docs/LCK_Esports_Manager_MANUAL.pdf" download>test</a>
 
 개요
 --------
