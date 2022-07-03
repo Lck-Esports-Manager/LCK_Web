@@ -4,7 +4,7 @@ CAU 2021-2 Capstone Design Project Repository
 
 개요
 --------
-<hr/>
+
 <br>
 
 LoL이라고 불리는 **League of Legends**는 세계최고의  MOBA(Multiplayer Online Battle Arena) 게임으로 두팀으로 나누어 이루어지는 실시간 전투와 협동을 통한 팀플레이가 인상적인 게임입니다.
@@ -18,7 +18,7 @@ LoL이라고 불리는 **League of Legends**는 세계최고의  MOBA(Multiplaye
 
 기능
 --------
-<hr/>
+
 <br>
 
 * 메인페이지
@@ -28,6 +28,7 @@ LoL이라고 불리는 **League of Legends**는 세계최고의  MOBA(Multiplaye
     - 플레이어의 매치 스케줄 일정이 어떻게 되는지 확인할 수 있습니다.
 <br>
 <br>
+
 * 선수 도감 및 팀 생성
 <br>
     - Lck Esports Manager에 등록되어 있는 LCK의 선수들을 볼 수 있습니다.
@@ -35,17 +36,20 @@ LoL이라고 불리는 **League of Legends**는 세계최고의  MOBA(Multiplaye
     - 주어진 금액으로 포지션 당 하나씩 선수들을 영입하여 팀을 생성하는 페이지입니다.
 <br>
 <br>
+
 * 팀 관리 및 선수 관리
 <br>
     - 팀의 사업관리 및 주전 선수 등록을 할 수 있는 페이지입니다.
     - 선수의 레벨, 능력치 등을 확인할 수 있습니다.
 <br>
 <br>
+
 * 스케줄 진행
 <br>
     - 리그 외에 헬스, 스트리밍, 휴식등의 활동 중 하나를 선택할 수 있습니다.
 <br>
 <br>
+
 * 게임 진행
 <br>
     - 챔피언 밴픽을 진행하고 선택지에 따라서 게임을 진행합니다.
@@ -55,23 +59,26 @@ LoL이라고 불리는 **League of Legends**는 세계최고의  MOBA(Multiplaye
 
 구현
 --------
-<hr/>
+
 <br>
 
 * Web FE
     - React, html, css
 <br>
 <br>
+
 * Web BE
     - Django Rest FrameWork
     - Django
 <br>
 <br>
+
 * AI for Match Prediction
     - Tensorflow
     - Jupyter Notebook
 <br>
 <br>
+
 * Infra
     - AWS EC2
     - AWS RDS
