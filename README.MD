@@ -1,5 +1,8 @@
 LCK Esports Manager
 ==========
+<p align="center">
+ <img src = "./img/poster.PNG">
+</p>
 CAU 2021-2 Capstone Design Project Repository
 
 개요
