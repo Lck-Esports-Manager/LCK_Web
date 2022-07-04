@@ -65,7 +65,7 @@ LoL이라고 불리는 **League of Legends**는 세계최고의  MOBA(Multiplaye
 * 팀 관리 및 선수 관리
 
 <p align="center">
- <img src = "./img/teamMaage.PNG">
+ <img src = "./img/teamManage.PNG">
  <img src = "./img/playerInfo.PNG">
 </p>
 
